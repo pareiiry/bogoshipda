@@ -1,0 +1,134 @@
+@charset "utf-8";
+    <style>
+        /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+        .row.content {height: 1000px}
+
+        /* Set gray background color and 100% height */
+        .sidenav {
+            background-color: #4f4f4f;
+            height: 100%;
+        }
+
+        /* Set black background color, white text and some padding */
+        footer {
+            background-color: #555;
+            color: white;
+            padding: 15px;
+        }
+
+        /* On small screens, set height to 'auto' for sidenav and grid */
+        @media screen and (max-width: 767px) {
+            .sidenav {
+                height: auto;
+                padding: 15px;
+            }
+            .row.content {height: auto;}
+		}
+        a {
+			font-size: 12px;
+			color:#fff;
+			}
+			
+        a:hover {
+			color:#FFF;
+        }
+        .navbar {
+            margin-bottom: 0px;
+			border-radius:0px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        #myInput {
+            background-image: url("../img/search1.png");
+            background-size: 25px;
+            background-position: 10px 5px;
+            background-repeat: no-repeat;
+            /*width: 20%;*/
+            /*font-size: 16px;*/
+            padding: 0px 20px 0px 40px;
+            border: 1px solid #ddd;
+			margin-top:10px;
+			margin-left:90px;
+            /*margin-bottom: 2px;*/
+            border-radius: 8px;
+			height:35px;	
+        }
+
+        #myTable {
+            border-collapse: collapse;
+            width: 100%;
+            border-top: 1px solid #ddd;
+            /*font-size: 18px;*/
+        }
+
+        #myTable th, #myTable td {
+            text-align: left;
+            padding: 12px;
+        }
+
+        #myTable tr {
+            border-bottom: 1px solid #ddd;
+        }
+
+        #myTable tr.header {
+            background-color: #edf9f7;
+			color: #00a9a3;
+        }
+		#myTable tr:hover {
+            background-color: #edf9f7;
+        }
+        /* Style buttons */
+        .btn-edit {
+            background-color: #CCC  ; /* Blue background */
+            border: none; /* Remove borders */
+            color: white; /* White text */
+            padding: 0px; /* Some padding */
+            font-size: 16px; /* Set a font size */
+            cursor: pointer; /* Mouse pointer on hover */
+            border-radius: 10px;
+			width: 30px;
+			height: 30px;
+			margin-left:10px;
+			
+        }
+
+        /* Darker background on mouse-over */
+        .btn-edit:hover {
+            background-color: #6CF;
+        }
+        .btn-delete {
+            background-color: #ccc; /* Blue background */
+            border: none; /* Remove borders */
+            color: white; /* White text */
+            padding: 0px; /* Some padding */
+            font-size: 16px; /* Set a font size */
+            cursor: pointer; /* Mouse pointer on hover */
+            border-radius: 10px;
+			width: 30px;
+			height: 30px;
+			margin-left:10px;
+        }
+
+        /* Darker background on mouse-over */
+        .btn-delete:hover {
+            background-color: #d15252;
+        }
+		
+		.bg-icon{
+			background-color: #666;
+			border-radius: 8px;
+			
+		}
+		.bg-icon:hover {
+			background-color:#aadcd8;
+		}
+		.bg-icon-current {
+			background-color: #aadcd8;
+			border-radius: 8px;
+		}
+			
+			
+    </style>
