@@ -179,8 +179,18 @@ $result2 = mysqli_query($con,$sql2);
                                 <!--                            <form method="post">-->
                                 
                                 <div class="btn-group" style="margin: 0 0 2% 0">
-                                    <label>ชื่อธนาคาร:</label>
-                                    <input size="100%" class="form-control" type="text" name="bankName" value="" required>
+
+                                    <div class="form-group" name="bankName" size="100%">
+                                        <label>ชื่อธนาคาร:</label>
+                                        <select>
+                                            <option value="SCB">SCB</option>
+                                            <option value="KTB">KTB</option>
+                                            <option value="BBL">BBL</option>
+                                            <option value="KBANK">KBANK</option>
+                                            <option value="Wallet">Wallet</option>
+                                            <option value="PrompPay">PrompPay</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="btn-group" style="margin: 0 0 2% 0;width: 100%">
                                     <label>ชื่อบัญชี:</label>
