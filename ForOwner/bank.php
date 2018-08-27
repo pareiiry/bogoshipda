@@ -68,7 +68,7 @@ $result2 = mysqli_query($con,$sql2);
             box-sizing: border-box;
         }
         .row.content {
-            height: 600px;
+            height: 1600px;
         }
 
     </style>
