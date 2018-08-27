@@ -207,7 +207,7 @@ $result2 = mysqli_query($con,$sql2);
                                 <table class="table">
                                     <thead style=" color:#00a9a3">
                                     <tr>
-                                        <th style="width:10%;text-align:center;">ธนาคาร</th>
+                                        <th style="width:10%;text-align:center;"></th>
                                         <th style="width:10%;text-align:center;">ธนาคาร</th>
                                         <th style="width:15%;text-align:center;">ชื่อบัญชี</th>
                                         <th style="width:15%;text-align:center;">เลขที่บัญชี</th>
@@ -235,7 +235,7 @@ $result2 = mysqli_query($con,$sql2);
                     }
                     else if($row2['bankName']=='KTB'){
                         echo"<tr>
-                     <td style=\"text-align:center;\"><img src=\"../images/bank/ktb.png\"  width=\"100%\"></td>
+                     <td style=\"text-align:center;\"><img src=\"../images/bank/ktb.jpg\"  width=\"100%\"></td>
                      <td style=\"text-align:center;\">$row2[bankName]</td>
                      <td style=\"text-align:center;\">$row2[accountName]</td>
 					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
