@@ -1,5 +1,4 @@
 <?php
-//hellooo
 session_start();
 if($_SESSION['ID'] == "")
 {
@@ -208,7 +207,7 @@ $result2 = mysqli_query($con,$sql2);
                                 <table class="table">
                                     <thead style=" color:#00a9a3">
                                     <tr>
-
+                                        <th style="width:10%;text-align:center;">ธนาคาร</th>
                                         <th style="width:10%;text-align:center;">ธนาคาร</th>
                                         <th style="width:15%;text-align:center;">ชื่อบัญชี</th>
                                         <th style="width:15%;text-align:center;">เลขที่บัญชี</th>
@@ -219,26 +218,92 @@ $result2 = mysqli_query($con,$sql2);
                                    
                      while($row2= mysqli_fetch_assoc($result2))// show the information from query
                 {
-                    
 
-                    echo "
-                    <tr>
-                    
-                    
+                    if($row2['bankName']=='SCB'){
+                        echo"<tr>
+                     <td style=\"text-align:center;\"><img src=\"../images/bank/scb.png\"  width=\"100%\"></td>
                      <td style=\"text-align:center;\">$row2[bankName]</td>
                      <td style=\"text-align:center;\">$row2[accountName]</td>
-					 <td style=\"text-align:center;\">$row2[accountNumber]</td>";
-                    
-                    echo"
+					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
                     <td style=\"text-align:center;\">
                     <form action=\"Action/deleteBank_action.php\" method=\"get\">
                         <input style='display: none;' type=\"text\" name=\"bankID\" value='$row2[bankID]'>
                         <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
                     </form>
-
                     </td>
-                    </tr>
-                    ";
+                    </tr>";
+                    }
+                    else if($row2['bankName']=='KTB'){
+                        echo"<tr>
+                     <td style=\"text-align:center;\"><img src=\"../images/bank/ktb.png\"  width=\"100%\"></td>
+                     <td style=\"text-align:center;\">$row2[bankName]</td>
+                     <td style=\"text-align:center;\">$row2[accountName]</td>
+					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
+                    <td style=\"text-align:center;\">
+                    <form action=\"Action/deleteBank_action.php\" method=\"get\">
+                        <input style='display: none;' type=\"text\" name=\"bankID\" value='$row2[bankID]'>
+                        <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
+                    </form>
+                    </td>
+                    </tr>";
+                    }
+                    else if($row2['bankName']=='BBL'){
+                        echo"<tr>
+                     <td style=\"text-align:center;\"><img src=\"../images/bank/bbl.png\"  width=\"100%\"></td>
+                     <td style=\"text-align:center;\">$row2[bankName]</td>
+                     <td style=\"text-align:center;\">$row2[accountName]</td>
+					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
+                    <td style=\"text-align:center;\">
+                    <form action=\"Action/deleteBank_action.php\" method=\"get\">
+                        <input style='display: none;' type=\"text\" name=\"bankID\" value='$row2[bankID]'>
+                        <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
+                    </form>
+                    </td>
+                    </tr>";
+                    }
+                    else if($row2['bankName']=='KBANK'){
+                        echo"<tr>
+                     <td style=\"text-align:center;\"><img src=\"../images/bank/kbank.png\"  width=\"100%\"></td>
+                     <td style=\"text-align:center;\">$row2[bankName]</td>
+                     <td style=\"text-align:center;\">$row2[accountName]</td>
+					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
+                    <td style=\"text-align:center;\">
+                    <form action=\"Action/deleteBank_action.php\" method=\"get\">
+                        <input style='display: none;' type=\"text\" name=\"bankID\" value='$row2[bankID]'>
+                        <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
+                    </form>
+                    </td>
+                    </tr>";
+                    }
+                    else if($row2['bankName']=='Wallet'){
+                        echo"<tr>
+                     <td style=\"text-align:center;\"><img src=\"../images/bank/true.jpg\"  width=\"100%\"></td>
+                     <td style=\"text-align:center;\">$row2[bankName]</td>
+                     <td style=\"text-align:center;\">$row2[accountName]</td>
+					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
+                    <td style=\"text-align:center;\">
+                    <form action=\"Action/deleteBank_action.php\" method=\"get\">
+                        <input style='display: none;' type=\"text\" name=\"bankID\" value='$row2[bankID]'>
+                        <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
+                    </form>
+                    </td>
+                    </tr>";
+                    }
+                    else if($row2['bankName']=='PrompPay'){
+                        echo"<tr>
+                     <td style=\"text-align:center;\"><img src=\"../images/bank/promptpay.png\"  width=\"100%\"></td>
+                     <td style=\"text-align:center;\">$row2[bankName]</td>
+                     <td style=\"text-align:center;\">$row2[accountName]</td>
+					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
+                    <td style=\"text-align:center;\">
+                    <form action=\"Action/deleteBank_action.php\" method=\"get\">
+                        <input style='display: none;' type=\"text\" name=\"bankID\" value='$row2[bankID]'>
+                        <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
+                    </form>
+                    </td>
+                    </tr>";
+                    }
+
 				}
                                     ?>
                                     
