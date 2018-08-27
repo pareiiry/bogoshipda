@@ -177,12 +177,10 @@ $result2 = mysqli_query($con,$sql2);
                             <div class="panel-heading" align="center"  style="background-color:#edf9f7;"><b>เพิ่มบัญชี</b></div>
                             <div class="panel-body" style="margin: 0% 2% 0% 2%">
                                 <!--                            <form method="post">-->
-                                
-                                <div class="btn-group" style="margin: 0 0 2% 0">
 
-                                    <div class="form-group" name="bankName" size="100%">
+                                    <div class="btn-group" style="margin: 0 0 2% 0;width: 100%">
                                         <label>ชื่อธนาคาร:</label>
-                                        <select>
+                                        <select class="form-control" name="bankName">
                                             <option value="SCB">SCB</option>
                                             <option value="KTB">KTB</option>
                                             <option value="BBL">BBL</option>
@@ -191,7 +189,6 @@ $result2 = mysqli_query($con,$sql2);
                                             <option value="PrompPay">PrompPay</option>
                                         </select>
                                     </div>
-                                </div>
                                 <div class="btn-group" style="margin: 0 0 2% 0;width: 100%">
                                     <label>ชื่อบัญชี:</label>
                                     <input size="100%" class="form-control" type="text" name="accountName" value="" required>
