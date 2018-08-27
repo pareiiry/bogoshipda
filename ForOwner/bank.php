@@ -68,7 +68,7 @@ $result2 = mysqli_query($con,$sql2);
             box-sizing: border-box;
         }
         .row.content {
-            height: 600px;
+            height: 1600px;
         }
 
     </style>
@@ -177,11 +177,18 @@ $result2 = mysqli_query($con,$sql2);
                             <div class="panel-heading" align="center"  style="background-color:#edf9f7;"><b>เพิ่มบัญชี</b></div>
                             <div class="panel-body" style="margin: 0% 2% 0% 2%">
                                 <!--                            <form method="post">-->
-                                
-                                <div class="btn-group" style="margin: 0 0 2% 0">
-                                    <label>ชื่อธนาคาร:</label>
-                                    <input size="100%" class="form-control" type="text" name="bankName" value="" required>
-                                </div>
+
+                                    <div class="btn-group" style="margin: 0 0 2% 0;width: 100%">
+                                        <label>ชื่อธนาคาร:</label>
+                                        <select class="form-control" name="bankName">
+                                            <option value="SCB">SCB</option>
+                                            <option value="KTB">KTB</option>
+                                            <option value="BBL">BBL</option>
+                                            <option value="KBANK">KBANK</option>
+                                            <option value="Wallet">Wallet</option>
+                                            <option value="PrompPay">PrompPay</option>
+                                        </select>
+                                    </div>
                                 <div class="btn-group" style="margin: 0 0 2% 0;width: 100%">
                                     <label>ชื่อบัญชี:</label>
                                     <input size="100%" class="form-control" type="text" name="accountName" value="" required>
@@ -207,7 +214,7 @@ $result2 = mysqli_query($con,$sql2);
                                 <table class="table">
                                     <thead style=" color:#00a9a3">
                                     <tr>
-                                        <th style="width:10%;text-align:center;">ธนาคาร</th>
+                                        <th style="width:10%;text-align:center;"></th>
                                         <th style="width:10%;text-align:center;">ธนาคาร</th>
                                         <th style="width:15%;text-align:center;">ชื่อบัญชี</th>
                                         <th style="width:15%;text-align:center;">เลขที่บัญชี</th>
@@ -235,7 +242,7 @@ $result2 = mysqli_query($con,$sql2);
                     }
                     else if($row2['bankName']=='KTB'){
                         echo"<tr>
-                     <td style=\"text-align:center;\"><img src=\"../images/bank/ktb.png\"  width=\"100%\"></td>
+                     <td style=\"text-align:center;\"><img src=\"../images/bank/ktb.jpg\"  width=\"100%\"></td>
                      <td style=\"text-align:center;\">$row2[bankName]</td>
                      <td style=\"text-align:center;\">$row2[accountName]</td>
 					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
