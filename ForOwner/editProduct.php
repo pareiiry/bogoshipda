@@ -245,23 +245,23 @@ $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
                                 <label>สี:</label>
                                 <select class="form-control" name="color">
                                     <option value="white" <?php if(isset($_POST['color']) && ($_POST['color']=='white'))echo 'selected' ?>>สีขาว</option>
-                                    <option value="cream">สีครีม</option>
-                                    <option value="milktea">สีชานม</option>
-                                    <option value="yellow">สีเหลือง</option>
-                                    <option value="green">สีเขียว</option>
-                                    <option value="darkgreen">สีเขียวเข้ม</option>
-                                    <option value="mint">สีมิ้นต์</option>
-                                    <option value="sky">สีฟ้าเข้ม</option>
-                                    <option value="orange">สีส้มอ่อน</option>
-                                    <option value="lightpink">สีชมพูอ่อน</option>
-                                    <option value="pink">สีชมพู</option>
-                                    <option value="darkpink">สีชมพูเข้ม</option>
-                                    <option value="red">สีแดง</option>
-                                    <option value="purple">สีม่วง</option>
-                                    <option value="lightgray">สีเทาอมฟ้า</option>
-                                    <option value="darkgray">สีเทาเข้ม</option>
-                                    <option value="brown">สีน้ำตาล</option>
-                                    <option value="black">สีดำ</option>
+                                    <option value="cream" <?php if(isset($_POST['color']) && ($_POST['color']=='cream'))echo 'selected' ?>>สีครีม</option>
+                                    <option value="milktea" <?php if(isset($_POST['color']) && ($_POST['color']=='milktea'))echo 'selected' ?>>สีชานม</option>
+                                    <option value="yellow" <?php if(isset($_POST['color']) && ($_POST['color']=='yellow'))echo 'selected' ?>>สีเหลือง</option>
+                                    <option value="green" <?php if(isset($_POST['color']) && ($_POST['color']=='green'))echo 'selected' ?>>สีเขียว</option>
+                                    <option value="darkgreen" <?php if(isset($_POST['color']) && ($_POST['color']=='darkgreen'))echo 'selected' ?>>สีเขียวเข้ม</option>
+                                    <option value="mint" <?php if(isset($_POST['color']) && ($_POST['color']=='mint'))echo 'selected' ?>>สีมิ้นต์</option>
+                                    <option value="sky" <?php if(isset($_POST['color']) && ($_POST['color']=='sky'))echo 'selected' ?>>สีฟ้าเข้ม</option>
+                                    <option value="orange" <?php if(isset($_POST['color']) && ($_POST['color']=='orange'))echo 'selected' ?>>สีส้มอ่อน</option>
+                                    <option value="lightpink" <?php if(isset($_POST['color']) && ($_POST['color']=='lightpink'))echo 'selected' ?>>สีชมพูอ่อน</option>
+                                    <option value="pink" <?php if(isset($_POST['color']) && ($_POST['color']=='pink'))echo 'selected' ?>>สีชมพู</option>
+                                    <option value="darkpink" <?php if(isset($_POST['color']) && ($_POST['color']=='darkpink'))echo 'selected' ?>>สีชมพูเข้ม</option>
+                                    <option value="red" <?php if(isset($_POST['color']) && ($_POST['color']=='red'))echo 'selected' ?>>สีแดง</option>
+                                    <option value="purple" <?php if(isset($_POST['color']) && ($_POST['color']=='purple'))echo 'selected' ?>>สีม่วง</option>
+                                    <option value="lightgray" <?php if(isset($_POST['color']) && ($_POST['color']=='lightgray'))echo 'selected' ?>>สีเทาอมฟ้า</option>
+                                    <option value="darkgray" <?php if(isset($_POST['color']) && ($_POST['color']=='darkgray'))echo 'selected' ?>>สีเทาเข้ม</option>
+                                    <option value="brown" <?php if(isset($_POST['color']) && ($_POST['color']=='brown'))echo 'selected' ?>>สีน้ำตาล</option>
+                                    <option value="black" <?php if(isset($_POST['color']) && ($_POST['color']=='black'))echo 'selected' ?>>สีดำ</option>
                                 </select>
                                 <div class="btn-group" style="margin: 0 0 2% 0">
                                     <label>คำอธิบายสินค้า:</label>
