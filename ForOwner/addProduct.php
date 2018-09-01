@@ -277,7 +277,7 @@ $result2 = mysqli_query($con,$sql2);
                         <div class="panel-body" >
 
                                 <div class="btn-group">
-                                    <form method="post" action="Action/upload-page.php" enctype="multipart/form-data">
+                                    <form method="post" action="#" enctype="multipart/form-data">
                                         Select files: <input style="margin:2% 0 2% 0 " type="file" name="filesToUpload[]" id="filesToUpload" multiple onchange="makeFileList();">
 <!--                                        <input type="submit">-->
                                     </form>

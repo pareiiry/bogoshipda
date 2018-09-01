@@ -7,7 +7,7 @@ for ($i=0; $i<count($_FILES['filesToUpload']['name']); $i++){
 //    $imgGroupID = uniqid();
 //    echo $imgGroupID;
     echo $_FILES['filesToUpload']['tmp_name'][$i];echo "<br>";
-    $db = mysqli_connect("localhost","root","","bogoshipdadb"); //keep your db name
+    $db = mysqli_connect("localhost","root","","bogoshipdadb2"); //keep your db name
     $image = addslashes(file_get_contents($_FILES['filesToUpload']['tmp_name'][$i]));
 //you keep your column name setting for insertion. I keep image type Blob.
     $query = "INSERT INTO image (imgID,img) VALUES('','$image')";

@@ -177,7 +177,7 @@ $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
                     <div class="col-sm-4" align="center"><h3><b>แก้ไขสินค้า</b></h3></div>
 
                     <div class="col-sm-4 " align="right">
-                        <input class="btn btn-success" type="submit" value="บันทึก" style="margin-left: 2%;margin-top: 3%">
+                        <input class="btn btn-success" type="submit" value="แก้ไข" style="margin-left: 2%;margin-top: 3%">
                         <a href="indexForOwner.php" class="btn btn-danger" role="button" type="clear" style="margin-left: 2%;margin-top: 3%" >ยกเลิก</a>
                     </div>
 
@@ -189,32 +189,7 @@ $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
                 <div class="row" style="margin-top: 20px">
                     <div class="col-md-8">
                         <div class="panel panel-default">
-                            <script type="text/javascript">
-
-                                // function enterNumber(){
-                                //
-                                //     var e = document.getElementById('price');
-                                //
-                                //     if (!/^\d+(\.\d{1,2})?$/.test(e.value))
-                                //     {
-                                //         alert("ไม่สามารถใส่จำนวนติดลบได้ค่ะ");
-                                //         //e.value = '';
-                                //         e.value = e.value.substring(0,e.value.length-1);
-                                //     }
-                                // }
-                                // function enterNumber2(){
-                                //
-                                //     var e = document.getElementById('cost');
-                                //
-                                //     if (!/^-/.test(e.value))
-                                //     {
-                                //         alert("ไม่สามารถใส่จำนวนติดลบได้ค่ะ");
-                                //         //e.value = '';
-                                //         e.value = e.value.substring(0,e.value.length-1);
-                                //     }
-                                // }
-
-                            </script>
+                            <input style='display: none;' type="text" name="pdID" value='<?php echo $row2['pdID'];?>'>
                             <div class="panel-heading"><b>ข้อมูลสินค้า</b></div>
                             <div class="panel-body" style="margin: 0% 2% 0% 2%">
                                 <!--                            <form method="post">-->
@@ -244,24 +219,24 @@ $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
                                 </div>
                                 <label>สี:</label>
                                 <select class="form-control" name="color">
-                                    <option value="white" <?php if(isset($_POST['color']) && ($_POST['color']=='white'))echo 'selected' ?>>สีขาว</option>
-                                    <option value="cream" <?php if(isset($_POST['color']) && ($_POST['color']=='cream'))echo 'selected' ?>>สีครีม</option>
-                                    <option value="milktea" <?php if(isset($_POST['color']) && ($_POST['color']=='milktea'))echo 'selected' ?>>สีชานม</option>
-                                    <option value="yellow" <?php if(isset($_POST['color']) && ($_POST['color']=='yellow'))echo 'selected' ?>>สีเหลือง</option>
-                                    <option value="green" <?php if(isset($_POST['color']) && ($_POST['color']=='green'))echo 'selected' ?>>สีเขียว</option>
-                                    <option value="darkgreen" <?php if(isset($_POST['color']) && ($_POST['color']=='darkgreen'))echo 'selected' ?>>สีเขียวเข้ม</option>
-                                    <option value="mint" <?php if(isset($_POST['color']) && ($_POST['color']=='mint'))echo 'selected' ?>>สีมิ้นต์</option>
-                                    <option value="sky" <?php if(isset($_POST['color']) && ($_POST['color']=='sky'))echo 'selected' ?>>สีฟ้าเข้ม</option>
-                                    <option value="orange" <?php if(isset($_POST['color']) && ($_POST['color']=='orange'))echo 'selected' ?>>สีส้มอ่อน</option>
-                                    <option value="lightpink" <?php if(isset($_POST['color']) && ($_POST['color']=='lightpink'))echo 'selected' ?>>สีชมพูอ่อน</option>
-                                    <option value="pink" <?php if(isset($_POST['color']) && ($_POST['color']=='pink'))echo 'selected' ?>>สีชมพู</option>
-                                    <option value="darkpink" <?php if(isset($_POST['color']) && ($_POST['color']=='darkpink'))echo 'selected' ?>>สีชมพูเข้ม</option>
-                                    <option value="red" <?php if(isset($_POST['color']) && ($_POST['color']=='red'))echo 'selected' ?>>สีแดง</option>
-                                    <option value="purple" <?php if(isset($_POST['color']) && ($_POST['color']=='purple'))echo 'selected' ?>>สีม่วง</option>
-                                    <option value="lightgray" <?php if(isset($_POST['color']) && ($_POST['color']=='lightgray'))echo 'selected' ?>>สีเทาอมฟ้า</option>
-                                    <option value="darkgray" <?php if(isset($_POST['color']) && ($_POST['color']=='darkgray'))echo 'selected' ?>>สีเทาเข้ม</option>
-                                    <option value="brown" <?php if(isset($_POST['color']) && ($_POST['color']=='brown'))echo 'selected' ?>>สีน้ำตาล</option>
-                                    <option value="black" <?php if(isset($_POST['color']) && ($_POST['color']=='black'))echo 'selected' ?>>สีดำ</option>
+                                    <option value="white" <?php if(isset($row2['color']) && ($row2['color']=='white'))echo 'selected' ?>>สีขาว</option>
+                                    <option value="cream" <?php if(isset($row2['color']) && ($row2['color']=='cream'))echo 'selected' ?>>สีครีม</option>
+                                    <option value="milktea" <?php if(isset($row2['color']) && ($row2['color']=='milktea'))echo 'selected' ?>>สีชานม</option>
+                                    <option value="yellow" <?php if(isset($row2['color']) && ($row2['color']=='yellow'))echo 'selected' ?>>สีเหลือง</option>
+                                    <option value="green" <?php if(isset($row2['color']) && ($row2['color']=='green'))echo 'selected' ?>>สีเขียว</option>
+                                    <option value="darkgreen" <?php if(isset($row2['color']) && ($row2['color']=='darkgreen'))echo 'selected' ?>>สีเขียวเข้ม</option>
+                                    <option value="mint" <?php if(isset($row2['color']) && ($row2['color']=='mint'))echo 'selected' ?>>สีมิ้นต์</option>
+                                    <option value="sky" <?php if(isset($row2['color']) && ($row2['color']=='sky'))echo 'selected' ?>>สีฟ้าเข้ม</option>
+                                    <option value="orange" <?php if(isset($row2['color']) && ($row2['color']=='orange'))echo 'selected' ?>>สีส้มอ่อน</option>
+                                    <option value="lightpink" <?php if(isset($row2['color']) && ($row2['color']=='lightpink'))echo 'selected' ?>>สีชมพูอ่อน</option>
+                                    <option value="pink" <?php if(isset($row2['color']) && ($row2['color']=='pink'))echo 'selected' ?>>สีชมพู</option>
+                                    <option value="darkpink" <?php if(isset($row2['color']) && ($row2['color']=='darkpink'))echo 'selected' ?>>สีชมพูเข้ม</option>
+                                    <option value="red" <?php if(isset($row2['color']) && ($row2['color']=='red'))echo 'selected' ?>>สีแดง</option>
+                                    <option value="purple" <?php if(isset($row2['color']) && ($row2['color']=='purple'))echo 'selected' ?>>สีม่วง</option>
+                                    <option value="lightgray" <?php if(isset($row2['color']) && ($row2['color']=='lightgray'))echo 'selected' ?>>สีเทาอมฟ้า</option>
+                                    <option value="darkgray" <?php if(isset($row2['color']) && ($row2['color']=='darkgray'))echo 'selected' ?>>สีเทาเข้ม</option>
+                                    <option value="brown" <?php if(isset($row2['color']) && ($row2['color']=='brown'))echo 'selected' ?>>สีน้ำตาล</option>
+                                    <option value="black" <?php if(isset($row2['color']) && ($row2['color']=='black'))echo 'selected' ?>>สีดำ</option>
                                 </select>
                                 <div class="btn-group" style="margin: 0 0 2% 0">
                                     <label>คำอธิบายสินค้า:</label>
@@ -271,133 +246,80 @@ $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        
-                        <div class="panel panel-default">
-                            <div class="panel-heading"><b>รูปภาพสินค้า</b></div>
-                            <div class="panel-body" >
+            </form>
+            <div class="col-md-4">
 
-                                รูปภาพ :
-                                    <?php
-                                    $sql3 = "SELECT * FROM image WHERE pdID= '".$row2['pdID']."'";
-                                    $result3 = mysqli_query($con,$sql3);
-                                    //$row3 = mysqli_fetch_array($result3,MYSQLI_ASSOC);
-                                    echo "<table style='margin-right: 3%'>";
-//                                    print_r($result3);
-//                                    echo mysqli_num_rows($result3);
-                                    while($row3= mysqli_fetch_assoc($result3)){
-                                        if($row3['img']===""){
-                                            echo "<br><center><font color='red'>ไม่มีรูปภาพที่จะแสดง</font></center>";
+                <div class="panel panel-default">
+                    <div class="panel-heading"><b>รูปภาพสินค้า</b></div>
+                    <div class="panel-body" >
+
+                        รูปภาพ :
+                        <?php
+                        $sql3 = "SELECT * FROM image WHERE pdID= '".$row2['pdID']."'";
+                        $result3 = mysqli_query($con,$sql3);
+                        //$row3 = mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                        echo "<table style='margin-right: 3%'>";
+                        //                                    print_r($result3);
+                        //                                    echo mysqli_num_rows($result3);
+                        while($row3= mysqli_fetch_assoc($result3)){
+                            if($row3['img']===""){
+                                echo "<br><center><font color='red'>ไม่มีรูปภาพที่จะแสดง</font></center>";
+                            }
+                            else{
+                                echo"<tr><td align='center'>";
+                                echo '<img style="width:30%" src="data:image/*;base64,'.base64_encode($row3['img']).'"/>';
+                                echo "</td><td align='center'>";?>
+                                <form action="Action/deleteImg_action.php" method="get">
+                                    <input style='display: none;' type="text" name="imgID" value='<?php echo $row3['imgID'];?>'>
+                                    <button class='btn-delete' type="submit"><i class="fa fa-trash"></i></button>
+                                </form>
+                                <?php
+                                echo "</td></tr>";
+                            }
+
+
+                        }echo "</table>";?>
+                        <br>
+                        <div class="btn-group">
+                            <form method="post" action="Action/addEditImg_action.php" enctype="multipart/form-data">
+                                Select files: <input style="margin:2% 0 2% 0 " type="file" name="filesToUpload[]" id="filesToUpload" multiple onchange="makeFileList();">
+                                <!--                                        <input type="submit">-->
+                                <input style='display: none;' type="text" name="pdID" value='<?php echo $row2['pdID'];?>'>
+
+                                รูปภาพที่เลือก :
+                                <ul id="fileList" style="list-style-type:none"><li><font color='red'>ไม่มีรูปภาพที่เลือก</font></li></ul>
+
+                                <script>
+                                    function makeFileList() {
+                                        var input = document.getElementById("filesToUpload");
+                                        var ul = document.getElementById("fileList");
+                                        while (ul.hasChildNodes()) {
+                                            ul.removeChild(ul.firstChild);
                                         }
-                                        else{
-                                            echo"<tr><td align='center'>";
-                                            echo '<img style="width:30%" src="data:image/*;base64,'.base64_encode($row3['img']).'"/>';
-                                            echo "</td><td align='center'>";?>
-                                            <form action="Action/deleteImg_action.php" method="get">
-                                                <input style='display: none;' type="text" name="imgID" value='<?php echo $row3['imgID'];?>'>
-                                                <button class='btn-delete' type="submit"><i class="fa fa-trash"></i></button>
-                                            </form>
-                                            <?php
-                                            echo "</td></tr>";
+                                        for (var i = 0; i < input.files.length; i++) {
+                                            var li = document.createElement("li");
+                                            li.innerHTML = input.files[i].name;
+                                            ul.appendChild(li);
                                         }
-
-
-                                    }echo "</table>";?>
-<br>
-                                <div class="btn-group">
-                                    <form method="post" action="Action/upload-page.php" enctype="multipart/form-data">
-                                        Select files: <input style="margin:2% 0 2% 0 " type="file" name="filesToUpload[]" id="filesToUpload" multiple onchange="makeFileList();">
-                                        <!--                                        <input type="submit">-->
-                                    </form>
-                                    รูปภาพที่เลือก :
-                                    <ul id="fileList" style="list-style-type:none"><li><font color='red'>ไม่มีรูปภาพที่เลือก</font></li></ul>
-
-                                    <script>
-                                        function makeFileList() {
-                                            var input = document.getElementById("filesToUpload");
-                                            var ul = document.getElementById("fileList");
-                                            while (ul.hasChildNodes()) {
-                                                ul.removeChild(ul.firstChild);
-                                            }
-                                            for (var i = 0; i < input.files.length; i++) {
-                                                var li = document.createElement("li");
-                                                li.innerHTML = input.files[i].name;
-                                                ul.appendChild(li);
-                                            }
-                                            if(!ul.hasChildNodes()) {
-                                                var li = document.createElement("li");
-                                                li.innerHTML = '<font color=\'red\'>ไม่มีรูปภาพที่เลือก</font>';
-                                                ul.appendChild(li);
-                                            }
+                                        if(!ul.hasChildNodes()) {
+                                            var li = document.createElement("li");
+                                            li.innerHTML = '<font color=\'red\'>ไม่มีรูปภาพที่เลือก</font>';
+                                            ul.appendChild(li);
                                         }
+                                    }
 
-                                    </script>
-
-                                </div>
-
-                            </div>
+                                </script>
+                                <button class='form-control btn btn-success' type="submit">อัพโหลดรูปภาพ</button>
+                            </form>
                         </div>
+
                     </div>
                 </div>
-
-            </form>
-
-            <!--            <h2>I Love Food</h2>-->
-            <!--            <h5><span class="glyphicon glyphicon-time"></span> Post by Jane Dane, Sep 27, 2015.</h5>-->
-            <!--            <h5><span class="label label-danger">Food</span> <span class="label label-primary">Ipsum</span></h5><br>-->
-            <!--            <p>Food is my passion. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>-->
-            <!--            <br><br>-->
-
-            <!--            <h4><small>RECENT POSTS</small></h4>-->
-            <!--            <hr>-->
-            <!--            <h2>Officially Blogging</h2>-->
-            <!--            <h5><span class="glyphicon glyphicon-time"></span> Post by John Doe, Sep 24, 2015.</h5>-->
-            <!--            <h5><span class="label label-success">Lorem</span></h5><br>-->
-            <!--            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>-->
-            <!--            <hr>-->
-
-            <!--            <h4>Leave a Comment:</h4>-->
-            <!--            <form role="form">-->
-            <!--                <div class="form-group">-->
-            <!--                    <textarea class="form-control" rows="3" required></textarea>-->
-            <!--                </div>-->
-            <!--                <button type="submit" class="btn btn-success">Submit</button>-->
-            <!--            </form>-->
-            <!--            <br><br>-->
-
-            <!--            <p><span class="badge">2</span> Comments:</p><br>-->
-
-            <!--            <div class="row">-->
-            <!--                <div class="col-sm-2 text-center">-->
-            <!--                    <img src="bandmember.jpg" class="img-circle" height="65" width="65" alt="Avatar">-->
-            <!--                </div>-->
-            <!--                <div class="col-sm-10">-->
-            <!--                    <h4>Anja <small>Sep 29, 2015, 9:12 PM</small></h4>-->
-            <!--                    <p>Keep up the GREAT work! I am cheering for you!! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>-->
-            <!--                    <br>-->
-            <!--                </div>-->
-            <!--                <div class="col-sm-2 text-center">-->
-            <!--                    <img src="bird.jpg" class="img-circle" height="65" width="65" alt="Avatar">-->
-            <!--                </div>-->
-            <!--                <div class="col-sm-10">-->
-            <!--                    <h4>John Row <small>Sep 25, 2015, 8:25 PM</small></h4>-->
-            <!--                    <p>I am so happy for you man! Finally. I am looking forward to read about your trendy life. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>-->
-            <!--                    <br>-->
-            <!--                    <p><span class="badge">1</span> Comment:</p><br>-->
-            <!--                    <div class="row">-->
-            <!--                        <div class="col-sm-2 text-center">-->
-            <!--                            <img src="bird.jpg" class="img-circle" height="65" width="65" alt="Avatar">-->
-            <!--                        </div>-->
-            <!--                        <div class="col-xs-10">-->
-            <!--                            <h4>Nested Bro <small>Sep 25, 2015, 8:28 PM</small></h4>-->
-            <!--                            <p>Me too! WOW!</p>-->
-            <!--                            <br>-->
-            <!--                        </div>-->
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--            </div>-->
+            </div>
         </div>
+
     </div>
+</div>
 </div>
 <!--<footer class="container-fluid">-->
 <!--    <p></p>-->

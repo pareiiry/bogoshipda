@@ -296,7 +296,12 @@ $result2 = mysqli_query($con,$sql2);
                     echo "
                     <tr>
                     <td style=\"text-align:center;\">";
-                    echo '<img style="width:30%" src="data:image/*;base64,'.base64_encode($row3['img']).'"/>';
+                if($row3['img']===""){
+                    echo '<img style="width:30%" src="../images/no-picture.jpg">';
+                }
+                else {
+                    echo '<img style="width:30%" src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
+                }
                     echo"</td>
                     <td>$row2[pdID]</td>
                     <td>$row2[name]</td>
