@@ -37,7 +37,7 @@ $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../css/styleOwner.css">
     <link rel="icon" type="image/png" href="../images/icons/favicon.png"/>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
         .row.content {height: 1500px}
@@ -242,6 +242,27 @@ $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
                                         </div>
                                     </div>
                                 </div>
+                                <label>สี:</label>
+                                <select class="form-control" name="color">
+                                    <option value="white" <?php if(isset($_POST['color']) && ($_POST['color']=='white'))echo 'selected' ?>>สีขาว</option>
+                                    <option value="cream">สีครีม</option>
+                                    <option value="milktea">สีชานม</option>
+                                    <option value="yellow">สีเหลือง</option>
+                                    <option value="green">สีเขียว</option>
+                                    <option value="darkgreen">สีเขียวเข้ม</option>
+                                    <option value="mint">สีมิ้นต์</option>
+                                    <option value="sky">สีฟ้าเข้ม</option>
+                                    <option value="orange">สีส้มอ่อน</option>
+                                    <option value="lightpink">สีชมพูอ่อน</option>
+                                    <option value="pink">สีชมพู</option>
+                                    <option value="darkpink">สีชมพูเข้ม</option>
+                                    <option value="red">สีแดง</option>
+                                    <option value="purple">สีม่วง</option>
+                                    <option value="lightgray">สีเทาอมฟ้า</option>
+                                    <option value="darkgray">สีเทาเข้ม</option>
+                                    <option value="brown">สีน้ำตาล</option>
+                                    <option value="black">สีดำ</option>
+                                </select>
                                 <div class="btn-group" style="margin: 0 0 2% 0">
                                     <label>คำอธิบายสินค้า:</label>
                                     <textarea class="form-control" style="min-width: 320%" rows="5" name="description"><?php echo $row2['description'];?></textarea>
@@ -251,17 +272,45 @@ $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
                         </div>
                     </div>
                     <div class="col-md-4">
+                        
                         <div class="panel panel-default">
                             <div class="panel-heading"><b>รูปภาพสินค้า</b></div>
                             <div class="panel-body" >
 
+                                รูปภาพ :
+                                    <?php
+                                    $sql3 = "SELECT * FROM image WHERE pdID= '".$row2['pdID']."'";
+                                    $result3 = mysqli_query($con,$sql3);
+                                    //$row3 = mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                                    echo "<table style='margin-right: 3%'>";
+//                                    print_r($result3);
+//                                    echo mysqli_num_rows($result3);
+                                    while($row3= mysqli_fetch_assoc($result3)){
+                                        if($row3['img']===""){
+                                            echo "<br><center><font color='red'>ไม่มีรูปภาพที่จะแสดง</font></center>";
+                                        }
+                                        else{
+                                            echo"<tr><td align='center'>";
+                                            echo '<img style="width:30%" src="data:image/*;base64,'.base64_encode($row3['img']).'"/>';
+                                            echo "</td><td align='center'>";?>
+                                            <form action="Action/deleteImg_action.php" method="get">
+                                                <input style='display: none;' type="text" name="imgID" value='<?php echo $row3['imgID'];?>'>
+                                                <button class='btn-delete' type="submit"><i class="fa fa-trash"></i></button>
+                                            </form>
+                                            <?php
+                                            echo "</td></tr>";
+                                        }
+
+
+                                    }echo "</table>";?>
+<br>
                                 <div class="btn-group">
                                     <form method="post" action="Action/upload-page.php" enctype="multipart/form-data">
                                         Select files: <input style="margin:2% 0 2% 0 " type="file" name="filesToUpload[]" id="filesToUpload" multiple onchange="makeFileList();">
                                         <!--                                        <input type="submit">-->
                                     </form>
                                     รูปภาพที่เลือก :
-                                    <ul id="fileList" style="list-style-type:none"><li>ไม่มีรูปภาพที่เลือก</li></ul>
+                                    <ul id="fileList" style="list-style-type:none"><li><font color='red'>ไม่มีรูปภาพที่เลือก</font></li></ul>
 
                                     <script>
                                         function makeFileList() {
@@ -277,7 +326,7 @@ $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
                                             }
                                             if(!ul.hasChildNodes()) {
                                                 var li = document.createElement("li");
-                                                li.innerHTML = 'ไม่มีรูปภาพที่เลือก';
+                                                li.innerHTML = '<font color=\'red\'>ไม่มีรูปภาพที่เลือก</font>';
                                                 ul.appendChild(li);
                                             }
                                         }

@@ -1,6 +1,6 @@
 <?php
 include ('dbConnect.php');
-$sql2 = "SELECT * FROM product";
+$sql2 = "SELECT * FROM product ORDER BY dateCreate DESC LIMIT 10";
 $result2 = mysqli_query($con,$sql2);
 ?>
 <!DOCTYPE html>
