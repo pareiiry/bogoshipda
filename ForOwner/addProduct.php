@@ -142,9 +142,7 @@ $result2 = mysqli_query($con,$sql2);
                         <!--                        <p>Some text..</p>-->
                         <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/review.png" style="width:100%" alt="Image">รีวิว</a>
                     </div>
-                    <div class="col-sm-3">
-                        <a href="faqs.php"><img class="bg-icon" src="../img/menu_bar_admin/faqs.png" style="width:100%" alt="Image">FAQs</a>
-                    </div>
+                   
                     <div class="col-sm-3">
                         <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/statistic.png" style="width:100%" alt="Image">รายงาน</a>
                     </div>
@@ -242,7 +240,30 @@ $result2 = mysqli_query($con,$sql2);
                                         </div>
                                     </div>
                                 </div>
-                                <div class="btn-group" style="margin: 0 0 2% 0">
+
+                            <label>สี:</label>
+                            <select class="form-control" name="color">
+                                <option value="white">สีขาว</option>
+                                <option value="cream">สีครีม</option>
+                                <option value="milktea">สีชานม</option>
+                                <option value="yellow">สีเหลือง</option>
+                                <option value="green">สีเขียว</option>
+                                <option value="darkgreen">สีเขียวเข้ม</option>
+                                <option value="mint">สีมิ้นต์</option>
+                                <option value="sky">สีฟ้าเข้ม</option>
+                                <option value="orange">สีส้มอ่อน</option>
+                                <option value="lightpink">สีชมพูอ่อน</option>
+                                <option value="pink">สีชมพู</option>
+                                <option value="darkpink">สีชมพูเข้ม</option>
+                                <option value="red">สีแดง</option>
+                                <option value="purple">สีม่วง</option>
+                                <option value="lightgray">สีเทาอมฟ้า</option>
+                                <option value="darkgray">สีเทาเข้ม</option>
+                                <option value="brown">สีน้ำตาล</option>
+                                <option value="black">สีดำ</option>
+                            </select>
+
+                                <div class="btn-group" style="margin: 2% 0 2% 0">
                                     <label>คำอธิบายสินค้า:</label>
                                     <textarea class="form-control" style="min-width: 320%" rows="5" name="description"></textarea>
                                 </div>
