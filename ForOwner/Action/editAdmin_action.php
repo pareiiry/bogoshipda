@@ -8,7 +8,7 @@ $password=$_POST['password'];
 
 include ('../../dbConnect.php');
 
-$sql="UPDATE usertable SET name='$name',email='$email',password='$password' WHERE uID=$uID";
+$sql="UPDATE user SET name='$name',email='$email',password='$password' WHERE uID=$uID";
 //$sql_query2=mysqli_query($con,$sql2);
 
 

@@ -1,6 +1,6 @@
 <?php
 include ('dbConnect.php');
-$sql2 = "SELECT * FROM producttable";
+$sql2 = "SELECT * FROM product";
 $result2 = mysqli_query($con,$sql2);
 ?>
 <!DOCTYPE html>
@@ -76,23 +76,18 @@ $result2 = mysqli_query($con,$sql2);
                     <ul class="main_menu">
                         <li>
                             <a href="index.php">Home</a>
-                            <ul class="sub_menu">
-                                <li><a href="index.html">Homepage V1</a></li>
-                                <li><a href="home-02.html">Homepage V2</a></li>
-                                <li><a href="home-03.html">Homepage V3</a></li>
-                            </ul>
                         </li>
 
                         <li>
-                            <a href="product.html">Product</a>
+                            <a href="product.php">Product</a>
                         </li>
 
                         <li>
-                            <a href="review.html">Review</a>
+                            <a href="review.php">Review</a>
                         </li>
 
                         <li class="sale-noti">
-                            <a href="cart.html">Design</a>
+                            <a href="design.php">Design</a>
                         </li>
                         <li>
                             <a href="help.php">Help</a>
@@ -168,7 +163,7 @@ $result2 = mysqli_query($con,$sql2);
                         <div class="header-cart-buttons">
                             <div class="header-cart-wrapbtn">
                                 <!-- Button -->
-                                <a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                <a href="cart.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
                                     View Cart
                                 </a>
                             </div>
@@ -322,15 +317,15 @@ $result2 = mysqli_query($con,$sql2);
                 </li>
 
                 <li>
-                    <a href="product.html">Product</a>
+                    <a href="product.php">Product</a>
                 </li>
 
                 <li>
-                    <a href="review.html">Review</a>
+                    <a href="review.php">Review</a>
                 </li>
 
                 <li class="sale-noti">
-                    <a href="cart.html">Design</a>
+                    <a href="design.php">Design</a>
                 </li>
 
                 <li>
@@ -385,7 +380,7 @@ $result2 = mysqli_query($con,$sql2);
 <!-- Banner -->
 
 
-<!-- New Product -->
+<!-- Product -->
 <section class="newproduct bgwhite p-t-45 p-b-105">
     <div class="container">
         <div class="sec-title p-b-60">
@@ -401,7 +396,7 @@ $result2 = mysqli_query($con,$sql2);
                 <?php
                 while($row2= mysqli_fetch_assoc($result2))// show the information from query
                 {
-                    $sql3 = "SELECT * FROM imgtable WHERE pdID= '" . $row2['pdID'] . "' LIMIT 1";
+                    $sql3 = "SELECT * FROM image WHERE pdID= '" . $row2['pdID'] . "' LIMIT 1";
                     $result3 = mysqli_query($con, $sql3);
                     $row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC);
 
@@ -426,7 +421,7 @@ $result2 = mysqli_query($con,$sql2);
 
                         <div class=\"block2-txt p-t-20\">
                             <a href=\"product-detail.html\" class=\"block2-name dis-block s-text3 p-b-5\">
-                               $row2[pdName]
+                               $row2[name]
                             </a>
 
                             <span class=\"block2-price m-text6 p-r-5\">
@@ -489,7 +484,7 @@ $result2 = mysqli_query($con,$sql2);
                 </li>
 
                 <li class="p-b-9 s-text7">
-                    line : bogoshipdashop
+                    line : bogoshipdastore
                 </li>
 
 
@@ -515,10 +510,9 @@ $result2 = mysqli_query($con,$sql2);
         </div>
 
         <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
-            <a href="payment.php"><u><h4 class="s-text12 p-b-30">
-                        Payment
-                    </h4></u></a>
-
+            <h4 class="s-text12 p-b-30">
+                Payment
+            </h4>
             <ul>
                 <li class="p-b-9 s-text7">
                     KTB &emsp;  K-BANK

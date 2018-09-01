@@ -1,6 +1,6 @@
 <?php
 session_start();
-$pdName=$_POST['pdName'];
+$name=$_POST['name'];
 $price=$_POST['price'];
 $cost=$_POST['cost'];
 $description=$_POST['description'];
@@ -10,12 +10,12 @@ $filesToUpload=$_POST['filesToUpload'];
 
 include ('../../dbConnect.php');
 
-$sql="INSERT INTO producttable (pdID,pdName,description,price,cost)VALUES('$pdID','$pdName','$description','$price','$cost')";//คำสั่งเพิ่มข้อมูล
+$sql="INSERT INTO product (pdID,name,description,price,cost)VALUES('$pdID','$name','$description','$price','$cost')";//คำสั่งเพิ่มข้อมูล
 $sql_query=mysqli_query($con,$sql);
 
 for ($i=0; $i<count($_FILES['filesToUpload']['name']); $i++) {
     $image = addslashes(file_get_contents($_FILES['filesToUpload']['tmp_name'][$i]));
-    $sql2 = "INSERT INTO imgtable (imgID,img,pdID)VALUES('','$image','$pdID')";//คำสั่งเพิ่มข้อมูล
+    $sql2 = "INSERT INTO image (imgID,img,pdID)VALUES('','$image','$pdID')";//คำสั่งเพิ่มข้อมูล
     $sql_query2 = mysqli_query($con, $sql2);
 }
 

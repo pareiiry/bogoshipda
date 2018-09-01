@@ -6,20 +6,20 @@ if($_SESSION['ID'] == "")
     header("location:loginPage.php");
     exit();
 }
-if($_SESSION['Status'] != "owner" && $_SESSION['Status'] != "admin")
+if($_SESSION['usertype'] != "owner" && $_SESSION['usertype'] != "admin")
 {
     //echo "ของ Adminเท่านั้นจ้าาา";
     exit();
 }
 include ('../dbConnect.php');
-$sql = "SELECT * FROM usertable WHERE uID = '".$_SESSION['ID']."' ";
+$sql = "SELECT * FROM user WHERE uID = '".$_SESSION['ID']."' ";
 //$objQuery = mysqli_query($strSQL);
 //$objResult = mysqli_fetch_array($objQuery);
 $result = mysqli_query($con,$sql);
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 
-$sql2 = "SELECT * FROM codetable";
+$sql2 = "SELECT * FROM code";
 //$objQuery = mysqli_query($strSQL);
 //$objResult = mysqli_fetch_array($objQuery);
 $result2 = mysqli_query($con,$sql2);
@@ -143,9 +143,7 @@ $result2 = mysqli_query($con,$sql2);
                         <!--                        <p>Some text..</p>-->
                         <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/review.png" style="width:100%" alt="Image">รีวิว</a>
                     </div>
-                    <div class="col-sm-3">
-                        <a href="faqs.php"><img class="bg-icon" src="../img/menu_bar_admin/faqs.png" style="width:100%" alt="Image">FAQs</a>
-                    </div>
+
                     <div class="col-sm-3">
                         <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/statistic.png" style="width:100%" alt="Image">รายงาน</a>
                     </div>
@@ -245,7 +243,7 @@ $result2 = mysqli_query($con,$sql2);
                     echo"
                     <td style=\"text-align:center;\">
                     <form action=\"Action/deleteDiscount_action.php\" method=\"get\">
-                        <input style='display: none;' type=\"text\" name=\"cdID\" value='$row2[cdID]'>
+                        <input style='display: none;' type=\"text\" name=\"codeID\" value='$row2[codeID]'>
                         <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
                     </form>
 

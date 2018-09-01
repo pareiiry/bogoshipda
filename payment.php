@@ -40,22 +40,20 @@ $result = mysqli_query($con,$sql);
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="css/util.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+        <link rel="stylesheet" type="text/css" href="css/styleHelp.css">
+
     <!--===============================================================================================-->
     
     <style>
-        table{
-            width:  50%;         
-            margin-left: 25%;
-
-        }
-        td {
+        table, th, td, tr{
+            width: auto;
+            margin: auto;
             text-align: center;
-            padding: 15px;     
-        }
+            padding: 10px 20px 10px 20px;
 
         }
-        .faqs{
-            margin-right:50%;
+        th{
+            height: 60px;
 
         }
         
@@ -96,30 +94,23 @@ $result = mysqli_query($con,$sql);
                 <nav class="menu">
                     <ul class="main_menu">
                         <li>
-                            <a href="index.php">หน้าหลัก</a>
-                            <ul class="sub_menu">
-                                <li><a href="index.html">Homepage V1</a></li>
-                                <li><a href="home-02.html">Homepage V2</a></li>
-                                <li><a href="home-03.html">Homepage V3</a></li>
-                            </ul>
+                            <a href="index.php">Home</a>
                         </li>
 
                         <li>
-                            <a href="product.html">Product</a>
+                            <a href="product.php">Product</a>
                         </li>
 
                         <li>
-                            <a href="product.html">Review</a>
-                        </li>
-                        <li>
-                            <a href="faqs.php">FAQs</a>
+                            <a href="review.php">Review</a>
                         </li>
 
-                        <li>
-                            <a href="about.html">About</a>
+                        <li class="sale-noti">
+                            <a href="design.php">Design</a>
                         </li>
-
-                        
+                        <li>
+                            <a href="help.php">Help</a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -191,7 +182,7 @@ $result = mysqli_query($con,$sql);
                         <div class="header-cart-buttons">
                             <div class="header-cart-wrapbtn">
                                 <!-- Button -->
-                                <a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                <a href="cart.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
                                     View Cart
                                 </a>
                             </div>
@@ -357,11 +348,7 @@ $result = mysqli_query($con,$sql);
                 </li>
 
                 <li class="item-menu-mobile">
-                    <a href="blog.html">FAQ</a>
-                </li>
-
-                <li class="item-menu-mobile">
-                    <a href="about.html">About</a>
+                    <a href="about.html">Help</a>
                 </li>
 
        
@@ -375,54 +362,113 @@ $result = mysqli_query($con,$sql);
 <!-- Banner -->
 
 
-<!-- New Product -->
+<!-- container -->
 <section class="newproduct bgwhite p-t-45 p-b-105">
     <div class="container">
-        <div class="sec-title p-b-60">
-            <h3 class="m-text5 t-center">
-                การชำระเงิน
-            </h3>
-        </div>
-
-        <!-- ส่วนแสดงเนื้อหา -->
-        <div class="faqs">
-            <table>
-                                    <thead style=" color:#ffaeba">
-                                    <tr>
-
-                                        <th style="text-align:center;">ธนาคาร</th>
-                                        <th style="text-align:center;">เลขที่บัญชี</th>
-                                        <th style="text-align:center;">ชื่อบัญชี</th>
-                                      
-                                    </tr>
-                                    </thead>
-                                     
-             <?php
-                                   
-                     while($row= mysqli_fetch_assoc($result))// show the information from query
-                {
-                    
-
-                    echo "
-                   
-                    <tr>
-        
-                     <td ><b>$row[bankName]</b></td>
-                     <td>$row[accountNumber] </td>
-                     <td>$row[accountName] </td>
-                     
-                    </tr>
-                    
-                    
-                    ";
-				}
-            ?>
-                </table>
-                                    
-                               
-        </div>
+<div class="row">
+                        <div class="col-xs-3">
+    <div class="list-group">
+        <a class="list-group-item disabled" href="#"><img src="images/icons/logo.png"/></a>
+        <a href="color.php" class="list-group-item">สีสาย/สีสกรีน</a>
+        <a href="price.php" class="list-group-item">ตารางราคา</a>
+        <a href="shipping.php" class="list-group-item">ค่าจัดส่ง</a>
+        <a href="payment.php" class="list-group-item">การชำระเงิน</a>
+        <a href="faq.php" class="list-group-item">คำถามที่พบบ่อย</a>
+        <a href="contact.php" class="list-group-item">ติดต่อเรา</a>
+        <a href="terms.php" class="list-group-item">เงื่อนไขข้อตกลง</a>
+    </div>
+    <div class="list-group">
+        <a href="#" class="list-group-item disabled">ช่วยเหลือ</a>
+        <a href="how-to-order.php" class="list-group-item">ขั้นตอนสั่งซื้อ</a>
+        <a href="coupon.php" class="list-group-item">วิธีใช้งานคูปอง</a>
+        <a href="how-to-payment.php" class="list-group-item">ขั้นตอนแจ้งชำระเงิน</a>
+    </div> 
+</div>                         <div class="col-xs-9">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+    <h3 class="panel-title">การชำระเงิน</h3>
 </div>
+<div class="panel-body">
+    <table>
+        <thead style=" color:#ffaeba">
+        <tr>
+            <th></th>
+            <th style="text-align:center;">ธนาคาร</th>
+            <th style="text-align:center;">ชื่อที่บัญชี</th>
+            <th style="text-align:center;">เลขบัญชี</th>
 
+        </tr>
+        </thead>
+
+        <?php
+
+        while($row2= mysqli_fetch_assoc($result))// show the information from query
+                {
+
+                    if($row2['bankName']=='SCB'){
+                        echo"<tr>
+                     <td style=\"text-align:center;\"><img src=\"images/bank/scb.png\"  width=\"50%\"></td>
+                     <td style=\"text-align:center;\">$row2[bankName]</td>
+                     <td style=\"text-align:center;\">$row2[accountName]</td>
+					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
+                    
+                    </tr>";
+                    }
+                    else if($row2['bankName']=='KTB'){
+                        echo"<tr>
+                     <td style=\"text-align:center;\"><img src=\"images/bank/ktb.jpg\"  width=\"50%\"></td>
+                     <td style=\"text-align:center;\">$row2[bankName]</td>
+                     <td style=\"text-align:center;\">$row2[accountName]</td>
+					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
+                    
+                    </tr>";
+                    }
+                    else if($row2['bankName']=='BBL'){
+                        echo"<tr>
+                     <td style=\"text-align:center;\"><img src=\"images/bank/bbl.png\"  width=\"50%\"></td>
+                     <td style=\"text-align:center;\">$row2[bankName]</td>
+                     <td style=\"text-align:center;\">$row2[accountName]</td>
+					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
+                    
+                    </tr>";
+                    }
+                    else if($row2['bankName']=='KBANK'){
+                        echo"<tr>
+                     <td style=\"text-align:center;\"><img src=\"images/bank/kbank.png\"  width=\"50%\"></td>
+                     <td style=\"text-align:center;\">$row2[bankName]</td>
+                     <td style=\"text-align:center;\">$row2[accountName]</td>
+					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
+                    
+                    </tr>";
+                    }
+                    else if($row2['bankName']=='Wallet'){
+                        echo"<tr>
+                     <td style=\"text-align:center;\"><img src=\"images/bank/true.jpg\"  width=\"50%\"></td>
+                     <td style=\"text-align:center;\">$row2[bankName]</td>
+                     <td style=\"text-align:center;\">$row2[accountName]</td>
+					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
+                    
+                    </tr>";
+                    }
+                    else if($row2['bankName']=='PrompPay'){
+                        echo"<tr>
+                     <td style=\"text-align:center;\"><img src=\"images/bank/promptpay.png\"  width=\"50%\"></td>
+                     <td style=\"text-align:center;\">$row2[bankName]</td>
+                     <td style=\"text-align:center;\">$row2[accountName]</td>
+					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
+                    
+                    </tr>";
+                    }
+
+
+        }
+        ?>
+    </table>
+</div>
+    </div>
+    </div>
+        </div>
+    </div>
     </section>
 
 <!-- Banner2 -->
@@ -475,9 +521,9 @@ $result = mysqli_query($con,$sql);
 <footer class="bg6 p-t-45 p-b-43 p-l-45 p-r-45">
     <div class="flex-w p-b-90">
         <div class="w-size6 p-t-30 p-l-15 p-r-15 respon3">
-            <h4 class="s-text12 p-b-30">
-                bogoshipda.com
-            </h4>
+            <a href="payment.php"><u><h4 class="s-text12 p-b-30">
+                Payment
+            </h4></u></a>
 
             <div>
                 <p class="s-text7 w-size27">
@@ -506,7 +552,7 @@ $result = mysqli_query($con,$sql);
                 </li>
 
                 <li class="p-b-9 s-text7">
-                    line : bogoshipdashop
+                    line : bogoshipdastore
                 </li>
 
                 
@@ -532,10 +578,9 @@ $result = mysqli_query($con,$sql);
         </div>
 
         <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
-            <a href="payment.php"><u><h4 class="s-text12 p-b-30">
+            <h4 class="s-text12 p-b-30">
                 Payment
-            </h4></u></a>
-
+            </h4>
             <ul>
                 <li class="p-b-9 s-text7">
                     KTB &emsp;  K-BANK

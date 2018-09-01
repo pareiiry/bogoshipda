@@ -1708,7 +1708,9 @@ li.sale-noti > a {
   -o-transform: scale(0);
   transform: scale(0);
 }
-
+.block2-btn-addwishlist:hover {
+    color: white;
+}
 .block2-btn-addwishlist:hover {
   color: white;
 }

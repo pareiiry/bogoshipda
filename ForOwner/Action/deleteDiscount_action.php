@@ -1,7 +1,7 @@
 <?php
 include ('../../dbConnect.php');
 
-$sql = "DELETE FROM codetable WHERE codetable.cdID = '".$_GET['cdID']."'";
+$sql = "DELETE FROM code WHERE code.codeID = '".$_GET['codeID']."'";
 //$query = mysqli_query($con,$sql2);
 if ($con->query($sql) === TRUE) {
     echo "<script type='text/javascript'>alert('ลบข้อมูลเรียบร้อยแล้ว')</script>";

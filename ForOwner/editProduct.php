@@ -6,20 +6,20 @@ if($_SESSION['ID'] == "")
     header("location:loginPage.php");
     exit();
 }
-if($_SESSION['Status'] != "owner" && $_SESSION['Status'] != "admin")
+if($_SESSION['usertype'] != "owner" && $_SESSION['usertype'] != "admin")
 {
     //echo "ของ Adminเท่านั้นจ้าาา";
     exit();
 }
 include ('../dbConnect.php');
-$sql = "SELECT * FROM usertable WHERE uID = '".$_SESSION['ID']."' ";
+$sql = "SELECT * FROM user WHERE uID = '".$_SESSION['ID']."' ";
 //$objQuery = mysqli_query($strSQL);
 //$objResult = mysqli_fetch_array($objQuery);
 $result = mysqli_query($con,$sql);
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 
-$sql2 = "SELECT * FROM producttable WHERE pdID = '".$_GET['pdID']."' ";;
+$sql2 = "SELECT * FROM product WHERE pdID = '".$_GET['pdID']."' ";;
 //$objQuery = mysqli_query($strSQL);
 //$objResult = mysqli_fetch_array($objQuery);
 $result2 = mysqli_query($con,$sql2);
@@ -144,9 +144,7 @@ $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
                         <!--                        <p>Some text..</p>-->
                         <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/review.png" style="width:100%" alt="Image">รีวิว</a>
                     </div>
-                    <div class="col-sm-3">
-                        <a href="faqs.php"><img class="bg-icon" src="../img/menu_bar_admin/faqs.png" style="width:100%" alt="Image">FAQs</a>
-                    </div>
+
                     <div class="col-sm-3">
                         <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/statistic.png" style="width:100%" alt="Image">รายงาน</a>
                     </div>
@@ -222,7 +220,7 @@ $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
                                 <!--                            <form method="post">-->
                                 <div class="btn-group" style="margin: 0 0 2% 0">
                                     <label>ชื่อสินค้า:</label>
-                                    <input size="100%" class="form-control" type="text" name="pdName" value="<?php echo $row2['pdName'];?>" required>
+                                    <input size="100%" class="form-control" type="text" name="name" value="<?php echo $row2['name'];?>" required>
                                 </div>
                                 <div class="row" >
                                     <div class="col-md-6" style="margin: 0 0 2% 0">

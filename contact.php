@@ -98,27 +98,23 @@ $result = mysqli_query($con,$sql);
                 <nav class="menu">
                     <ul class="main_menu">
                         <li>
-                            <a href="index.php">หน้าหลัก</a>
-                            <ul class="sub_menu">
-                                <li><a href="index.html">Homepage V1</a></li>
-                                <li><a href="home-02.html">Homepage V2</a></li>
-                                <li><a href="home-03.html">Homepage V3</a></li>
-                            </ul>
+                            <a href="index.php">Home</a>
                         </li>
 
                         <li>
-                            <a href="product.html">Product</a>
+                            <a href="product.php">Product</a>
                         </li>
 
                         <li>
-                            <a href="product.html">Review</a>
+                            <a href="review.php">Review</a>
                         </li>
 
+                        <li class="sale-noti">
+                            <a href="design.php">Design</a>
+                        </li>
                         <li>
-                            <a href="about.html">Help</a>
+                            <a href="help.php">Help</a>
                         </li>
-
-                        
                     </ul>
                 </nav>
             </div>
@@ -380,23 +376,26 @@ $result = mysqli_query($con,$sql);
         <a href="color.php" class="list-group-item">สีสาย/สีสกรีน</a>
         <a href="price.php" class="list-group-item">ตารางราคา</a>
         <a href="shipping.php" class="list-group-item">ค่าจัดส่ง</a>
+        <a href="payment.php" class="list-group-item">การชำระเงิน</a>
         <a href="faq.php" class="list-group-item">คำถามที่พบบ่อย</a>
-        <a target="contact.php" href="#" class="list-group-item">ติดต่อเรา</a>
+        <a href="contact.php" class="list-group-item">ติดต่อเรา</a>
         <a href="terms.php" class="list-group-item">เงื่อนไขข้อตกลง</a>
     </div>
     <div class="list-group">
         <a href="#" class="list-group-item disabled">ช่วยเหลือ</a>
-        <a href="how-to-order" class="list-group-item">ขั้นตอนสั่งซื้อ</a>
-        <a href="coupon" class="list-group-item">วิธีใช้งานคูปอง</a>
-        <a href="how-to-payment" class="list-group-item">ขั้นตอนแจ้งชำระเงิน</a>
+        <a href="how-to-order.php" class="list-group-item">ขั้นตอนสั่งซื้อ</a>
+        <a href="coupon.php" class="list-group-item">วิธีใช้งานคูปอง</a>
+        <a href="how-to-payment.php" class="list-group-item">ขั้นตอนแจ้งชำระเงิน</a>
     </div> 
 </div>                         <div class="col-xs-9">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-    <h3 class="panel-title">สีสาย/สีสกรีน</h3>
+    <h3 class="panel-title">ติดต่อเรา</h3>
 </div>
 <div class="panel-body">
-<img width="100%" src="images/color-chart.jpg" />
+    bogoshipdashop@gmail.com
+    <br>Tel. 082-6118627
+    <br>line : bogoshipdastore
 </div>
     </div>
     </div>
@@ -485,7 +484,7 @@ $result = mysqli_query($con,$sql);
                 </li>
 
                 <li class="p-b-9 s-text7">
-                    line : bogoshipdashop
+                    line : bogoshipdastore
                 </li>
 
                 
@@ -511,10 +510,9 @@ $result = mysqli_query($con,$sql);
         </div>
 
         <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
-            <a href="payment.php"><u><h4 class="s-text12 p-b-30">
+            <h4 class="s-text12 p-b-30">
                 Payment
-            </h4></u></a>
-
+            </h4>
             <ul>
                 <li class="p-b-9 s-text7">
                     KTB &emsp;  K-BANK

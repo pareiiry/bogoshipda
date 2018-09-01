@@ -6,20 +6,20 @@ if($_SESSION['ID'] == "")
     header("location:loginPage.php");
     exit();
 }
-if($_SESSION['Status'] != "owner" && $_SESSION['Status'] != "admin")
+if($_SESSION['usertype'] != "owner" && $_SESSION['usertype'] != "admin")
 {
     //echo "ของ Adminเท่านั้นจ้าาา";
     exit();
 }
 include ('../dbConnect.php');
-$sql = "SELECT * FROM usertable WHERE uID = '".$_SESSION['ID']."' ";
+$sql = "SELECT * FROM user WHERE uID = '".$_SESSION['ID']."' ";
 //$objQuery = mysqli_query($strSQL);
 //$objResult = mysqli_fetch_array($objQuery);
 $result = mysqli_query($con,$sql);
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 
-$sql2 = "SELECT * FROM producttable";
+$sql2 = "SELECT * FROM product";
 //$objQuery = mysqli_query($strSQL);
 //$objResult = mysqli_fetch_array($objQuery);
 $result2 = mysqli_query($con,$sql2);
@@ -220,7 +220,7 @@ $result2 = mysqli_query($con,$sql2);
 <!--                            <form method="post">-->
                                 <div class="btn-group" style="margin: 0 0 2% 0">
                                     <label>ชื่อสินค้า:</label>
-                                    <input size="100%" class="form-control" type="text" name="pdName" value="" required>
+                                    <input size="100%" class="form-control" type="text" name="name" value="" required>
                                 </div>
                                 <div class="row" >
                                     <div class="col-md-6" style="margin: 0 0 2% 0">

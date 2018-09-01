@@ -6,20 +6,20 @@ if($_SESSION['ID'] == "")
     header("location:loginPage.php");
     exit();
 }
-if($_SESSION['Status'] != "owner" && $_SESSION['Status'] != "admin")
+if($_SESSION['usertype'] != "owner" && $_SESSION['usertype'] != "admin")
 {
     //echo "ของ Adminเท่านั้นจ้าาา";
     exit();
 }
 include ('../dbConnect.php');
-$sql = "SELECT * FROM usertable WHERE uID = '".$_SESSION['ID']."' ";
+$sql = "SELECT * FROM user WHERE uID = '".$_SESSION['ID']."' ";
 //$objQuery = mysqli_query($strSQL);
 //$objResult = mysqli_fetch_array($objQuery);
 $result = mysqli_query($con,$sql);
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 
-$sql2 = "SELECT * FROM producttable";
+$sql2 = "SELECT * FROM product";
 //$objQuery = mysqli_query($strSQL);
 //$objResult = mysqli_fetch_array($objQuery);
 $result2 = mysqli_query($con,$sql2);
@@ -243,9 +243,6 @@ $result2 = mysqli_query($con,$sql2);
                         <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/review.png" style="width:100%" alt="Image">รีวิว</a>
                     </div>
                     <div class="col-sm-3">
-                        <a href="faqs.php"><img class="bg-icon" src="../img/menu_bar_admin/faqs.png" style="width:100%" alt="Image">FAQs</a>
-                    </div>
-                    <div class="col-sm-3">
                         <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/statistic.png" style="width:100%" alt="Image">รายงาน</a>
                     </div>
                     <div class="col-sm-3">
@@ -292,7 +289,7 @@ $result2 = mysqli_query($con,$sql2);
                 <?php
                 while($row2= mysqli_fetch_assoc($result2))// show the information from query
                 {
-                    $sql3 = "SELECT * FROM imgtable WHERE pdID= '".$row2['pdID']."' LIMIT 1";
+                    $sql3 = "SELECT * FROM image WHERE pdID= '".$row2['pdID']."' LIMIT 1";
                     $result3 = mysqli_query($con,$sql3);
                     $row3 = mysqli_fetch_array($result3,MYSQLI_ASSOC);
 
@@ -302,7 +299,7 @@ $result2 = mysqli_query($con,$sql2);
                     echo '<img style="width:30%" src="data:image/*;base64,'.base64_encode($row3['img']).'"/>';
                     echo"</td>
                     <td>$row2[pdID]</td>
-                    <td>$row2[pdName]</td>
+                    <td>$row2[name]</td>
                      <td style=\"text-align:center;\">$row2[price]</td>
                      <td style=\"text-align:center;\">$row2[cost]</td>
                     <td style=\"text-align:center;\">

@@ -9,7 +9,7 @@ $unitDiscount=$_POST['unitDiscount'];
 
 include ('../../dbConnect.php');
 
-$sql="INSERT INTO codetable (cdID,codeText,discount,unitDiscount,dateCreate,dateDelete,active)VALUES('','$codeText','$discount','$unitDiscount','$dateCreate','$dateDelete',1)";//คำสั่งเพิ่มข้อมูล
+$sql="INSERT INTO code (codeID,codeText,discount,unitDiscount,dateCreate,dateDelete,active)VALUES('','$codeText','$discount','$unitDiscount','$dateCreate','$dateDelete',1)";//คำสั่งเพิ่มข้อมูล
 $sql_query=mysqli_query($con,$sql);
 if($sql_query) {
     echo "<script type='text/javascript'>alert('บันทึกข้อมูลเรียบร้อยแล้ว')</script>";
@@ -18,6 +18,6 @@ if($sql_query) {
     echo "<script type='text/javascript'>alert('เกิดข้อผิดพลาดในการบันทึกข้อมูล');window.history.go(-1);</script>" ;
 }
 
-//mysqli_close();
+$con->close()
 
 ?>

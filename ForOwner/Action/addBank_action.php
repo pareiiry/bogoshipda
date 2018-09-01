@@ -22,6 +22,6 @@ if($sql_query) {
     echo "<script type='text/javascript'>alert('เกิดข้อผิดพลาดในการบันทึกข้อมูล');window.history.go(-1);</script>" ;
 }
 
-//mysqli_close();
+$con->close()
 
 ?>
