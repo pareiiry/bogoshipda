@@ -1,4 +1,5 @@
 <?php
+session_start();
 include ('dbConnect.php');
 $sql2 = "SELECT * FROM product ORDER BY dateCreate DESC LIMIT 10";
 $result2 = mysqli_query($con,$sql2);
@@ -74,7 +75,7 @@ $result2 = mysqli_query($con,$sql2);
             <div class="wrap_menu">
                 <nav class="menu">
                     <ul class="main_menu">
-                        <li>
+                        <li class="sale-noti">
                             <a href="index.php">Home</a>
                         </li>
 
@@ -86,7 +87,7 @@ $result2 = mysqli_query($con,$sql2);
                             <a href="review.php">Review</a>
                         </li>
 
-                        <li class="sale-noti">
+                        <li>
                             <a href="design.php">Design</a>
                         </li>
                         <li>
@@ -102,76 +103,114 @@ $result2 = mysqli_query($con,$sql2);
 
                 <div class="header-wrapicon2">
                     <img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                    <span class="header-icons-noti">0</span>
+                    <span class="header-icons-noti"><?php echo count($_SESSION["shopping_cart"]);?></span>
 
                     <!-- Header cart noti -->
                     <div class="header-cart header-dropdown">
                         <ul class="header-cart-wrapitem">
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-01.jpg" alt="IMG">
-                                </div>
+    <?php
+                            if(!empty($_SESSION["shopping_cart"]))
+                            {
+                            $total = 0;
 
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        White Shirt With Pleat Detail Back
-                                    </a>
+                            foreach($_SESSION["shopping_cart"] as $keys => $values)
+                            {
+                            if($values["pdID"]!==null) {
+                                $sql3 = "SELECT * FROM image WHERE pdID= '".$values["pdID"]."' LIMIT 1";
+                                $result3 = mysqli_query($con,$sql3);
+                                $row3 = mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                            ?>
+                                <li class="header-cart-item">
+                                    <div class="header-cart-item-img">
+                                        <?php
+                                        if($row3['img']===""){
+                                            echo '<img src="images/no-picture.jpg">';
+                                        }
+                                        else {
+                                            echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
+                                        }
+                                        ?>
+                                    </div>
 
-                                    <span class="header-cart-item-info">
-											1 x $19.00
+                                    <div class="header-cart-item-txt">
+                                        <a href="#" class="header-cart-item-name">
+                                            <?php echo $values["name"]; ?>
+                                        </a>
+
+                                        <span class="header-cart-item-info">
+											<?php echo $values["quantity"]; ?> x ฿ <?php echo $values["price"]; ?>
 										</span>
-                                </div>
-                            </li>
+                                    </div>
+                                </li>
+                            <?php
+                        $total = $total + ($values["quantity"] * $values["price"]);
+                        //echo $total;
+                    }
+                    else{
+                        unset($_SESSION["shopping_cart"][$keys]);
+                        ?>
+                        <li class="header-cart-item">
+                            <div class="header-cart-item-img">
+                            </div>
 
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-02.jpg" alt="IMG">
-                                </div>
+                            <div class="header-cart-item-txt">
+                                <a href="#" class="header-cart-item-name">
+                                    - ไม่มีสินค้าที่เลือก -
+                                </a>
 
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        Converse All Star Hi Black Canvas
-                                    </a>
+                                <span class="header-cart-item-info">
 
-                                    <span class="header-cart-item-info">
-											1 x $39.00
 										</span>
-                                </div>
-                            </li>
+                            </div>
+                        </li>
+                            <?php
 
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-03.jpg" alt="IMG">
-                                </div>
+                            }
+                            }
 
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        Nixon Porter Leather Watch In Tan
-                                    </a>
+            }
+            else{
+                ?>
+                <li class="header-cart-item">
+                    <div class="header-cart-item-img">
+                    </div>
 
-                                    <span class="header-cart-item-info">
-											1 x $17.00
+                    <div class="header-cart-item-txt">
+                        <a href="#" class="header-cart-item-name">
+                            - ไม่มีสินค้าที่เลือก -
+                        </a>
+
+                        <span class="header-cart-item-info">
+
 										</span>
-                                </div>
-                            </li>
+                    </div>
+                </li>
+                            <?php
+                            }
+                            ?>
+
                         </ul>
 
+                       <?php if($total!==null) {
+                        ?>
                         <div class="header-cart-total">
-                            Total: $75.00
+                            Total: ฿ <?php echo number_format($total, 0); ?>
                         </div>
+                        <?php
+                }?>
 
                         <div class="header-cart-buttons">
                             <div class="header-cart-wrapbtn">
                                 <!-- Button -->
-                                <a href="cart.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    View Cart
+                                <a href="clearcart.php" style="background-color: red" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                    Clear all
                                 </a>
                             </div>
 
                             <div class="header-cart-wrapbtn">
                                 <!-- Button -->
                                 <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    Check Out
+                                    View cart
                                 </a>
                             </div>
                         </div>
@@ -182,158 +221,158 @@ $result2 = mysqli_query($con,$sql2);
     </div>
 
     <!-- Header Mobile -->
-    <div class="wrap_header_mobile">
-        <!-- Logo moblie -->
-        <a href="index.php" class="logo-mobile">
-            <font size="5"><b>Bogoshipda</b></font>
-        </a>
-
-        <!-- Button show menu -->
-        <div class="btn-show-menu">
-            <!-- Header Icon mobile -->
-            <div class="header-icons-mobile">
-                <a href="loginPage.php" class="header-wrapicon1 dis-block">
-                    ลงชื่อเข้าใช้
-                </a>
-
-                <span class="linedivide2"></span>
-
-                <div class="header-wrapicon2">
-                    <img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                    <span class="header-icons-noti">0</span>
-
-                    <!-- Header cart noti -->
-                    <div class="header-cart header-dropdown">
-                        <ul class="header-cart-wrapitem">
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-01.jpg" alt="IMG">
-                                </div>
-
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        White Shirt With Pleat Detail Back
-                                    </a>
-
-                                    <span class="header-cart-item-info">
-											1 x $19.00
-										</span>
-                                </div>
-                            </li>
-
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-02.jpg" alt="IMG">
-                                </div>
-
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        Converse All Star Hi Black Canvas
-                                    </a>
-
-                                    <span class="header-cart-item-info">
-											1 x $39.00
-										</span>
-                                </div>
-                            </li>
-
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-03.jpg" alt="IMG">
-                                </div>
-
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        Nixon Porter Leather Watch In Tan
-                                    </a>
-
-                                    <span class="header-cart-item-info">
-											1 x $17.00
-										</span>
-                                </div>
-                            </li>
-                        </ul>
-
-                        <div class="header-cart-total">
-                            Total: $75.00
-                        </div>
-
-                        <div class="header-cart-buttons">
-                            <div class="header-cart-wrapbtn">
-                                <!-- Button -->
-                                <a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    View Cart
-                                </a>
-                            </div>
-
-                            <div class="header-cart-wrapbtn">
-                                <!-- Button -->
-                                <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    Check Out
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
-					<span class="hamburger-box">
-						<span class="hamburger-inner"></span>
-					</span>
-            </div>
-        </div>
-    </div>
+<!--    <div class="wrap_header_mobile">-->
+<!--        <!-- Logo moblie -->-->
+<!--        <a href="index.php" class="logo-mobile">-->
+<!--            <font size="5"><b>Bogoshipda</b></font>-->
+<!--        </a>-->
+<!---->
+<!--        <!-- Button show menu -->-->
+<!--        <div class="btn-show-menu">-->
+<!--            <!-- Header Icon mobile -->-->
+<!--            <div class="header-icons-mobile">-->
+<!--                <a href="loginPage.php" class="header-wrapicon1 dis-block">-->
+<!--                    ลงชื่อเข้าใช้-->
+<!--                </a>-->
+<!---->
+<!--                <span class="linedivide2"></span>-->
+<!---->
+<!--                <div class="header-wrapicon2">-->
+<!--                    <img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">-->
+<!--                    <span class="header-icons-noti">0</span>-->
+<!---->
+<!--                    <!-- Header cart noti -->-->
+<!--                    <div class="header-cart header-dropdown">-->
+<!--                        <ul class="header-cart-wrapitem">-->
+<!--                            <li class="header-cart-item">-->
+<!--                                <div class="header-cart-item-img">-->
+<!--                                    <img src="images/item-cart-01.jpg" alt="IMG">-->
+<!--                                </div>-->
+<!---->
+<!--                                <div class="header-cart-item-txt">-->
+<!--                                    <a href="#" class="header-cart-item-name">-->
+<!--                                        White Shirt With Pleat Detail Back-->
+<!--                                    </a>-->
+<!---->
+<!--                                    <span class="header-cart-item-info">-->
+<!--											1 x $19.00-->
+<!--										</span>-->
+<!--                                </div>-->
+<!--                            </li>-->
+<!---->
+<!--                            <li class="header-cart-item">-->
+<!--                                <div class="header-cart-item-img">-->
+<!--                                    <img src="images/item-cart-02.jpg" alt="IMG">-->
+<!--                                </div>-->
+<!---->
+<!--                                <div class="header-cart-item-txt">-->
+<!--                                    <a href="#" class="header-cart-item-name">-->
+<!--                                        Converse All Star Hi Black Canvas-->
+<!--                                    </a>-->
+<!---->
+<!--                                    <span class="header-cart-item-info">-->
+<!--											1 x $39.00-->
+<!--										</span>-->
+<!--                                </div>-->
+<!--                            </li>-->
+<!---->
+<!--                            <li class="header-cart-item">-->
+<!--                                <div class="header-cart-item-img">-->
+<!--                                    <img src="images/item-cart-03.jpg" alt="IMG">-->
+<!--                                </div>-->
+<!---->
+<!--                                <div class="header-cart-item-txt">-->
+<!--                                    <a href="#" class="header-cart-item-name">-->
+<!--                                        Nixon Porter Leather Watch In Tan-->
+<!--                                    </a>-->
+<!---->
+<!--                                    <span class="header-cart-item-info">-->
+<!--											1 x $17.00-->
+<!--										</span>-->
+<!--                                </div>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!---->
+<!--                        <div class="header-cart-total">-->
+<!--                            Total: $75.00-->
+<!--                        </div>-->
+<!---->
+<!--                        <div class="header-cart-buttons">-->
+<!--                            <div class="header-cart-wrapbtn">-->
+<!--                                <!-- Button -->-->
+<!--                                <a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">-->
+<!--                                    View Cart-->
+<!--                                </a>-->
+<!--                            </div>-->
+<!---->
+<!--                            <div class="header-cart-wrapbtn">-->
+<!--                                <!-- Button -->-->
+<!--                                <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">-->
+<!--                                    Check Out-->
+<!--                                </a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!---->
+<!--            <div class="btn-show-menu-mobile hamburger hamburger--squeeze">-->
+<!--					<span class="hamburger-box">-->
+<!--						<span class="hamburger-inner"></span>-->
+<!--					</span>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
     <!-- Menu Mobile -->
-    <div class="wrap-side-menu" >
-        <nav class="side-menu">
-            <ul class="main-menu">
-
-                <li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
-                    <div class="topbar-child2-mobile">
-							<span class="topbar-email">
-								สวัสดี Guest
-							</span>
-
-                    </div>
-                </li>
-
-                <li class="item-topbar-mobile p-l-10">
-                    <div class="topbar-social-mobile">
-                        <a href="https://twitter.com/bogoshipdastore" class="topbar-social-item fa fa-twitter"></a>
-                        <a href="https://www.instagram.com/bogoshipda_store" class="topbar-social-item fa fa-instagram"></a>
-                    </div>
-                </li>
-
-                <li class="item-menu-mobile">
-                    <a href="index.php">Home</a>
-                    <ul class="sub-menu">
-                        <li><a href="index.html">Homepage V1</a></li>
-                        <li><a href="home-02.html">Homepage V2</a></li>
-                        <li><a href="home-03.html">Homepage V3</a></li>
-                    </ul>
-                    <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
-                </li>
-
-                <li>
-                    <a href="product.php">Product</a>
-                </li>
-
-                <li>
-                    <a href="review.php">Review</a>
-                </li>
-
-                <li class="sale-noti">
-                    <a href="design.php">Design</a>
-                </li>
-
-                <li>
-                    <a href="help.php">Help</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
+<!--    <div class="wrap-side-menu" >-->
+<!--        <nav class="side-menu">-->
+<!--            <ul class="main-menu">-->
+<!---->
+<!--                <li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">-->
+<!--                    <div class="topbar-child2-mobile">-->
+<!--							<span class="topbar-email">-->
+<!--								สวัสดี Guest-->
+<!--							</span>-->
+<!---->
+<!--                    </div>-->
+<!--                </li>-->
+<!---->
+<!--                <li class="item-topbar-mobile p-l-10">-->
+<!--                    <div class="topbar-social-mobile">-->
+<!--                        <a href="https://twitter.com/bogoshipdastore" class="topbar-social-item fa fa-twitter"></a>-->
+<!--                        <a href="https://www.instagram.com/bogoshipda_store" class="topbar-social-item fa fa-instagram"></a>-->
+<!--                    </div>-->
+<!--                </li>-->
+<!---->
+<!--                <li class="item-menu-mobile">-->
+<!--                    <a href="index.php">Home</a>-->
+<!--                    <ul class="sub-menu">-->
+<!--                        <li><a href="index.html">Homepage V1</a></li>-->
+<!--                        <li><a href="home-02.html">Homepage V2</a></li>-->
+<!--                        <li><a href="home-03.html">Homepage V3</a></li>-->
+<!--                    </ul>-->
+<!--                    <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>-->
+<!--                </li>-->
+<!---->
+<!--                <li>-->
+<!--                    <a href="product.php">Product</a>-->
+<!--                </li>-->
+<!---->
+<!--                <li>-->
+<!--                    <a href="review.php">Review</a>-->
+<!--                </li>-->
+<!---->
+<!--                <li class="sale-noti">-->
+<!--                    <a href="design.php">Design</a>-->
+<!--                </li>-->
+<!---->
+<!--                <li>-->
+<!--                    <a href="help.php">Help</a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </nav>-->
+<!--    </div>-->
 </header>
 
 <!-- Slide1 -->
@@ -400,21 +439,33 @@ $result2 = mysqli_query($con,$sql2);
                     $result3 = mysqli_query($con, $sql3);
                     $row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC);
 
+
                     echo "<div class=\"item-slick2 p-l-15 p-r-15\">
                     <!-- Block2 -->
                     <div class=\"block2\">
                         <div class=\"block2-img wrap-pic-w of-hidden pos-relative\">";
-                    echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
+                   //print_r($row3);
+                    //echo $row3['img'];
+                    if($row3['img']===""){
+                        echo '<img src="images/no-picture.jpg">';
+                    }
+                    else {
+                        echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
+                    }
                     echo "
-
                             <div class=\"block2-overlay trans-0-4\">
                               
 
                                 <div class=\"block2-btn-addcart w-size1 trans-0-4\">
                                     <!-- Button -->
-                                    <button class=\"flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4\">
-                                        Add to Cart
-                                    </button>
+                                      <form action=\"addToCart_action.php\" method=\"post\">
+                                        <input type=\"hidden\" name=\"quantity\" value=\"1\">
+                                        <input type=\"hidden\" name=\"name\" value=\"$row2[name]\">
+                                        <input type=\"hidden\" name=\"price\" value=\"$row2[price]\">
+                                        <input type=\"hidden\" name=\"pdID\" value=\"$row2[pdID]\">
+                                        <input type=\"submit\" value=\"Add to Cart\" class=\"flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4\">
+                                    </form>
+
                                 </div>
                             </div>
                         </div>
