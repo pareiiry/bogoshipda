@@ -125,7 +125,7 @@ $result2 = mysqli_query($con,$sql2);
                                         <?php
 
                                         if($row3['img']==="" || empty($row3)){
-                                            echo"Hello";
+                                           // echo"Hello";
                                             echo '<img src="images/no-picture.jpg">';
                                         }
                                         else {
