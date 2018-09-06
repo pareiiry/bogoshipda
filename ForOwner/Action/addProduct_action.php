@@ -6,15 +6,12 @@ $cost=$_POST['cost'];
 $description=$_POST['description'];
 $pdID = uniqid();
 $dateCreate = date("Y-m-d H:i:s");
-if(isset($_POST['filesToUpload'])){
-    $filesToUpload=$_POST['filesToUpload'];
-}
-
 $color=$_POST['color'];
 
 include ('../../dbConnect.php');
 
-if(isset($_POST['filesToUpload'])) {
+if(!empty($_FILES['filesToUpload'])) {
+//$filesToUpload=$_POST['filesToUpload'];
 $sql="INSERT INTO product (pdID,name,description,price,cost,dateCreate,color)VALUES('$pdID','$name','$description','$price','$cost','$dateCreate','$color')";//คำสั่งเพิ่มข้อมูล
 $sql_query=mysqli_query($con,$sql);
 
