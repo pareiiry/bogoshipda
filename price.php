@@ -88,22 +88,22 @@
                 <nav class="menu">
                     <ul class="main_menu">
                         <li>
-                            <a href="index.php">Home</a>
+                            <a href="index.php">หน้าแรก</a>
                         </li>
 
                         <li>
-                            <a href="product.php">Product</a>
+                            <a href="product.php">สินค้า</a>
                         </li>
 
                         <li>
-                            <a href="review.php">Review</a>
+                            <a href="review.php">รีวิว</a>
                         </li>
 
                         <li class="sale-noti">
-                            <a href="design.php">Design</a>
+                            <a href="design.php">ออกแบบ</a>
                         </li>
                         <li>
-                            <a href="help.php">Help</a>
+                            <a href="help.php">ช่วยเหลือ</a>
                         </li>
                     </ul>
                 </nav>
@@ -441,9 +441,9 @@
 <footer class="bg6 p-t-45 p-b-43 p-l-45 p-r-45">
     <div class="flex-w p-b-90">
         <div class="w-size6 p-t-30 p-l-15 p-r-15 respon3">
-            <a href="payment.php"><u><h4 class="s-text12 p-b-30">
-                Payment
-            </h4></u></a>
+            <h4 class="s-text12 p-b-30">
+                bogoshipda.com
+            </h4>
 
             <div>
                 <p class="s-text7 w-size27">
@@ -459,12 +459,12 @@
 
         <div class="w-size8 p-t-30 p-l-15 p-r-15 respon4">
             <h4 class="s-text12 p-b-30">
-                Contact Us
+                ติดต่อเรา
             </h4>
 
             <ul>
-                <li class="p-b-9 s-text7">                   
-                        bogoshipdashop@gmail.com                   
+                <li class="p-b-9 s-text7">
+                    bogoshipdashop@gmail.com
                 </li>
 
                 <li class="p-b-9 s-text7">
@@ -472,34 +472,31 @@
                 </li>
 
                 <li class="p-b-9 s-text7">
-                    line : bogoshipdastore
+                    Line id : bogoshipdastore
                 </li>
 
-                
             </ul>
         </div>
 
         <div class="w-size15 p-t-30 p-l-15 p-r-15 respon4">
             <h4 class="s-text12 p-b-30">
-                Shipment
+                บริการจัดส่ง
             </h4>
 
             <ul>
                 <li class="p-b-9 s-text7">
                     Thailand Post
                 </li>
-
                 <li class="p-b-9 s-text7">
                     Kerry Express
                 </li>
 
-                
             </ul>
         </div>
 
         <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
             <h4 class="s-text12 p-b-30">
-                Payment
+                วิธีการชำระเงิน
             </h4>
             <ul>
                 <li class="p-b-9 s-text7">

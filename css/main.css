@@ -1919,13 +1919,24 @@ li.sale-noti > a {
 /*[ Filter Color ]
 ///////////////////////////////////////////////////////////
 */
-.color-filter1 {background-color: #00bbec;}
-.color-filter2 {background-color: #2c6ed5;}
-.color-filter3 {background-color: #ffa037;}
-.color-filter4 {background-color: #ff5337;}
-.color-filter5 {background-color: #a88c77;}
-.color-filter6 {background-color: #393939;}
-.color-filter7 {background-color: #cccccc;}
+.color-filter1 {background-color: #fafafa;}
+.color-filter2 {background-color: #ffffd7;}
+.color-filter3 {background-color: #fdebc3;}
+.color-filter4 {background-color: #fcff00;}
+.color-filter5 {background-color: #8ae671;}
+.color-filter6 {background-color: #388b6f;}
+.color-filter7 {background-color: #b4ffcb;}
+.color-filter8 {background-color: #43abea;}
+.color-filter9 {background-color: #ffd28b;}
+.color-filter10 {background-color: #ffe5e5;}
+.color-filter11 {background-color: #ffb0bb;}
+.color-filter12 {background-color: #f95a7c;}
+.color-filter13 {background-color: #e20000;}
+.color-filter14 {background-color: #ebd1e9;}
+.color-filter15 {background-color: #d7d8e4;}
+.color-filter16 {background-color: #727875;}
+.color-filter17 {background-color: #72552a;}
+.color-filter18 {background-color: #000000;}
 
 .checkbox-color-filter {
   display: none;

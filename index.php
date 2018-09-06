@@ -75,23 +75,23 @@ $result2 = mysqli_query($con,$sql2);
             <div class="wrap_menu">
                 <nav class="menu">
                     <ul class="main_menu">
+                        <li>
+                            <a href="index.php">หน้าแรก</a>
+                        </li>
+
+                        <li>
+                            <a href="product.php">สินค้า</a>
+                        </li>
+
+                        <li>
+                            <a href="review.php">รีวิว</a>
+                        </li>
+
                         <li class="sale-noti">
-                            <a href="index.php">Home</a>
-                        </li>
-
-                        <li>
-                            <a href="product.php">Product</a>
-                        </li>
-
-                        <li>
-                            <a href="review.php">Review</a>
-                        </li>
-
-                        <li>
-                            <a href="design.php">Design</a>
+                            <a href="design.php">ออกแบบ</a>
                         </li>
                         <li>
-                            <a href="help.php">Help</a>
+                            <a href="help.php">ช่วยเหลือ</a>
                         </li>
                     </ul>
                 </nav>
@@ -140,7 +140,7 @@ $result2 = mysqli_query($con,$sql2);
                                         </a>
 
                                         <span class="header-cart-item-info">
-											<?php echo $values["quantity"]; ?> x ฿ <?php echo $values["price"]; ?>
+											<?php echo $values["quantity"]; ?> x  ฿<?php echo $values["price"]; ?>
 										</span>
                                     </div>
                                 </li>
@@ -198,7 +198,7 @@ $result2 = mysqli_query($con,$sql2);
                            if($total!==null) {
                             ?>
                             <div class="header-cart-total">
-                                Total: ฿ <?php echo number_format($total, 0); ?>
+                                รวมค่าสินค้า : ฿<?php echo number_format($total, 0); ?>
                             </div>
                             <?php
                             }
@@ -208,14 +208,14 @@ $result2 = mysqli_query($con,$sql2);
                             <div class="header-cart-wrapbtn">
                                 <!-- Button -->
                                 <a href="clearcart.php" style="background-color: red" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    Clear all
+                                    ลบทั้งหมด
                                 </a>
                             </div>
 
                             <div class="header-cart-wrapbtn">
                                 <!-- Button -->
-                                <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    View cart
+                                <a href="cart.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                    ดูตะกร้าสินค้า
                                 </a>
                             </div>
                         </div>
@@ -429,7 +429,7 @@ $result2 = mysqli_query($con,$sql2);
     <div class="container">
         <div class="sec-title p-b-60">
             <h3 class="m-text5 t-center">
-                Products
+                สินค้ามาใหม่
             </h3>
         </div>
 
@@ -527,7 +527,7 @@ $result2 = mysqli_query($con,$sql2);
 
         <div class="w-size8 p-t-30 p-l-15 p-r-15 respon4">
             <h4 class="s-text12 p-b-30">
-                Contact Us
+                ติดต่อเรา
             </h4>
 
             <ul>
@@ -540,34 +540,31 @@ $result2 = mysqli_query($con,$sql2);
                 </li>
 
                 <li class="p-b-9 s-text7">
-                    line : bogoshipdastore
+                    Line id : bogoshipdastore
                 </li>
-
 
             </ul>
         </div>
 
         <div class="w-size15 p-t-30 p-l-15 p-r-15 respon4">
             <h4 class="s-text12 p-b-30">
-                Shipment
+                บริการจัดส่ง
             </h4>
 
             <ul>
                 <li class="p-b-9 s-text7">
                     Thailand Post
                 </li>
-
                 <li class="p-b-9 s-text7">
-                    Kerry Express
+                   Kerry Express
                 </li>
-
 
             </ul>
         </div>
 
         <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
             <h4 class="s-text12 p-b-30">
-                Payment
+                วิธีการชำระเงิน
             </h4>
             <ul>
                 <li class="p-b-9 s-text7">
