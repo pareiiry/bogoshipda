@@ -103,7 +103,7 @@ $result2 = mysqli_query($con,$sql2);
 
                 <div class="header-wrapicon2">
                     <img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                    <span class="header-icons-noti"><?php echo count($_SESSION["shopping_cart"]);?></span>
+                    <span class="header-icons-noti"><?php if(empty($_SESSION["shopping_cart"])){echo "0";}else{echo count($_SESSION["shopping_cart"]);}?></span>
 
                     <!-- Header cart noti -->
                     <div class="header-cart header-dropdown">
@@ -191,13 +191,16 @@ $result2 = mysqli_query($con,$sql2);
 
                         </ul>
 
-                       <?php if($total!==null) {
-                        ?>
-                        <div class="header-cart-total">
-                            Total: ฿ <?php echo number_format($total, 0); ?>
-                        </div>
-                        <?php
-                }?>
+                       <?php
+                       if(!empty($_SESSION["shopping_cart"])){
+                           if($total!==null) {
+                            ?>
+                            <div class="header-cart-total">
+                                Total: ฿ <?php echo number_format($total, 0); ?>
+                            </div>
+                            <?php
+                            }
+                       }?>
 
                         <div class="header-cart-buttons">
                             <div class="header-cart-wrapbtn">
