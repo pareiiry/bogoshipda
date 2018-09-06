@@ -10,7 +10,7 @@ $color=$_POST['color'];
 
 include ('../../dbConnect.php');
 
-if($_FILES['filesToUpload']['size'] == 0 && $_FILES['filesToUpload']['error'] == 0) {
+if($_FILES['filesToUpload']['size'] == 0) {
 //$filesToUpload=$_POST['filesToUpload'];
 $sql="INSERT INTO product (pdID,name,description,price,cost,dateCreate,color)VALUES('$pdID','$name','$description','$price','$cost','$dateCreate','$color')";//คำสั่งเพิ่มข้อมูล
 $sql_query=mysqli_query($con,$sql);
