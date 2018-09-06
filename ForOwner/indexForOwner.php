@@ -296,7 +296,7 @@ $result2 = mysqli_query($con,$sql2);
                     echo "
                     <tr>
                     <td style=\"text-align:center;\">";
-                if($row3['img']===""){
+                if($row3['img']==="" || empty($row3)){
                     echo '<img style="width:30%" src="../images/no-picture.jpg">';
                 }
                 else {

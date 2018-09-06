@@ -123,7 +123,9 @@ $result2 = mysqli_query($con,$sql2);
                                 <li class="header-cart-item">
                                     <div class="header-cart-item-img">
                                         <?php
-                                        if($row3['img']===""){
+
+                                        if($row3['img']==="" || empty($row3)){
+                                            echo"Hello";
                                             echo '<img src="images/no-picture.jpg">';
                                         }
                                         else {
