@@ -229,178 +229,51 @@ $result2 = mysqli_query($con,$sql2);
                      while($row2= mysqli_fetch_assoc($result2))// show the information from query
                 {
 
+
+                        echo"<tr>";
                     if($row2['bankName']=='SCB'){
-                        echo"<tr>
-                     <td style=\"text-align:center;\"><img src=\"../images/bank/scb.png\"  width=\"25%\"></td>
-                     <td style=\"text-align:center;\">$row2[bankName]</td>
-                     <td style=\"text-align:center;\">$row2[accountName]</td>
-					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
-                    <td style=\"text-align:center;\">
-                    <form action=\"Action/deleteBank_action.php\" method=\"get\">
-                        <input style='display: none;' type=\"text\" name=\"bankID\" value='$row2[bankID]'>
-                        <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
-                    </form>
-                    </td>
-                    </tr>";
-                    }
-                    else if($row2['bankName']=='KTB'){
-                        echo"<tr>
-                     <td style=\"text-align:center;\"><img src=\"../images/bank/ktb.jpg\"  width=\"25%\"></td>
-                     <td style=\"text-align:center;\">$row2[bankName]</td>
-                     <td style=\"text-align:center;\">$row2[accountName]</td>
-					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
-                    <td style=\"text-align:center;\">
-                    <form action=\"Action/deleteBank_action.php\" method=\"get\">
-                        <input style='display: none;' type=\"text\" name=\"bankID\" value='$row2[bankID]'>
-                        <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
-                    </form>
-                    </td>
-                    </tr>";
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/scb.png\"  width=\"25%\"></td>";
+                     }
+                    else if($row2['bankName']=='KTB') {
+                        echo " <td style=\"text-align:center;\"><img src=\"../images/bank/ktb.jpg\"  width=\"25%\"></td>";
                     }
                     else if($row2['bankName']=='BBL'){
-                        echo"<tr>
-                     <td style=\"text-align:center;\"><img src=\"../images/bank/bbl.png\"  width=\"25%\"></td>
-                     <td style=\"text-align:center;\">$row2[bankName]</td>
-                     <td style=\"text-align:center;\">$row2[accountName]</td>
-					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
-                    <td style=\"text-align:center;\">
-                    <form action=\"Action/deleteBank_action.php\" method=\"get\">
-                        <input style='display: none;' type=\"text\" name=\"bankID\" value='$row2[bankID]'>
-                        <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
-                    </form>
-                    </td>
-                    </tr>";
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/bbl.png\"  width=\"25%\"></td>";
                     }
                     else if($row2['bankName']=='KBANK'){
-                        echo"<tr>
-                     <td style=\"text-align:center;\"><img src=\"../images/bank/kbank.png\"  width=\"25%\"></td>
-                     <td style=\"text-align:center;\">$row2[bankName]</td>
-                     <td style=\"text-align:center;\">$row2[accountName]</td>
-					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
-                    <td style=\"text-align:center;\">
-                    <form action=\"Action/deleteBank_action.php\" method=\"get\">
-                        <input style='display: none;' type=\"text\" name=\"bankID\" value='$row2[bankID]'>
-                        <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
-                    </form>
-                    </td>
-                    </tr>";
-                    }
-                    else if($row2['bankName']=='GSB'){
-                        echo"<tr>
-                     <td style=\"text-align:center;\"><img src=\"../images/bank/gsb.png\"  width=\"25%\"></td>
-                     <td style=\"text-align:center;\">$row2[bankName]</td>
-                     <td style=\"text-align:center;\">$row2[accountName]</td>
-					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
-                    <td style=\"text-align:center;\">
-                    <form action=\"Action/deleteBank_action.php\" method=\"get\">
-                        <input style='display: none;' type=\"text\" name=\"bankID\" value='$row2[bankID]'>
-                        <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
-                    </form>
-                    </td>
-                    </tr>";
-                    }
-                    else if($row2['bankName']=='KRUNGSRI'){
-                        echo"<tr>
-                     <td style=\"text-align:center;\"><img src=\"../images/bank/krungsri.png\"  width=\"25%\"></td>
-                     <td style=\"text-align:center;\">$row2[bankName]</td>
-                     <td style=\"text-align:center;\">$row2[accountName]</td>
-					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
-                    <td style=\"text-align:center;\">
-                    <form action=\"Action/deleteBank_action.php\" method=\"get\">
-                        <input style='display: none;' type=\"text\" name=\"bankID\" value='$row2[bankID]'>
-                        <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
-                    </form>
-                    </td>
-                    </tr>";
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/kbank.png\"  width=\"25%\"></td>";
+                    }else if($row2['bankName']=='GSB'){
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/gsb.png\"  width=\"25%\"></td>";
+                    }  else if($row2['bankName']=='KRUNGSRI'){
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/krungsri.png\"  width=\"25%\"></td>";
                     }
                     else if($row2['bankName']=='TMB'){
-                        echo"<tr>
-                     <td style=\"text-align:center;\"><img src=\"../images/bank/tmb.png\"  width=\"25%\"></td>
-                     <td style=\"text-align:center;\">$row2[bankName]</td>
-                     <td style=\"text-align:center;\">$row2[accountName]</td>
-					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
-                    <td style=\"text-align:center;\">
-                    <form action=\"Action/deleteBank_action.php\" method=\"get\">
-                        <input style='display: none;' type=\"text\" name=\"bankID\" value='$row2[bankID]'>
-                        <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
-                    </form>
-                    </td>
-                    </tr>";
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/tmb.png\"  width=\"25%\"></td>";
                     }
-                    else if($row2['bankName']=='UOB'){
-                        echo"<tr>
-                     <td style=\"text-align:center;\"><img src=\"../images/bank/uob.png\"  width=\"25%\"></td>
-                     <td style=\"text-align:center;\">$row2[bankName]</td>
-                     <td style=\"text-align:center;\">$row2[accountName]</td>
-					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
-                    <td style=\"text-align:center;\">
-                    <form action=\"Action/deleteBank_action.php\" method=\"get\">
-                        <input style='display: none;' type=\"text\" name=\"bankID\" value='$row2[bankID]'>
-                        <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
-                    </form>
-                    </td>
-                    </tr>";
+                   else if($row2['bankName']=='UOB'){
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/uob.png\"  width=\"25%\"></td>";
                     }
-                    else if($row2['bankName']=='TBANK'){
-                        echo"<tr>
-                     <td style=\"text-align:center;\"><img src=\"../images/bank/tbank.png\"  width=\"25%\"></td>
-                     <td style=\"text-align:center;\">$row2[bankName]</td>
-                     <td style=\"text-align:center;\">$row2[accountName]</td>
-					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
-                    <td style=\"text-align:center;\">
-                    <form action=\"Action/deleteBank_action.php\" method=\"get\">
-                        <input style='display: none;' type=\"text\" name=\"bankID\" value='$row2[bankID]'>
-                        <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
-                    </form>
-                    </td>
-                    </tr>";
-                    }
-                    else if($row2['bankName']=='CIMB'){
-                        echo"<tr>
-                     <td style=\"text-align:center;\"><img src=\"../images/bank/cimb.png\"  width=\"25%\"></td>
-                     <td style=\"text-align:center;\">$row2[bankName]</td>
-                     <td style=\"text-align:center;\">$row2[accountName]</td>
-					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
-                    <td style=\"text-align:center;\">
-                    <form action=\"Action/deleteBank_action.php\" method=\"get\">
-                        <input style='display: none;' type=\"text\" name=\"bankID\" value='$row2[bankID]'>
-                        <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
-                    </form>
-                    </td>
-                    </tr>";
+                    else if($row2['bankName']=='TBANK') {
+                        echo "<td style=\"text-align:center;\"><img src=\"../images/bank/tbank.png\"  width=\"25%\"></td>";
+                    }else if($row2['bankName']=='CIMB'){
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/cimb.png\"  width=\"25%\"></td>";
                     }
                     else if($row2['bankName']=='CITIBANK'){
-                        echo"<tr>
-                     <td style=\"text-align:center;\"><img src=\"../images/bank/citibank.png\"  width=\"25%\"></td>
-                     <td style=\"text-align:center;\">$row2[bankName]</td>
-                     <td style=\"text-align:center;\">$row2[accountName]</td>
-					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
-                    <td style=\"text-align:center;\">
-                    <form action=\"Action/deleteBank_action.php\" method=\"get\">
-                        <input style='display: none;' type=\"text\" name=\"bankID\" value='$row2[bankID]'>
-                        <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
-                    </form>
-                    </td>
-                    </tr>";
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/citibank.png\"  width=\"25%\"></td>";
                     }
                     else if($row2['bankName']=='SCBT'){
-                        echo"<tr>
-                     <td style=\"text-align:center;\"><img src=\"../images/bank/standardcharter.png\"  width=\"25%\"></td>
-                     <td style=\"text-align:center;\">$row2[bankName]</td>
-                     <td style=\"text-align:center;\">$row2[accountName]</td>
-					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
-                    <td style=\"text-align:center;\">
-                    <form action=\"Action/deleteBank_action.php\" method=\"get\">
-                        <input style='display: none;' type=\"text\" name=\"bankID\" value='$row2[bankID]'>
-                        <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
-                    </form>
-                    </td>
-                    </tr>";
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/standardcharter.png\"  width=\"25%\"></td>";
                     }
                     else if($row2['bankName']=='TISCO'){
-                        echo"<tr>
-                     <td style=\"text-align:center;\"><img src=\"../images/bank/tisco.png\"  width=\"25%\"></td>
-                     <td style=\"text-align:center;\">$row2[bankName]</td>
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/tisco.png\"  width=\"25%\"></td>";
+                    }
+                    else if($row2['bankName']=='Wallet') {
+                        echo "<td style=\"text-align:center;\"><img src=\"../images/bank/true.jpg\"  width=\"25%\"></td>";
+                    }
+                    else if($row2['bankName']=='PrompPay') {
+                        echo "<td style=\"text-align:center;\"><img src=\"../images/bank/promptpay.png\"  width=\"25%\"></td>";
+                    }
+                    echo "<td style=\"text-align:center;\">$row2[bankName]</td>
                      <td style=\"text-align:center;\">$row2[accountName]</td>
 					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
                     <td style=\"text-align:center;\">
@@ -410,35 +283,6 @@ $result2 = mysqli_query($con,$sql2);
                     </form>
                     </td>
                     </tr>";
-                    }
-                    else if($row2['bankName']=='Wallet'){
-                        echo"<tr>
-                     <td style=\"text-align:center;\"><img src=\"../images/bank/true.jpg\"  width=\"25%\"></td>
-                     <td style=\"text-align:center;\">$row2[bankName]</td>
-                     <td style=\"text-align:center;\">$row2[accountName]</td>
-					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
-                    <td style=\"text-align:center;\">
-                    <form action=\"Action/deleteBank_action.php\" method=\"get\">
-                        <input style='display: none;' type=\"text\" name=\"bankID\" value='$row2[bankID]'>
-                        <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
-                    </form>
-                    </td>
-                    </tr>";
-                    }
-                    else if($row2['bankName']=='PrompPay'){
-                        echo"<tr>
-                     <td style=\"text-align:center;\"><img src=\"../images/bank/promptpay.png\"  width=\"25%\"></td>
-                     <td style=\"text-align:center;\">$row2[bankName]</td>
-                     <td style=\"text-align:center;\">$row2[accountName]</td>
-					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
-                    <td style=\"text-align:center;\">
-                    <form action=\"Action/deleteBank_action.php\" method=\"get\">
-                        <input style='display: none;' type=\"text\" name=\"bankID\" value='$row2[bankID]'>
-                        <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
-                    </form>
-                    </td>
-                    </tr>";
-                    }
 
 				}
                                     ?>
