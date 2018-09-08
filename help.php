@@ -102,10 +102,10 @@
                             <a href="review.php">รีวิว</a>
                         </li>
 
-                        <li class="sale-noti">
+                        <li>
                             <a href="design.php">ออกแบบ</a>
                         </li>
-                        <li>
+                        <li class="sale-noti">
                             <a href="help.php">ช่วยเหลือ</a>
                         </li>
                     </ul>
