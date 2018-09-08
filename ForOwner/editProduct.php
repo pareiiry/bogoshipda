@@ -106,15 +106,15 @@ $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
                     </div>
                     <div class="col-sm-3">
                         <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/order.png" style="width:100%" alt="Image">สั่งซื้อ</a>
+                        <a href="order.php"><img class="bg-icon" src="../img/menu_bar_admin/order.png" style="width:100%" alt="Image">สั่งซื้อ</a>
                     </div>
                     <div class="col-sm-3">
                         <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/payment.png" style="width:100%" alt="Image">ชำระเงิน</a>
+                        <a href="payment.php"><img class="bg-icon" src="../img/menu_bar_admin/payment.png" style="width:100%" alt="Image">ชำระเงิน</a>
                     </div>
                     <div class="col-sm-3">
                         <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/shipment.png" style="width:100%" alt="Image">ขนส่ง</a>
+                        <a href="shipping.php"><img class="bg-icon" src="../img/menu_bar_admin/shipment.png" style="width:100%" alt="Image">ขนส่ง</a>
                     </div>
                 </div>
             </div><br>
@@ -130,23 +130,20 @@ $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
                     </div>
                     <div class="col-sm-3">
                         <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/account.png" style="width:100%" alt="Image">บัญชีรับเงิน</a>
+                        <a href="bank.php"><img class="bg-icon" src="../img/menu_bar_admin/account.png" style="width:100%" alt="Image">บัญชีรับเงิน</a>
                     </div>
                     <div class="col-sm-3">
                         <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/news.png" style="width:100%" alt="Image">BANNER</a>
+                        <a href="banner.php"><img class="bg-icon" src="../img/menu_bar_admin/news.png" style="width:100%" alt="Image">BANNER</a>
                     </div>
                 </div>
             </div><br>
             <div class="container-fluid bg-3 text-center">
                 <div class="row">
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/review.png" style="width:100%" alt="Image">รีวิว</a>
-                    </div>
+
 
                     <div class="col-sm-3">
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/statistic.png" style="width:100%" alt="Image">รายงาน</a>
+                        <a href="statistic.php"><img class="bg-icon" src="../img/menu_bar_admin/statistic.png" style="width:100%" alt="Image">รายงาน</a>
                     </div>
                     <div class="col-sm-3">
 
@@ -221,21 +218,21 @@ $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
                                 <select class="form-control" name="color">
                                     <option value="white" <?php if(isset($row2['color']) && ($row2['color']=='white'))echo 'selected' ?>>สีขาว</option>
                                     <option value="cream" <?php if(isset($row2['color']) && ($row2['color']=='cream'))echo 'selected' ?>>สีครีม</option>
-                                    <option value="milktea" <?php if(isset($row2['color']) && ($row2['color']=='milktea'))echo 'selected' ?>>สีชานม</option>
-                                    <option value="yellow" <?php if(isset($row2['color']) && ($row2['color']=='yellow'))echo 'selected' ?>>สีเหลือง</option>
-                                    <option value="green" <?php if(isset($row2['color']) && ($row2['color']=='green'))echo 'selected' ?>>สีเขียว</option>
-                                    <option value="darkgreen" <?php if(isset($row2['color']) && ($row2['color']=='darkgreen'))echo 'selected' ?>>สีเขียวเข้ม</option>
-                                    <option value="mint" <?php if(isset($row2['color']) && ($row2['color']=='mint'))echo 'selected' ?>>สีมิ้นต์</option>
-                                    <option value="sky" <?php if(isset($row2['color']) && ($row2['color']=='sky'))echo 'selected' ?>>สีฟ้าเข้ม</option>
-                                    <option value="orange" <?php if(isset($row2['color']) && ($row2['color']=='orange'))echo 'selected' ?>>สีส้มอ่อน</option>
-                                    <option value="lightpink" <?php if(isset($row2['color']) && ($row2['color']=='lightpink'))echo 'selected' ?>>สีชมพูอ่อน</option>
-                                    <option value="pink" <?php if(isset($row2['color']) && ($row2['color']=='pink'))echo 'selected' ?>>สีชมพู</option>
-                                    <option value="darkpink" <?php if(isset($row2['color']) && ($row2['color']=='darkpink'))echo 'selected' ?>>สีชมพูเข้ม</option>
-                                    <option value="red" <?php if(isset($row2['color']) && ($row2['color']=='red'))echo 'selected' ?>>สีแดง</option>
-                                    <option value="purple" <?php if(isset($row2['color']) && ($row2['color']=='purple'))echo 'selected' ?>>สีม่วง</option>
-                                    <option value="lightgray" <?php if(isset($row2['color']) && ($row2['color']=='lightgray'))echo 'selected' ?>>สีเทาอมฟ้า</option>
-                                    <option value="darkgray" <?php if(isset($row2['color']) && ($row2['color']=='darkgray'))echo 'selected' ?>>สีเทาเข้ม</option>
-                                    <option value="brown" <?php if(isset($row2['color']) && ($row2['color']=='brown'))echo 'selected' ?>>สีน้ำตาล</option>
+                                    <option value="milktea" style="color: #fdebc3" <?php if(isset($row2['color']) && ($row2['color']=='milktea'))echo 'selected' ?>>สีชานม</option>
+                                    <option value="yellow"  style="color: #fcff00" <?php if(isset($row2['color']) && ($row2['color']=='yellow'))echo 'selected' ?>>สีเหลือง</option>
+                                    <option value="green" style="color: #8ae671" <?php if(isset($row2['color']) && ($row2['color']=='green'))echo 'selected' ?>>สีเขียว</option>
+                                    <option value="darkgreen" style="color: #388b6f" <?php if(isset($row2['color']) && ($row2['color']=='darkgreen'))echo 'selected' ?>>สีเขียวเข้ม</option>
+                                    <option value="mint" style="color: #b4ffcb" <?php if(isset($row2['color']) && ($row2['color']=='mint'))echo 'selected' ?>>สีมิ้นต์</option>
+                                    <option value="sky" style="color: #43abea" <?php if(isset($row2['color']) && ($row2['color']=='sky'))echo 'selected' ?>>สีฟ้าเข้ม</option>
+                                    <option value="orange" style="color: #ffd28b" <?php if(isset($row2['color']) && ($row2['color']=='orange'))echo 'selected' ?>>สีส้มอ่อน</option>
+                                    <option value="lightpink" style="color: #ffe5e5" <?php if(isset($row2['color']) && ($row2['color']=='lightpink'))echo 'selected' ?>>สีชมพูอ่อน</option>
+                                    <option value="pink" style="color: #ffb0bb" <?php if(isset($row2['color']) && ($row2['color']=='pink'))echo 'selected' ?>>สีชมพู</option>
+                                    <option value="darkpink" style="color: #f95a7c" <?php if(isset($row2['color']) && ($row2['color']=='darkpink'))echo 'selected' ?>>สีชมพูเข้ม</option>
+                                    <option value="red" style="color: #e20000" <?php if(isset($row2['color']) && ($row2['color']=='red'))echo 'selected' ?>>สีแดง</option>
+                                    <option value="purple" style="color: #ebd1e9" <?php if(isset($row2['color']) && ($row2['color']=='purple'))echo 'selected' ?>>สีม่วง</option>
+                                    <option value="lightgray" style="color: #d7d8e4" <?php if(isset($row2['color']) && ($row2['color']=='lightgray'))echo 'selected' ?>>สีเทาอมฟ้า</option>
+                                    <option value="darkgray" style="color: #727875" <?php if(isset($row2['color']) && ($row2['color']=='darkgray'))echo 'selected' ?>>สีเทาเข้ม</option>
+                                    <option value="brown" style="color: #72552a" <?php if(isset($row2['color']) && ($row2['color']=='brown'))echo 'selected' ?>>สีน้ำตาล</option>
                                     <option value="black" <?php if(isset($row2['color']) && ($row2['color']=='black'))echo 'selected' ?>>สีดำ</option>
                                 </select>
                                 <div class="btn-group" style="margin: 0 0 2% 0">

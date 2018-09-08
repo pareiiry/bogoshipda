@@ -104,15 +104,15 @@ $result2 = mysqli_query($con,$sql2);
                     </div>
                     <div class="col-sm-3">
                         <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/order.png" style="width:100%" alt="Image">สั่งซื้อ</a>
+                        <a href="order.php"><img class="bg-icon" src="../img/menu_bar_admin/order.png" style="width:100%" alt="Image">สั่งซื้อ</a>
                     </div>
                     <div class="col-sm-3">
                         <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/payment.png" style="width:100%" alt="Image">ชำระเงิน</a>
+                        <a href="payment.php"><img class="bg-icon" src="../img/menu_bar_admin/payment.png" style="width:100%" alt="Image">ชำระเงิน</a>
                     </div>
                     <div class="col-sm-3">
                         <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/shipment.png" style="width:100%" alt="Image">ขนส่ง</a>
+                        <a href="shipping.php"><img class="bg-icon" src="../img/menu_bar_admin/shipment.png" style="width:100%" alt="Image">ขนส่ง</a>
                     </div>
                 </div>
             </div><br>
@@ -128,23 +128,19 @@ $result2 = mysqli_query($con,$sql2);
                     </div>
                     <div class="col-sm-3">
                         <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/account.png" style="width:100%" alt="Image">บัญชีรับเงิน</a>
+                        <a href="bank.php"><img class="bg-icon" src="../img/menu_bar_admin/account.png" style="width:100%" alt="Image">บัญชีรับเงิน</a>
                     </div>
                     <div class="col-sm-3">
                         <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/news.png" style="width:100%" alt="Image">BANNER</a>
+                        <a href="banner.php"><img class="bg-icon" src="../img/menu_bar_admin/news.png" style="width:100%" alt="Image">BANNER</a>
                     </div>
                 </div>
             </div><br>
             <div class="container-fluid bg-3 text-center">
                 <div class="row">
+
                     <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/review.png" style="width:100%" alt="Image">รีวิว</a>
-                    </div>
-                   
-                    <div class="col-sm-3">
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/statistic.png" style="width:100%" alt="Image">รายงาน</a>
+                        <a href="statistic.php"><img class="bg-icon" src="../img/menu_bar_admin/statistic.png" style="width:100%" alt="Image">รายงาน</a>
                     </div>
                     <div class="col-sm-3">
 
@@ -245,21 +241,21 @@ $result2 = mysqli_query($con,$sql2);
                             <select class="form-control" name="color">
                                 <option value="white">สีขาว</option>
                                 <option value="cream">สีครีม</option>
-                                <option value="milktea">สีชานม</option>
-                                <option value="yellow">สีเหลือง</option>
-                                <option value="green">สีเขียว</option>
-                                <option value="darkgreen">สีเขียวเข้ม</option>
-                                <option value="mint">สีมิ้นต์</option>
-                                <option value="sky">สีฟ้าเข้ม</option>
-                                <option value="orange">สีส้มอ่อน</option>
-                                <option value="lightpink">สีชมพูอ่อน</option>
-                                <option value="pink">สีชมพู</option>
-                                <option value="darkpink">สีชมพูเข้ม</option>
-                                <option value="red">สีแดง</option>
-                                <option value="purple">สีม่วง</option>
-                                <option value="lightgray">สีเทาอมฟ้า</option>
-                                <option value="darkgray">สีเทาเข้ม</option>
-                                <option value="brown">สีน้ำตาล</option>
+                                <option value="milktea" style="color: #fdebc3">สีชานม</option>
+                                <option value="yellow" style="color: #fcff00">สีเหลือง</option>
+                                <option value="green" style="color: #8ae671">สีเขียว</option>
+                                <option value="darkgreen" style="color: #388b6f">สีเขียวเข้ม</option>
+                                <option value="mint" style="color: #b4ffcb">สีมิ้นต์</option>
+                                <option value="sky" style="color: #43abea">สีฟ้าเข้ม</option>
+                                <option value="orange" style="color: #ffd28b">สีส้มอ่อน</option>
+                                <option value="lightpink" style="color: #ffe5e5">สีชมพูอ่อน</option>
+                                <option value="pink" style="color: #ffb0bb">สีชมพู</option>
+                                <option value="darkpink" style="color: #f95a7c">สีชมพูเข้ม</option>
+                                <option value="red" style="color: #e20000">สีแดง</option>
+                                <option value="purple" style="color: #ebd1e9">สีม่วง</option>
+                                <option value="lightgray" style="color: #d7d8e4">สีเทาอมฟ้า</option>
+                                <option value="darkgray" style="color: #727875">สีเทาเข้ม</option>
+                                <option value="brown" style="color: #72552a">สีน้ำตาล</option>
                                 <option value="black">สีดำ</option>
                             </select>
 
