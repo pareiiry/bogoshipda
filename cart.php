@@ -1,4 +1,5 @@
 <?php
+session_start();
 include ('dbConnect.php');
 $sql2 = "SELECT * FROM product";
 $result2 = mysqli_query($con,$sql2);
@@ -39,6 +40,7 @@ $result2 = mysqli_query($con,$sql2);
     <link rel="stylesheet" type="text/css" href="css/util.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!--===============================================================================================-->
+
     <style>
         .table-shipping{
             border-color: #2b2b2b;
@@ -89,7 +91,7 @@ $result2 = mysqli_query($con,$sql2);
                             <a href="index.php">หน้าแรก</a>
                         </li>
 
-                        <li>
+                        <li  class="sale-noti">
                             <a href="product.php">สินค้า</a>
                         </li>
 
@@ -97,7 +99,7 @@ $result2 = mysqli_query($con,$sql2);
                             <a href="review.php">รีวิว</a>
                         </li>
 
-                        <li class="sale-noti">
+                        <li>
                             <a href="design.php">ออกแบบ</a>
                         </li>
                         <li>
@@ -107,88 +109,6 @@ $result2 = mysqli_query($con,$sql2);
                 </nav>
             </div>
 
-            <!-- Header Icon -->
-            <div class="header-icons">
-
-
-                <div class="header-wrapicon2">
-                    <img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                    <span class="header-icons-noti">0</span>
-
-                    <!-- Header cart noti -->
-                    <div class="header-cart header-dropdown">
-                        <ul class="header-cart-wrapitem">
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-01.jpg" alt="IMG">
-                                </div>
-
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        White Shirt With Pleat Detail Back
-                                    </a>
-
-                                    <span class="header-cart-item-info">
-											1 x $19.00
-										</span>
-                                </div>
-                            </li>
-
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-02.jpg" alt="IMG">
-                                </div>
-
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        Converse All Star Hi Black Canvas
-                                    </a>
-
-                                    <span class="header-cart-item-info">
-											1 x $39.00
-										</span>
-                                </div>
-                            </li>
-
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-03.jpg" alt="IMG">
-                                </div>
-
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        Nixon Porter Leather Watch In Tan
-                                    </a>
-
-                                    <span class="header-cart-item-info">
-											1 x $17.00
-										</span>
-                                </div>
-                            </li>
-                        </ul>
-
-                        <div class="header-cart-total">
-                            Total: $75.00
-                        </div>
-
-                        <div class="header-cart-buttons">
-                            <div class="header-cart-wrapbtn">
-                                <!-- Button -->
-                                <a href="cart.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    View Cart
-                                </a>
-                            </div>
-
-                            <div class="header-cart-wrapbtn">
-                                <!-- Button -->
-                                <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    Check Out
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -209,83 +129,6 @@ $result2 = mysqli_query($con,$sql2);
 
                 <span class="linedivide2"></span>
 
-                <div class="header-wrapicon2">
-                    <img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                    <span class="header-icons-noti">0</span>
-
-                    <!-- Header cart noti -->
-                    <div class="header-cart header-dropdown">
-                        <ul class="header-cart-wrapitem">
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-01.jpg" alt="IMG">
-                                </div>
-
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        White Shirt With Pleat Detail Back
-                                    </a>
-
-                                    <span class="header-cart-item-info">
-											1 x $19.00
-										</span>
-                                </div>
-                            </li>
-
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-02.jpg" alt="IMG">
-                                </div>
-
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        Converse All Star Hi Black Canvas
-                                    </a>
-
-                                    <span class="header-cart-item-info">
-											1 x $39.00
-										</span>
-                                </div>
-                            </li>
-
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-03.jpg" alt="IMG">
-                                </div>
-
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        Nixon Porter Leather Watch In Tan
-                                    </a>
-
-                                    <span class="header-cart-item-info">
-											1 x $17.00
-										</span>
-                                </div>
-                            </li>
-                        </ul>
-
-                        <div class="header-cart-total">
-                            Total: $75.00
-                        </div>
-
-                        <div class="header-cart-buttons">
-                            <div class="header-cart-wrapbtn">
-                                <!-- Button -->
-                                <a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    View Cart
-                                </a>
-                            </div>
-
-                            <div class="header-cart-wrapbtn">
-                                <!-- Button -->
-                                <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    Check Out
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
@@ -355,6 +198,7 @@ $result2 = mysqli_query($con,$sql2);
         <!-- Cart item -->
         <div class="container-table-cart pos-relative">
             <div class="wrap-table-shopping-cart bgwhite">
+                <a href="product.php"><i class="fa fa-angle-double-left" style="font-size:24px"></i> &nbsp;กลับไปยังหน้าสินค้า</a>
                 <table class="table-shopping-cart">
                     <tr class="table-head">
                         <th class="column-1"></th>
@@ -363,54 +207,88 @@ $result2 = mysqli_query($con,$sql2);
                         <th class="column-4 p-l-70">จำนวน</th>
                         <th class="column-5">ราคารวม</th>
                     </tr>
+                    <?php
+                    if(!empty($_SESSION["shopping_cart"]))
+                    {
+                        $total = 0;
 
-                    <tr class="table-row">
-                        <td class="column-1">
-                            <div class="cart-img-product b-rad-4 o-f-hidden">
-                                <img src="images/item-10.jpg" alt="IMG-PRODUCT">
-                            </div>
-                        </td>
-                        <td class="column-2">Men Tshirt</td>
-                        <td class="column-3">฿</td>
-                        <td class="column-4">
-                            <div class="flex-w bo5 of-hidden w-size17">
-                                <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
-                                    <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
-                                </button>
+                        foreach($_SESSION["shopping_cart"] as $keys => $values)
+                        {
+                            if($values["pdID"]!==null) {
+                                $sql3 = "SELECT * FROM image WHERE pdID= '".$values["pdID"]."' LIMIT 1";
+                                $result3 = mysqli_query($con,$sql3);
+                                $row3 = mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                                ?>
+                                <tr class="table-row">
+                                    <td class="column-1">
+                                        <div class="cart-img-product b-rad-4 o-f-hidden">
+                                            <?php
 
-                                <input class="size8 m-text18 t-center num-product" type="number" name="num-product1" value="1">
+                                            if($row3['img']==="" || empty($row3)){
+                                                // echo"Hello";
+                                                echo '<img src="images/no-picture.jpg">';
+                                            }
+                                            else {
+                                                echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
+                                            }
+                                            ?>
+                                        </div>
+                                    </td>
+                                    <td class="column-2"><?php echo $values["name"]; ?></td>
+                                    <td class="column-3">฿  <?php echo $values["price"]; ?></td>
+                                    <td class="column-4">
+                                        <div class="flex-w bo5 of-hidden w-size17">
+                                            <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
+                                                <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
+                                            </button>
 
-                                <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
-                                    <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </td>
-                        <td class="column-5">฿</td>
-                    </tr>
+                                            <input class="size8 m-text18 t-center num-product" type="number" name="num-product1" value="<?php echo $values["quantity"]; ?>">
 
-                    <tr class="table-row">
-                        <td class="column-1">
-                            <div class="cart-img-product b-rad-4 o-f-hidden">
-                                <img src="images/item-05.jpg" alt="IMG-PRODUCT">
-                            </div>
-                        </td>
-                        <td class="column-2">Mug Adventure</td>
-                        <td class="column-3">฿</td>
-                        <td class="column-4">
-                            <div class="flex-w bo5 of-hidden w-size17">
-                                <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
-                                    <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
-                                </button>
+                                            <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
+                                                <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td class="column-5">฿ <?php echo ($values["quantity"] * $values["price"]); ?></td>
+                                </tr>
 
-                                <input class="size8 m-text18 t-center num-product" type="number" name="num-product2" value="1">
+                                <?php
+                                $total = $total + ($values["quantity"] * $values["price"]);
+                                //echo $total;
+                            }
+                            else{
+                                unset($_SESSION["shopping_cart"][$keys]);
+                                ?>
+                                <tr class="table-row">
+                                    <td colspan="5" style="text-align: center;color: red"> - ไม่มีสินค้าที่เลือก -</td>
+                                </tr>
+                                <?php
 
-                                <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
-                                    <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </td>
-                        <td class="column-5">฿</td>
-                    </tr>
+                            }
+                        }
+
+                    }
+                    else{
+                        ?>
+                        <tr class="table-row">
+                            <td colspan="5" style="text-align: center;color: red"> - ไม่มีสินค้าที่เลือก -</td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+
+                    <?php
+                    if(!empty($_SESSION["shopping_cart"])){
+                        if($total!==null) {
+                            ?>
+                            <tr class="table-row">
+                                <td colspan="4" style="text-align: right">รวมค่าสินค้าทั้งหมด:  &nbsp;&nbsp;</td>
+                                <td style="color: red">฿ <?php echo number_format($total, 0); ?></td>
+                            </tr>
+                            <?php
+                        }
+                    }?>
+
                 </table>
             </div>
         </div>

@@ -79,7 +79,7 @@ $result2 = mysqli_query($con,$sql2);
                             <a href="index.php">หน้าแรก</a>
                         </li>
 
-                        <li>
+                        <li class="sale-noti">
                             <a href="product.php">สินค้า</a>
                         </li>
 
@@ -87,7 +87,7 @@ $result2 = mysqli_query($con,$sql2);
                             <a href="review.php">รีวิว</a>
                         </li>
 
-                        <li class="sale-noti">
+                        <li>
                             <a href="design.php">ออกแบบ</a>
                         </li>
                         <li>
