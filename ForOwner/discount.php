@@ -228,9 +228,16 @@ $result2 = mysqli_query($con,$sql2);
                                         echo "
                     <tr>";
                     if($row2['active']==1){
-                    echo"
-                    <td style=\"text-align:center;color: #1BA135\">Active</td>
-                    <td style=\"text-align:center;\">$row2[dateCreate]</td>
+                        $drnM = new DateTime("now", new DateTimeZone('Asia/Bangkok'));
+                        $drnM = $drnM ->format("Y-m-d");
+                        if($row2['dateDelete']>$drnM){
+                            echo"<td style=\"text-align:center;color: #1BA135\">Active</td>";
+                        }
+                        else{
+                            echo"<td style=\"text-align:center;color: red\">Unactive</td>";
+                        }
+
+                     echo"<td style=\"text-align:center;\">$row2[dateCreate]</td>
                      <td style=\"text-align:center;\">$row2[dateDelete]</td>
                      <td style=\"text-align:center;\">$row2[codeText]</td>
                      <td style=\"text-align:center;\">$row2[discount]</td>";
