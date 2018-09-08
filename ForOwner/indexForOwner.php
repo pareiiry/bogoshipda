@@ -232,7 +232,7 @@ $result2 = mysqli_query($con,$sql2);
                     </div>
                     <div class="col-sm-3">
                         <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/news.png" style="width:100%" alt="Image">BANNER</a>
+                        <a href="banner.php"><img class="bg-icon" src="../img/menu_bar_admin/news.png" style="width:100%" alt="Image">BANNER</a>
                     </div>
                 </div>
             </div><br>

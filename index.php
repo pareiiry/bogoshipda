@@ -384,39 +384,21 @@ $result2 = mysqli_query($con,$sql2);
 <section class="slide1">
     <div class="wrap-slick1">
         <div class="slick1">
-            <div class="item-slick1 item1-slick1" style="background-image: url(images/master-slide-02.jpg);">
+
+            <?php
+            $sqlB = "SELECT * FROM banner";
+            $resultB = mysqli_query($con,$sqlB);
+            while($rowB = mysqli_fetch_assoc($resultB))// show the information from query
+            {
+                echo ' <div class="item-slick1 item1-slick1" style="background-image: url(data:image/*;base64,' . base64_encode($rowB['bImg']) . ');">
                 <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
-
-
                     <div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="zoomIn">
                         <!-- Button -->
-
                     </div>
                 </div>
-            </div>
-
-            <div class="item-slick1 item2-slick1" style="background-image: url(images/master-slide-03.jpg);">
-                <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
-
-
-                    <div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="slideInUp">
-                        <!-- Button -->
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="item-slick1 item3-slick1" style="background-image: url(images/master-slide-04.jpg);">
-                <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
-
-
-                    <div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="rotateIn">
-                        <!-- Button -->
-
-                    </div>
-                </div>
-            </div>
-
+            </div>';
+            }
+            ?>
         </div>
     </div>
 </section>

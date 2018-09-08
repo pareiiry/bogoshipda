@@ -19,10 +19,8 @@ $result = mysqli_query($con,$sql);
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 
-$sql2 = "SELECT * FROM bank";
-//$objQuery = mysqli_query($strSQL);
-//$objResult = mysqli_fetch_array($objQuery);
-$result2 = mysqli_query($con,$sql2);
+$sqlB = "SELECT * FROM banner";
+$resultB = mysqli_query($con,$sqlB);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -178,7 +176,7 @@ $result2 = mysqli_query($con,$sql2);
                                             <!--                                        <input type="submit">-->
                                         </form>
                                         รูปภาพที่เลือก :
-                                        <ul id="fileList" style="list-style-type:none"><li>ไม่มีรูปภาพที่เลือก</li></ul>
+                                        <ul id="fileList2" style="list-style-type:none"><li>ไม่มีรูปภาพที่เลือก</li></ul>
 
                                         <script>
                                             function makeFileList2() {
@@ -218,15 +216,19 @@ $result2 = mysqli_query($con,$sql2);
                                         <th style="width:5%;text-align:center;"></th>
                                     </tr>
                                     </thead>
-                                    <tr>
-                                        <td>pic</td>
-                                        <td>
-                                        <form action="Action/deleteBanner.php" method="get">
-                                            <input style='display: none;' type="text" name="uID" value='$row2[uID]'>
-                                            <button class='btn-delete' type="submit"><i class="fa fa-trash"></i></button>
-                                        </form>
-                                        </td>
-                                    </tr>
+                                        <?php
+                                        while($rowB = mysqli_fetch_assoc($resultB))// show the information from query
+                                        {
+                                                echo '<tr><td style="text-align: center"><img style="width:50%" src="data:image/*;base64,' . base64_encode($rowB['bImg']) . '"/></td>';
+                                                ?><td>
+                                                <form action="Action/deleteBanner.php" method="get">
+                                                    <input style='display: none;' type="text" name="bID" value='<?php echo $rowB['bID'];?>'>
+                                                    <button class='btn-delete' type="submit"><i class="fa fa-trash"></i></button>
+                                                </form>
+                                                </td><?php echo'</tr>';
+                                        }
+                                        ?>
+
                                     
                                 </table>
                             </div>
