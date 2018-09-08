@@ -17,7 +17,7 @@ if($dateCreate<=$dateDelete){
     }else{
         echo "<script type='text/javascript'>alert('เกิดข้อผิดพลาดในการบันทึกข้อมูล');window.history.go(-1);</script>" ;
     }
-    
+
 }
 else{
     echo "<script type='text/javascript'>alert('ไม่สามารถเพิ่มส่วนลดได้เนื่องจากวันที่สร้างมากกว่าวันที่สิ้นสุด กรุณาแก้ไขแล้วทำรายการใหม่อีกครั้ง');window.history.go(-1);</script>" ;

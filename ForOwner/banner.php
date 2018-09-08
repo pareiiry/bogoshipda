@@ -165,7 +165,7 @@ $result2 = mysqli_query($con,$sql2);
                 <hr>
 
                 <div class="row" style="margin-top: 20px">
-                    <form method="post" action="Action/addBank_action.php" enctype="multipart/form-data">
+                    <form method="post" action="Action/addBanner_action.php" enctype="multipart/form-data">
                     <div class="col-md-3">
                         <div class="panel panel-default">
                             <div class="panel-heading" align="center"  style="background-color:#edf9f7;"><b>เพิ่มรูปภาพ</b></div>
@@ -174,16 +174,16 @@ $result2 = mysqli_query($con,$sql2);
 
                                     <div class="btn-group" style="margin: 0 0 2% 0;width: 100%">
                                         <form method="post" action="#" enctype="multipart/form-data">
-                                            Select files: <input style="margin:2% 0 2% 0 " type="file" name="filesToUpload[]" id="filesToUpload" multiple onchange="makeFileList();">
+                                            Select files: <input style="margin:2% 0 2% 0 " type="file" name="filesToUploadBanner[]" id="filesToUploadBanner" multiple onchange="makeFileList2();">
                                             <!--                                        <input type="submit">-->
                                         </form>
                                         รูปภาพที่เลือก :
                                         <ul id="fileList" style="list-style-type:none"><li>ไม่มีรูปภาพที่เลือก</li></ul>
 
                                         <script>
-                                            function makeFileList() {
-                                                var input = document.getElementById("filesToUpload");
-                                                var ul = document.getElementById("fileList");
+                                            function makeFileList2() {
+                                                var input = document.getElementById("filesToUploadBanner");
+                                                var ul = document.getElementById("fileList2");
                                                 while (ul.hasChildNodes()) {
                                                     ul.removeChild(ul.firstChild);
                                                 }
