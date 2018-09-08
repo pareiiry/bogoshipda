@@ -404,61 +404,60 @@ $result = mysqli_query($con,$sql);
 
         while($row2= mysqli_fetch_assoc($result))// show the information from query
                 {
-
+                    echo"<tr>";
                     if($row2['bankName']=='SCB'){
-                        echo"<tr>
-                     <td style=\"text-align:center;\"><img src=\"images/bank/scb.png\"  width=\"50%\"></td>
-                     <td style=\"text-align:center;\">$row2[bankName]</td>
-                     <td style=\"text-align:center;\">$row2[accountName]</td>
-					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
-                    
-                    </tr>";
+                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/scb.png\"  width=\"50%\"></td>";
                     }
-                    else if($row2['bankName']=='KTB'){
-                        echo"<tr>
-                     <td style=\"text-align:center;\"><img src=\"images/bank/ktb.jpg\"  width=\"50%\"></td>
-                     <td style=\"text-align:center;\">$row2[bankName]</td>
-                     <td style=\"text-align:center;\">$row2[accountName]</td>
-					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
-                    
-                    </tr>";
+                    else if($row2['bankName']=='KTB') {
+                        echo " <td style=\"text-align:center;\"><img src=\"images/bank/ktb.jpg\"  width=\"50%\"></td>";
                     }
                     else if($row2['bankName']=='BBL'){
-                        echo"<tr>
-                     <td style=\"text-align:center;\"><img src=\"images/bank/bbl.png\"  width=\"50%\"></td>
-                     <td style=\"text-align:center;\">$row2[bankName]</td>
-                     <td style=\"text-align:center;\">$row2[accountName]</td>
-					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
-                    
-                    </tr>";
+                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/bbl.png\"  width=\"50%\"></td>";
                     }
                     else if($row2['bankName']=='KBANK'){
-                        echo"<tr>
-                     <td style=\"text-align:center;\"><img src=\"images/bank/kbank.png\"  width=\"50%\"></td>
-                     <td style=\"text-align:center;\">$row2[bankName]</td>
+                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/kbank.png\"  width=\"50%\"></td>";
+                    }else if($row2['bankName']=='GSB'){
+                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/gsb.png\"  width=\"50%\"></td>";
+                    }  else if($row2['bankName']=='KRUNGSRI'){
+                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/krungsri.png\"  width=\"50%\"></td>";
+                    }
+                    else if($row2['bankName']=='TMB'){
+                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/tmb.png\"  width=\"50%\"></td>";
+                    }
+                    else if($row2['bankName']=='UOB'){
+                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/uob.png\"  width=\"50%\"></td>";
+                    }
+                    else if($row2['bankName']=='TBANK') {
+                        echo "<td style=\"text-align:center;\"><img src=\"images/bank/tbank.png\"  width=\"50%\"></td>";
+                    }else if($row2['bankName']=='CIMB'){
+                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/cimb.png\"  width=\"50%\"></td>";
+                    }
+                    else if($row2['bankName']=='CITIBANK'){
+                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/citibank.png\"  width=\"50%\"></td>";
+                    }
+                    else if($row2['bankName']=='SCBT'){
+                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/standardcharter.png\"  width=\"50%\"></td>";
+                    }
+                    else if($row2['bankName']=='TISCO'){
+                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/tisco.png\"  width=\"50%\"></td>";
+                    }
+                    else if($row2['bankName']=='Wallet') {
+                        echo "<td style=\"text-align:center;\"><img src=\"images/bank/true.jpg\"  width=\"50%\"></td>";
+                    }
+                    else if($row2['bankName']=='PrompPay') {
+                        echo "<td style=\"text-align:center;\"><img src=\"images/bank/promptpay.png\"  width=\"50%\"></td>";
+                    }
+                    echo "<td style=\"text-align:center;\">$row2[bankName]</td>
                      <td style=\"text-align:center;\">$row2[accountName]</td>
 					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
-                    
+                    <td style=\"text-align:center;\">
+                    <form action=\"Action/deleteBank_action.php\" method=\"get\">
+                        <input style='display: none;' type=\"text\" name=\"bankID\" value='$row2[bankID]'>
+                        <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
+                    </form>
+                    </td>
                     </tr>";
-                    }
-                    else if($row2['bankName']=='Wallet'){
-                        echo"<tr>
-                     <td style=\"text-align:center;\"><img src=\"images/bank/true.jpg\"  width=\"50%\"></td>
-                     <td style=\"text-align:center;\">$row2[bankName]</td>
-                     <td style=\"text-align:center;\">$row2[accountName]</td>
-					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
-                    
-                    </tr>";
-                    }
-                    else if($row2['bankName']=='PrompPay'){
-                        echo"<tr>
-                     <td style=\"text-align:center;\"><img src=\"images/bank/promptpay.png\"  width=\"50%\"></td>
-                     <td style=\"text-align:center;\">$row2[bankName]</td>
-                     <td style=\"text-align:center;\">$row2[accountName]</td>
-					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
-                    
-                    </tr>";
-                    }
+
 
 
         }
