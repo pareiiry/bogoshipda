@@ -1,4 +1,5 @@
 <?php
+session_start();
 include ('dbConnect.php');
 $sql2 = "SELECT * FROM product ORDER BY dateCreate DESC ";
 $result2 = mysqli_query($con,$sql2);

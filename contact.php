@@ -1,4 +1,5 @@
 <?php
+session_start();
 include ('dbConnect.php');
 $sql = "SELECT * FROM faqs";
 $result = mysqli_query($con,$sql);
@@ -109,10 +110,10 @@ $result = mysqli_query($con,$sql);
                             <a href="review.php">รีวิว</a>
                         </li>
 
-                        <li class="sale-noti">
+                        <li>
                             <a href="design.php">ออกแบบ</a>
                         </li>
-                        <li>
+                        <li class="sale-noti">
                             <a href="help.php">ช่วยเหลือ</a>
                         </li>
                     </ul>
@@ -125,76 +126,119 @@ $result = mysqli_query($con,$sql);
 
                 <div class="header-wrapicon2">
                     <img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                    <span class="header-icons-noti">0</span>
+                    <span class="header-icons-noti"><?php if(empty($_SESSION["shopping_cart"])){echo "0";}else{echo count($_SESSION["shopping_cart"]);}?></span>
 
                     <!-- Header cart noti -->
                     <div class="header-cart header-dropdown">
                         <ul class="header-cart-wrapitem">
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-01.jpg" alt="IMG">
-                                </div>
+                            <?php
+                            if(!empty($_SESSION["shopping_cart"]))
+                            {
+                                $total = 0;
 
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        White Shirt With Pleat Detail Back
-                                    </a>
+                                foreach($_SESSION["shopping_cart"] as $keys => $values)
+                                {
+                                    if($values["pdID"]!==null) {
+                                        $sql3 = "SELECT * FROM image WHERE pdID= '".$values["pdID"]."' LIMIT 1";
+                                        $result3 = mysqli_query($con,$sql3);
+                                        $row3 = mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                                        ?>
+                                        <li class="header-cart-item">
+                                            <div class="header-cart-item-img">
+                                                <?php
 
-                                    <span class="header-cart-item-info">
-											1 x $19.00
+                                                if($row3['img']==="" || empty($row3)){
+                                                    // echo"Hello";
+                                                    echo '<img src="images/no-picture.jpg">';
+                                                }
+                                                else {
+                                                    echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
+                                                }
+                                                ?>
+                                            </div>
+
+                                            <div class="header-cart-item-txt">
+                                                <a href="#" class="header-cart-item-name">
+                                                    <?php echo $values["name"]; ?>
+                                                </a>
+
+                                                <span class="header-cart-item-info">
+											<?php echo $values["quantity"]; ?> x  ฿<?php echo $values["price"]; ?>
 										</span>
-                                </div>
-                            </li>
+                                            </div>
+                                        </li>
+                                        <?php
+                                        $total = $total + ($values["quantity"] * $values["price"]);
+                                        //echo $total;
+                                    }
+                                    else{
+                                        unset($_SESSION["shopping_cart"][$keys]);
+                                        ?>
+                                        <li class="header-cart-item">
+                                            <div class="header-cart-item-img">
+                                            </div>
 
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-02.jpg" alt="IMG">
-                                </div>
+                                            <div class="header-cart-item-txt">
+                                                <a href="#" class="header-cart-item-name">
+                                                    - ไม่มีสินค้าที่เลือก -
+                                                </a>
 
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        Converse All Star Hi Black Canvas
-                                    </a>
+                                                <span class="header-cart-item-info">
 
-                                    <span class="header-cart-item-info">
-											1 x $39.00
 										</span>
-                                </div>
-                            </li>
+                                            </div>
+                                        </li>
+                                        <?php
 
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-03.jpg" alt="IMG">
-                                </div>
+                                    }
+                                }
 
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        Nixon Porter Leather Watch In Tan
-                                    </a>
+                            }
+                            else{
+                                ?>
+                                <li class="header-cart-item">
+                                    <div class="header-cart-item-img">
+                                    </div>
 
-                                    <span class="header-cart-item-info">
-											1 x $17.00
+                                    <div class="header-cart-item-txt">
+                                        <a href="#" class="header-cart-item-name">
+                                            - ไม่มีสินค้าที่เลือก -
+                                        </a>
+
+                                        <span class="header-cart-item-info">
+
 										</span>
-                                </div>
-                            </li>
+                                    </div>
+                                </li>
+                                <?php
+                            }
+                            ?>
+
                         </ul>
 
-                        <div class="header-cart-total">
-                            Total: $75.00
-                        </div>
+                        <?php
+                        if(!empty($_SESSION["shopping_cart"])){
+                            if($total!==null) {
+                                ?>
+                                <div class="header-cart-total">
+                                    รวมค่าสินค้า : ฿<?php echo number_format($total, 0); ?>
+                                </div>
+                                <?php
+                            }
+                        }?>
 
                         <div class="header-cart-buttons">
                             <div class="header-cart-wrapbtn">
                                 <!-- Button -->
-                                <a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    View Cart
+                                <a href="clearcart.php" style="background-color: red" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                    ลบทั้งหมด
                                 </a>
                             </div>
 
                             <div class="header-cart-wrapbtn">
                                 <!-- Button -->
-                                <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    Check Out
+                                <a href="cart.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                    ดูตะกร้าสินค้า
                                 </a>
                             </div>
                         </div>
