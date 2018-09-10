@@ -36,26 +36,16 @@ session_start();
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="css/util.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
-        <link rel="stylesheet" type="text/css" href="css/styleHelp.css">
+
 
     <!--===============================================================================================-->
     
     <style>
-        table, th, td, tr{
-            width: auto;
-            border: 1px solid black;
-            margin: auto;
-            text-align: center;
-            padding: 10px 20px 10px 20px;
-
+        .checked, .price span {
+            color: #ff9f1a; }
+        .p{
+            color:#ffaeba ;
         }
-        th{
-            height: 60px;
-            background-color: #f5f5f5;
-        }
-
-
-        
     </style>
 </head>
 <body class="animsition">
@@ -405,56 +395,146 @@ session_start();
 
 
 <!-- container -->
-<section class="newproduct bgwhite p-t-45 p-b-105">
-    <div class="container">
-<div class="row">
-                        <div class="col-xs-3">
-    <div class="list-group">
-        <a class="list-group-item disabled" href="#"><img src="images/icons/logo.png"/></a>
-        <a href="color.php" class="list-group-item">สีสาย/สีสกรีน</a>
-        <a href="price.php" class="list-group-item">ตารางราคา</a>
-        <a href="shipping.php" class="list-group-item">ค่าจัดส่ง</a>
-        <a href="payment.php" class="list-group-item">การชำระเงิน</a>
-        <a href="faq.php" class="list-group-item">คำถามที่พบบ่อย</a>
-        <a href="contact.php" class="list-group-item">ติดต่อเรา</a>
-        <a href="terms.php" class="list-group-item">เงื่อนไขข้อตกลง</a>
-    </div>
-    <div class="list-group">
-        <a href="#" class="list-group-item disabled">ช่วยเหลือ</a>
-        <a href="how-to-order.php" class="list-group-item">ขั้นตอนสั่งซื้อ</a>
-        <a href="coupon.php" class="list-group-item">วิธีใช้งานคูปอง</a>
-        <a href="how-to-payment.php" class="list-group-item">ขั้นตอนแจ้งชำระเงิน</a>
-    </div> 
-</div>                         <div class="col-xs-9">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-    <h3 class="panel-title">ค่าจัดส่ง</h3>
+
+<div class="bread-crumb bgwhite flex-w p-l-52 p-r-15 p-t-30 p-l-15-sm">
+    <a href="index.php" class="s-text16">
+        หนัาแรก
+        <i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
+    </a>
+
+    <a href="product.php" class="s-text16">
+        สินค้า
+        <i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
+    </a>
+
+
+    <span class="s-text17">
+			product name
+		</span>
 </div>
-<div class="panel-body">
-    <table>
-        <tr>
-            <th>รูปแบบการส่ง/จำนวน</th>
-            <th>1-3</th>
-            <th>4 ชิ้นขึ้นไป </th>
 
-        </tr>
-        <tr>
-            <td>ลงทะเบียน</td>
-            <td>30 บาท</td>
-            <td>+ เพิ่มชิ้นละ 5 บาท</td>
+<!-- Product Detail -->
+<div class="container bgwhite p-t-35 p-b-80">
+    <div class="flex-w flex-sb">
+        <div class="w-size13 p-t-30 respon5">
+            <div class="wrap-slick3 flex-sb flex-w">
+                <div class="wrap-slick3-dots"></div>
 
-        </tr>
-        <tr>
-            <td>EMS</td>
-            <td>50 บาท</td>
-            <td>+ เพิ่มชิ้นละ 5 บาท</td>
+                <div class="slick3">
+                    <div class="item-slick3" data-thumb="images/thumb-item-01.jpg">
+                        <div class="wrap-pic-w">
+                            <img src="images/product-detail-01.jpg" alt="IMG-PRODUCT">
+                        </div>
+                    </div>
 
-        </tr>
-    </table>
-</div>
-    </div>
-    </div>
+                    <div class="item-slick3" data-thumb="images/thumb-item-02.jpg">
+                        <div class="wrap-pic-w">
+                            <img src="images/product-detail-02.jpg" alt="IMG-PRODUCT">
+                        </div>
+                    </div>
+
+                    <div class="item-slick3" data-thumb="images/thumb-item-03.jpg">
+                        <div class="wrap-pic-w">
+                            <img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <div class="w-size14 p-t-30 respon5">
+            <h4 class="product-detail-name m-text16 p-b-13">
+                product name
+            </h4>
+
+            <span class="m-text17 p">
+					฿22
+				</span>
+
+
+            <!--  -->
+            <div class="p-t-33 p-b-60">
+
+
+                <div class="wrap-dropdown-content bo6 p-t-15 p-b-14 active-dropdown-content">
+                    <h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
+                        รายละเอียดสินค้า
+                        <i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="true"></i>
+                        <i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
+                    </h5>
+
+                    <div class="dropdown-content dis-none p-t-15 p-b-23">
+                        <p class="s-text8">
+                            สี :
+                        </p>
+
+                    </div>
+                </div>
+                <div class="flex-r-m flex-w p-t-10">
+                    <div class="w-size16 flex-m flex-w">
+                        <div class="flex-w bo5 of-hidden m-r-22 m-t-10 m-b-10">
+                            <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
+                                <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
+                            </button>
+
+                            <input class="size8 m-text18 t-center num-product" type="number" name="num-product" value="1">
+
+                            <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
+                                <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+
+                        <div class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
+                            <!-- Button -->
+                            <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+                                เพิ่มลงตะกร้า
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!--  -->
+
+
+        </div>
+    </div>
+</div>
+
+<section class="newproduct bgwhite p-t-45 p-b-105">
+
+
+    <div class="container">
+        <div class="wrap-dropdown-content bo7 p-t-15 p-b-14">
+            <h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
+                รีวิวสินค้า (0)
+                <i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="true"></i>
+                <i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
+            </h5>
+
+            <div class="dropdown-content dis-none p-t-15 p-b-23">
+                <div class="rating-main">
+                    <div class="rating-name">name</div>
+                    <div class="rating-rating">
+                        <div class="stars">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        </div>
+                    </div>
+                    <div class="rating-comment">comment</div>
+                    <div class="rating-pic"><img src="images/no-picture.jpg"></div>
+                    <div class="rating-time">10-09-2018 18:26</div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+
+
     </div>
     </section>
 
@@ -469,6 +549,8 @@ session_start();
 
 
 <!-- Shipping -->
+
+
 
 <!-- Footer -->
 <footer class="bg6 p-t-45 p-b-43 p-l-45 p-r-45">
@@ -536,8 +618,8 @@ session_start();
                     KTB &emsp;  K-BANK
                 </li>
                 <li class="p-b-9 s-text7">
-                    BBL  &emsp; Wallet
-                </li>
+                    BBL  &emsp; Wallet   
+                </li>                
                 <li class="p-b-9 s-text7">
                     SCB &emsp; PrompPay
                 </li>
@@ -566,7 +648,7 @@ session_start();
 
 <!-- Container Selection1 -->
 <div id="dropDownSelect1"></div>
-
+<div id="dropDownSelect2"></div>
 
 
 <!--===============================================================================================-->
@@ -582,6 +664,17 @@ session_start();
     $(".selection-1").select2({
         minimumResultsForSearch: 20,
         dropdownParent: $('#dropDownSelect1')
+    });
+</script>
+<script type="text/javascript">
+    $(".selection-1").select2({
+        minimumResultsForSearch: 20,
+        dropdownParent: $('#dropDownSelect1')
+    });
+
+    $(".selection-2").select2({
+        minimumResultsForSearch: 20,
+        dropdownParent: $('#dropDownSelect2')
     });
 </script>
 <!--===============================================================================================-->

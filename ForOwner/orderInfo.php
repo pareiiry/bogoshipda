@@ -150,7 +150,7 @@ $result2 = mysqli_query($con,$sql2);
                 <div class="row">
 
                     <div class="col-sm-3">
-                        <a href="statistic.php"><img class="bg-icon" src="../img/menu_bar_admin/statistic.png" style="width:100%" alt="Image">รายงาน</a>
+                        <a href="statistic.php"><img class="bg-icon" src="../img/menu_bar_admin/statistic.png" style="width:100%" alt="Image">สถิติ</a>
                     </div>
                     <div class="col-sm-3">
 

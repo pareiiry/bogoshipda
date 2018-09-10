@@ -95,10 +95,35 @@ $result2 = mysqli_query($con,$sql2);
             border-radius: 8px;
 			height:35px;	
         }
+        .tb{
+            margin: auto;
+            margin-top: 50px;
+            margin-bottom: 30px;
+        }
+        .tb tr td{
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-collapse: collapse;
+        }
+        .custom-date{
+            margin: auto;
+            margin-top: 30px;
+            text-align: center;
+            width: 80%;
+        }
 
+        .list{
+            margin: auto;
+            margin-top: 30px;
+            text-align: center;
+            width: 80%;
+            border: 1px black;
+        }
         #myTable {
             border-collapse: collapse;
-            width: 100%;
+            margin-top: 50px;
+            width: auto;
             border-top: 1px solid #ddd;
             /*font-size: 18px;*/
         }
@@ -205,7 +230,7 @@ $result2 = mysqli_query($con,$sql2);
                     </div>
                     <div class="col-sm-3">
                         <!--                        <p>Some text..</p>-->
-                        <a href="order.php"><img class="bg-icon-current" src="../img/menu_bar_admin/order.png" style="width:100%" alt="Image">สั่งซื้อ</a>
+                        <a href="order.php"><img class="bg-icon" src="../img/menu_bar_admin/order.png" style="width:100%" alt="Image">สั่งซื้อ</a>
                     </div>
                     <div class="col-sm-3">
                         <!--                        <p>Some text..</p>-->
@@ -242,7 +267,7 @@ $result2 = mysqli_query($con,$sql2);
 
 
                     <div class="col-sm-3">
-                        <a href="statistic.php"><img class="bg-icon" src="../img/menu_bar_admin/statistic.png" style="width:100%" alt="Image">สถิติ</a>
+                        <a href="statistic.php"><img class="bg-icon-current" src="../img/menu_bar_admin/statistic.png" style="width:100%" alt="Image">สถิติ</a>
                     </div>
                     <div class="col-sm-3">
 
@@ -253,38 +278,74 @@ $result2 = mysqli_query($con,$sql2);
         </div>
 
         <div class="col-sm-9">
-            <div class="row" style="margin-top: 5px">
-                <div class="col-sm-4"></div>
-                <div class="col-sm-4"><h3><b>รายการสั่งซื้อสินค้า</b></h3></div>
-                <div class="col-sm-4"><input type="text" id="myInput" onkeyup="search()" placeholder="ค้นหาชื่อ..." title="Type in a name" width="100%"></div>
+            <div class="row" style="margin-top: 5px" align="center">
+                <h3><b>สถิติร้านค้า</b></h3>
             </div>
 
             <hr>
+        <div class="col-sm-3">
+            <div class="panel panel-default">
+            <div class="list-group">
+                <a href="statistic.php" class="list-group-item">รายได้</a>
+                <a href="statistic-order.php" class="list-group-item list-group-item-info">จำนวนรายการสั่งซื้อ</a>
+
+            </div>
+            </div>
+
+        </div>
+        <div class="col-sm-9">
+            <div class="panel panel-default">
+                <div class="row" style="margin-top: 30px" align="center">
+                    <h4><b>จำนวนรายการสั่งซื้อ</b></h4>
+                </div>
+
+                    <table class="custom-date">
+                        <tr>
+                            <td>แสดงตั้งแต่วันที่ </td>
+                            <td><input type="date" class="form-control" id="date" name="date"  value="<?php echo date("Y-m-d"); ?>"></td>
+                            <td>ถึง </td>
+                            <td><input type="date" class="form-control" id="date" name="date" value="<?php echo date("Y-m-d"); ?>"></td>
+                        </tr>
+                    </table>
 
 
-            <table id="myTable">
-                <tr class="header">
-                    <th style="width:10%;text-align:center;"></th>
+            <table class="list table-striped">
+                <thead>
+                    <th style="width:10%;text-align:center;">วันที่สั่งซื้อ</th>
                     <th style="width:10%;text-align:center;">Order ID</th>
-                    <th style="width:20%;text-align:center;">ชื่อผู้สั่งซื้อ</th>
-                    <th style="width:20%;text-align:center;">รายการสินค้า</th>
-                    <th style="width:20%;text-align:center;">ยอดสั่งซื้อ(บาท)</th>
-                    <th style="width:10%;text-align:center;"></th>
-                </tr>
+                    <th style="width:10%;text-align:center;">จำนวน</th>
+                    <th style="width:20%;text-align:center;">ราคา(บาท)</th>
+
+                </thead>
                 <tr>
                     <td style="width:10%;text-align:center;"></td>
-                    <td style="width:10%;text-align:center;"><b><a href="orderInfo.php" class="color-link">Order ID</a></b></td>
-                    <td style="width:20%;text-align:center;">ชื่อผู้สั่งซื้อ</td>
-                    <td style="width:20%;text-align:center;">รายการสินค้า</td>
-                    <td style="width:20%;text-align:center;">000</td>
-                    <td style="width:10%;text-align:center;">
-                        <form action="orderInfo.php" method="get">
-                            <input style='display: none;' type="text" name="uID" value=''>
-                            <button class='btn-view' type="submit"><i class="fa fa-search"></i></button>
-                        </form>
-                    </td>
+                    <td style="width:10%;text-align:center;">Order ID</td>
+                    <td style="width:20%;text-align:center;">xxx</td>
+                    <td style="width:20%;text-align:center;">xxx</td>
                 </tr>
+
             </table>
+
+                <table class="tb" width="80%">
+                    <tr>
+                        <td colspan="2">
+                            รายการสั่งซื้อทั้งหมด
+                            <br> รายการ
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%">จำนวนสินค้าที่ขายได้
+                        <br> ชิ้น
+                        </td>
+                        <td>ราคารวม
+                            <br> บาท
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+        </div>
 
             <script>
                 function search() {

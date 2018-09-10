@@ -203,15 +203,15 @@ $result2 = mysqli_query($con,$sql2);
                     </div>
                     <div class="col-sm-3">
                         <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/order.png" style="width:100%" alt="Image">สั่งซื้อ</a>
+                        <a href="order.php"><img class="bg-icon" src="../img/menu_bar_admin/order.png" style="width:100%" alt="Image">สั่งซื้อ</a>
                     </div>
                     <div class="col-sm-3">
                         <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/payment.png" style="width:100%" alt="Image">ชำระเงิน</a>
+                        <a href="payment.php"><img class="bg-icon" src="../img/menu_bar_admin/payment.png" style="width:100%" alt="Image">ชำระเงิน</a>
                     </div>
                     <div class="col-sm-3">
                         <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/shipment.png" style="width:100%" alt="Image">ขนส่ง</a>
+                        <a href="shipping.php"><img class="bg-icon" src="../img/menu_bar_admin/shipment.png" style="width:100%" alt="Image">ขนส่ง</a>
                     </div>
                 </div>
             </div><br>
@@ -231,19 +231,16 @@ $result2 = mysqli_query($con,$sql2);
                     </div>
                     <div class="col-sm-3">
                         <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/news.png" style="width:100%" alt="Image">BANNER</a>
+                        <a href="banner.php"><img class="bg-icon" src="../img/menu_bar_admin/news.png" style="width:100%" alt="Image">BANNER</a>
                     </div>
                 </div>
             </div><br>
             <div class="container-fluid bg-3 text-center">
                 <div class="row">
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/review.png" style="width:100%" alt="Image">รีวิว</a>
-                    </div>
+
 
                     <div class="col-sm-3">
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/statistic.png" style="width:100%" alt="Image">รายงาน</a>
+                        <a href="statistic.php"><img class="bg-icon" src="../img/menu_bar_admin/statistic.png" style="width:100%" alt="Image">สถิติ</a>
                     </div>
                     <div class="col-sm-3">
 
@@ -255,7 +252,7 @@ $result2 = mysqli_query($con,$sql2);
 
         <div class="col-sm-9">
             <div class="row" style="margin-top: 5px">
-                <div class="col-sm-4"></div>
+                <div class="col-sm-4 "></div>
                 <div class="col-sm-4"><h3><b>สมาชิก</b></h3></div>
                 <div class="col-sm-4"><input type="text" id="myInput" onkeyup="search()" placeholder="ค้นหาชื่อ..." title="Type in a name" width="100%"></div>
             </div>

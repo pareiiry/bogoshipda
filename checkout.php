@@ -351,9 +351,10 @@ $result2 = mysqli_query($con,$sql2);
 
 <!-- Cart -->
 <section class="cart bgwhite p-t-70 p-b-100">
+
     <div class="container">
         <!-- Cart item -->
-
+        <a href="cart.php"><i class="fa fa-angle-double-left" style="font-size:24px"></i> &nbsp;ย้อนกลับ</a>
 
         <!-- Total -->
         <div class="bo9 w-size29 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">

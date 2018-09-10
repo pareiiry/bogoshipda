@@ -143,7 +143,7 @@ $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
 
 
                     <div class="col-sm-3">
-                        <a href="statistic.php"><img class="bg-icon" src="../img/menu_bar_admin/statistic.png" style="width:100%" alt="Image">รายงาน</a>
+                        <a href="statistic.php"><img class="bg-icon" src="../img/menu_bar_admin/statistic.png" style="width:100%" alt="Image">สถิติ</a>
                     </div>
                     <div class="col-sm-3">
 
@@ -255,7 +255,7 @@ $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
                         $sql3 = "SELECT * FROM image WHERE pdID= '".$row2['pdID']."'";
                         $result3 = mysqli_query($con,$sql3);
                         //$row3 = mysqli_fetch_array($result3,MYSQLI_ASSOC);
-                        echo "<table style='margin-right: 3%'>";
+                        echo "<table style='margin-right: 3%' width='100%' '>";
                         //                                    print_r($result3);
                         //                                    echo mysqli_num_rows($result3);
                         while($row3= mysqli_fetch_assoc($result3)){
@@ -263,9 +263,9 @@ $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
                                 echo "<br><center><font color='red'>ไม่มีรูปภาพที่จะแสดง</font></center>";
                             }
                             else{
-                                echo"<tr><td align='center'>";
-                                echo '<img style="width:30%" src="data:image/*;base64,'.base64_encode($row3['img']).'"/>';
-                                echo "</td><td align='center'>";?>
+                                echo"<tr><td align='right' style='padding: 7px'>";
+                                echo '<img class="img-thumbnail" style="width:50%" src="data:image/*;base64,'.base64_encode($row3['img']).'"/>';
+                                echo "</td><td align='left' width='50%'>"; ?>
                                 <form action="Action/deleteImg_action.php" method="get">
                                     <input style='display: none;' type="text" name="imgID" value='<?php echo $row3['imgID'];?>'>
                                     <button class='btn-delete' type="submit"><i class="fa fa-trash"></i></button>

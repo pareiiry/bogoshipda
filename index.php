@@ -450,7 +450,7 @@ $result2 = mysqli_query($con,$sql2);
                                         <input type=\"hidden\" name=\"name\" value=\"$row2[name]\">
                                         <input type=\"hidden\" name=\"price\" value=\"$row2[price]\">
                                         <input type=\"hidden\" name=\"pdID\" value=\"$row2[pdID]\">
-                                        <input type=\"submit\" value=\"Add to Cart\" class=\"flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4\">
+                                        <input type=\"submit\" value=\"เพิ่มลงตะกร้า\" class=\"flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4\">
                                     </form>
 
                                 </div>
@@ -458,7 +458,7 @@ $result2 = mysqli_query($con,$sql2);
                         </div>
 
                         <div class=\"block2-txt p-t-20\">
-                            <a href=\"product-detail.html\" class=\"block2-name dis-block s-text3 p-b-5\">
+                            <a href=\"product-detail.php\" class=\"block2-name dis-block s-text3 p-b-5\">
                                $row2[name]
                             </a>
 
