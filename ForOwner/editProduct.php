@@ -40,10 +40,6 @@ $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style>
-        /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-        .row.content {height: 1500px}
-
-        /* Set gray background color and 100% height */
         div.sticky{
             position: sticky;
             top:0;
@@ -71,9 +67,6 @@ $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
 
         * {
             box-sizing: border-box;
-        }
-        .row.content {
-            height: 600px;
         }
 
     </style>

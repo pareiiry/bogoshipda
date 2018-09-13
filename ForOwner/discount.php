@@ -39,10 +39,7 @@ $result2 = mysqli_query($con,$sql2);
     <link rel="stylesheet" type="text/css" href="../css/styleOwner.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style>
-        /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-        .row.content {height: 1500px}
 
-        /* Set gray background color and 100% height */
         div.sticky{
             position: sticky;
             top:0;
@@ -70,9 +67,6 @@ $result2 = mysqli_query($con,$sql2);
 
         * {
             box-sizing: border-box;
-        }
-        .row.content {
-            height: 600px;
         }
 
     </style>
