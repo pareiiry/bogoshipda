@@ -1,10 +1,24 @@
 <?php
 session_start();
 include ('dbConnect.php');
-$sql2 = "SELECT * FROM product ORDER BY dateCreate DESC ";
+
+$page = $_GET['page'];
+if($_GET['page']==""||$_GET['page']=="1"){
+        $pageshow=0;
+
+}
+else{
+    $pageshow=($page*9)-9;
+}
+
+$sql2 = "SELECT * FROM product ORDER BY dateCreate DESC LIMIT $pageshow,9";
 $result2 = mysqli_query($con,$sql2);
 
-
+$sql3 = "SELECT * FROM product ORDER BY dateCreate DESC";
+$result3 = mysqli_query($con,$sql3);
+$all_pd_count = mysqli_num_rows($result3);
+$cal=$all_pd_count/9;
+$page_of_pd = ceil($cal);
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -226,198 +240,27 @@ $result2 = mysqli_query($con,$sql2);
         </div>
     </div>
 
-    <!-- Header Mobile -->
-    <div class="wrap_header_mobile">
-        <!-- Logo moblie -->
-        <a href="index.php" class="logo-mobile">
-            <font size="5"><b>Bogoshipda</b></font>
-        </a>
 
-        <!-- Button show menu -->
-        <div class="btn-show-menu">
-            <!-- Header Icon mobile -->
-            <div class="header-icons-mobile">
-                <a href="loginPage.php" class="header-wrapicon1 dis-block">
-                    ลงชื่อเข้าใช้
-                </a>
-
-                <span class="linedivide2"></span>
-
-                <div class="header-wrapicon2">
-                    <img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                    <span class="header-icons-noti">0</span>
-
-                    <!-- Header cart noti -->
-                    <div class="header-cart header-dropdown">
-                        <ul class="header-cart-wrapitem">
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-01.jpg" alt="IMG">
-                                </div>
-
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        White Shirt With Pleat Detail Back
-                                    </a>
-
-                                    <span class="header-cart-item-info">
-											1 x $19.00
-										</span>
-                                </div>
-                            </li>
-
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-02.jpg" alt="IMG">
-                                </div>
-
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        Converse All Star Hi Black Canvas
-                                    </a>
-
-                                    <span class="header-cart-item-info">
-											1 x $39.00
-										</span>
-                                </div>
-                            </li>
-
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-03.jpg" alt="IMG">
-                                </div>
-
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        Nixon Porter Leather Watch In Tan
-                                    </a>
-
-                                    <span class="header-cart-item-info">
-											1 x $17.00
-										</span>
-                                </div>
-                            </li>
-                        </ul>
-
-                        <div class="header-cart-total">
-                            Total: $75.00
-                        </div>
-
-                        <div class="header-cart-buttons">
-                            <div class="header-cart-wrapbtn">
-                                <!-- Button -->
-                                <a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    View Cart
-                                </a>
-                            </div>
-
-                            <div class="header-cart-wrapbtn">
-                                <!-- Button -->
-                                <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    Check Out
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
-					<span class="hamburger-box">
-						<span class="hamburger-inner"></span>
-					</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Menu Mobile -->
-    <div class="wrap-side-menu" >
-        <nav class="side-menu">
-            <ul class="main-menu">
-
-                <li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
-                    <div class="topbar-child2-mobile">
-							<span class="topbar-email">
-								สวัสดี Guest
-							</span>
-
-                    </div>
-                </li>
-
-                <li class="item-topbar-mobile p-l-10">
-                    <div class="topbar-social-mobile">
-                        <a href="https://twitter.com/bogoshipdastore" class="topbar-social-item fa fa-twitter"></a>
-                        <a href="https://www.instagram.com/bogoshipda_store" class="topbar-social-item fa fa-instagram"></a>
-                    </div>
-                </li>
-
-                <li class="item-menu-mobile">
-                    <a href="index.php">Home</a>
-                    <ul class="sub-menu">
-                        <li><a href="index.html">Homepage V1</a></li>
-                        <li><a href="home-02.html">Homepage V2</a></li>
-                        <li><a href="home-03.html">Homepage V3</a></li>
-                    </ul>
-                    <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
-                </li>
-
-                <li>
-                    <a href="product.php">Product</a>
-                </li>
-
-                <li>
-                    <a href="review.php">Review</a>
-                </li>
-
-                <li class="sale-noti">
-                    <a href="design.php">Design</a>
-                </li>
-
-                <li>
-                    <a href="help.php">Help</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
 </header>
 
-<!-- Slide1 -->
 <section class="slide1">
     <div class="wrap-slick1">
         <div class="slick1">
-            <div class="item-slick1 item1-slick1" style="background-image: url(images/master-slide-02.jpg);">
+
+            <?php
+            $sqlB = "SELECT * FROM banner";
+            $resultB = mysqli_query($con,$sqlB);
+            while($rowB = mysqli_fetch_assoc($resultB))// show the information from query
+            {
+                echo ' <div class="item-slick1 item1-slick1" style="background-image: url(data:image/*;base64,' . base64_encode($rowB['bImg']) . ');">
                 <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
-
-
                     <div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="zoomIn">
                         <!-- Button -->
-
                     </div>
                 </div>
-            </div>
-
-            <div class="item-slick1 item2-slick1" style="background-image: url(images/master-slide-03.jpg);">
-                <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
-
-
-                    <div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="slideInUp">
-                        <!-- Button -->
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="item-slick1 item3-slick1" style="background-image: url(images/master-slide-04.jpg);">
-                <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
-
-
-                    <div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="rotateIn">
-                        <!-- Button -->
-
-                    </div>
-                </div>
-            </div>
-
+            </div>';
+            }
+            ?>
         </div>
     </div>
 </section>
@@ -546,7 +389,15 @@ $result2 = mysqli_query($con,$sql2);
                     </div>
 
                     <span class="s-text8 p-t-5 p-b-5">
-							Showing 1–12 of 16 results
+                        <?php
+                        if(($pageshow+10)>$all_pd_count){
+                            echo "แสดง".($pageshow+1)." - ".$all_pd_count." จาก ".$all_pd_count." ผลการค้นหา";
+
+                        }
+                        else{
+                             echo "แสดง".($pageshow+1)." - ".($pageshow+10)." จาก ".$all_pd_count." ผลการค้นหา";
+
+                        }?>
 						</span>
                 </div>
 
@@ -564,7 +415,7 @@ while($row2= mysqli_fetch_assoc($result2))// show the information from query
                     echo  "<div class=\"col-sm-12 col-md-6 col-lg-4 p-b-50\">
                         <!-- Block2 -->
                         <div class=\"block2\">
-                            <div class=\"block2-img wrap-pic-w of-hidden pos-relative block2-labelnew\">";
+                            <div class=\"block2-img wrap-pic-w of-hidden pos-relative\">";
 
  if($row3['img']===""){
      echo '<img src="images/no-picture.jpg">';
@@ -577,7 +428,7 @@ while($row2= mysqli_fetch_assoc($result2))// show the information from query
                                     
                                     <div class=\"block2-btn-addcart w-size1 trans-0-4\">
                                         <!-- Button -->
-                                        <form action=\"addToCart_action . php\" method=\"post\">
+                                        <form action=\"addToCart_action.php\" method=\"post\">
                                         <input type=\"hidden\" name=\"quantity\" value=\"1\">
                                         <input type=\"hidden\" name=\"name\" value=\"$row2[name]\">
                                         <input type=\"hidden\" name=\"price\" value=\"$row2[price]\">
@@ -604,11 +455,20 @@ while($row2= mysqli_fetch_assoc($result2))// show the information from query
 
 
 
-                <!-- Pagination -->
-                    <div class="pagination flex-m flex-w p-t-26">
-                        <a href="#" class="item-pagination flex-c-m trans-0-4 active-pagination">1</a>
-                        <a href="#" class="item-pagination flex-c-m trans-0-4">2</a>
+
+
+<!--                        <a href="#" class="item-pagination flex-c-m trans-0-4 active-pagination">1</a>-->
+
                     </div>
+                <!-- Pagination -->
+                <div class="pagination flex-m flex-w p-t-26">
+                    <?php
+                    for($pn=1;$pn<=$page_of_pd;$pn++){
+
+                        echo  "<a href=\"product.php?page=$pn\" class=\"item-pagination flex-c-m trans-0-4\">$pn</a>";
+
+                    }
+                    ?>
             </div>
         </div>
     </div>
