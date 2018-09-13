@@ -23,21 +23,22 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bootstrap Example</title>
+    <title>Bogoshida Admin</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style>
         /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
         .row.content {height: 1500px}
 
         /* Set gray background color and 100% height */
-        .sidenav {
-            background-color: #f1f1f1;
-            height: 100%;
+        div.sticky{
+            position: sticky;
+            top:0;
         }
 
         /* Set black background color, white text and some padding */
@@ -91,83 +92,64 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
         </div>
     </div>
 </nav>
+<div class="w3-sidebar w3-bar-block" style="width:25%;background-color:#4f4f4f;color: white;padding: 15px;" >
+    <!--    <h3 class="w3-bar-item" style="background-color: #101010">Bogoshipda Admin</h3>-->
+    <div class="container-fluid bg-3 text-center">
+        <div class="row">
+            <div class="col-sm-3">
+                <!--                        <p>Some text..</p>-->
+                <a href="indexForOwner.php" ><img class="bg-icon" src="../img/menu_bar_admin/product.png" style="width:100%; " alt="Image">สินค้า</a>
+            </div>
+            <div class="col-sm-3">
+                <!--                        <p>Some text..</p>-->
+                <a href="order.php"><img class="bg-icon" src="../img/menu_bar_admin/order.png" style="width:100%" alt="Image">สั่งซื้อ<span class="menu-icons-noti">1</span></a>
+            </div>
+            <div class="col-sm-3">
+                <!--                        <p>Some text..</p>-->
+                <a href="payment.php"><img class="bg-icon" src="../img/menu_bar_admin/payment.png" style="width:100%" alt="Image">ชำระเงิน</a>
+            </div>
+            <div class="col-sm-3">
+                <!--                        <p>Some text..</p>-->
+                <a href="shipping.php"><img class="bg-icon" src="../img/menu_bar_admin/shipment.png" style="width:100%" alt="Image">ขนส่ง</a>
+            </div>
+        </div>
+    </div><br>
+    <div class="container-fluid bg-3 text-center">
+        <div class="row">
+            <div class="col-sm-3">
+                <!--                        <p>Some text..</p>-->
+                <a href="manageMember.php"><img class="bg-icon-current" src="../img/menu_bar_admin/user.png" style="width:100%" alt="Image">สมาชิก</a>
+            </div>
+            <div class="col-sm-3">
+                <!--                        <p>Some text..</p>-->
+                <a href="discount.php"><img class="bg-icon" src="../img/menu_bar_admin/discount.png" style="width:100%" alt="Image">ส่วนลด</a>
+            </div>
+            <div class="col-sm-3">
+                <!--                        <p>Some text..</p>-->
+                <a href="bank.php"><img class="bg-icon" src="../img/menu_bar_admin/account.png" style="width:100%" alt="Image">บัญชีรับเงิน</a>
+            </div>
+            <div class="col-sm-3">
+                <!--                        <p>Some text..</p>-->
+                <a href="banner.php"><img class="bg-icon" src="../img/menu_bar_admin/news.png" style="width:100%" alt="Image">BANNER</a>
+            </div>
+        </div>
+    </div><br>
+    <div class="container-fluid bg-3 text-center">
+        <div class="row">
+            <div class="col-sm-3">
+                <a href="statistic.php"><img class="bg-icon" src="../img/menu_bar_admin/statistic.png" style="width:100%" alt="Image">สถิติ</a>
+            </div>
+            <div class="col-sm-3">
+
+            </div>
+        </div>
+    </div><br>
+</div>
 <div class="container-fluid">
     <div class="row content">
-        <div class="col-sm-3 sidenav" style="font-size: 10px;">
-            <br>
-            <!--            <h4>Bogoshipda Admin</h4>-->
-            <div class="container-fluid bg-3 text-center">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="indexForOwner.php" ><img src="../img/menu_bar_admin/product.png" style="width:100%" alt="Image">สินค้า</a>
-                    </div>
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="#"><img src="../img/menu_bar_admin/order.png" style="width:100%" alt="Image">สั่งซื้อ</a>
-                    </div>
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="#"><img src="../img/menu_bar_admin/payment.png" style="width:100%" alt="Image">ชำระเงิน</a>
-                    </div>
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="#"><img src="../img/menu_bar_admin/shipment.png" style="width:100%" alt="Image">ขนส่ง</a>
-                    </div>
-                </div>
-            </div><br>
-            <div class="container-fluid bg-3 text-center">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="manageMember.php" style="filter: grayscale(100%);"><img src="../img/menu_bar_admin/user.png" style="width:100%" alt="Image">สมาชิก</a>
-                    </div>
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="discount.php"><img src="../img/menu_bar_admin/discount.png" style="width:100%" alt="Image">ส่วนลด</a>
-                    </div>
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="#"><img src="../img/menu_bar_admin/account.png" style="width:100%" alt="Image">บัญชีรับเงิน</a>
-                    </div>
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="#"><img src="../img/menu_bar_admin/news.png" style="width:100%" alt="Image">BANNER</a>
-                    </div>
-                </div>
-            </div><br>
-            <div class="container-fluid bg-3 text-center">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="#"><img src="../img/menu_bar_admin/review.png" style="width:100%" alt="Image">รีวิว</a>
-                    </div>
-                    <div class="col-sm-3">
-                        <a href="#"><img src="../img/menu_bar_admin/statistic.png" style="width:100%" alt="Image">รายงาน</a>
-                    </div>
-                    <div class="col-sm-3">
 
-                    </div>
-                    <div class="col-sm-3">
-
-                    </div>
-                </div>
-            </div><br>
-            <!--            <ul class="nav nav-pills nav-stacked">-->
-            <!--                <li class="active"><a href="#section1">Home</a></li>-->
-            <!--                <li><a href="#section2">Friends</a></li>-->
-            <!--                <li><a href="#section3">Family</a></li>-->
-            <!--                <li><a href="#section3">Photos</a></li>-->
-            <!--            </ul><br>-->
-
-            <!--            <div class="input-group">-->
-            <!--                <input type="text" class="form-control" placeholder="Search Blog..">-->
-            <!--                <span class="input-group-btn">-->
-            <!--          <button class="btn btn-default" type="button">-->
-            <!--            <span class="glyphicon glyphicon-search"></span>-->
-            <!--          </button>-->
-            <!--        </span>-->
-            <!--            </div>-->
+        <div class="col-sm-3 sticky" style="font-size: 10px;background-color: #252525;">
+            <h4 style="color: #c8c8c8;padding: 10px">Bogoshipda Admin</h4>
         </div>
 
         <div class="col-sm-9">
