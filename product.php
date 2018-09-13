@@ -395,7 +395,7 @@ $page_of_pd = ceil($cal);
 
                         }
                         else{
-                             echo "แสดง".($pageshow+1)." - ".($pageshow+10)." จาก ".$all_pd_count." ผลการค้นหา";
+                             echo "แสดง".($pageshow+1)." - ".($pageshow+9)." จาก ".$all_pd_count." ผลการค้นหา";
 
                         }?>
 						</span>
