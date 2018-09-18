@@ -13,7 +13,6 @@ if(isset($_POST['pdID']))
                 //delete old
                 unset($_SESSION["shopping_cart"][$keys]);
 
-
             }
             else{
                 $quantity = $_POST['quantity'];
@@ -39,6 +38,7 @@ if(isset($_POST['pdID']))
             echo '<script>alert("เพิ่มสินค้าในตระกร้าสินค้าเรียบร้อยแล้ว")</script>';
             echo '<script>location.replace(document.referrer);</script>';
         }
+
     }
     else
     {
