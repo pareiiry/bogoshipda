@@ -3,7 +3,7 @@ session_start();
 if($_SESSION['ID'] == "")
 {
     //echo "Please Login!";
-    header("location:loginPage.php");
+    header("location:../loginPage.php");
     exit();
 }
 if($_SESSION['usertype'] != "owner" && $_SESSION['usertype'] != "admin")

@@ -3,7 +3,7 @@ session_start();
 if($_SESSION['ID'] == "")
 {
     //echo "Please Login!";
-    header("location:loginPage.php");
+    header("location:../loginPage.php");
     exit();
 }
 if($_SESSION['usertype'] != "owner" && $_SESSION['usertype'] != "admin")
@@ -168,6 +168,25 @@ $result2 = mysqli_query($con,$sql2);
 		}
         .color-link{
             color: #ed80aa;
+        }
+        .menu-icons-noti {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: red;
+            color: white;
+            font-family: Montserrat-Medium;
+            font-size: 12px;
+            position: absolute;
+            top: -7px;
+            right: 10px;
         }
     </style>
 </head>

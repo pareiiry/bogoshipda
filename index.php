@@ -1,8 +1,9 @@
 <?php
 session_start();
 include ('dbConnect.php');
-$sql2 = "SELECT * FROM product ORDER BY dateCreate DESC LIMIT 10";
+$sql2 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC LIMIT 10";
 $result2 = mysqli_query($con,$sql2);
+
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -135,7 +136,7 @@ $result2 = mysqli_query($con,$sql2);
                                     </div>
 
                                     <div class="header-cart-item-txt">
-                                        <a href="#" class="header-cart-item-name">
+                                        <a href="product-detail.php?pdID=<?php echo $values['pdID']; ?>" class="header-cart-item-name">
                                             <?php echo $values["name"]; ?>
                                         </a>
 
@@ -156,7 +157,7 @@ $result2 = mysqli_query($con,$sql2);
                             </div>
 
                             <div class="header-cart-item-txt">
-                                <a href="#" class="header-cart-item-name">
+                                <a class="header-cart-item-name">
                                     - ไม่มีสินค้าที่เลือก -
                                 </a>
 
@@ -178,7 +179,7 @@ $result2 = mysqli_query($con,$sql2);
                     </div>
 
                     <div class="header-cart-item-txt">
-                        <a href="#" class="header-cart-item-name">
+                        <a class="header-cart-item-name">
                             - ไม่มีสินค้าที่เลือก -
                         </a>
 
@@ -458,7 +459,7 @@ $result2 = mysqli_query($con,$sql2);
                         </div>
 
                         <div class=\"block2-txt p-t-20\">
-                            <a href=\"product-detail.php\" class=\"block2-name dis-block s-text3 p-b-5\">
+                            <a href=\"product-detail.php?pdID=$row2[pdID]\" class=\"block2-name dis-block s-text3 p-b-5\">
                                $row2[name]
                             </a>
 

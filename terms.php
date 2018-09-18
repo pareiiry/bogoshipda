@@ -155,7 +155,7 @@ $result = mysqli_query($con,$sql);
                                             </div>
 
                                             <div class="header-cart-item-txt">
-                                                <a href="#" class="header-cart-item-name">
+                                                <a href="product-detail.php?pdID=<?php echo $values['pdID']; ?>" class="header-cart-item-name">
                                                     <?php echo $values["name"]; ?>
                                                 </a>
 
@@ -176,7 +176,7 @@ $result = mysqli_query($con,$sql);
                                             </div>
 
                                             <div class="header-cart-item-txt">
-                                                <a href="#" class="header-cart-item-name">
+                                                <a class="header-cart-item-name">
                                                     - ไม่มีสินค้าที่เลือก -
                                                 </a>
 
@@ -198,7 +198,7 @@ $result = mysqli_query($con,$sql);
                                     </div>
 
                                     <div class="header-cart-item-txt">
-                                        <a href="#" class="header-cart-item-name">
+                                        <a class="header-cart-item-name">
                                             - ไม่มีสินค้าที่เลือก -
                                         </a>
 

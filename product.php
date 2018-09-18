@@ -11,10 +11,10 @@ else{
     $pageshow=($page*9)-9;
 }
 
-$sql2 = "SELECT * FROM product ORDER BY dateCreate DESC LIMIT $pageshow,9";
+$sql2 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC LIMIT $pageshow,9";
 $result2 = mysqli_query($con,$sql2);
 
-$sql3 = "SELECT * FROM product ORDER BY dateCreate DESC";
+$sql3 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC";
 $result3 = mysqli_query($con,$sql3);
 $all_pd_count = mysqli_num_rows($result3);
 $cal=$all_pd_count/9;
@@ -150,7 +150,7 @@ $page_of_pd = ceil($cal);
                                             </div>
 
                                             <div class="header-cart-item-txt">
-                                                <a href="#" class="header-cart-item-name">
+                                                <a href="product-detail.php?pdID=<?php echo $values['pdID']; ?>" class="header-cart-item-name">
                                                     <?php echo $values["name"]; ?>
                                                 </a>
 
@@ -171,7 +171,7 @@ $page_of_pd = ceil($cal);
                                             </div>
 
                                             <div class="header-cart-item-txt">
-                                                <a href="#" class="header-cart-item-name">
+                                                <a class="header-cart-item-name">
                                                     - ไม่มีสินค้าที่เลือก -
                                                 </a>
 
@@ -193,7 +193,7 @@ $page_of_pd = ceil($cal);
                                     </div>
 
                                     <div class="header-cart-item-txt">
-                                        <a href="#" class="header-cart-item-name">
+                                        <a class="header-cart-item-name">
                                             - ไม่มีสินค้าที่เลือก -
                                         </a>
 
@@ -391,11 +391,11 @@ $page_of_pd = ceil($cal);
                     <span class="s-text8 p-t-5 p-b-5">
                         <?php
                         if(($pageshow+10)>$all_pd_count){
-                            echo "แสดง".($pageshow+1)." - ".$all_pd_count." จาก ".$all_pd_count." ผลการค้นหา";
+                            echo "แสดง ".($pageshow+1)." - ".$all_pd_count." จาก ".$all_pd_count." ผลการค้นหา";
 
                         }
                         else{
-                             echo "แสดง".($pageshow+1)." - ".($pageshow+9)." จาก ".$all_pd_count." ผลการค้นหา";
+                             echo "แสดง ".($pageshow+1)." - ".($pageshow+9)." จาก ".$all_pd_count." ผลการค้นหา";
 
                         }?>
 						</span>
@@ -440,7 +440,7 @@ while($row2= mysqli_fetch_assoc($result2))// show the information from query
                             </div>
 
                             <div class=\"block2-txt p-t-20\">
-                                <a href=\"product-detail.html\" class=\"block2-name dis-block s-text3 p-b-5\">
+                                <a href=\"product-detail.php?pdID=$row2[pdID]\" class=\"block2-name dis-block s-text3 p-b-5\">
                                     $row2[name]
                                 </a>
 

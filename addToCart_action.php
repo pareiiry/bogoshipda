@@ -5,14 +5,27 @@ if(isset($_POST['pdID']))
 //    $price = preg_replace( '/[^0-9]/', '', $_POST['price'] );
     //$priceBefore = preg_replace( '/[^0-9]/', '', $_POST['priceBefore'] );
     if(isset($_SESSION["shopping_cart"]))
-    {
+    {   //loop check
+        foreach($_SESSION["shopping_cart"] as $keys => $values)
+        {
+            if($values["pdID"]===$_POST['pdID']){
+                $quantity = $_POST['quantity']+$values["quantity"];
+                //delete old
+                unset($_SESSION["shopping_cart"][$keys]);
+
+
+            }
+            else{
+                $quantity = $_POST['quantity'];
+            }
+        }
         $item_array_id = array_column($_SESSION["shopping_cart"], "pdID");
         if(!in_array($_POST['pdID'], $item_array_id))
         {
             $count = count($_SESSION["shopping_cart"]);
             $item_array = array(
                 'pdID'               =>     $_POST['pdID'],
-                'quantity'          =>     $_POST['quantity'],
+                'quantity'          =>     $quantity,
                 'name'          =>     $_POST['name'],
                 'price'          =>     $_POST['price']
             );

@@ -3,7 +3,7 @@ session_start();
 if($_SESSION['ID'] == "")
 {
     //echo "Please Login!";
-    header("location:loginPage.php");
+    header("location:../loginPage.php");
     exit();
 }
 if($_SESSION['usertype'] != "owner" && $_SESSION['usertype'] != "admin")
@@ -19,7 +19,7 @@ $result = mysqli_query($con,$sql);
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 
-$sql2 = "SELECT * FROM product";
+$sql2 = "SELECT * FROM product WHERE product.delete = 0";
 //$objQuery = mysqli_query($strSQL);
 //$objResult = mysqli_fetch_array($objQuery);
 $result2 = mysqli_query($con,$sql2);

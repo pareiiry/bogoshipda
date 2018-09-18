@@ -8,11 +8,14 @@ $result3 = mysqli_query($con,$sql3);
 while($row3= mysqli_fetch_assoc($result3))// show the information from query
 {
    // echo $row3['imgID'];
-    $sql = "DELETE FROM image WHERE image.imgID = '".$row3['imgID']."'";
+//    $sql = "DELETE FROM image WHERE image.imgID = '".$row3['imgID']."'";
+//    $query = mysqli_query($con,$sql);
+    $sql ="UPDATE image SET image.delete=1 WHERE image.imgID = '".$row3['imgID']."'";
     $query = mysqli_query($con,$sql);
 }
 
-$sql2 = "DELETE FROM product WHERE product.pdID = '".$_GET['pdID']."'";
+//$sql2 = "DELETE FROM product WHERE product.pdID = '".$_GET['pdID']."'";
+$sql2 ="UPDATE product SET product.delete=1 WHERE product.pdID = '".$_GET['pdID']."'";
 //$query = mysqli_query($con,$sql2);
     if ($con->query($sql2) === TRUE) {
         echo "<script type='text/javascript'>alert('ลบข้อมูลเรียบร้อยแล้ว')</script>";

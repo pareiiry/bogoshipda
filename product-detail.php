@@ -1,5 +1,68 @@
 <?php
 session_start();
+include ('dbConnect.php');
+$pdID = $_GET['pdID'];
+$sqlShow = "SELECT * FROM product WHERE product.pdID = '$pdID'";
+$resultShow = mysqli_query($con,$sqlShow);
+$rowShow = mysqli_fetch_array($resultShow,MYSQLI_ASSOC);
+
+if($rowShow['color']=='white'){
+    $color = 'สีขาว';
+}
+elseif ($rowShow['color']=='cream'){
+    $color = 'สีครีม';
+}
+elseif ($rowShow['color']=='milktea'){
+    $color = 'สีชานม';
+}
+elseif ($rowShow['color']=='yellow'){
+    $color = 'สีเหลือง';
+}
+elseif ($rowShow['color']=='green'){
+    $color = 'สีเขียว';
+}
+elseif ($rowShow['color']=='darkgreen'){
+    $color = 'สีเขียวเข้ม';
+}
+elseif ($rowShow['color']=='mint'){
+    $color = 'สีมิ้นต์';
+}
+elseif ($rowShow['color']=='sky'){
+    $color = 'สีฟ้าเข้ม';
+}
+elseif ($rowShow['color']=='orange'){
+    $color = 'สีส้มอ่อน';
+}
+elseif ($rowShow['color']=='lightpink'){
+    $color = 'สีชมพูอ่อน';
+}
+elseif ($rowShow['color']=='pink'){
+    $color = 'สีชมพู';
+}
+elseif ($rowShow['color']=='darkpink'){
+$color = 'สีชมพูเข้ม';
+}
+elseif ($rowShow['color']=='red'){
+$color = 'สีแดง';
+}
+elseif ($rowShow['color']=='purple'){
+$color = 'สีม่วง';
+}
+elseif ($rowShow['color']=='lightgray'){
+$color = 'สีเทาอมฟ้า';
+}
+elseif ($rowShow['color']=='darkgray'){
+$color = 'สีเทาเข้ม';
+}
+elseif ($rowShow['color']=='brown'){
+$color = 'สีน้ำตาล';
+}
+elseif ($rowShow['color']=='black'){
+$color = 'สีดำ';
+}
+else{
+    $color = 'ไม่กำหนด';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -86,7 +149,7 @@ session_start();
                             <a href="index.php">หน้าแรก</a>
                         </li>
 
-                        <li>
+                        <li class="sale-noti">
                             <a href="product.php">สินค้า</a>
                         </li>
 
@@ -97,7 +160,7 @@ session_start();
                         <li>
                             <a href="design.php">ออกแบบ</a>
                         </li>
-                        <li class="sale-noti">
+                        <li>
                             <a href="help.php">ช่วยเหลือ</a>
                         </li>
                     </ul>
@@ -142,7 +205,7 @@ session_start();
                                             </div>
 
                                             <div class="header-cart-item-txt">
-                                                <a href="#" class="header-cart-item-name">
+                                                <a href="product-detail.php?pdID=<?php echo $values['pdID']; ?>" class="header-cart-item-name">
                                                     <?php echo $values["name"]; ?>
                                                 </a>
 
@@ -163,7 +226,7 @@ session_start();
                                             </div>
 
                                             <div class="header-cart-item-txt">
-                                                <a href="#" class="header-cart-item-name">
+                                                <a class="header-cart-item-name">
                                                     - ไม่มีสินค้าที่เลือก -
                                                 </a>
 
@@ -185,7 +248,7 @@ session_start();
                                     </div>
 
                                     <div class="header-cart-item-txt">
-                                        <a href="#" class="header-cart-item-name">
+                                        <a class="header-cart-item-name">
                                             - ไม่มีสินค้าที่เลือก -
                                         </a>
 
@@ -232,161 +295,6 @@ session_start();
         </div>
     </div>
 
-    <!-- Header Mobile -->
-    <div class="wrap_header_mobile">
-        <!-- Logo moblie -->
-        <a href="index.php" class="logo-mobile">
-            <font size="5"><b>Bogoshipda</b></font>
-        </a>
-
-        <!-- Button show menu -->
-        <div class="btn-show-menu">
-            <!-- Header Icon mobile -->
-            <div class="header-icons-mobile">
-                <a href="loginPage.php" class="header-wrapicon1 dis-block">
-                    ลงชื่อเข้าใช้
-                </a>
-
-                <span class="linedivide2"></span>
-
-                <div class="header-wrapicon2">
-                    <img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                    <span class="header-icons-noti">0</span>
-
-                    <!-- Header cart noti -->
-                    <div class="header-cart header-dropdown">
-                        <ul class="header-cart-wrapitem">
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-01.jpg" alt="IMG">
-                                </div>
-
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        White Shirt With Pleat Detail Back
-                                    </a>
-
-                                    <span class="header-cart-item-info">
-											1 x $19.00
-										</span>
-                                </div>
-                            </li>
-
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-02.jpg" alt="IMG">
-                                </div>
-
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        Converse All Star Hi Black Canvas
-                                    </a>
-
-                                    <span class="header-cart-item-info">
-											1 x $39.00
-										</span>
-                                </div>
-                            </li>
-
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-03.jpg" alt="IMG">
-                                </div>
-
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        Nixon Porter Leather Watch In Tan
-                                    </a>
-
-                                    <span class="header-cart-item-info">
-											1 x $17.00
-										</span>
-                                </div>
-                            </li>
-                        </ul>
-
-                        <div class="header-cart-total">
-                            Total: $75.00
-                        </div>
-
-                        <div class="header-cart-buttons">
-                            <div class="header-cart-wrapbtn">
-                                <!-- Button -->
-                                <a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    View Cart
-                                </a>
-                            </div>
-
-                            <div class="header-cart-wrapbtn">
-                                <!-- Button -->
-                                <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    Check Out
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
-					<span class="hamburger-box">
-						<span class="hamburger-inner"></span>
-					</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Menu Mobile -->
-    <div class="wrap-side-menu" >
-        <nav class="side-menu">
-            <ul class="main-menu">
-
-                <li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
-                    <div class="topbar-child2-mobile">
-							<span class="topbar-email">
-								สวัสดี Guest
-							</span>
-
-                    </div>
-                </li>
-
-                <li class="item-topbar-mobile p-l-10">
-                    <div class="topbar-social-mobile">
-                        <a href="https://twitter.com/bogoshipdastore" class="topbar-social-item fa fa-twitter"></a>
-                	<a href="https://www.instagram.com/bogoshipda_store" class="topbar-social-item fa fa-instagram"></a>
-                    </div>
-                </li>
-
-                <li class="item-menu-mobile">
-                    <a href="index.php">หน้าหลัก</a>
-                    <ul class="sub-menu">
-                        <li><a href="index.html">Homepage V1</a></li>
-                        <li><a href="home-02.html">Homepage V2</a></li>
-                        <li><a href="home-03.html">Homepage V3</a></li>
-                    </ul>
-                    <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
-                </li>
-
-                <li class="item-menu-mobile">
-                    <a href="product.html">Product</a>
-                </li>
-
-                <li class="item-menu-mobile">
-                    <a href="product.html">Review</a>
-                </li>
-
-                <li class="item-menu-mobile">
-                    <a href="cart.html">Design</a>
-                </li>
-
-                <li class="item-menu-mobile">
-                    <a href="about.html">Help</a>
-                </li>
-
-       
-            </ul>
-        </nav>
-    </div>
 </header>
 
 
@@ -396,22 +304,22 @@ session_start();
 
 <!-- container -->
 
-<div class="bread-crumb bgwhite flex-w p-l-52 p-r-15 p-t-30 p-l-15-sm">
-    <a href="index.php" class="s-text16">
-        หนัาแรก
-        <i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
-    </a>
-
-    <a href="product.php" class="s-text16">
-        สินค้า
-        <i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
-    </a>
-
-
-    <span class="s-text17">
-			product name
-		</span>
-</div>
+<!--<div class="bread-crumb bgwhite flex-w p-l-52 p-r-15 p-t-30 p-l-15-sm">-->
+<!--    <a href="index.php" class="s-text16">-->
+<!--        หนัาแรก-->
+<!--        <i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>-->
+<!--    </a>-->
+<!---->
+<!--    <a href="product.php" class="s-text16">-->
+<!--        สินค้า-->
+<!--        <i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>-->
+<!--    </a>-->
+<!---->
+<!---->
+<!--    <span class="s-text17">-->
+<!--			product name-->
+<!--		</span>-->
+<!--</div>-->
 
 <!-- Product Detail -->
 <div class="container bgwhite p-t-35 p-b-80">
@@ -419,36 +327,79 @@ session_start();
         <div class="w-size13 p-t-30 respon5">
             <div class="wrap-slick3 flex-sb flex-w">
                 <div class="wrap-slick3-dots"></div>
-
+                <?php $sqlSP = "SELECT * FROM image WHERE pdID= '".$_GET["pdID"]."'";
+                $resultSP = mysqli_query($con,$sqlSP);
+                $pic_count = mysqli_num_rows($resultSP);
+                //$rowSP = mysqli_fetch_array($resultSP,MYSQLI_ASSOC);
+                ?>
                 <div class="slick3">
-                    <div class="item-slick3" data-thumb="images/thumb-item-01.jpg">
-                        <div class="wrap-pic-w">
-                            <img src="images/product-detail-01.jpg" alt="IMG-PRODUCT">
-                        </div>
-                    </div>
+                        <?php
+                      //echo "<script>alert($pic_count);</script>";
+                            if($pic_count>1) {
+                                while ($rowSP = mysqli_fetch_assoc($resultSP))// show the information from query
+                                {
+                                    if (empty($rowSP)) {
+                                        echo '
+                                    <div class="item-slick3" data-thumb="images/no-picture.jpg">
+                                    <div class="wrap-pic-w">
+                                        <img src="images/no-picture.jpg">;
+                                    </div>
+                                </div>';
 
-                    <div class="item-slick3" data-thumb="images/thumb-item-02.jpg">
-                        <div class="wrap-pic-w">
-                            <img src="images/product-detail-02.jpg" alt="IMG-PRODUCT">
-                        </div>
-                    </div>
+                                    } else {
+                                        echo '
+                                    <div class="item-slick3" data-thumb="data:image/*;base64,' . base64_encode($rowSP['img']) . '">
+                                    <div class="wrap-pic-w">
+                                        <img src="data:image/*;base64,' . base64_encode($rowSP['img']) . '"/>
+                                    </div>
+                                    </div>';
+                                    }
+                                }
+                            }
+                            else{
+                                while ($rowSP = mysqli_fetch_assoc($resultSP))// show the information from query
+                                {
+                                    $image = base64_decode($rowSP['img']);
+                                    /** check if the image is db */
+                                    if($image!=null)
+                                    {
+                                        $db_img = imagecreatefromstring($image);
+                                        Header("Content-type: image/jpeg");
+                                        imagejpeg($db_img);
+                                    }
 
-                    <div class="item-slick3" data-thumb="images/thumb-item-03.jpg">
-                        <div class="wrap-pic-w">
-                            <img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">
-                        </div>
-                    </div>
-                </div>
+                                    if ($rowSP['img']==="" || empty($rowSP)) {
+                                        echo '
+                                        <div class="item-slick3" data-thumb="images/no-picture.jpg">
+                                        <div class="wrap-pic-w">
+                                        <img src="images/no-picture.jpg">
+                                    </div>
+                                </div>';
+
+                                    } else {
+                                        echo '
+                                    <div class="item-slick3" data-thumb="data:image/*;base64,' . base64_encode($rowSP['img']) . '" >
+                                    <div class="wrap-pic-w">
+                                        <img src="data:image/*;base64,' . base64_encode($rowSP['img']) . '"/>
+                                    </div>
+                                </div>';
+                                    }
+                                }
+                            }
+
+                echo '</div>';
+                        ?>
+
             </div>
         </div>
 
         <div class="w-size14 p-t-30 respon5">
             <h4 class="product-detail-name m-text16 p-b-13">
-                product name
+                <?php echo $rowShow['name'];?>
             </h4>
 
             <span class="m-text17 p">
-					฿22
+					฿ <?php echo $rowShow['price'];?>
 				</span>
 
 
@@ -465,33 +416,39 @@ session_start();
 
                     <div class="dropdown-content dis-none p-t-15 p-b-23">
                         <p class="s-text8">
-                            สี :
+                            สี : <?php echo $color;?> <br>
+                            <?php echo nl2br($rowShow['description']);?>
                         </p>
 
                     </div>
                 </div>
+                <form action="addToCart_action.php" method="post">
                 <div class="flex-r-m flex-w p-t-10">
                     <div class="w-size16 flex-m flex-w">
-                        <div class="flex-w bo5 of-hidden m-r-22 m-t-10 m-b-10">
-                            <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
-                                <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
-                            </button>
+                            <input type="hidden" name="name" value="<?php echo $rowShow['name'];?>">
+                            <input type="hidden" name="price" value="<?php echo $rowShow['price'];?>">
+                            <input type="hidden" name="pdID" value="<?php echo $rowShow['pdID'];?>">
+                            <div class="flex-w bo5 of-hidden m-r-22 m-t-10 m-b-10">
+                                <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
+                                    <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
+                                </button>
 
-                            <input class="size8 m-text18 t-center num-product" type="number" name="num-product" value="1">
+                                <input class="size8 m-text18 t-center num-product" type="number" name="quantity" value="1">
 
-                            <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
-                                <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
-                            </button>
-                        </div>
+                                <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
+                                    <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                            </div>
 
-                        <div class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
-                            <!-- Button -->
-                            <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-                                เพิ่มลงตะกร้า
-                            </button>
-                        </div>
+                            <div class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
+                                <!-- Button -->
+                                <input type="submit" value="เพิ่มลงตะกร้า" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+                            </div>
+
+
                     </div>
                 </div>
+                </form>
             </div>
 
 
