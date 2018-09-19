@@ -196,6 +196,8 @@ $result2 = mysqli_query($con,$sql2);
 <section class="cart bgwhite p-t-70 p-b-100">
     <div class="container">
         <!-- Cart item -->
+        <form action="updateToCart_action.php" method="post">
+
         <div class="container-table-cart pos-relative">
             <div class="wrap-table-shopping-cart bgwhite">
                 <a href="product.php"><i class="fa fa-angle-double-left" style="font-size:24px"></i> &nbsp;กลับไปยังหน้าสินค้า</a>
@@ -206,6 +208,7 @@ $result2 = mysqli_query($con,$sql2);
                         <th class="column-3">ราคาต่อชิ้น</th>
                         <th class="column-4 p-l-70">จำนวน</th>
                         <th class="column-5">ราคารวม</th>
+                        <th class="column-5"></th>
                     </tr>
                     <?php
                     if(!empty($_SESSION["shopping_cart"]))
@@ -214,6 +217,9 @@ $result2 = mysqli_query($con,$sql2);
 
                         foreach($_SESSION["shopping_cart"] as $keys => $values)
                         {
+                            echo "<input type=\"hidden\" name=\"name2[]\" value=\"$values[name]\">
+                            <input type=\"hidden\" name=\"price2[]\" value=\"$values[price]\">
+                            <input type=\"hidden\" name=\"pdID2[]\" value=\"$values[pdID]\">";
                             if($values["pdID"]!==null) {
                                 $sql3 = "SELECT * FROM image WHERE pdID= '".$values["pdID"]."' LIMIT 1";
                                 $result3 = mysqli_query($con,$sql3);
@@ -242,7 +248,7 @@ $result2 = mysqli_query($con,$sql2);
                                                 <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
                                             </button>
 
-                                            <input class="size8 m-text18 t-center num-product" type="number" name="num-product1" value="<?php echo $values["quantity"]; ?>">
+                                            <input class="size8 m-text18 t-center num-product" type="number" name="quantity2[]" value="<?php echo $values["quantity"]; ?>">
 
                                             <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
                                                 <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
@@ -250,6 +256,9 @@ $result2 = mysqli_query($con,$sql2);
                                         </div>
                                     </td>
                                     <td class="column-5">฿ <?php echo ($values["quantity"] * $values["price"]); ?></td>
+                                    <td>  <?php echo "<a href='deleteFromCare_acion.php?pdID=$values[pdID]' style='background-color: red;margin-left: 2%' class='flex-c-m bg1 bo-rad-23 hov1 s-text1 trans-0-4'>
+                                            X
+                                         </a>";?>  </td>
                                 </tr>
 
                                 <?php
@@ -260,7 +269,7 @@ $result2 = mysqli_query($con,$sql2);
                                 unset($_SESSION["shopping_cart"][$keys]);
                                 ?>
                                 <tr class="table-row">
-                                    <td colspan="5" style="text-align: center;color: red"> - ไม่มีสินค้าที่เลือก -</td>
+                                    <td colspan="6" style="text-align: center;color: red"> - ไม่มีสินค้าที่เลือก -</td>
                                 </tr>
                                 <?php
 
@@ -271,7 +280,7 @@ $result2 = mysqli_query($con,$sql2);
                     else{
                         ?>
                         <tr class="table-row">
-                            <td colspan="5" style="text-align: center;color: red"> - ไม่มีสินค้าที่เลือก -</td>
+                            <td colspan="6" style="text-align: center;color: red"> - ไม่มีสินค้าที่เลือก -</td>
                         </tr>
                         <?php
                     }
@@ -309,12 +318,13 @@ $result2 = mysqli_query($con,$sql2);
 
             <div class="size10 trans-0-4 m-t-10 m-b-10">
                 <!-- Button -->
-                <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-                    อัพเดทราคาสินค้า
-                </button>
+                <input type="submit" value="อัพเดตราคาสินค้า" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+<!--                <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">-->
+<!--                    อัพเดทราคาสินค้า-->
+<!--                </button>-->
             </div>
         </div>
-
+        </form>
         <!-- Total -->
         <div class="bo9 w-size29 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
             <h5 class="m-text20 p-b-24">
