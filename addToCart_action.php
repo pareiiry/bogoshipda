@@ -6,25 +6,13 @@ if(isset($_POST['pdID']))
     //$priceBefore = preg_replace( '/[^0-9]/', '', $_POST['priceBefore'] );
     if(isset($_SESSION["shopping_cart"]))
     {   //loop check
-        foreach($_SESSION["shopping_cart"] as $keys => $values)
-        {
-            if($values["pdID"]===$_POST['pdID']){
-                $quantity = $_POST['quantity']+$values["quantity"];
-                //delete old
-                unset($_SESSION["shopping_cart"][$keys]);
-
-            }
-            else{
-                $quantity = $_POST['quantity'];
-            }
-        }
         $item_array_id = array_column($_SESSION["shopping_cart"], "pdID");
         if(!in_array($_POST['pdID'], $item_array_id))
         {
             $count = count($_SESSION["shopping_cart"]);
             $item_array = array(
                 'pdID'               =>     $_POST['pdID'],
-                'quantity'          =>     $quantity,
+                'quantity'          =>     $_POST['quantity'],
                 'name'          =>     $_POST['name'],
                 'price'          =>     $_POST['price']
             );
@@ -32,11 +20,28 @@ if(isset($_POST['pdID']))
             echo '<script>alert("เพิ่มสินค้าในตระกร้าสินค้าเรียบร้อยแล้ว")</script>';
             echo '<script>location.replace(document.referrer);</script>';
 
-
         }
         else{
-            echo '<script>alert("เพิ่มสินค้าในตระกร้าสินค้าเรียบร้อยแล้ว")</script>';
-            echo '<script>location.replace(document.referrer);</script>';
+            foreach($_SESSION["shopping_cart"] as $keys => $values)
+            {
+                if($values["pdID"]===$_POST['pdID']){
+                    $quantity = $_POST['quantity']+$values["quantity"];
+                    //delete old
+                    unset($_SESSION["shopping_cart"][$keys]);
+                    $item_array = array(
+                        'pdID'               =>     $_POST['pdID'],
+                        'quantity'          =>     $quantity,
+                        'name'          =>     $_POST['name'],
+                        'price'          =>     $_POST['price']
+                    );
+                    $_SESSION["shopping_cart"][$keys] = $item_array;
+                    echo '<script>alert("เพิ่มสินค้าในตระกร้าสินค้าเรียบร้อยแล้ว")</script>';
+                    echo '<script>location.replace(document.referrer);</script>';
+                    break;
+                }
+
+            }
+
         }
 
     }
