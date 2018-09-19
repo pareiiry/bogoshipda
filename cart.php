@@ -3,6 +3,9 @@ session_start();
 include ('dbConnect.php');
 $sql2 = "SELECT * FROM product";
 $result2 = mysqli_query($con,$sql2);
+$valueDIscount=0;
+$unit=null;
+$summaryPrice=0;
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -303,19 +306,7 @@ $result2 = mysqli_query($con,$sql2);
         </div>
 
         <div class="flex-w flex-sb-m p-t-25 p-b-25 bo8 p-l-35 p-r-60 p-lr-15-sm">
-            <div class="flex-w flex-m w-full-sm">
-                <div class="size11 bo4 m-r-10">
-                    <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="coupon-code" placeholder="โค้ดส่วนลด">
-                </div>
-
-                <div class="size12 trans-0-4 m-t-10 m-b-10 m-r-10">
-                    <!-- Button -->
-                    <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-                        ใช้โค้ด
-                    </button>
-                </div>
-            </div>
-
+            <div class="flex-w flex-m w-full-sm"></div>
             <div class="size10 trans-0-4 m-t-10 m-b-10">
                 <!-- Button -->
                 <input type="submit" value="อัพเดตราคาสินค้า" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
@@ -325,6 +316,75 @@ $result2 = mysqli_query($con,$sql2);
             </div>
         </div>
         </form>
+    <!--Code promotion-->
+        <div class="flex-w flex-sb-m p-t-25 p-b-25 bo8 p-l-35 p-r-60 p-lr-15-sm">
+            <form action="cart.php" method="post">
+            <div class="flex-w flex-m w-full-sm">
+                <div class="size11 bo4 m-r-10">
+                    <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="codePromo" placeholder="โค้ดส่วนลด">
+                </div>
+
+                <div class="size12 trans-0-4 m-t-10 m-b-10 m-r-10">
+                    <!-- Button -->
+                    <button type="submit" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+                        ใช้โค้ด
+                    </button>
+                </div>
+            </div>
+            </form>
+            <?php
+                if(isset($_POST['codePromo'])) {
+                    //echo $_POST['codePromo'];
+                    include ('dbConnect.php');
+                    $sqlC = "SELECT * FROM code WHERE codeText = '".$_POST['codePromo']."'";
+                    $resultC = mysqli_query($con, $sqlC);
+                    $rowC = mysqli_fetch_array($resultC,MYSQLI_ASSOC);
+
+                    if ($rowC['active'] == 1) {
+                        $drnM = new DateTime("now", new DateTimeZone('Asia/Bangkok'));
+                        $drnM = $drnM->format("Y-m-d");
+                        if ($rowC['dateDelete'] > $drnM) {
+
+                            $valueDIscount=$rowC['discount'];
+                            $unit=$rowC['unitDiscount'];
+                            //Active
+                        } else {
+
+                            $valueDIscount=0;
+                            $unit=null;
+                            echo "ส่วนลดหมดอายุแล้ว";
+                        }
+                    }
+                    else{
+                        $valueDIscount=0;
+                        $unit=null;
+                    }
+                }
+                else{
+                    $valueDIscount=0;
+                    $unit=null;
+                }
+            ?>
+
+            <div class="size10 trans-0-4 m-t-10 m-b-10">
+               <?php
+                if($unit!=null){
+                    echo "<span style='color: red'>คุณได้รับส่วนลด  </span>";
+                    if($unit=="bath"){
+                        echo  "<span style='color: red'> ". $valueDIscount." บาท</span>";
+                        $summaryPrice=$total-$valueDIscount;
+                    }
+                    else if($unit=="percent"){
+                        echo  "<span style='color: red'> ". $valueDIscount." %</span>";
+                        $summaryPrice=($total*(100-$valueDIscount))/100;
+                    }
+                }
+                else{
+                    $summaryPrice=$total;
+                }
+               ?>
+            </div>
+        </div>
         <!-- Total -->
         <div class="bo9 w-size29 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
             <h5 class="m-text20 p-b-24">
@@ -338,7 +398,8 @@ $result2 = mysqli_query($con,$sql2);
 					</span>
 
                 <span class="m-text21 w-size20 w-full-sm">
-						฿
+
+                    <span style='color: red'>฿ <?php echo number_format($summaryPrice, 0);?></span>
 					</span>
             </div>
 
