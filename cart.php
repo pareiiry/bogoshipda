@@ -6,6 +6,9 @@ $result2 = mysqli_query($con,$sql2);
 $valueDIscount=0;
 $unit=null;
 $summaryPrice=0;
+$ship = 30;
+$addShip=0;
+$count=0;
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -253,7 +256,7 @@ $summaryPrice=0;
 
                                             <input class="size8 m-text18 t-center num-product" type="number" name="quantity2[]" value="<?php echo $values["quantity"]; ?>">
 
-                                            <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
+                                            <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2" >
                                                 <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
                                             </button>
                                         </div>
@@ -266,6 +269,7 @@ $summaryPrice=0;
 
                                 <?php
                                 $total = $total + ($values["quantity"] * $values["price"]);
+                                $count += $values["quantity"];
                                 //echo $total;
                             }
                             else{
@@ -418,7 +422,7 @@ $summaryPrice=0;
                     <table class="table-shipping">
                        <tr>
                            <td>
-                               <input type="radio" name="reg" checked> + พัสดุลงทะเบียน <br>ระยะเวลาจัดส่ง :   3 - 7 วันทำการ
+                               <input type="radio" name="ship" value="30"  checked> + พัสดุลงทะเบียน <br>ระยะเวลาจัดส่ง :   3 - 7 วันทำการ
                            </td>
                            <td> ค่าจัดส่ง </td>
                            <td>30 บาท</td>
@@ -426,30 +430,20 @@ $summaryPrice=0;
 
                         <tr>
                             <td>
-                                <input type="radio" name="ems"> + พัสดุด่วนพิเศษ (EMS)<br>ระยะเวลาจัดส่ง :   1 - 2 วันทำการ
+                                <input type="radio" name="ship" value="50"> + พัสดุด่วนพิเศษ (EMS)<br>ระยะเวลาจัดส่ง :   1 - 2 วันทำการ
                             </td>
                             <td> ค่าจัดส่ง </td>
                             <td>50 บาท</td>
                         </tr>
                         <tr>
                             <td>
-                                <input type="radio" name="kerry"> + Kerry Express<br>ระยะเวลาจัดส่ง :   1 - 2 วันทำการ
+                                <input type="radio" name="ship" value="50"> + Kerry Express<br>ระยะเวลาจัดส่ง :   1 - 2 วันทำการ
                             </td>
                             <td> ค่าจัดส่ง </td>
                             <td>50 บาท</td>
                         </tr>
                     </table>
 
-
-
-
-
-                    <div class="size14 trans-0-4 m-b-10">
-                        <!-- Button -->
-                        <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-                            อัพเดทราคาสินค้า
-                        </button>
-                    </div>
                 </div>
             </div>
 
@@ -481,13 +475,18 @@ $summaryPrice=0;
                 </div>
             </div>
             <!--  -->
-            <div class="flex-w flex-sb-m p-t-26 p-b-30">
+            <p class="flex-w flex-sb-m p-t-26 p-b-30">
 					<span class="m-text22 w-size19 w-full-sm">
 						ยอดชำระเงินทั้งหมด :
 					</span>
 
-                <span class="m-text21 w-size20 w-full-sm">
-						฿
+                <span class="m-text21 w-size20 w-full-sm" >
+                   <span id="lastPrice" style="color: red">฿ <?php
+                       if($count>5){
+                           $addShip = ($count-5)*5;
+                       }
+                       echo number_format(($summaryPrice+30+$addShip), 0);?></span>
+
 					</span>
             </div>
 
@@ -651,6 +650,28 @@ $summaryPrice=0;
         $(this).on('click', function(){
             swal(nameProduct, "is added to wishlist !", "success");
         });
+    });
+</script>
+
+<script>
+    $('input[type=radio][name=ship]').change(function() {
+        if (this.value == '30') {
+            <?php $ship = 30;
+            if($count>5){
+                $addShip = ($count-5)*5;
+            }
+            $lastPrice = number_format(($summaryPrice+$ship+$addShip), 0);?>
+            document.getElementById("lastPrice").innerHTML = "฿ <?php echo $lastPrice;?>";
+
+    }
+        else if (this.value == '50') {
+            <?php $ship = 50;
+            if($count>5){
+                $addShip = ($count-5)*5;
+            }
+            $lastPrice = number_format(($summaryPrice+$ship+$addShip), 0);?>
+            document.getElementById("lastPrice").innerHTML = "฿ <?php echo $lastPrice;?>";
+        }
     });
 </script>
 
