@@ -9,6 +9,9 @@ $summaryPrice=0;
 $ship = 30;
 $addShip=0;
 $count=0;
+$discount=0;
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -377,10 +380,12 @@ $count=0;
                     if($unit=="bath"){
                         echo  "<span style='color: red'> ". $valueDIscount." บาท</span>";
                         $summaryPrice=$total-$valueDIscount;
+                        $discount=$valueDIscount;
                     }
                     else if($unit=="percent"){
                         echo  "<span style='color: red'> ". $valueDIscount." %</span>";
                         $summaryPrice=($total*(100-$valueDIscount))/100;
+                        $discount=($total*$valueDIscount)/100;
                     }
                 }
                 else{
@@ -407,7 +412,7 @@ $count=0;
 					</span>
             </div>
 
-            <!--  -->
+         <form action="checkout.php" method="post">
             <div class="flex-w flex-sb bo10 p-t-15 p-b-20">
 					<span class="s-text18 w-size19 w-full-sm">
 						เลือกวิธีการจัดส่งสินค้า :
@@ -422,7 +427,7 @@ $count=0;
                     <table class="table-shipping">
                        <tr>
                            <td>
-                               <input type="radio" name="ship" value="30"  checked> + พัสดุลงทะเบียน <br>ระยะเวลาจัดส่ง :   3 - 7 วันทำการ
+                               <input type="radio" name="ship" value="Regis"  checked > + พัสดุลงทะเบียน <br>ระยะเวลาจัดส่ง :   3 - 7 วันทำการ
                            </td>
                            <td> ค่าจัดส่ง </td>
                            <td>30 บาท</td>
@@ -430,14 +435,14 @@ $count=0;
 
                         <tr>
                             <td>
-                                <input type="radio" name="ship" value="50"> + พัสดุด่วนพิเศษ (EMS)<br>ระยะเวลาจัดส่ง :   1 - 2 วันทำการ
+                                <input type="radio" name="ship" value="Ems" > + พัสดุด่วนพิเศษ (EMS)<br>ระยะเวลาจัดส่ง :   1 - 2 วันทำการ
                             </td>
                             <td> ค่าจัดส่ง </td>
                             <td>50 บาท</td>
                         </tr>
                         <tr>
                             <td>
-                                <input type="radio" name="ship" value="50"> + Kerry Express<br>ระยะเวลาจัดส่ง :   1 - 2 วันทำการ
+                                <input type="radio" name="ship" value="Kerry" > + Kerry Express<br>ระยะเวลาจัดส่ง :   1 - 2 วันทำการ
                             </td>
                             <td> ค่าจัดส่ง </td>
                             <td>50 บาท</td>
@@ -452,7 +457,7 @@ $count=0;
                        ชื่อผู้รับ :
 					</span>
                 <div class="w-size20 w-full-sm p-b-20">
-                    <textarea class="form-control" style="width: 100%" rows="1" name="address"></textarea>
+                    <textarea class="form-control" style="width: 100%" rows="1" name="nameShip" required></textarea>
                 </div>
 
 					<span class="s-text18 w-size19 w-full-sm">
@@ -460,7 +465,7 @@ $count=0;
 					</span>
 
                 <div class="w-size20 w-full-sm">
-                    <textarea class="form-control" style="width: 100%" rows="3" name="address"></textarea>
+                    <textarea class="form-control" style="width: 100%" rows="3" name="addressShip" required></textarea>
                 </div>
             </div>
 
@@ -471,31 +476,37 @@ $count=0;
 					</span>
 
                 <div class="w-size20 w-full-sm">
-                    <textarea class="form-control" style="width: 100%" rows="1" name=""placeholder="(ไม่บังคับ) ฝากข้อความถึงเจ้าของร้าน"></textarea>
+                    <textarea class="form-control" style="width: 100%" rows="1" name="msgShip" placeholder="(ไม่บังคับ) ฝากข้อความถึงเจ้าของร้าน"></textarea>
                 </div>
             </div>
+
+            <input type="hidden" name="lastPriceShip" value="<?php if($count>5){$addShip = ($count-5)*5;}echo number_format(($summaryPrice+30+$addShip), 0);?>">
+            <input type="hidden" name="discountShip" value="<?php echo $discount;?>">
+            <input type="hidden" name="countShip" value="<?php echo $count;?>">
+
             <!--  -->
-            <p class="flex-w flex-sb-m p-t-26 p-b-30">
+            <div class="flex-w flex-sb-m p-t-26 p-b-30">
 					<span class="m-text22 w-size19 w-full-sm">
 						ยอดชำระเงินทั้งหมด :
 					</span>
 
                 <span class="m-text21 w-size20 w-full-sm" >
+
                    <span id="lastPrice" style="color: red">฿ <?php
                        if($count>5){
                            $addShip = ($count-5)*5;
                        }
                        echo number_format(($summaryPrice+30+$addShip), 0);?></span>
-
 					</span>
             </div>
 
             <div class="size15 trans-0-4">
                 <!-- Button -->
-                <a href="checkout.php"  class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+                <button type="submit" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
                     ดำเนินการต่อ
-                </a>
+                </button >
             </div>
+            </form>
         </div>
     </div>
 </section>
@@ -655,7 +666,7 @@ $count=0;
 
 <script>
     $('input[type=radio][name=ship]').change(function() {
-        if (this.value == '30') {
+        if (this.value == 'Regis') {
             <?php $ship = 30;
             if($count>5){
                 $addShip = ($count-5)*5;
@@ -663,14 +674,53 @@ $count=0;
             $lastPrice = number_format(($summaryPrice+$ship+$addShip), 0);?>
             document.getElementById("lastPrice").innerHTML = "฿ <?php echo $lastPrice;?>";
 
-    }
-        else if (this.value == '50') {
+        }
+        else if (this.value == 'Ems') {
             <?php $ship = 50;
             if($count>5){
                 $addShip = ($count-5)*5;
             }
             $lastPrice = number_format(($summaryPrice+$ship+$addShip), 0);?>
             document.getElementById("lastPrice").innerHTML = "฿ <?php echo $lastPrice;?>";
+        }
+        else if (this.value == 'Kerry') {
+            <?php $ship = 50;
+            if($count>5){
+                $addShip = ($count-5)*5;
+            }
+            $lastPrice = number_format(($summaryPrice+$ship+$addShip), 0);?>
+            document.getElementById("lastPrice").innerHTML = "฿ <?php echo $lastPrice;?>";
+
+        }
+    });
+</script>
+
+<script>
+    $('input[type=radio][name=ship]').change(function() {
+        if (this.value == 'Regis') {
+            <?php $ship = 30;
+            if($count>5){
+                $addShip = ($count-5)*5;
+            }
+            $lastPrice = number_format(($summaryPrice+$ship+$addShip), 0);?>
+            document.getElementById("lastPriceShip").innerHTML = "฿ <?php echo $lastPrice;?>";
+
+        }
+        else if (this.value == 'Ems') {
+            <?php $ship = 50;
+            if($count>5){
+                $addShip = ($count-5)*5;
+            }
+            $lastPrice = number_format(($summaryPrice+$ship+$addShip), 0);?>
+            document.getElementById("lastPriceShip").innerHTML = "฿ <?php echo $lastPrice;?>";
+        }
+        else if (this.value == 'Kerry') {
+            <?php $ship = 50;
+            if($count>5){
+                $addShip = ($count-5)*5;
+            }
+            $lastPrice = number_format(($summaryPrice+$ship+$addShip), 0);?>
+            document.getElementById("lastPriceShip").innerHTML = "฿ <?php echo $lastPrice;?>";
         }
     });
 </script>

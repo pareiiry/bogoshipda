@@ -1,7 +1,9 @@
 <?php
+session_start();
 include ('dbConnect.php');
 $sql2 = "SELECT * FROM product";
 $result2 = mysqli_query($con,$sql2);
+$dc=0;
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -89,7 +91,7 @@ $result2 = mysqli_query($con,$sql2);
                             <a href="index.php">หน้าแรก</a>
                         </li>
 
-                        <li>
+                        <li class="sale-noti">
                             <a href="product.php">สินค้า</a>
                         </li>
 
@@ -97,7 +99,7 @@ $result2 = mysqli_query($con,$sql2);
                             <a href="review.php">รีวิว</a>
                         </li>
 
-                        <li class="sale-noti">
+                        <li>
                             <a href="design.php">ออกแบบ</a>
                         </li>
                         <li>
@@ -107,244 +109,10 @@ $result2 = mysqli_query($con,$sql2);
                 </nav>
             </div>
 
-            <!-- Header Icon -->
-            <div class="header-icons">
 
-
-                <div class="header-wrapicon2">
-                    <img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                    <span class="header-icons-noti">0</span>
-
-                    <!-- Header cart noti -->
-                    <div class="header-cart header-dropdown">
-                        <ul class="header-cart-wrapitem">
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-01.jpg" alt="IMG">
-                                </div>
-
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        White Shirt With Pleat Detail Back
-                                    </a>
-
-                                    <span class="header-cart-item-info">
-											1 x $19.00
-										</span>
-                                </div>
-                            </li>
-
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-02.jpg" alt="IMG">
-                                </div>
-
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        Converse All Star Hi Black Canvas
-                                    </a>
-
-                                    <span class="header-cart-item-info">
-											1 x $39.00
-										</span>
-                                </div>
-                            </li>
-
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-03.jpg" alt="IMG">
-                                </div>
-
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        Nixon Porter Leather Watch In Tan
-                                    </a>
-
-                                    <span class="header-cart-item-info">
-											1 x $17.00
-										</span>
-                                </div>
-                            </li>
-                        </ul>
-
-                        <div class="header-cart-total">
-                            Total: $75.00
-                        </div>
-
-                        <div class="header-cart-buttons">
-                            <div class="header-cart-wrapbtn">
-                                <!-- Button -->
-                                <a href="cart.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    View Cart
-                                </a>
-                            </div>
-
-                            <div class="header-cart-wrapbtn">
-                                <!-- Button -->
-                                <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    Check Out
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
-    <!-- Header Mobile -->
-    <div class="wrap_header_mobile">
-        <!-- Logo moblie -->
-        <a href="index.php" class="logo-mobile">
-            <font size="5"><b>Bogoshipda</b></font>
-        </a>
-
-        <!-- Button show menu -->
-        <div class="btn-show-menu">
-            <!-- Header Icon mobile -->
-            <div class="header-icons-mobile">
-                <a href="loginPage.php" class="header-wrapicon1 dis-block">
-                    ลงชื่อเข้าใช้
-                </a>
-
-                <span class="linedivide2"></span>
-
-                <div class="header-wrapicon2">
-                    <img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                    <span class="header-icons-noti">0</span>
-
-                    <!-- Header cart noti -->
-                    <div class="header-cart header-dropdown">
-                        <ul class="header-cart-wrapitem">
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-01.jpg" alt="IMG">
-                                </div>
-
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        White Shirt With Pleat Detail Back
-                                    </a>
-
-                                    <span class="header-cart-item-info">
-											1 x $19.00
-										</span>
-                                </div>
-                            </li>
-
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-02.jpg" alt="IMG">
-                                </div>
-
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        Converse All Star Hi Black Canvas
-                                    </a>
-
-                                    <span class="header-cart-item-info">
-											1 x $39.00
-										</span>
-                                </div>
-                            </li>
-
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-03.jpg" alt="IMG">
-                                </div>
-
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        Nixon Porter Leather Watch In Tan
-                                    </a>
-
-                                    <span class="header-cart-item-info">
-											1 x $17.00
-										</span>
-                                </div>
-                            </li>
-                        </ul>
-
-                        <div class="header-cart-total">
-                            Total: $75.00
-                        </div>
-
-                        <div class="header-cart-buttons">
-                            <div class="header-cart-wrapbtn">
-                                <!-- Button -->
-                                <a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    View Cart
-                                </a>
-                            </div>
-
-                            <div class="header-cart-wrapbtn">
-                                <!-- Button -->
-                                <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    Check Out
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
-					<span class="hamburger-box">
-						<span class="hamburger-inner"></span>
-					</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Menu Mobile -->
-    <div class="wrap-side-menu" >
-        <nav class="side-menu">
-            <ul class="main-menu">
-
-                <li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
-                    <div class="topbar-child2-mobile">
-							<span class="topbar-email">
-								สวัสดี Guest
-							</span>
-
-                    </div>
-                </li>
-
-                <li class="item-topbar-mobile p-l-10">
-                    <div class="topbar-social-mobile">
-                        <a href="https://twitter.com/bogoshipdastore" class="topbar-social-item fa fa-twitter"></a>
-                        <a href="https://www.instagram.com/bogoshipda_store" class="topbar-social-item fa fa-instagram"></a>
-                    </div>
-                </li>
-
-                <li class="item-menu-mobile">
-                    <a href="index.php">Home</a>
-                    <ul class="sub-menu">
-                        <li><a href="index.html">Homepage V1</a></li>
-                        <li><a href="home-02.html">Homepage V2</a></li>
-                        <li><a href="home-03.html">Homepage V3</a></li>
-                    </ul>
-                    <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
-                </li>
-
-                <li>
-                    <a href="product.php">Product</a>
-                </li>
-
-                <li>
-                    <a href="review.php">Review</a>
-                </li>
-
-                <li class="sale-noti">
-                    <a href="design.php">Design</a>
-                </li>
-
-                <li>
-                    <a href="help.php">Help</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
 </header>
 
 
@@ -370,7 +138,7 @@ $result2 = mysqli_query($con,$sql2);
 					</span>
 
                 <div class="w-size16 w-full-sm">
-                    11/1 dfksad
+                    <?php echo $_POST['nameShip']."<br>".$_POST['addressShip']?>
                 </div>
             </div>
 
@@ -380,7 +148,8 @@ $result2 = mysqli_query($con,$sql2);
 					</span>
 
                 <div class="w-size16 w-full-sm">
-                    -
+                    <?php if($_POST['msgShip']==""||$_POST['msgShip']==" "||$_POST['msgShip']=="-")echo "-";else echo $_POST['msgShip'];?>
+
                 </div>
             </div>
 
@@ -395,20 +164,63 @@ $result2 = mysqli_query($con,$sql2);
                             <td width="20%"></td>
                             <td width="50%" align="center"></td>
                             <td width="10%" align="center">จำนวน</td>
-                            <td width="20%" align="right">ราคา</td>
+                            <td width="20%" align="right">ราคารวม</td>
                         </tr>
-                        <tr>
-                            <td align="center"></td>
-                            <td>pink</td>
-                            <td align="center">1</td>
-                            <td align="right">฿200</td>
-                        </tr>
+                        <?php
+                        $total = 0;
+                        if(!empty($_SESSION["shopping_cart"]))
+                        {
+                            foreach($_SESSION["shopping_cart"] as $keys => $values)
+                            {
+                                if($values["pdID"]!==null)
+                                {?>
+                                    <tr >
+                                        <td align="center"></td>
+                                        <td><?php echo $values["name"]; ?></td>
+                                        <td align="center"><?php echo $values["quantity"]; ?></td>
+                                        <td align="right">฿<?php echo ($values["quantity"] * $values["price"]); ?></td>
+                                    </tr>
+
+                                    <?php
+                                    $total = $total + ($values["quantity"] * $values["price"]);
+                                    //echo $total;
+                                }
+                                else{
+                                    unset($_SESSION["shopping_cart"][$keys]);
+                                    ?>
+                                    <tr>
+                                        <td colspan="4" style="text-align: center;color: red"> - ไม่มีสินค้าที่เลือก -</td>
+                                    </tr>
+                                    <?php
+
+                                }
+                            }
+
+                        }
+                        else{
+                            ?>
+                            <tr>
+                                <td colspan="4" style="text-align: center;color: red"> - ไม่มีสินค้าที่เลือก -</td>
+                            </tr>
+                            <?php
+                        }
+                        ?>
+
                     </table>
                 </div>
                 <span class="s-text18 w-size16 w-full-sm">
 					</span>
                 <div class="w-size30 w-full-sm" align="right">
-                    <b>฿200</b>
+                    <b>
+                        <?php
+                        if(!empty($_SESSION["shopping_cart"])){
+                            if($total!==null) {
+
+                                  echo "฿ ".number_format($total, 0);
+
+                            }
+                        }?>
+                    </b>
                 </div>
             </div>
 
@@ -419,10 +231,40 @@ $result2 = mysqli_query($con,$sql2);
 					</span>
 
                 <div class="w-size31  w-full-sm p-t-7">
-                        Kerry Express
+                    <?php if($_POST['ship']=='Regis'){
+                       echo "พัสดุลงทะเบียน";
+                    }elseif ($_POST['ship']=='Ems'){
+                        echo "พัสดุด่วนพิเศษ (EMS)";
+                    }elseif ($_POST['ship']=='Kerry'){
+                        echo "Kerry Express";
+                    }?>
                     </div>
                     <div class="w-size15  w-full-sm" align="right">
-                        ฿50
+                        ฿ <?php
+                        if($_POST['ship']=='Regis'){
+                            $ship = 30;
+                            if($_POST['countShip']>5){
+                                $addShip = ($_POST['countShip']-5)*5;
+                            }
+                            $sc=number_format(($ship+$addShip), 0);
+                            echo number_format(($ship+$addShip), 0);
+                        }elseif ($_POST['ship']=='Ems'){
+                            $ship = 50;
+                            if($_POST['countShip']>5){
+                                $addShip = ($_POST['countShip']-5)*5;
+                            }
+                            $sc=number_format(($ship+$addShip), 0);
+                            echo number_format(($ship+$addShip), 0);
+
+                        }elseif ($_POST['ship']=='Kerry'){
+                            $ship = 50;
+                            if($_POST['countShip']>5){
+                                $addShip = ($_POST['countShip']-5)*5;
+                            }
+                            $sc=number_format(($ship+$addShip), 0);
+                            echo number_format(($ship+$addShip), 0);
+                        }
+                       ?>
                 </div>
 
             </div>
@@ -432,7 +274,7 @@ $result2 = mysqli_query($con,$sql2);
 						ส่วนลด :
 					</span>
                 <div class="w-size15 w-full-sm" align="right">
-                    ฿20
+                    ฿ <?php echo $_POST['discountShip']; $dc=$_POST['discountShip'];?>
                 </div>
 
             </div>
@@ -443,7 +285,9 @@ $result2 = mysqli_query($con,$sql2);
 					</span>
 
                 <div class="w-size15 w-full-sm fs-25 text-pink" align="right">
-                    <b>฿230</b>
+                    <b>฿ <?php
+                        echo  number_format((($total-$dc)+$sc), 0);
+                        ?></b>
                 </div>
             </div>
 
