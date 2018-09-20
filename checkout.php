@@ -115,16 +115,25 @@ $dc=0;
 
 </header>
 
-
-
-<!-- Cart -->
 <section class="cart bgwhite p-t-70 p-b-100">
-
+<?php if(!isset($_POST['discountShip'])){?>
+    <div class="container">
+        <!-- Cart item -->
+        <a href="cart.php"><i class="fa fa-angle-double-left" style="font-size:24px"></i> &nbsp;ย้อนกลับ</a>
+        <div class="bo9 w-size29 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
+            <h5 class="m-text20 p-b-24" align="center">
+                สรุปรายการสั่งซื้อสินค้า
+            </h5>
+            <h6 align="center" style="color: red">-ไม่มีรายการยืนยันการสั่งสินค้า-</h6>
+        </div>
+    </div>
+    <?php }else{?>
     <div class="container">
         <!-- Cart item -->
         <a href="cart.php"><i class="fa fa-angle-double-left" style="font-size:24px"></i> &nbsp;ย้อนกลับ</a>
 
         <!-- Total -->
+
         <div class="bo9 w-size29 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
             <h5 class="m-text20 p-b-24" align="center">
                 สรุปรายการสั่งซื้อสินค้า
@@ -293,14 +302,18 @@ $dc=0;
 
             <div class="size15 trans-0-4">
                 <!-- Button -->
-                <a href="checkout.php"  class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+                <a href="#"  class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
                     สั่งซื้อสินค้า
                 </a>
             </div>
         </div>
-    </div>
-</section>
 
+    </div>
+    <?php }?>
+
+
+
+</section>
 <!-- Banner2 -->
 
 

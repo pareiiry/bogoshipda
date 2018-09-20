@@ -480,7 +480,7 @@ $discount=0;
                 </div>
             </div>
 
-            <input type="hidden" name="lastPriceShip" value="<?php if($count>5){$addShip = ($count-5)*5;}echo number_format(($summaryPrice+30+$addShip), 0);?>">
+<!--            <input type="hidden" name="lastPriceShip" value="--><?php //if($count>5){$addShip = ($count-5)*5;}echo number_format(($summaryPrice+30+$addShip), 0);?><!--">-->
             <input type="hidden" name="discountShip" value="<?php echo $discount;?>">
             <input type="hidden" name="countShip" value="<?php echo $count;?>">
 
