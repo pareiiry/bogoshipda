@@ -2,14 +2,20 @@
 session_start();
 include ('dbConnect.php');
 
-$page = $_GET['page'];
-if($_GET['page']==""||$_GET['page']=="1"){
+if(isset($_GET['page'])){
+    $page = $_GET['page'];
+    if($_GET['page']==""||$_GET['page']=="1"){
         $pageshow=0;
 
+    }
+    else{
+        $pageshow=($page*9)-9;
+    }
 }
 else{
-    $pageshow=($page*9)-9;
+    $pageshow=0;
 }
+
 
 $sql2 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC LIMIT $pageshow,9";
 $result2 = mysqli_query($con,$sql2);

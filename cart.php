@@ -346,26 +346,31 @@ $discount=0;
                     $sqlC = "SELECT * FROM code WHERE codeText = '".$_POST['codePromo']."'";
                     $resultC = mysqli_query($con, $sqlC);
                     $rowC = mysqli_fetch_array($resultC,MYSQLI_ASSOC);
+                    if(!empty($rowC)) {
+                        if ($rowC['active'] == 1) {
+                            $drnM = new DateTime("now", new DateTimeZone('Asia/Bangkok'));
+                            $drnM = $drnM->format("Y-m-d");
+                            if ($rowC['dateDelete'] > $drnM) {
 
-                    if ($rowC['active'] == 1) {
-                        $drnM = new DateTime("now", new DateTimeZone('Asia/Bangkok'));
-                        $drnM = $drnM->format("Y-m-d");
-                        if ($rowC['dateDelete'] > $drnM) {
+                                $valueDIscount = $rowC['discount'];
+                                $unit = $rowC['unitDiscount'];
+                                //Active
+                            } else {
 
-                            $valueDIscount=$rowC['discount'];
-                            $unit=$rowC['unitDiscount'];
-                            //Active
+                                $valueDIscount = 0;
+                                $unit = null;
+                                echo "ส่วนลดหมดอายุแล้ว";
+                            }
                         } else {
-
-                            $valueDIscount=0;
-                            $unit=null;
-                            echo "ส่วนลดหมดอายุแล้ว";
+                            $valueDIscount = 0;
+                            $unit = null;
                         }
+                    }else{
+                        $valueDIscount = 0;
+                        $unit = null;
+                        echo "ไม่มีส่วนลด";
                     }
-                    else{
-                        $valueDIscount=0;
-                        $unit=null;
-                    }
+
                 }
                 else{
                     $valueDIscount=0;
