@@ -3,23 +3,23 @@ session_start();
 if($_SESSION['ID'] == "")
 {
     //echo "Please Login!";
-    header("location:loginPage.php");
+    header("location:../loginPage.php");
     exit();
 }
-if($_SESSION['Status'] != "owner" && $_SESSION['Status'] != "admin")
+if($_SESSION['usertype'] != "owner" && $_SESSION['usertype'] != "admin")
 {
     echo "ของ Adminเท่านั้นจ้าาา";
     exit();
 }
 include ('../dbConnect.php');
-$sql = "SELECT * FROM usertable WHERE uID = '".$_SESSION['ID']."' ";
+$sql = "SELECT * FROM user WHERE uID = '".$_SESSION['ID']."' ";
 //$objQuery = mysqli_query($strSQL);
 //$objResult = mysqli_fetch_array($objQuery);
 $result = mysqli_query($con,$sql);
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 
-$sql2 = "SELECT * FROM usertable";
+$sql2 = "SELECT * FROM user";
 //$objQuery = mysqli_query($strSQL);
 //$objResult = mysqli_fetch_array($objQuery);
 $result2 = mysqli_query($con,$sql2);
@@ -38,14 +38,13 @@ $result2 = mysqli_query($con,$sql2);
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/png" href="../images/icons/favicon.png"/>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style>
-        /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-        .row.content {height: 1000px}
 
         /* Set gray background color and 100% height */
-        .sidenav {
-            background-color: #4f4f4f;
-            height: 100%;
+        div.sticky{
+            position: sticky;
+            top:0;
         }
 
         /* Set black background color, white text and some padding */
@@ -190,75 +189,70 @@ $result2 = mysqli_query($con,$sql2);
         </div>
     </div>
 </nav>
+<div class="w3-sidebar w3-bar-block" style="width:25%;background-color:#4f4f4f;color: white;padding: 15px;" >
+    <!--    <h3 class="w3-bar-item" style="background-color: #101010">Bogoshipda Admin</h3>-->
+    <div class="container-fluid bg-3 text-center">
+        <div class="row">
+            <div class="col-sm-3">
+                <!--                        <p>Some text..</p>-->
+                <a href="indexForOwner.php" ><img class="bg-icon" src="../img/menu_bar_admin/product.png" style="width:100%; " alt="Image">สินค้า</a>
+            </div>
+            <div class="col-sm-3">
+                <!--                        <p>Some text..</p>-->
+                <a href="order.php"><img class="bg-icon" src="../img/menu_bar_admin/order.png" style="width:100%" alt="Image">สั่งซื้อ<span class="menu-icons-noti">1</span></a>
+            </div>
+            <div class="col-sm-3">
+                <!--                        <p>Some text..</p>-->
+                <a href="payment.php"><img class="bg-icon" src="../img/menu_bar_admin/payment.png" style="width:100%" alt="Image">ชำระเงิน</a>
+            </div>
+            <div class="col-sm-3">
+                <!--                        <p>Some text..</p>-->
+                <a href="shipping.php"><img class="bg-icon" src="../img/menu_bar_admin/shipment.png" style="width:100%" alt="Image">ขนส่ง</a>
+            </div>
+        </div>
+    </div><br>
+    <div class="container-fluid bg-3 text-center">
+        <div class="row">
+            <div class="col-sm-3">
+                <!--                        <p>Some text..</p>-->
+                <a href="manageMember.php"><img class="bg-icon-current" src="../img/menu_bar_admin/user.png" style="width:100%" alt="Image">สมาชิก</a>
+            </div>
+            <div class="col-sm-3">
+                <!--                        <p>Some text..</p>-->
+                <a href="discount.php"><img class="bg-icon" src="../img/menu_bar_admin/discount.png" style="width:100%" alt="Image">ส่วนลด</a>
+            </div>
+            <div class="col-sm-3">
+                <!--                        <p>Some text..</p>-->
+                <a href="bank.php"><img class="bg-icon" src="../img/menu_bar_admin/account.png" style="width:100%" alt="Image">บัญชีรับเงิน</a>
+            </div>
+            <div class="col-sm-3">
+                <!--                        <p>Some text..</p>-->
+                <a href="banner.php"><img class="bg-icon" src="../img/menu_bar_admin/news.png" style="width:100%" alt="Image">BANNER</a>
+            </div>
+        </div>
+    </div><br>
+    <div class="container-fluid bg-3 text-center">
+        <div class="row">
+            <div class="col-sm-3">
+                <a href="statistic.php"><img class="bg-icon" src="../img/menu_bar_admin/statistic.png" style="width:100%" alt="Image">สถิติ</a>
+            </div>
+            <div class="col-sm-3">
+
+            </div>
+        </div>
+    </div><br>
+</div>
+
 <div class="container-fluid">
     <div class="row content">
-        <div class="col-sm-3 sidenav" style="font-size: 10px;">
-            <br>
-            <!--            <h4>Bogoshipda Admin</h4>-->
-            <div class="container-fluid bg-3 text-center">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="indexForOwner.php" ><img class="bg-icon" src="../img/menu_bar_admin/product.png" style="width:100%" alt="Image">สินค้า</a>
-                    </div>
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/order.png" style="width:100%" alt="Image">สั่งซื้อ</a>
-                    </div>
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/payment.png" style="width:100%" alt="Image">ชำระเงิน</a>
-                    </div>
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/shipment.png" style="width:100%" alt="Image">ขนส่ง</a>
-                    </div>
-                </div>
-            </div><br>
-            <div class="container-fluid bg-3 text-center">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="manageMember.php"><img class="bg-icon-current" src="../img/menu_bar_admin/user.png" style="width:100%" alt="Image">สมาชิก</a>
-                    </div>
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="discount.php"><img class="bg-icon" src="../img/menu_bar_admin/discount.png" style="width:100%" alt="Image">ส่วนลด</a>
-                    </div>
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="bank.php"><img class="bg-icon" src="../img/menu_bar_admin/account.png" style="width:100%" alt="Image">บัญชีรับเงิน</a>
-                    </div>
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/news.png" style="width:100%" alt="Image">BANNER</a>
-                    </div>
-                </div>
-            </div><br>
-            <div class="container-fluid bg-3 text-center">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/review.png" style="width:100%" alt="Image">รีวิว</a>
-                    </div>
-                    <div class="col-sm-3">
-                        <a href="faqs.php"><img class="bg-icon" src="../img/menu_bar_admin/faqs.png" style="width:100%" alt="Image">FAQs</a>
-                    </div>
-                    <div class="col-sm-3">
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/statistic.png" style="width:100%" alt="Image">รายงาน</a>
-                    </div>
-                    <div class="col-sm-3">
-
-                    </div>
-                </div>
-            </div><br>
-
+        <div class="col-sm-3 sticky" style="font-size: 10px;background-color: #252525;">
+            <h4 style="color: #c8c8c8;padding: 10px">Bogoshipda Admin</h4>
         </div>
 
         <div class="col-sm-9">
             <div class="row" style="margin-top: 5px">
-                <div class="col-sm-4"><a href="addAdmin.php" class="btn btn-success" role="button" style="margin-left: 2%;margin-top: 3%" >+ เพิ่ม Admin</a></div>
-                <div class="col-sm-4"><h3><b>รายชื่อผู้ใช้และสมาชิก</b></h3></div>
+                <div class="col-sm-4 "></div>
+                <div class="col-sm-4"><h3><b>สมาชิก</b></h3></div>
                 <div class="col-sm-4"><input type="text" id="myInput" onkeyup="search()" placeholder="ค้นหาชื่อ..." title="Type in a name" width="100%"></div>
             </div>
 
@@ -276,13 +270,13 @@ $result2 = mysqli_query($con,$sql2);
                 <?php
                 while($row2= mysqli_fetch_assoc($result2))// show the information from query
                 {
-                    if($row2['status']=="owner"){
+                    if($row2['usertype']=="owner"){
                         echo "
                     <tr>
                     <td style='text-align:center;'>$row2[uID]</td>
-                    <td>$row2[name]</td>
-                    <td>$row2[email]</td>
-                    <td style='text-align:center;'>$row2[status]</td>
+                    <td style='text-align:center;'>$row2[name]</td>
+                    <td style='text-align:center;'>$row2[email]</td>
+                    <td style='text-align:center;'>$row2[usertype]</td>
                     <td style=\"text-align:center;\">
                        <div class='row'>
                        <div class=\"col-md-2\">
@@ -301,13 +295,13 @@ $result2 = mysqli_query($con,$sql2);
                     </tr>
                     ";
                     }
-                    else if($row2['status']=="member"){
+                    else if($row2['usertype']=="member"){
                         echo "
                     <tr>
                     <td style='text-align:center;'>$row2[uID]</td>
-                    <td>$row2[name]</td>
-                    <td>$row2[email]</td>
-                    <td style='text-align:center;'>$row2[status]</td>
+                    <td style='text-align:center;'>$row2[name]</td>
+                    <td style='text-align:center;'>$row2[email]</td>
+                    <td style='text-align:center;'>$row2[usertype]</td>
                     <td style=\"text-align:center;\">
                        <div class='row'>
                        <div class=\"col-md-2\">
@@ -332,7 +326,7 @@ $result2 = mysqli_query($con,$sql2);
                     <td style='text-align:center;'>$row2[uID]</td>
                     <td>$row2[name]</td>
                     <td>$row2[email]</td>
-                    <td style='text-align:center;'>$row2[status]</td>
+                    <td style='text-align:center;'>$row2[usertype]</td>
                     <td style=\"text-align:center;\">
                        <div class='row'>
                        <div class=\"col-md-4\">

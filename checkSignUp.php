@@ -12,7 +12,7 @@ $address=$_POST['address'];
 
 
 include ("dbConnect.php");
-$sql="INSERT INTO usertable (uID,name,email,password,address,phone_number,gender,dob,status)VALUES('','$name','$email','$password','$address','$phone_number','$gender','$dob','member')";
+$sql="INSERT INTO user (uID,name,email,password,address,phone_number,gender,dob,usertype)VALUES('','$name','$email','$password','$address','$phone_number','$gender','$dob','member')";
 //$sql_query=mysqli_query($sql);
 $con->query($sql);
 
@@ -24,6 +24,6 @@ if($con) {
     echo "<script>alert('เกิดข้อผิดพลาดในการบันทึกข้อมูล');window.history.go(-1);</script>" ;
 }
 
-mysqli_close();
+$con->close();
 
 ?>

@@ -8,16 +8,20 @@ $unitDiscount=$_POST['unitDiscount'];
 //$status=$_POST['status'];
 
 include ('../../dbConnect.php');
+if($dateCreate<=$dateDelete){
+    $sql="INSERT INTO code (codeID,codeText,discount,unitDiscount,dateCreate,dateDelete,active)VALUES('','$codeText','$discount','$unitDiscount','$dateCreate','$dateDelete',1)";//คำสั่งเพิ่มข้อมูล
+    $sql_query=mysqli_query($con,$sql);
+    if($sql_query) {
+        echo "<script type='text/javascript'>alert('บันทึกข้อมูลเรียบร้อยแล้ว')</script>";
+        echo "<meta http-equiv ='refresh'content='0;URL=../discount.php'>";
+    }else{
+        echo "<script type='text/javascript'>alert('เกิดข้อผิดพลาดในการบันทึกข้อมูล');window.history.go(-1);</script>" ;
+    }
 
-$sql="INSERT INTO codetable (cdID,codeText,discount,unitDiscount,dateCreate,dateDelete,active)VALUES('','$codeText','$discount','$unitDiscount','$dateCreate','$dateDelete',1)";//คำสั่งเพิ่มข้อมูล
-$sql_query=mysqli_query($con,$sql);
-if($sql_query) {
-    echo "<script type='text/javascript'>alert('บันทึกข้อมูลเรียบร้อยแล้ว')</script>";
-    echo "<meta http-equiv ='refresh'content='0;URL=../discount.php'>";
-}else{
-    echo "<script type='text/javascript'>alert('เกิดข้อผิดพลาดในการบันทึกข้อมูล');window.history.go(-1);</script>" ;
 }
-
-//mysqli_close();
+else{
+    echo "<script type='text/javascript'>alert('ไม่สามารถเพิ่มส่วนลดได้เนื่องจากวันที่สร้างมากกว่าวันที่สิ้นสุด กรุณาแก้ไขแล้วทำรายการใหม่อีกครั้ง');window.history.go(-1);</script>" ;
+}
+$con->close()
 
 ?>

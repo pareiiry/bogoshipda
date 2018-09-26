@@ -1,10 +1,7 @@
 <?php
+session_start();
 include ('dbConnect.php');
-$sql = "SELECT * FROM faqs";
-$result = mysqli_query($con,$sql);
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
@@ -98,27 +95,23 @@ $result = mysqli_query($con,$sql);
                 <nav class="menu">
                     <ul class="main_menu">
                         <li>
-                            <a href="index.php">หน้าหลัก</a>
-                            <ul class="sub_menu">
-                                <li><a href="index.html">Homepage V1</a></li>
-                                <li><a href="home-02.html">Homepage V2</a></li>
-                                <li><a href="home-03.html">Homepage V3</a></li>
-                            </ul>
+                            <a href="index.php">หน้าแรก</a>
                         </li>
 
                         <li>
-                            <a href="product.html">Product</a>
+                            <a href="product.php">สินค้า</a>
                         </li>
 
                         <li>
-                            <a href="product.html">Review</a>
+                            <a href="review.php">รีวิว</a>
                         </li>
 
                         <li>
-                            <a href="about.html">Help</a>
+                            <a href="design.php">ออกแบบ</a>
                         </li>
-
-                        
+                        <li class="sale-noti">
+                            <a href="help.php">ช่วยเหลือ</a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -129,76 +122,129 @@ $result = mysqli_query($con,$sql);
 
                 <div class="header-wrapicon2">
                     <img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                    <span class="header-icons-noti">0</span>
-
+                    <span class="header-icons-noti"><?php
+                        $quantity=0;
+                        if(empty($_SESSION["shopping_cart"]))
+                        {
+                            echo "0";
+                        }
+                        else{
+                            foreach($_SESSION["shopping_cart"] as $keys2 => $values2)
+                            {
+                                $quantity+=$values2["quantity"];
+                            }echo $quantity;
+                        }?></span>
                     <!-- Header cart noti -->
                     <div class="header-cart header-dropdown">
                         <ul class="header-cart-wrapitem">
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-01.jpg" alt="IMG">
-                                </div>
+                            <?php
+                            if(!empty($_SESSION["shopping_cart"]))
+                            {
+                                $total = 0;
 
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        White Shirt With Pleat Detail Back
-                                    </a>
+                                foreach($_SESSION["shopping_cart"] as $keys => $values)
+                                {
+                                    if($values["pdID"]!==null) {
+                                        $sql3 = "SELECT * FROM image WHERE pdID= '".$values["pdID"]."' LIMIT 1";
+                                        $result3 = mysqli_query($con,$sql3);
+                                        $row3 = mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                                        ?>
+                                        <li class="header-cart-item">
+                                            <div class="header-cart-item-img">
+                                                <?php
 
-                                    <span class="header-cart-item-info">
-											1 x $19.00
+                                                if($row3['img']==="" || empty($row3)){
+                                                    // echo"Hello";
+                                                    echo '<img src="images/no-picture.jpg">';
+                                                }
+                                                else {
+                                                    echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
+                                                }
+                                                ?>
+                                            </div>
+
+                                            <div class="header-cart-item-txt">
+                                                <a href="product-detail.php?pdID=<?php echo $values['pdID']; ?>" class="header-cart-item-name">
+                                                    <?php echo $values["name"]; ?>
+                                                </a>
+
+                                                <span class="header-cart-item-info">
+											<?php echo $values["quantity"]; ?> x  ฿<?php echo $values["price"]; ?>
 										</span>
-                                </div>
-                            </li>
+                                            </div>
+                                        </li>
+                                        <?php
+                                        $total = $total + ($values["quantity"] * $values["price"]);
+                                        //echo $total;
+                                    }
+                                    else{
+                                        unset($_SESSION["shopping_cart"][$keys]);
+                                        ?>
+                                        <li class="header-cart-item">
+                                            <div class="header-cart-item-img">
+                                            </div>
 
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-02.jpg" alt="IMG">
-                                </div>
+                                            <div class="header-cart-item-txt">
+                                                <a class="header-cart-item-name">
+                                                    - ไม่มีสินค้าที่เลือก -
+                                                </a>
 
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        Converse All Star Hi Black Canvas
-                                    </a>
+                                                <span class="header-cart-item-info">
 
-                                    <span class="header-cart-item-info">
-											1 x $39.00
 										</span>
-                                </div>
-                            </li>
+                                            </div>
+                                        </li>
+                                        <?php
 
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-03.jpg" alt="IMG">
-                                </div>
+                                    }
+                                }
 
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        Nixon Porter Leather Watch In Tan
-                                    </a>
+                            }
+                            else{
+                                ?>
+                                <li class="header-cart-item">
+                                    <div class="header-cart-item-img">
+                                    </div>
 
-                                    <span class="header-cart-item-info">
-											1 x $17.00
+                                    <div class="header-cart-item-txt">
+                                        <a class="header-cart-item-name">
+                                            - ไม่มีสินค้าที่เลือก -
+                                        </a>
+
+                                        <span class="header-cart-item-info">
+
 										</span>
-                                </div>
-                            </li>
+                                    </div>
+                                </li>
+                                <?php
+                            }
+                            ?>
+
                         </ul>
 
-                        <div class="header-cart-total">
-                            Total: $75.00
-                        </div>
+                        <?php
+                        if(!empty($_SESSION["shopping_cart"])){
+                            if($total!==null) {
+                                ?>
+                                <div class="header-cart-total">
+                                    รวมค่าสินค้า : ฿<?php echo number_format($total, 0); ?>
+                                </div>
+                                <?php
+                            }
+                        }?>
 
                         <div class="header-cart-buttons">
                             <div class="header-cart-wrapbtn">
                                 <!-- Button -->
-                                <a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    View Cart
+                                <a href="clearcart.php" style="background-color: red" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                    ลบทั้งหมด
                                 </a>
                             </div>
 
                             <div class="header-cart-wrapbtn">
                                 <!-- Button -->
-                                <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    Check Out
+                                <a href="cart.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                    ดูตะกร้าสินค้า
                                 </a>
                             </div>
                         </div>
@@ -344,11 +390,11 @@ $result = mysqli_query($con,$sql);
                 </li>
 
                 <li class="item-menu-mobile">
-                    <a href="product.html">Product</a>
+                    <a href="product.php">Product</a>
                 </li>
 
                 <li class="item-menu-mobile">
-                    <a href="product.html">Review</a>
+                    <a href="review.php">Review</a>
                 </li>
 
                 <li class="item-menu-mobile">
@@ -356,7 +402,7 @@ $result = mysqli_query($con,$sql);
                 </li>
 
                 <li class="item-menu-mobile">
-                    <a href="about.html">Help</a>
+                    <a href="help.php">Help</a>
                 </li>
 
        
@@ -380,15 +426,16 @@ $result = mysqli_query($con,$sql);
         <a href="color.php" class="list-group-item">สีสาย/สีสกรีน</a>
         <a href="price.php" class="list-group-item">ตารางราคา</a>
         <a href="shipping.php" class="list-group-item">ค่าจัดส่ง</a>
+        <a href="payment.php" class="list-group-item">การชำระเงิน</a>
         <a href="faq.php" class="list-group-item">คำถามที่พบบ่อย</a>
-        <a target="contact.php" href="#" class="list-group-item">ติดต่อเรา</a>
+        <a href="contact.php" class="list-group-item">ติดต่อเรา</a>
         <a href="terms.php" class="list-group-item">เงื่อนไขข้อตกลง</a>
     </div>
     <div class="list-group">
         <a href="#" class="list-group-item disabled">ช่วยเหลือ</a>
-        <a href="how-to-order" class="list-group-item">ขั้นตอนสั่งซื้อ</a>
-        <a href="coupon" class="list-group-item">วิธีใช้งานคูปอง</a>
-        <a href="how-to-payment" class="list-group-item">ขั้นตอนแจ้งชำระเงิน</a>
+        <a href="how-to-order.php" class="list-group-item">ขั้นตอนสั่งซื้อ</a>
+        <a href="coupon.php" class="list-group-item">วิธีใช้งานคูปอง</a>
+        <a href="how-to-payment.php" class="list-group-item">ขั้นตอนแจ้งชำระเงิน</a>
     </div> 
 </div>                         <div class="col-xs-9">
                             <div class="panel panel-default">
@@ -415,48 +462,15 @@ $result = mysqli_query($con,$sql);
 
 
 <!-- Shipping -->
-<section class="shipping bgwhite p-t-62 p-b-46">
-    <div class="flex-w p-l-15 p-r-15">
-        <div class="flex-col-c w-size5 p-l-15 p-r-15 p-t-16 p-b-15 respon1">
-            <h4 class="m-text12 t-center">
-                Free Delivery Worldwide
-            </h4>
-
-            <a href="#" class="s-text11 t-center">
-                Click here for more info
-            </a>
-        </div>
-
-        <div class="flex-col-c w-size5 p-l-15 p-r-15 p-t-16 p-b-15 bo2 respon2">
-            <h4 class="m-text12 t-center">
-                ระยะเวลาผลิต 3-5 วัน
-            </h4>
-
-            <span class="s-text11 t-center">
-					เริ่มผลิตหลังชำระเงิน
-				</span>
-        </div>
-
-        <div class="flex-col-c w-size5 p-l-15 p-r-15 p-t-16 p-b-15 respon1">
-            <h4 class="m-text12 t-center">
-                Store Opening
-            </h4>
-
-            <span class="s-text11 t-center">
-					รับออเดอร์ทุกวัน
-				</span>
-        </div>
-    </div>
-</section>
 
 
 <!-- Footer -->
 <footer class="bg6 p-t-45 p-b-43 p-l-45 p-r-45">
     <div class="flex-w p-b-90">
         <div class="w-size6 p-t-30 p-l-15 p-r-15 respon3">
-            <a href="payment.php"><u><h4 class="s-text12 p-b-30">
-                Payment
-            </h4></u></a>
+            <h4 class="s-text12 p-b-30">
+                bogoshipda.com
+            </h4>
 
             <div>
                 <p class="s-text7 w-size27">
@@ -472,12 +486,12 @@ $result = mysqli_query($con,$sql);
 
         <div class="w-size8 p-t-30 p-l-15 p-r-15 respon4">
             <h4 class="s-text12 p-b-30">
-                Contact Us
+                ติดต่อเรา
             </h4>
 
             <ul>
-                <li class="p-b-9 s-text7">                   
-                        bogoshipdashop@gmail.com                   
+                <li class="p-b-9 s-text7">
+                    bogoshipdashop@gmail.com
                 </li>
 
                 <li class="p-b-9 s-text7">
@@ -485,35 +499,32 @@ $result = mysqli_query($con,$sql);
                 </li>
 
                 <li class="p-b-9 s-text7">
-                    line : bogoshipdashop
+                    Line id : bogoshipdastore
                 </li>
 
-                
             </ul>
         </div>
 
         <div class="w-size15 p-t-30 p-l-15 p-r-15 respon4">
             <h4 class="s-text12 p-b-30">
-                Shipment
+                บริการจัดส่ง
             </h4>
 
             <ul>
                 <li class="p-b-9 s-text7">
                     Thailand Post
                 </li>
-
                 <li class="p-b-9 s-text7">
                     Kerry Express
                 </li>
 
-                
             </ul>
         </div>
 
         <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
-            <a href="payment.php"><u><h4 class="s-text12 p-b-30">
-                Payment
-            </h4></u></a>
+            <a href="payment.php"><h4 class="s-text12 p-b-30">
+                    วิธีการชำระเงิน
+                </h4></a>
 
             <ul>
                 <li class="p-b-9 s-text7">

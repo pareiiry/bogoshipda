@@ -3,23 +3,23 @@ session_start();
 if($_SESSION['ID'] == "")
 {
     //echo "Please Login!";
-    header("location:loginPage.php");
+    header("location:../loginPage.php");
     exit();
 }
-if($_SESSION['Status'] != "owner" && $_SESSION['Status'] != "admin")
+if($_SESSION['usertype'] != "owner" && $_SESSION['usertype'] != "admin")
 {
     //echo "ของ Adminเท่านั้นจ้าาา";
     exit();
 }
 include ('../dbConnect.php');
-$sql = "SELECT * FROM usertable WHERE uID = '".$_SESSION['ID']."' ";
+$sql = "SELECT * FROM user WHERE uID = '".$_SESSION['ID']."' ";
 //$objQuery = mysqli_query($strSQL);
 //$objResult = mysqli_fetch_array($objQuery);
 $result = mysqli_query($con,$sql);
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 
-$sql2 = "SELECT * FROM producttable";
+$sql2 = "SELECT * FROM product";
 //$objQuery = mysqli_query($strSQL);
 //$objResult = mysqli_fetch_array($objQuery);
 $result2 = mysqli_query($con,$sql2);
@@ -36,13 +36,13 @@ $result2 = mysqli_query($con,$sql2);
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="../css/styleOwner.css">
     <link rel="icon" type="image/png" href="../images/icons/favicon.png"/>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style>
-        /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-        .row.content {height: 1500px}
 
-        /* Set gray background color and 100% height */
-
-
+        div.sticky{
+            position: sticky;
+            top:0;
+        }
         /* Set black background color, white text and some padding */
         footer {
             background-color: #555;
@@ -66,9 +66,7 @@ $result2 = mysqli_query($con,$sql2);
         * {
             box-sizing: border-box;
         }
-        .row.content {
-            height: 600px;
-        }
+
 
     </style>
 </head>
@@ -91,83 +89,63 @@ $result2 = mysqli_query($con,$sql2);
         </div>
     </div>
 </nav>
+<div class="w3-sidebar w3-bar-block" style="width:25%;background-color:#4f4f4f;color: white;padding: 15px;" >
+    <!--    <h3 class="w3-bar-item" style="background-color: #101010">Bogoshipda Admin</h3>-->
+    <div class="container-fluid bg-3 text-center">
+        <div class="row">
+            <div class="col-sm-3">
+                <!--                        <p>Some text..</p>-->
+                <a href="indexForOwner.php" ><img class="bg-icon-current" src="../img/menu_bar_admin/product.png" style="width:100%; " alt="Image">สินค้า</a>
+            </div>
+            <div class="col-sm-3">
+                <!--                        <p>Some text..</p>-->
+                <a href="order.php"><img class="bg-icon" src="../img/menu_bar_admin/order.png" style="width:100%" alt="Image">สั่งซื้อ<span class="menu-icons-noti">1</span></a>
+            </div>
+            <div class="col-sm-3">
+                <!--                        <p>Some text..</p>-->
+                <a href="payment.php"><img class="bg-icon" src="../img/menu_bar_admin/payment.png" style="width:100%" alt="Image">ชำระเงิน</a>
+            </div>
+            <div class="col-sm-3">
+                <!--                        <p>Some text..</p>-->
+                <a href="shipping.php"><img class="bg-icon" src="../img/menu_bar_admin/shipment.png" style="width:100%" alt="Image">ขนส่ง</a>
+            </div>
+        </div>
+    </div><br>
+    <div class="container-fluid bg-3 text-center">
+        <div class="row">
+            <div class="col-sm-3">
+                <!--                        <p>Some text..</p>-->
+                <a href="manageMember.php"><img class="bg-icon" src="../img/menu_bar_admin/user.png" style="width:100%" alt="Image">สมาชิก</a>
+            </div>
+            <div class="col-sm-3">
+                <!--                        <p>Some text..</p>-->
+                <a href="discount.php"><img class="bg-icon" src="../img/menu_bar_admin/discount.png" style="width:100%" alt="Image">ส่วนลด</a>
+            </div>
+            <div class="col-sm-3">
+                <!--                        <p>Some text..</p>-->
+                <a href="bank.php"><img class="bg-icon" src="../img/menu_bar_admin/account.png" style="width:100%" alt="Image">บัญชีรับเงิน</a>
+            </div>
+            <div class="col-sm-3">
+                <!--                        <p>Some text..</p>-->
+                <a href="banner.php"><img class="bg-icon" src="../img/menu_bar_admin/news.png" style="width:100%" alt="Image">BANNER</a>
+            </div>
+        </div>
+    </div><br>
+    <div class="container-fluid bg-3 text-center">
+        <div class="row">
+            <div class="col-sm-3">
+                <a href="statistic.php"><img class="bg-icon" src="../img/menu_bar_admin/statistic.png" style="width:100%" alt="Image">สถิติ</a>
+            </div>
+            <div class="col-sm-3">
+
+            </div>
+        </div>
+    </div><br>
+</div>
 <div class="container-fluid">
     <div class="row content">
-        <div class="col-sm-3 sidenav" style="font-size: 10px;">
-            <br>
-            <!--            <h4>Bogoshipda Admin</h4>-->
-            <div class="container-fluid bg-3 text-center">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="indexForOwner.php"><img class="bg-icon-current" src="../img/menu_bar_admin/product.png" style="width:100%" alt="Image">สินค้า</a>
-                    </div>
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/order.png" style="width:100%" alt="Image">สั่งซื้อ</a>
-                    </div>
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/payment.png" style="width:100%" alt="Image">ชำระเงิน</a>
-                    </div>
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/shipment.png" style="width:100%" alt="Image">ขนส่ง</a>
-                    </div>
-                </div>
-            </div><br>
-            <div class="container-fluid bg-3 text-center">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="manageMember.php"><img class="bg-icon" src="../img/menu_bar_admin/user.png" style="width:100%" alt="Image">สมาชิก</a>
-                    </div>
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="discount.php"><img class="bg-icon" src="../img/menu_bar_admin/discount.png" style="width:100%" alt="Image">ส่วนลด</a>
-                    </div>
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/account.png" style="width:100%" alt="Image">บัญชีรับเงิน</a>
-                    </div>
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/news.png" style="width:100%" alt="Image">BANNER</a>
-                    </div>
-                </div>
-            </div><br>
-            <div class="container-fluid bg-3 text-center">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <!--                        <p>Some text..</p>-->
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/review.png" style="width:100%" alt="Image">รีวิว</a>
-                    </div>
-                    <div class="col-sm-3">
-                        <a href="faqs.php"><img class="bg-icon" src="../img/menu_bar_admin/faqs.png" style="width:100%" alt="Image">FAQs</a>
-                    </div>
-                    <div class="col-sm-3">
-                        <a href="#"><img class="bg-icon" src="../img/menu_bar_admin/statistic.png" style="width:100%" alt="Image">รายงาน</a>
-                    </div>
-                    <div class="col-sm-3">
-
-                    </div>
-                </div>
-            </div><br>
-            <!--            <ul class="nav nav-pills nav-stacked">-->
-            <!--                <li class="active"><a href="#section1">Home</a></li>-->
-            <!--                <li><a href="#section2">Friends</a></li>-->
-            <!--                <li><a href="#section3">Family</a></li>-->
-            <!--                <li><a href="#section3">Photos</a></li>-->
-            <!--            </ul><br>-->
-
-            <!--            <div class="input-group">-->
-            <!--                <input type="text" class="form-control" placeholder="Search Blog..">-->
-            <!--                <span class="input-group-btn">-->
-            <!--          <button class="btn btn-default" type="button">-->
-            <!--            <span class="glyphicon glyphicon-search"></span>-->
-            <!--          </button>-->
-            <!--        </span>-->
-            <!--            </div>-->
+        <div class="col-sm-3 sticky" style="font-size: 10px;background-color: #252525;">
+            <h4 style="color: #c8c8c8;padding: 10px">Bogoshipda Admin</h4>
         </div>
 
         <div class="col-sm-9">
@@ -220,7 +198,7 @@ $result2 = mysqli_query($con,$sql2);
 <!--                            <form method="post">-->
                                 <div class="btn-group" style="margin: 0 0 2% 0">
                                     <label>ชื่อสินค้า:</label>
-                                    <input size="100%" class="form-control" type="text" name="pdName" value="" required>
+                                    <input size="100%" class="form-control" type="text" name="name" value="" required>
                                 </div>
                                 <div class="row" >
                                     <div class="col-md-6" style="margin: 0 0 2% 0">
@@ -242,7 +220,30 @@ $result2 = mysqli_query($con,$sql2);
                                         </div>
                                     </div>
                                 </div>
-                                <div class="btn-group" style="margin: 0 0 2% 0">
+
+                            <label>สี:</label>
+                            <select class="form-control" name="color">
+                                <option value="white">สีขาว</option>
+                                <option value="cream">สีครีม</option>
+                                <option value="milktea" style="color: #fdebc3">สีชานม</option>
+                                <option value="yellow" style="color: #fcff00">สีเหลือง</option>
+                                <option value="green" style="color: #8ae671">สีเขียว</option>
+                                <option value="darkgreen" style="color: #388b6f">สีเขียวเข้ม</option>
+                                <option value="mint" style="color: #b4ffcb">สีมิ้นต์</option>
+                                <option value="sky" style="color: #43abea">สีฟ้าเข้ม</option>
+                                <option value="orange" style="color: #ffd28b">สีส้มอ่อน</option>
+                                <option value="lightpink" style="color: #ffe5e5">สีชมพูอ่อน</option>
+                                <option value="pink" style="color: #ffb0bb">สีชมพู</option>
+                                <option value="darkpink" style="color: #f95a7c">สีชมพูเข้ม</option>
+                                <option value="red" style="color: #e20000">สีแดง</option>
+                                <option value="purple" style="color: #ebd1e9">สีม่วง</option>
+                                <option value="lightgray" style="color: #d7d8e4">สีเทาอมฟ้า</option>
+                                <option value="darkgray" style="color: #727875">สีเทาเข้ม</option>
+                                <option value="brown" style="color: #72552a">สีน้ำตาล</option>
+                                <option value="black">สีดำ</option>
+                            </select>
+
+                                <div class="btn-group" style="margin: 2% 0 2% 0">
                                     <label>คำอธิบายสินค้า:</label>
                                     <textarea class="form-control" style="min-width: 320%" rows="5" name="description"></textarea>
                                 </div>
@@ -256,7 +257,7 @@ $result2 = mysqli_query($con,$sql2);
                         <div class="panel-body" >
 
                                 <div class="btn-group">
-                                    <form method="post" action="Action/upload-page.php" enctype="multipart/form-data">
+                                    <form method="post" action="#" enctype="multipart/form-data">
                                         Select files: <input style="margin:2% 0 2% 0 " type="file" name="filesToUpload[]" id="filesToUpload" multiple onchange="makeFileList();">
 <!--                                        <input type="submit">-->
                                     </form>
