@@ -354,20 +354,24 @@ $discount=0;
 
                                 $valueDIscount = $rowC['discount'];
                                 $unit = $rowC['unitDiscount'];
+                                $codeID=$rowC['codeID'];
                                 //Active
                             } else {
 
                                 $valueDIscount = 0;
                                 $unit = null;
+                                $codeID=null;
                                 echo "ส่วนลดหมดอายุแล้ว";
                             }
                         } else {
                             $valueDIscount = 0;
                             $unit = null;
+                            $codeID=null;
                         }
                     }else{
                         $valueDIscount = 0;
                         $unit = null;
+                        $codeID=null;
                         echo "ไม่มีส่วนลด";
                     }
 
@@ -375,6 +379,7 @@ $discount=0;
                 else{
                     $valueDIscount=0;
                     $unit=null;
+                    $codeID=null;
                 }
             ?>
 
@@ -488,6 +493,7 @@ $discount=0;
 <!--            <input type="hidden" name="lastPriceShip" value="--><?php //if($count>5){$addShip = ($count-5)*5;}echo number_format(($summaryPrice+30+$addShip), 0);?><!--">-->
             <input type="hidden" name="discountShip" value="<?php echo $discount;?>">
             <input type="hidden" name="countShip" value="<?php echo $count;?>">
+             <input type="hidden" name="codeID" value="<?php echo $codeID;?>">
 
             <!--  -->
             <div class="flex-w flex-sb-m p-t-26 p-b-30">

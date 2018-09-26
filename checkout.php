@@ -128,6 +128,7 @@ $dc=0;
         </div>
     </div>
     <?php }else{?>
+    <form action="addToDb_action.php" method="get">
     <div class="container">
         <!-- Cart item -->
         <a href="cart.php"><i class="fa fa-angle-double-left" style="font-size:24px"></i> &nbsp;ย้อนกลับ</a>
@@ -147,6 +148,8 @@ $dc=0;
 					</span>
 
                 <div class="w-size16 w-full-sm">
+                    <?php echo "<input type=\"hidden\" name=\"nameShip\" value=\"$_POST[nameShip]\">";?>
+                    <?php echo "<input type=\"hidden\" name=\"addressShip\" value=\"$_POST[addressShip]\">";?>
                     <?php echo $_POST['nameShip']."<br>".$_POST['addressShip']?>
                 </div>
             </div>
@@ -157,8 +160,7 @@ $dc=0;
 					</span>
 
                 <div class="w-size16 w-full-sm">
-                    <?php if($_POST['msgShip']==""||$_POST['msgShip']==" "||$_POST['msgShip']=="-")echo "-";else echo $_POST['msgShip'];?>
-
+                    <?php if($_POST['msgShip']==""||$_POST['msgShip']==" "||$_POST['msgShip']=="-"){echo "-";echo "<input type=\"hidden\" name=\"msgShip\" value=\"-\">";}else{ echo $_POST['msgShip'];echo "<input type=\"hidden\" name=\"msgShip\" value=\"$_POST[msgShip]\">";}?>
                 </div>
             </div>
 
@@ -182,7 +184,9 @@ $dc=0;
                             foreach($_SESSION["shopping_cart"] as $keys => $values)
                             {
                                 if($values["pdID"]!==null)
-                                {?>
+                                {
+                                    ?>
+
                                     <tr >
                                         <td align="center"></td>
                                         <td><?php echo $values["name"]; ?></td>
@@ -273,6 +277,9 @@ $dc=0;
                             $sc=number_format(($ship+$addShip), 0);
                             echo number_format(($ship+$addShip), 0);
                         }
+                        $sp=($ship+$addShip);
+                         echo "<input type=\"hidden\" name=\"shipPrice\" value=\"$sp\">";
+
                        ?>
                 </div>
 
@@ -302,13 +309,16 @@ $dc=0;
 
             <div class="size15 trans-0-4">
                 <!-- Button -->
-                <a href="#"  class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-                    สั่งซื้อสินค้า
-                </a>
+                    <input type="hidden" name="codeID" value="<?php echo $_POST['codeID']?>">
+                    <button type="submit" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+                        สั่งซื้อสินค้า
+                    </button>
+
             </div>
         </div>
 
     </div>
+    </form>
     <?php }?>
 
 
