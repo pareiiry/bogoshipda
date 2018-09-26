@@ -1,9 +1,6 @@
 <?php
 session_start();
 include ('dbConnect.php');
-$sql = "SELECT * FROM faqs";
-$result = mysqli_query($con,$sql);
-
 ?>
 
 <!DOCTYPE html>
@@ -123,8 +120,18 @@ $result = mysqli_query($con,$sql);
 
                 <div class="header-wrapicon2">
                     <img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                    <span class="header-icons-noti"><?php if(empty($_SESSION["shopping_cart"])){echo "0";}else{echo count($_SESSION["shopping_cart"]);}?></span>
-
+                    <span class="header-icons-noti"><?php
+                        $quantity=0;
+                        if(empty($_SESSION["shopping_cart"]))
+                        {
+                            echo "0";
+                        }
+                        else{
+                            foreach($_SESSION["shopping_cart"] as $keys2 => $values2)
+                            {
+                                $quantity+=$values2["quantity"];
+                            }echo $quantity;
+                        }?></span>
                     <!-- Header cart noti -->
                     <div class="header-cart header-dropdown">
                         <ul class="header-cart-wrapitem">
@@ -527,9 +534,9 @@ $result = mysqli_query($con,$sql);
         </div>
 
         <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
-            <h4 class="s-text12 p-b-30">
-                วิธีการชำระเงิน
-            </h4>
+            <a href="payment.php"><h4 class="s-text12 p-b-30">
+                    วิธีการชำระเงิน
+                </h4></a>
             <ul>
                 <li class="p-b-9 s-text7">
                     KTB &emsp;  K-BANK
