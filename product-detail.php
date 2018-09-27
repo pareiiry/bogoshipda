@@ -173,8 +173,18 @@ else{
 
                 <div class="header-wrapicon2">
                     <img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                    <span class="header-icons-noti"><?php if(empty($_SESSION["shopping_cart"])){echo "0";}else{echo count($_SESSION["shopping_cart"]);}?></span>
-
+                    <span class="header-icons-noti"><?php
+                        $quantity=0;
+                        if(empty($_SESSION["shopping_cart"]))
+                        {
+                            echo "0";
+                        }
+                        else{
+                            foreach($_SESSION["shopping_cart"] as $keys2 => $values2)
+                            {
+                                $quantity+=$values2["quantity"];
+                            }echo $quantity;
+                        }?></span>
                     <!-- Header cart noti -->
                     <div class="header-cart header-dropdown">
                         <ul class="header-cart-wrapitem">

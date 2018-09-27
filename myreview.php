@@ -1,14 +1,13 @@
 <?php
 session_start();
 include ('dbConnect.php');
-$sql2 = "SELECT * FROM product";
-$result2 = mysqli_query($con,$sql2);
-$dc=0;
+$sql = "SELECT * FROM bank";
+$result = mysqli_query($con,$sql);
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>Bogoshipda | สรุปรายการสั่งซื้อ</title>
+    <title>Bogoshipda | รีวิวของฉัน</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -42,15 +41,18 @@ $dc=0;
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!--===============================================================================================-->
     <style>
-        .table-shipping{
-            border-color: #2b2b2b;
-            width: 100%;
-            height: 65%;
-            padding: auto;
-            margin-bottom: 10px;
+        .star-rating .fa-star{color: orange;}
+    .ordertable{
+        text-align: center;
+        padding-top: 10px;
+    }
+        td{
+            padding: 10px 10px 10px 10px;
         }
+        th{
+            padding: 10px 10px 10px 10px;
 
-
+        }
     </style>
 </head>
 <body class="animsition">
@@ -91,7 +93,7 @@ $dc=0;
                             <a href="index.php">หน้าแรก</a>
                         </li>
 
-                        <li class="sale-noti">
+                        <li>
                             <a href="product.php">สินค้า</a>
                         </li>
 
@@ -116,203 +118,42 @@ $dc=0;
 </header>
 
 <section class="cart bgwhite p-t-70 p-b-100">
-<?php if(!isset($_POST['discountShip'])){?>
-    <div class="container">
-        <!-- Cart item -->
-        <a href="cart.php"><i class="fa fa-angle-double-left" style="font-size:24px"></i> &nbsp;ย้อนกลับ</a>
-        <div class="bo9 w-size29 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
-            <h5 class="m-text20 p-b-24" align="center">
-                สรุปรายการสั่งซื้อสินค้า
-            </h5>
-            <h6 align="center" style="color: red">-ไม่มีรายการยืนยันการสั่งสินค้า-</h6>
-        </div>
-    </div>
-    <?php }else{?>
-    <div class="container">
-        <!-- Cart item -->
-        <a href="cart.php"><i class="fa fa-angle-double-left" style="font-size:24px"></i> &nbsp;ย้อนกลับ</a>
 
-        <!-- Total -->
+    <div class="container">
 
         <div class="bo9 w-size29 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
-            <h5 class="m-text20 p-b-24" align="center">
-                สรุปรายการสั่งซื้อสินค้า
-            </h5>
-            <h6 align="center" style="color: red">ตรวจสอบความถูกต้องก่อนยืนยันการสั่งซื้อ</h6>
+            <h4 class="p-b-24" align="center">
+                รีวิวของฉัน</h4>
 
-            <!--  -->
-            <div class="flex-w flex-sb bo17 p-t-20 p-b-20 p-l-20 p-r-20 m-b-30 m-t-25">
-					<span class="s-text18 w-size15 w-full-sm">
-                        ที่อยู่ในการจัดส่ง :
-					</span>
+            <table class="table-striped ordertable" width="100%">
+                <thead style=" color:#ffaeba">
+                <tr>
+                    <th style="text-align:center;">รูป</th>
+                    <th style="text-align:center;">วันที่รีวิว</th>
+                    <th style="text-align:center;">คะแนน</th>
+                    <th style="text-align:left;">ความคิดเห็น</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td></td>
+                    <td>26-09-2018</td>
+                    <td>
+                        <div class="star-rating">
+                            <span class="fa fa-star-o" data-rating="1"></span>
+                            <span class="fa fa-star-o" data-rating="2"></span>
+                            <span class="fa fa-star-o" data-rating="3"></span>
+                            <span class="fa fa-star-o" data-rating="4"></span>
+                            <span class="fa fa-star-o" data-rating="5"></span>
+                            <input type="hidden" name="whatever1" class="rating-value" value="4">
+                        </div>
+                    </td>
+                    <td style="text-align: left">sdhsaiurhfkjsnf;sf</td>
 
-                <div class="w-size16 w-full-sm">
-                    <?php echo $_POST['nameShip']."<br>".$_POST['addressShip']?>
-                </div>
-            </div>
+                </tr>
 
-            <div class="flex-w flex-sb bo18 p-t-20 p-b-20 p-l-20 p-r-20 m-b-30 m-t-25">
-					<span class="s-text18 w-size15 w-full-sm">
-                        ข้อความถึงเจ้าของร้าน :
-					</span>
-
-                <div class="w-size16 w-full-sm">
-                    <?php if($_POST['msgShip']==""||$_POST['msgShip']==" "||$_POST['msgShip']=="-")echo "-";else echo $_POST['msgShip'];?>
-
-                </div>
-            </div>
-
-            <div class="flex-w flex-sb-m bo16 p-t-20 p-b-20 p-l-20 p-r-20  ">
-					<span class="s-text18 w-size15 w-full-sm">
-						รายละเอียดสินค้าที่สั่งซื้อ :
-					</span>
-
-                <div class="w-size16 w-full-sm m-b-10">
-                    <table class="p-t-10 p-b-10" width="100%">
-                        <tr>
-                            <td width="20%"></td>
-                            <td width="50%" align="center">ชื่อสินค้า</td>
-                            <td width="10%" align="center">จำนวน</td>
-                            <td width="20%" align="right">ราคารวม</td>
-                        </tr>
-                        <?php
-                        $total = 0;
-                        if(!empty($_SESSION["shopping_cart"]))
-                        {
-                            foreach($_SESSION["shopping_cart"] as $keys => $values)
-                            {
-                                if($values["pdID"]!==null)
-                                {?>
-                                    <tr >
-                                        <td align="center"></td>
-                                        <td align="center"><?php echo $values["name"]; ?></td>
-                                        <td align="center"><?php echo $values["quantity"]; ?></td>
-                                        <td align="right">฿<?php echo ($values["quantity"] * $values["price"]); ?></td>
-                                    </tr>
-
-                                    <?php
-                                    $total = $total + ($values["quantity"] * $values["price"]);
-                                    //echo $total;
-                                }
-                                else{
-                                    unset($_SESSION["shopping_cart"][$keys]);
-                                    ?>
-                                    <tr>
-                                        <td colspan="4" style="text-align: center;color: red"> - ไม่มีสินค้าที่เลือก -</td>
-                                    </tr>
-                                    <?php
-
-                                }
-                            }
-
-                        }
-                        else{
-                            ?>
-                            <tr>
-                                <td colspan="4" style="text-align: center;color: red"> - ไม่มีสินค้าที่เลือก -</td>
-                            </tr>
-                            <?php
-                        }
-                        ?>
-
-                    </table>
-                </div>
-                <span class="s-text18 w-size16 w-full-sm">
-					</span>
-                <div class="w-size30 w-full-sm" align="right">
-                    <b>
-                        <?php
-                        if(!empty($_SESSION["shopping_cart"])){
-                            if($total!==null) {
-
-                                  echo "฿ ".number_format($total, 0);
-
-                            }
-                        }?>
-                    </b>
-                </div>
-            </div>
-
-            <!--  -->
-            <div class="flex-w flex-sb bo16 p-t-20 p-b-20 p-l-20 p-r-20 ">
-					<span class="s-text18 w-size15 w-full-sm">
-						วิธีการจัดส่งสินค้า :
-					</span>
-
-                <div class="w-size31  w-full-sm p-t-7">
-                    <?php if($_POST['ship']=='Regis'){
-                       echo "พัสดุลงทะเบียน";
-                    }elseif ($_POST['ship']=='Ems'){
-                        echo "พัสดุด่วนพิเศษ (EMS)";
-                    }elseif ($_POST['ship']=='Kerry'){
-                        echo "Kerry Express";
-                    }?>
-                    </div>
-                    <div class="w-size15  w-full-sm" align="right">
-                        ฿ <?php
-                        if($_POST['ship']=='Regis'){
-                            $ship = 30;
-                            if($_POST['countShip']>5){
-                                $addShip = ($_POST['countShip']-5)*5;
-                            }
-                            $sc=number_format(($ship+$addShip), 0);
-                            echo number_format(($ship+$addShip), 0);
-                        }elseif ($_POST['ship']=='Ems'){
-                            $ship = 50;
-                            if($_POST['countShip']>5){
-                                $addShip = ($_POST['countShip']-5)*5;
-                            }
-                            $sc=number_format(($ship+$addShip), 0);
-                            echo number_format(($ship+$addShip), 0);
-
-                        }elseif ($_POST['ship']=='Kerry'){
-                            $ship = 50;
-                            if($_POST['countShip']>5){
-                                $addShip = ($_POST['countShip']-5)*5;
-                            }
-                            $sc=number_format(($ship+$addShip), 0);
-                            echo number_format(($ship+$addShip), 0);
-                        }
-                       ?>
-                </div>
-
-            </div>
-
-            <div class="flex-w flex-sb bo16 p-t-20 p-b-20 p-l-20 p-r-20 ">
-					<span class="s-text18 w-size15 w-full-sm">
-						ส่วนลด :
-					</span>
-                <div class="w-size15 w-full-sm" align="right">
-                    ฿ <?php echo $_POST['discountShip']; $dc=$_POST['discountShip'];?>
-                </div>
-
-            </div>
-            <!--  -->
-            <div class="flex-w flex-sb-m p-b-30 p-l-20 p-r-20 m-t-20">
-					<span class="m-text22 w-size19 w-full-sm">
-						ยอดชำระเงินทั้งหมด :
-					</span>
-
-                <div class="w-size15 w-full-sm fs-25 text-pink" align="right">
-                    <b>฿ <?php
-                        echo  number_format((($total-$dc)+$sc), 0);
-                        ?></b>
-                </div>
-            </div>
-
-            <div class="size15 trans-0-4">
-
-                <!-- Button -->
-                <a href="success.php"  class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-                    สั่งซื้อสินค้า
-                </a>
-            </div>
+            </table>
         </div>
-
     </div>
-    <?php }?>
-
-
 
 </section>
 <!-- Banner2 -->
@@ -453,18 +294,27 @@ $dc=0;
 <!--===============================================================================================-->
 <script type="text/javascript" src="vendor/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
-    $('.block2-btn-addcart').each(function(){
-        var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-        $(this).on('click', function(){
-            swal(nameProduct, "is added to cart !", "success");
+
+    var $star_rating = $('.star-rating .fa');
+
+    var SetRatingStar = function() {
+        return $star_rating.each(function() {
+            if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+                return $(this).removeClass('fa-star-o').addClass('fa-star');
+            } else {
+                return $(this).removeClass('fa-star').addClass('fa-star-o');
+            }
         });
+    };
+
+    $star_rating.on('click', function() {
+        $star_rating.siblings('input.rating-value').val($(this).data('rating'));
+        return SetRatingStar();
     });
 
-    $('.block2-btn-addwishlist').each(function(){
-        var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-        $(this).on('click', function(){
-            swal(nameProduct, "is added to wishlist !", "success");
-        });
+    SetRatingStar();
+    $(document).ready(function() {
+
     });
 </script>
 

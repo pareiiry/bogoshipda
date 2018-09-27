@@ -29,7 +29,7 @@ $result2 = mysqli_query($con,$sql2);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bogoshipda Admin</title>
+    <title>Bogoshipda Admin | รายการจัดส่งสินค้า</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -39,6 +39,8 @@ $result2 = mysqli_query($con,$sql2);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/png" href="../images/icons/favicon.png"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/util.css">
     <style>
 
         div.sticky{
@@ -148,11 +150,6 @@ $result2 = mysqli_query($con,$sql2);
 			margin-left:10px;
         }
 
-        /* Darker background on mouse-over */
-        .btn-delete:hover {
-            background-color: #d15252;
-        }
-		
 		.bg-icon{
 			background-color: #666;
 			border-radius: 8px;
@@ -167,6 +164,62 @@ $result2 = mysqli_query($con,$sql2);
 		}
         .color-link{
             color: #ed80aa;
+        }
+        .btn-outline-success {
+            color: #28a745;
+            background-color: transparent;
+            background-image: none;
+            border-color: #28a745;
+        }
+
+        .btn-outline-success:hover {
+            color: #fff;
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-outline-success:focus, .btn-outline-success.focus {
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.5);
+        }
+
+        .btn-outline-success.disabled, .btn-outline-success:disabled {
+            color: #28a745;
+            background-color: transparent;
+        }
+
+        .btn-outline-success:active, .btn-outline-success.active,
+        .show > .btn-outline-success.dropdown-toggle {
+            color: #fff;
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        .btn-outline-danger {
+            color: #dc3545;
+            background-color: transparent;
+            background-image: none;
+            border-color: #dc3545;
+        }
+
+        .btn-outline-danger:hover {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-outline-danger:focus, .btn-outline-danger.focus {
+            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.5);
+        }
+
+        .btn-outline-danger.disabled, .btn-outline-danger:disabled {
+            color: #dc3545;
+            background-color: transparent;
+        }
+
+        .btn-outline-danger:active, .btn-outline-danger.active,
+        .show > .btn-outline-danger.dropdown-toggle {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
         }
     </style>
 </head>
@@ -223,7 +276,7 @@ $result2 = mysqli_query($con,$sql2);
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
-                <a href="bank.php"><img class="bg-icon" src="../img/menu_bar_admin/account.png" style="width:100%" alt="Image">บัญชีรับเงิน</a>
+                <a href="bank.php"><img class="bg-icon" src="../img/menu_bar_admin/account.png" style="width:100%" alt="Image">บัญชี</a>
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
@@ -265,23 +318,23 @@ $result2 = mysqli_query($con,$sql2);
                     <th style="width:5%;text-align:center;">Order ID</th>
                     <th style="text-align: center;">วันที่ยืนยันรับเงิน</th>
                     <th style="width:20%;text-align:center;">ชื่อผู้สั่งซื้อ</th>
-                    <th style="width:20%;text-align:center;">รายการสินค้า</th>
                     <th style="width:20%;text-align:center;">รายละเอียดการส่งของ</th>
                     <th style="text-align: center;">รหัสพัสดุ</th>
-                    <th style="text-align: center">ยืนยันจัดส่ง</th>
+                    <th style="text-align: center; width: 5%">ยืนยันจัดส่ง</th>
                 </tr>
                 <tr>
                     <td style="width:5%;text-align:center;"></td>
                     <td style="width:5%;text-align:center;"><b><a href="orderInfo.php" class="color-link">Order ID</a></b> </td>
                     <td style="text-align: center;">วันที่ยืนยันรับเงิน</td>
                     <td style="width:20%;text-align:center;">ผู้สั่งซื้อ</td>
-                    <td style="width:20%;text-align:center;">รายการสินค้า</td>
                     <td style="width:20%;text-align:left;">
                         <b>ส่งแบบ : </b>
                         <br><b>ผู้รับ : </b>
                     </td>
                     <td style="text-align: center;">รหัสพัสดุ</td>
-                    <td style="text-align: center">ยืนยันจัดส่ง</td>
+                    <td style="text-align: center">
+                        <button type="button" class="btn btn-outline-success">ยืนยัน</button>
+                    </td>
                 </tr>
             </table>
 
