@@ -128,7 +128,7 @@ $dc=0;
         </div>
     </div>
     <?php }else{?>
-    <form action="addToDb_action.php" method="get">
+    <form action="addToDbForGuest_action.php" method="post">
     <div class="container">
         <!-- Cart item -->
         <a href="cart.php"><i class="fa fa-angle-double-left" style="font-size:24px"></i> &nbsp;ย้อนกลับ</a>
@@ -150,7 +150,8 @@ $dc=0;
                 <div class="w-size16 w-full-sm">
                     <?php echo "<input type=\"hidden\" name=\"nameShip\" value=\"$_POST[nameShip]\">";?>
                     <?php echo "<input type=\"hidden\" name=\"addressShip\" value=\"$_POST[addressShip]\">";?>
-                    <?php echo $_POST['nameShip']."<br>".$_POST['addressShip']?>
+                    <?php echo "<input type=\"hidden\" name=\"telShip\" value=\"$_POST[telShip]\">";?>
+                    <?php echo $_POST['nameShip']."( โทร. ".$_POST['telShip']." )"."<br>".$_POST['addressShip']?>
                 </div>
             </div>
 
@@ -310,6 +311,8 @@ $dc=0;
             <div class="size15 trans-0-4">
                 <!-- Button -->
                     <input type="hidden" name="codeID" value="<?php echo $_POST['codeID']?>">
+                    <input type="hidden" name="ship" value="<?php echo $_POST['ship']?>">
+                    <input type="hidden" name="dc" value="<?php echo $dc?>">
                     <button type="submit" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
                         สั่งซื้อสินค้า
                     </button>
