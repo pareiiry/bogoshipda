@@ -121,82 +121,6 @@ $discount=0;
         </div>
     </div>
 
-    <!-- Header Mobile -->
-    <div class="wrap_header_mobile">
-        <!-- Logo moblie -->
-        <a href="index.php" class="logo-mobile">
-            <font size="5"><b>Bogoshipda</b></font>
-        </a>
-
-        <!-- Button show menu -->
-        <div class="btn-show-menu">
-            <!-- Header Icon mobile -->
-            <div class="header-icons-mobile">
-                <a href="loginPage.php" class="header-wrapicon1 dis-block">
-                    ลงชื่อเข้าใช้
-                </a>
-
-                <span class="linedivide2"></span>
-
-            </div>
-
-            <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
-					<span class="hamburger-box">
-						<span class="hamburger-inner"></span>
-					</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Menu Mobile -->
-    <div class="wrap-side-menu" >
-        <nav class="side-menu">
-            <ul class="main-menu">
-
-                <li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
-                    <div class="topbar-child2-mobile">
-							<span class="topbar-email">
-								สวัสดี Guest
-							</span>
-
-                    </div>
-                </li>
-
-                <li class="item-topbar-mobile p-l-10">
-                    <div class="topbar-social-mobile">
-                        <a href="https://twitter.com/bogoshipdastore" class="topbar-social-item fa fa-twitter"></a>
-                        <a href="https://www.instagram.com/bogoshipda_store" class="topbar-social-item fa fa-instagram"></a>
-                    </div>
-                </li>
-
-                <li class="item-menu-mobile">
-                    <a href="index.php">Home</a>
-                    <ul class="sub-menu">
-                        <li><a href="index.html">Homepage V1</a></li>
-                        <li><a href="home-02.html">Homepage V2</a></li>
-                        <li><a href="home-03.html">Homepage V3</a></li>
-                    </ul>
-                    <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
-                </li>
-
-                <li>
-                    <a href="product.php">Product</a>
-                </li>
-
-                <li>
-                    <a href="review.php">Review</a>
-                </li>
-
-                <li class="sale-noti">
-                    <a href="design.php">Design</a>
-                </li>
-
-                <li>
-                    <a href="help.php">Help</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
 </header>
 
 
@@ -204,6 +128,25 @@ $discount=0;
 <!-- Cart -->
 <section class="cart bgwhite p-t-70 p-b-100">
     <div class="container">
+        <?php if(empty($_SESSION["shopping_cart"])){?>
+
+                <!-- Cart item -->
+                <a href="product.php"><i class="fa fa-angle-double-left" style="font-size:24px"></i> &nbsp;กลับไปยังหน้าสินค้า</a>
+                <table class="table-shopping-cart">
+                    <tr class="table-head">
+                        <th class="column-1"></th>
+                        <th class="column-2">สินค้า</th>
+                        <th class="column-3">ราคาต่อชิ้น</th>
+                        <th class="column-4 p-l-70">จำนวน</th>
+                        <th class="column-5">ราคารวม</th>
+                        <th class="column-5"></th>
+                    </tr>
+                    <tr class="table-row">
+                        <td colspan="6" style="text-align: center;color: red"> - ไม่มีสินค้าที่เลือก -</td>
+                    </tr>
+                </table>
+
+        <?php }else{?>
         <!-- Cart item -->
         <form action="updateToCart_action.php" method="post">
 
@@ -470,13 +413,7 @@ $discount=0;
                 <div class="w-size20 w-full-sm p-b-20">
                     <textarea class="form-control" style="width: 100%" rows="1" name="nameShip" required></textarea>
                 </div>
-
-                <span class="s-text18 w-size19 w-full-sm">
-                       เบอร์โทร :
-					</span>
-                <div class="w-size20 w-full-sm p-b-20">
-                    <textarea class="form-control" style="width: 100%" rows="1" name="tel" required></textarea>
-                </div>
+                
 					<span class="s-text18 w-size19 w-full-sm">
                         ที่อยู่ในการจัดส่ง :
 					</span>
@@ -535,6 +472,7 @@ $discount=0;
                 </button >
             </div>
             </form>
+            <?php }?>
         </div>
     </div>
 </section>
