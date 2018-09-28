@@ -16,7 +16,7 @@ $discount=0;
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>Home</title>
+    <title>Bogoshipda | ตะกร้าสินค้า</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -265,7 +265,7 @@ $discount=0;
                                         </div>
                                     </td>
                                     <td class="column-5">฿ <?php echo ($values["quantity"] * $values["price"]); ?></td>
-                                    <td>  <?php echo "<a href='deleteFromCare_acion.php?pdID=$values[pdID]' style='background-color: red;margin-left: 2%' class='flex-c-m bg1 bo-rad-23 hov1 s-text1 trans-0-4'>
+                                    <td class="column-6">  <?php echo "<a href='deleteFromCare_acion.php?pdID=$values[pdID]' style='background-color: red;margin-left: 2%' class='flex-c-m bg1 bo-rad-5 hov1 s-text1 trans-0-4'>
                                             X
                                          </a>";?>  </td>
                                 </tr>
@@ -303,6 +303,7 @@ $discount=0;
                             <tr class="table-row">
                                 <td colspan="4" style="text-align: right">รวมค่าสินค้าทั้งหมด:  &nbsp;&nbsp;</td>
                                 <td style="color: red">฿ <?php echo number_format($total, 0); ?></td>
+                                <td></td>
                             </tr>
                             <?php
                         }
@@ -470,6 +471,12 @@ $discount=0;
                     <textarea class="form-control" style="width: 100%" rows="1" name="nameShip" required></textarea>
                 </div>
 
+                <span class="s-text18 w-size19 w-full-sm">
+                       เบอร์โทร :
+					</span>
+                <div class="w-size20 w-full-sm p-b-20">
+                    <textarea class="form-control" style="width: 100%" rows="1" name="tel" required></textarea>
+                </div>
 					<span class="s-text18 w-size19 w-full-sm">
                         ที่อยู่ในการจัดส่ง :
 					</span>
@@ -603,9 +610,9 @@ $discount=0;
         </div>
 
         <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
-            <h4 class="s-text12 p-b-30">
-                        วิธีการชำระเงิน
-                    </h4>
+            <a href="payment.php"><h4 class="s-text12 p-b-30">
+                    วิธีการชำระเงิน
+                </h4></a>
 
             <ul>
                 <li class="p-b-9 s-text7">

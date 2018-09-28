@@ -3702,6 +3702,9 @@ SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE
 .w-size31 {
     width: 58%;
 }
+.w-size32 {
+    width: 45%;
+}
 /*[ Height Size ]
 ///////////////////////////////////////////////////////////
 */
@@ -4011,7 +4014,14 @@ EFFECT   EFFECT   EFFECT   EFFECT   EFFECT   EFFECT  EFFECT
 	color: white;
 	text-decoration: underline;
 }
-
+.hov7:hover {
+    background-color: limegreen;
+    color: white;
+}
+.hov8:hover {
+    background-color: red;
+    color: white;
+}
 /*[ Active ]
 ///////////////////////////////////////////////////////////
 */

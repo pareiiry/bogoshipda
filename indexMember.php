@@ -123,10 +123,16 @@ $result2 = mysqli_query($con,$sql2);
                     <div class="header-cart header-dropdown">
                         <center><?php echo "".$row["name"];?></center><hr>
                         <li>
-                            <a href="#">ข้อมูลส่วนตัว</a>
+                            <a href="myprofile.php">ข้อมูลส่วนตัว</a>
                         </li>
                         <li>
-                            <a href="#">ประวัติการสั่งซื้อ</a>
+                            <a href="history.php">ประวัติการสั่งซื้อ</a>
+                        </li>
+                        <li>
+                            <a href="addReview.php">เพิ่มรีวิวสินค้า</a>
+                        </li>
+                        <li>
+                            <a href="reviewHistory.php">รีวิวของฉัน</a>
                         </li>
                         <li>
                             <a href="logout.php">ลงชื่อออก</a>
@@ -236,6 +242,7 @@ $result2 = mysqli_query($con,$sql2);
                         <li class="header-cart-item">
                             <a href="#">แก้ไขบัญชีผู้ใช้</a>
                         </li>
+
                         <li class="header-cart-item">
                             <a href="logout.php">ลงชื่อออก</a>
                         </li>

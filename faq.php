@@ -5,7 +5,7 @@ include ('dbConnect.php');
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>Home</title>
+    <title>Bogoshipda | คำถามที่พบบ่อย</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
