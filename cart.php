@@ -474,8 +474,18 @@ $discount=0;
                         ที่อยู่ในการจัดส่ง :
 					</span>
 
-                <div class="w-size20 w-full-sm">
+                <div class="w-size20 w-full-sm p-b-20">
                     <textarea class="form-control" style="width: 100%" rows="3" name="addressShip" required></textarea>
+                </div>
+
+                <span class="s-text18 w-size19 w-full-sm">
+                        เบอร์โทรศัพท์ :
+				</span>
+<!--                <div class="size11 bo4 m-r-10">-->
+<!--                    <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="codePromo" placeholder="โค้ดส่วนลด">-->
+<!--                </div>-->
+                <div class="w-size20 bo4 w-full-sm" >
+                    <input type="tel"  class="form-control" style="width: 100%" name="telShip" pattern="^[0-9-+s()]*$" required>
                 </div>
             </div>
 
