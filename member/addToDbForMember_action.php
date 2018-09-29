@@ -1,6 +1,7 @@
 <?php
 session_start();
 include ('../dbConnect.php');
+$orderID = uniqid();
 $gpdID = uniqid();
 $uID=$_POST['uID'];
 $nameShip=$_POST['nameShip'];
@@ -47,7 +48,7 @@ if(!empty($_SESSION["shopping_cart"]))
     }
         $netPrice=number_format((($total-$discount)+$shipPrice), 0,'.', '');
         echo $netPrice;
-        $sqlaod="INSERT INTO order_table (orderID,uID,gpdID,allAmount,priceAmount,codeID,shipPrice,howShip,netPrice,dateTime,nameShip,addressShip,telShip,msgShip)VALUES('','$uID','$gpdID','$sumQuantity','$total','$codeID','$shipPrice','$howShip','$netPrice','$dateTime','$nameShip','$addressShip','$telShip','$msgShip')";//คำสั่งเพิ่มข้อมูล
+        $sqlaod="INSERT INTO order_table (orderID,uID,gpdID,allAmount,priceAmount,codeID,shipPrice,howShip,netPrice,dateTime,nameShip,addressShip,telShip,msgShip)VALUES('$orderID ','$uID','$gpdID','$sumQuantity','$total','$codeID','$shipPrice','$howShip','$netPrice','$dateTime','$nameShip','$addressShip','$telShip','$msgShip')";//คำสั่งเพิ่มข้อมูล
         $sql_queryaod = mysqli_query($con,$sqlaod);
 
       //  echo $netPrice.$total.$dateTime.$sumCost.$sumQuantity.$telShip.$codeID;
@@ -56,7 +57,7 @@ if(!empty($_SESSION["shopping_cart"]))
                 unset($_SESSION["shopping_cart"][$keys]);
             }
             echo "<script type='text/javascript'>alert('สั่งซื้อสินค้าเรียบร้อยแล้ว')</script>";
-            echo "<meta http-equiv ='refresh'content='0;URL=indexMember2.php'>"; //ส่งไปหน้า การโอนเงิน!!!!!!!!!!!!!!!!!!!!
+            echo "<meta http-equiv ='refresh'content='0;URL=success.php?orderID=$orderID'>"; //ส่งไปหน้า การโอนเงิน!!!!!!!!!!!!!!!!!!!!
         }else{
             echo "<script type='text/javascript'>alert('เกิดข้อผิดพลาดในการสั่งซื้อสินค้า')</script>";
             echo "<meta http-equiv ='refresh'content='0;URL=cart.php'>";

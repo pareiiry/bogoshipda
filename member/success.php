@@ -14,10 +14,9 @@ if($_SESSION['usertype'] != "member")
 
 include ('../dbConnect.php');
 $sql = "SELECT * FROM user WHERE uID = '".$_SESSION['ID']."' ";
-//$objQuery = mysqli_query($strSQL);
-//$objResult = mysqli_fetch_array($objQuery);
 $result = mysqli_query($con,$sql);
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
 $sqlB = "SELECT * FROM bank";
 $resultB = mysqli_query($con,$sqlB);
 ?>
@@ -149,138 +148,7 @@ $resultB = mysqli_query($con,$sqlB);
                     </div>
                 </div>
 
-                <span class="linedivide1"></span>
 
-                <div class="header-wrapicon2">
-                    <img src="../images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                    <span class="header-icons-noti"><?php
-                        $quantity=0;
-                        if(empty($_SESSION["shopping_cart"]))
-                        {
-                            echo "0";
-                        }
-                        else{
-                            foreach($_SESSION["shopping_cart"] as $keys2 => $values2)
-                            {
-                                $quantity+=$values2["quantity"];
-                            }echo $quantity;
-                        }?></span>
-                    <!-- Header cart noti -->
-                    <div class="header-cart header-dropdown">
-                        <ul class="header-cart-wrapitem">
-                            <?php
-                            if(!empty($_SESSION["shopping_cart"]))
-                            {
-                                $total = 0;
-
-                                foreach($_SESSION["shopping_cart"] as $keys => $values)
-                                {
-                                    if($values["pdID"]!==null) {
-                                        $sql3 = "SELECT * FROM image WHERE pdID= '".$values["pdID"]."' LIMIT 1";
-                                        $result3 = mysqli_query($con,$sql3);
-                                        $row3 = mysqli_fetch_array($result3,MYSQLI_ASSOC);
-                                        ?>
-                                        <li class="header-cart-item">
-                                            <div class="header-cart-item-img">
-                                                <?php
-
-                                                if($row3['img']==="" || empty($row3)){
-                                                    // echo"Hello";
-                                                    echo '<img src="images/no-picture.jpg">';
-                                                }
-                                                else {
-                                                    echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
-                                                }
-                                                ?>
-                                            </div>
-
-                                            <div class="header-cart-item-txt">
-                                                <a href="#" class="header-cart-item-name">
-                                                    <?php echo $values["name"]; ?>
-                                                </a>
-
-                                                <span class="header-cart-item-info">
-											<?php echo $values["quantity"]; ?> x  ฿<?php echo $values["price"]; ?>
-										</span>
-                                            </div>
-                                        </li>
-                                        <?php
-                                        $total = $total + ($values["quantity"] * $values["price"]);
-                                        //echo $total;
-                                    }
-                                    else{
-                                        unset($_SESSION["shopping_cart"][$keys]);
-                                        ?>
-                                        <li class="header-cart-item">
-                                            <div class="header-cart-item-img">
-                                            </div>
-
-                                            <div class="header-cart-item-txt">
-                                                <a href="#" class="header-cart-item-name">
-                                                    - ไม่มีสินค้าที่เลือก -
-                                                </a>
-
-                                                <span class="header-cart-item-info">
-
-										</span>
-                                            </div>
-                                        </li>
-                                        <?php
-
-                                    }
-                                }
-
-                            }
-                            else{
-                                ?>
-                                <li class="header-cart-item">
-                                    <div class="header-cart-item-img">
-                                    </div>
-
-                                    <div class="header-cart-item-txt">
-                                        <a href="#" class="header-cart-item-name">
-                                            - ไม่มีสินค้าที่เลือก -
-                                        </a>
-
-                                        <span class="header-cart-item-info">
-
-										</span>
-                                    </div>
-                                </li>
-                                <?php
-                            }
-                            ?>
-
-                        </ul>
-
-                        <?php
-                        if(!empty($_SESSION["shopping_cart"])){
-                            if($total!==null) {
-                                ?>
-                                <div class="header-cart-total">
-                                    รวมค่าสินค้า : ฿<?php echo number_format($total, 0); ?>
-                                </div>
-                                <?php
-                            }
-                        }?>
-
-                        <div class="header-cart-buttons">
-                            <div class="header-cart-wrapbtn">
-                                <!-- Button -->
-                                <a href="clearcart.php" style="background-color: red" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    ลบทั้งหมด
-                                </a>
-                            </div>
-
-                            <div class="header-cart-wrapbtn">
-                                <!-- Button -->
-                                <a href="cart.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    ดูตะกร้าสินค้า
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
         </div>
@@ -297,22 +165,26 @@ $resultB = mysqli_query($con,$sqlB);
                 <tr>
                     <td colspan="2">
                          <h5 class="m-text20 p-b-24" align="center">
-                            <img src="images/icons/success.png">
+                            <img src="../images/icons/success.png">
                             <br>
                             สั่งซื้อเรียบร้อย (รอชำระเงิน)</h5>
-                            <h6 align="center" style="color: darkgray">เลขที่รายการสั่งซื้อของคุณคือ #  </h6>
+                            <h6 align="center" style="color: darkgray">เลขที่รายการสั่งซื้อของคุณคือ <?php echo $_GET['orderID']; ?>  </h6>
                     </td>
                 </tr>
+                <?php $sqlOrder = "SELECT * FROM order_table WHERE orderID = '".$_GET['orderID']."' ";
+                $resultOrder = mysqli_query($con,$sqlOrder);
+                $rowOrder = mysqli_fetch_array($resultOrder,MYSQLI_ASSOC);?>
                 <tr>
                     <td align="center">จำนวนเงินที่ต้องชำระ
-                        <h4 style="color: #ffaeba">฿</h4>
+                        <h4 style="color: #ffaeba">฿ <?php echo $rowOrder['netPrice'];?></h4>
                     </td>
                     <td align="center">สถานะรายการสั่งซื้อ
                     <h4 style="color: limegreen">รอชำระเงิน</h4>
                     </td>
                 </tr>
             </table>
-            <h6 align="center" style="color: red">กรุณาชำระเงินภายในวันที่ หากไม่ได้ชำระเงินภายในวันที่กำหนด รายการสั่งซื้อของคุณจะถูกยกเลิกโดยอัตโนมัติ</h6>
+            <?php $payDate = date('d-m-Y',strtotime($rowOrder['dateTime'] . "+5 days"));?>
+            <h6 align="center" style="color: red">กรุณาชำระเงินภายในวันที่ <?php echo $payDate;?> หากไม่ได้ชำระเงินภายในวันที่กำหนด รายการสั่งซื้อของคุณจะถูกยกเลิกโดยอัตโนมัติ</h6>
             <hr>
             <h5 class="m-text20 p-b-24" align="center">
                 วิธีการชำระเงิน</h5>
@@ -333,46 +205,46 @@ $resultB = mysqli_query($con,$sqlB);
                 {
                     echo"<tr>";
                     if($row2['bankName']=='SCB'){
-                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/scb.png\"  width=\"20%\"></td>";
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/scb.png\"  width=\"20%\"></td>";
                     }
                     else if($row2['bankName']=='KTB') {
-                        echo " <td style=\"text-align:center;\"><img src=\"images/bank/ktb.jpg\"  width=\"20%\"></td>";
+                        echo " <td style=\"text-align:center;\"><img src=\"../images/bank/ktb.jpg\"  width=\"20%\"></td>";
                     }
                     else if($row2['bankName']=='BBL'){
-                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/bbl.png\"  width=\"20%\"></td>";
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/bbl.png\"  width=\"20%\"></td>";
                     }
                     else if($row2['bankName']=='KBANK'){
-                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/kbank.png\"  width=\"20%\"></td>";
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/kbank.png\"  width=\"20%\"></td>";
                     }else if($row2['bankName']=='GSB'){
-                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/gsb.png\"  width=\"20%\"></td>";
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/gsb.png\"  width=\"20%\"></td>";
                     }  else if($row2['bankName']=='KRUNGSRI'){
-                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/krungsri.png\"  width=\"20%\"></td>";
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/krungsri.png\"  width=\"20%\"></td>";
                     }
                     else if($row2['bankName']=='TMB'){
-                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/tmb.png\"  width=\"20%\"></td>";
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/tmb.png\"  width=\"20%\"></td>";
                     }
                     else if($row2['bankName']=='UOB'){
-                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/uob.png\"  width=\"20%\"></td>";
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/uob.png\"  width=\"20%\"></td>";
                     }
                     else if($row2['bankName']=='TBANK') {
-                        echo "<td style=\"text-align:center;\"><img src=\"images/bank/tbank.png\"  width=\"20%\"></td>";
+                        echo "<td style=\"text-align:center;\"><img src=\"../images/bank/tbank.png\"  width=\"20%\"></td>";
                     }else if($row2['bankName']=='CIMB'){
-                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/cimb.png\"  width=\"20%\"></td>";
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/cimb.png\"  width=\"20%\"></td>";
                     }
                     else if($row2['bankName']=='CITIBANK'){
-                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/citibank.png\"  width=\"20%\"></td>";
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/citibank.png\"  width=\"20%\"></td>";
                     }
                     else if($row2['bankName']=='SCBT'){
-                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/standardcharter.png\"  width=\"20%\"></td>";
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/standardcharter.png\"  width=\"20%\"></td>";
                     }
                     else if($row2['bankName']=='TISCO'){
-                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/tisco.png\"  width=\"20%\"></td>";
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/tisco.png\"  width=\"20%\"></td>";
                     }
                     else if($row2['bankName']=='Wallet') {
-                        echo "<td style=\"text-align:center;\"><img src=\"images/bank/true.jpg\"  width=\"20%\"></td>";
+                        echo "<td style=\"text-align:center;\"><img src=\"../images/bank/true.jpg\"  width=\"20%\"></td>";
                     }
                     else if($row2['bankName']=='PrompPay') {
-                        echo "<td style=\"text-align:center;\"><img src=\"images/bank/promptpay.png\"  width=\"20%\"></td>";
+                        echo "<td style=\"text-align:center;\"><img src=\"../images/bank/promptpay.png\"  width=\"20%\"></td>";
                     }
                     echo "<td style=\"text-align:center;\">$row2[bankName]</td>
                      <td style=\"text-align:center;\">$row2[accountName]</td>

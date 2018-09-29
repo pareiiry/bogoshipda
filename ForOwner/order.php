@@ -284,22 +284,13 @@ $result2 = mysqli_query($con,$sql2);
                     <th style="width:10%;text-align:center;"></th>
                     <th style="width:10%;text-align:center;">Order ID</th>
                     <th style="width:20%;text-align:center;">ชื่อผู้สั่งซื้อ</th>
-                    <th style="width:20%;text-align:center;">รายการสินค้า</th>
                     <th style="width:20%;text-align:center;">ยอดสั่งซื้อ(บาท)</th>
-                    <th style="width:10%;text-align:center;"></th>
                 </tr>
                 <tr>
                     <td style="width:10%;text-align:center;"></td>
                     <td style="width:10%;text-align:center;"><b><a href="orderInfo.php" class="color-link">Order ID</a></b></td>
                     <td style="width:20%;text-align:center;">ชื่อผู้สั่งซื้อ</td>
-                    <td style="width:20%;text-align:center;">รายการสินค้า</td>
                     <td style="width:20%;text-align:center;">000</td>
-                    <td style="width:10%;text-align:center;">
-                        <form action="orderInfo.php" method="get">
-                            <input style='display: none;' type="text" name="uID" value=''>
-                            <button class='btn-view' type="submit"><i class="fa fa-search"></i></button>
-                        </form>
-                    </td>
                 </tr>
             </table>
 
