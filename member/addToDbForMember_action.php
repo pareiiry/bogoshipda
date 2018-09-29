@@ -1,8 +1,8 @@
 <?php
 session_start();
-include ('dbConnect.php');
+include ('../dbConnect.php');
 $gpdID = uniqid();
-
+$uID=$_POST['uID'];
 $nameShip=$_POST['nameShip'];
 $addressShip=$_POST['addressShip'];
 $telShip=$_POST['telShip'];
@@ -18,7 +18,7 @@ else{
 $discount =$_POST['dc'];
 $dateTime = date("Y-m-d H:i:s");
 $howShip=$_POST['ship'];
-$uID=$_POST['uID'];
+
 
 $total = 0;
 $sumQuantity=0;
@@ -56,7 +56,7 @@ if(!empty($_SESSION["shopping_cart"]))
                 unset($_SESSION["shopping_cart"][$keys]);
             }
             echo "<script type='text/javascript'>alert('สั่งซื้อสินค้าเรียบร้อยแล้ว')</script>";
-            echo "<meta http-equiv ='refresh'content='0;URL=index.php'>"; //ส่งไปหน้า การโอนเงิน!!!!!!!!!!!!!!!!!!!!
+            echo "<meta http-equiv ='refresh'content='0;URL=indexMember2.php'>"; //ส่งไปหน้า การโอนเงิน!!!!!!!!!!!!!!!!!!!!
         }else{
             echo "<script type='text/javascript'>alert('เกิดข้อผิดพลาดในการสั่งซื้อสินค้า')</script>";
             echo "<meta http-equiv ='refresh'content='0;URL=cart.php'>";

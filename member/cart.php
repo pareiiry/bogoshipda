@@ -451,7 +451,7 @@ $discount=0;
                        ชื่อผู้รับ :
 					</span>
                 <div class="w-size20 w-full-sm p-b-20">
-                    <textarea class="form-control" style="width: 100%" rows="1" name="nameShip" required></textarea>
+                    <textarea class="form-control" style="width: 100%" rows="1" name="nameShip" required><?php echo $row['name'];?></textarea>
                 </div>
 
 					<span class="s-text18 w-size19 w-full-sm">
@@ -459,7 +459,7 @@ $discount=0;
 					</span>
 
                 <div class="w-size20 w-full-sm p-b-20">
-                    <textarea class="form-control" style="width: 100%" rows="3" name="addressShip" required></textarea>
+                    <textarea class="form-control" style="width: 100%" rows="3" name="addressShip" required><?php echo $row['address'];?></textarea>
                 </div>
 
                 <span class="s-text18 w-size19 w-full-sm">
@@ -469,7 +469,7 @@ $discount=0;
 <!--                    <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="codePromo" placeholder="โค้ดส่วนลด">-->
 <!--                </div>-->
                 <div class="w-size20 bo4 w-full-sm" >
-                    <input type="tel"  class="form-control" style="width: 100%" name="telShip" pattern="^[0-9-+s()]*$" required>
+                    <input type="tel"  class="form-control" style="width: 100%" name="telShip" pattern="^[0-9-+s()]*$" value="<?php echo $row['phone_number'];?>" required>
                 </div>
             </div>
 
@@ -516,15 +516,6 @@ $discount=0;
         </div>
     </div>
 </section>
-
-<!-- Banner2 -->
-
-
-
-<!-- Blog -->
-
-
-<!-- Instagram -->
 
 
 <!-- Footer -->

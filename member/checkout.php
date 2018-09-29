@@ -20,6 +20,7 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 $sql2 = "SELECT * FROM product";
 $result2 = mysqli_query($con,$sql2);
 $dc=0;
+
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -168,7 +169,7 @@ $dc=0;
         </div>
     </div>
     <?php }else{?>
-    <form action="addToDbForGuest_action.php" method="post">
+    <form action="addToDbForMember_action.php" method="post">
     <div class="container">
         <!-- Cart item -->
         <a href="cart.php"><i class="fa fa-angle-double-left" style="font-size:24px"></i> &nbsp;ย้อนกลับ</a>
@@ -295,6 +296,7 @@ $dc=0;
                     </div>
                     <div class="w-size15  w-full-sm" align="right">
                         ฿ <?php
+                        $addShip=0;
                         if($_POST['ship']=='Regis'){
                             $ship = 30;
                             if($_POST['countShip']>5){
@@ -353,6 +355,7 @@ $dc=0;
                     <input type="hidden" name="codeID" value="<?php echo $_POST['codeID']?>">
                     <input type="hidden" name="ship" value="<?php echo $_POST['ship']?>">
                     <input type="hidden" name="dc" value="<?php echo $dc?>">
+                    <input type="hidden" name="uID" value="<?php echo $row['uID'];?>">
                     <button type="submit" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
                         สั่งซื้อสินค้า
                     </button>
