@@ -1,8 +1,24 @@
 <?php
 session_start();
-include ('dbConnect.php');
-$sql = "SELECT * FROM bank";
+if($_SESSION['ID'] == "")
+{
+    //echo "Please Login!";
+    header("location:../loginPage.php");
+    exit();
+}
+if($_SESSION['usertype'] != "member")
+{
+    //echo "ของ Adminเท่านั้นจ้าาา";
+    exit();
+}
+
+include ('../dbConnect.php');
+$sql = "SELECT * FROM user WHERE uID = '".$_SESSION['ID']."' ";
 $result = mysqli_query($con,$sql);
+$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
+$sqlBank = "SELECT * FROM bank";
+$resultBank = mysqli_query($con,$sqlBank);
 
 ?>
 
@@ -13,35 +29,35 @@ $result = mysqli_query($con,$sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="images/icons/favicon.png"/>
+    <link rel="icon" type="image/png" href="../images/icons/favicon.png"/>
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="fonts/themify/themify-icons.css">
+    <link rel="stylesheet" type="text/css" href="../fonts/themify/themify-icons.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="../fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="fonts/elegant-font/html-css/style.css">
+    <link rel="stylesheet" type="text/css" href="../fonts/elegant-font/html-css/style.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/animate/animate.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/css-hamburgers/hamburgers.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/animsition/css/animsition.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/select2/select2.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/daterangepicker/daterangepicker.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/slick/slick.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/lightbox2/css/lightbox.min.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/lightbox2/css/lightbox.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="css/util.css">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link rel="stylesheet" type="text/css" href="css/styleHelp.css">
+    <link rel="stylesheet" type="text/css" href="../css/util.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/styleHelp.css">
 
     <!--===============================================================================================-->
     
@@ -78,7 +94,7 @@ $result = mysqli_query($con,$sql);
 
             <div class="topbar-child2">
 					<span class="topbar-email">
-						สวัสดี Guest | <a href="../loginPage.php">ลงชื่อเข้าใช้</a>
+						สวัสดี คุณ <?php echo "".$row["name"];?>
 					</span>
             </div>
         </div>
@@ -118,7 +134,29 @@ $result = mysqli_query($con,$sql);
 
             <!-- Header Icon -->
             <div class="header-icons">
+                <div class="header-wrapicon1">
+                    <img src="../images/icons/icon-header-01.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+                    <div class="header-cart header-dropdown">
+                        <center><?php echo "".$row["name"];?></center><hr>
+                        <li>
+                            <a href="myprofile.php">ข้อมูลส่วนตัว</a>
+                        </li>
+                        <li>
+                            <a href="history.php">ประวัติการสั่งซื้อ</a>
+                        </li>
+                        <li>
+                            <a href="addReview.php">เพิ่มรีวิวสินค้า</a>
+                        </li>
+                        <li>
+                            <a href="myreview.php">รีวิวของฉัน</a>
+                        </li>
+                        <li>
+                            <a href="../logout.php">ลงชื่อออก</a>
+                        </li>
+                    </div>
+                </div>
 
+                <span class="linedivide1"></span>
 
                 <div class="header-wrapicon2">
                     <img src="../images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
@@ -268,21 +306,21 @@ $result = mysqli_query($con,$sql);
 <div class="row">
                         <div class="col-xs-3">
                             <div class="list-group">
-                                <a class="list-group-item disabled" href="#"><img src="../images/icons/logo.png"/></a>
-                                <a href="../color.php" class="list-group-item">สีสาย/สีสกรีน</a>
-                                <a href="../price.php" class="list-group-item">ตารางราคา</a>
-                                <a href="../shipping.php" class="list-group-item">ค่าจัดส่ง</a>
-                                <a href="../payment.php" class="list-group-item">การชำระเงิน</a>
-                                <a href="../faq.php" class="list-group-item">คำถามที่พบบ่อย</a>
-                                <a href="../contact.php" class="list-group-item">ติดต่อเรา</a>
-                                <a href="../terms.php" class="list-group-item">เงื่อนไขข้อตกลง</a>
-                            </div>
-                            <div class="list-group">
-                                <a href="#" class="list-group-item disabled">ช่วยเหลือ</a>
-                                <a href="../how-to-order.php" class="list-group-item">ขั้นตอนสั่งซื้อ</a>
-                                <a href="../coupon.php" class="list-group-item">วิธีใช้งานคูปอง</a>
-                                <a href="../how-to-payment.php" class="list-group-item">ขั้นตอนแจ้งชำระเงิน</a>
-                            </div>
+                            <a class="list-group-item disabled" href="#"><img src="../images/icons/logo.png"/></a>
+                            <a href="color.php" class="list-group-item">สีสาย/สีสกรีน</a>
+                            <a href="price.php" class="list-group-item">ตารางราคา</a>
+                            <a href="shipping.php" class="list-group-item">ค่าจัดส่ง</a>
+                            <a href="payment.php" class="list-group-item">การชำระเงิน</a>
+                            <a href="faq.php" class="list-group-item">คำถามที่พบบ่อย</a>
+                            <a href="contact.php" class="list-group-item">ติดต่อเรา</a>
+                            <a href="terms.php" class="list-group-item">เงื่อนไขข้อตกลง</a>
+                        </div>
+    <div class="list-group">
+        <a href="#" class="list-group-item disabled">ช่วยเหลือ</a>
+        <a href="how-to-order.php" class="list-group-item">ขั้นตอนสั่งซื้อ</a>
+        <a href="coupon.php" class="list-group-item">วิธีใช้งานคูปอง</a>
+        <a href="how-to-payment.php" class="list-group-item">ขั้นตอนแจ้งชำระเงิน</a>
+    </div>
                         </div>                         <div class="col-xs-9">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -302,7 +340,7 @@ $result = mysqli_query($con,$sql);
 
         <?php
 
-        while($row2= mysqli_fetch_assoc($result))// show the information from query
+        while($row2= mysqli_fetch_assoc($resultBank))// show the information from query
                 {
                     echo"<tr>";
                     if($row2['bankName']=='SCB'){
@@ -479,14 +517,14 @@ $result = mysqli_query($con,$sql);
 
 
 <!--===============================================================================================-->
-<script type="text/javascript" src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
-<script type="text/javascript" src="vendor/animsition/js/animsition.min.js"></script>
+<script type="text/javascript" src="../vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
-<script type="text/javascript" src="vendor/bootstrap/js/popper.js"></script>
-<script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../vendor/bootstrap/js/popper.js"></script>
+<script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
-<script type="text/javascript" src="vendor/select2/select2.min.js"></script>
+<script type="text/javascript" src="../vendor/select2/select2.min.js"></script>
 <script type="text/javascript">
     $(".selection-1").select2({
         minimumResultsForSearch: 20,
@@ -494,14 +532,14 @@ $result = mysqli_query($con,$sql);
     });
 </script>
 <!--===============================================================================================-->
-<script type="text/javascript" src="vendor/slick/slick.min.js"></script>
-<script type="text/javascript" src="js/slick-custom.js"></script>
+<script type="text/javascript" src="../vendor/slick/slick.min.js"></script>
+<script type="text/javascript" src="../js/slick-custom.js"></script>
 <!--===============================================================================================-->
-<script type="text/javascript" src="vendor/countdowntime/countdowntime.js"></script>
+<script type="text/javascript" src="../vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
-<script type="text/javascript" src="vendor/lightbox2/js/lightbox.min.js"></script>
+<script type="text/javascript" src="../vendor/lightbox2/js/lightbox.min.js"></script>
 <!--===============================================================================================-->
-<script type="text/javascript" src="vendor/sweetalert/sweetalert.min.js"></script>
+<script type="text/javascript" src="../vendor/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
     $('.block2-btn-addcart').each(function(){
         var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
@@ -519,7 +557,7 @@ $result = mysqli_query($con,$sql);
 </script>
 
 <!--===============================================================================================-->
-<script src="js/main.js"></script>
+<script src="../js/main.js"></script>
 
 </body>
 </html>

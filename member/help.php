@@ -1,6 +1,21 @@
 <?php
 session_start();
+if($_SESSION['ID'] == "")
+{
+    //echo "Please Login!";
+    header("location:../loginPage.php");
+    exit();
+}
+if($_SESSION['usertype'] != "member")
+{
+    //echo "ของ Adminเท่านั้นจ้าาา";
+    exit();
+}
+
 include ('../dbConnect.php');
+$sql = "SELECT * FROM user WHERE uID = '".$_SESSION['ID']."' ";
+$result = mysqli_query($con,$sql);
+$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -78,7 +93,7 @@ include ('../dbConnect.php');
 
             <div class="topbar-child2">
 					<span class="topbar-email">
-						สวัสดี Guest | <a href="../loginPage.php">ลงชื่อเข้าใช้</a>
+						สวัสดี คุณ <?php echo "".$row["name"];?>
 					</span>
             </div>
         </div>
@@ -119,7 +134,29 @@ include ('../dbConnect.php');
             <!-- Header Icon -->
             <div class="header-icons">
 
+                <div class="header-wrapicon1">
+                    <img src="../images/icons/icon-header-01.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+                    <div class="header-cart header-dropdown">
+                        <center><?php echo "".$row["name"];?></center><hr>
+                        <li>
+                            <a href="myprofile.php">ข้อมูลส่วนตัว</a>
+                        </li>
+                        <li>
+                            <a href="history.php">ประวัติการสั่งซื้อ</a>
+                        </li>
+                        <li>
+                            <a href="addReview.php">เพิ่มรีวิวสินค้า</a>
+                        </li>
+                        <li>
+                            <a href="myreview.php">รีวิวของฉัน</a>
+                        </li>
+                        <li>
+                            <a href="../logout.php">ลงชื่อออก</a>
+                        </li>
+                    </div>
+                </div>
 
+                <span class="linedivide1"></span>
                 <div class="header-wrapicon2">
                     <img src="../images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
                     <span class="header-icons-noti"><?php
@@ -269,19 +306,19 @@ include ('../dbConnect.php');
                         <div class="col-xs-3">
     <div class="list-group">
         <a class="list-group-item disabled" href="#"><img src="../images/icons/logo.png"/></a>
-        <a href="../color.php" class="list-group-item">สีสาย/สีสกรีน</a>
-        <a href="../price.php" class="list-group-item">ตารางราคา</a>
-        <a href="../shipping.php" class="list-group-item">ค่าจัดส่ง</a>
-        <a href="../payment.php" class="list-group-item">การชำระเงิน</a>
-        <a href="../faq.php" class="list-group-item">คำถามที่พบบ่อย</a>
-        <a href="../contact.php" class="list-group-item">ติดต่อเรา</a>
-        <a href="../terms.php" class="list-group-item">เงื่อนไขข้อตกลง</a>
+        <a href="color.php" class="list-group-item">สีสาย/สีสกรีน</a>
+        <a href="price.php" class="list-group-item">ตารางราคา</a>
+        <a href="shipping.php" class="list-group-item">ค่าจัดส่ง</a>
+        <a href="payment.php" class="list-group-item">การชำระเงิน</a>
+        <a href="faq.php" class="list-group-item">คำถามที่พบบ่อย</a>
+        <a href="contact.php" class="list-group-item">ติดต่อเรา</a>
+        <a href="terms.php" class="list-group-item">เงื่อนไขข้อตกลง</a>
     </div>
     <div class="list-group">
         <a href="#" class="list-group-item disabled">ช่วยเหลือ</a>
-        <a href="../how-to-order.php" class="list-group-item">ขั้นตอนสั่งซื้อ</a>
-        <a href="../coupon.php" class="list-group-item">วิธีใช้งานคูปอง</a>
-        <a href="../how-to-payment.php" class="list-group-item">ขั้นตอนแจ้งชำระเงิน</a>
+        <a href="how-to-order.php" class="list-group-item">ขั้นตอนสั่งซื้อ</a>
+        <a href="coupon.php" class="list-group-item">วิธีใช้งานคูปอง</a>
+        <a href="how-to-payment.php" class="list-group-item">ขั้นตอนแจ้งชำระเงิน</a>
     </div>
 </div>                         <div class="col-xs-9">
                             <div class="panel panel-default">
