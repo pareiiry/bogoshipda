@@ -41,7 +41,7 @@ $result = mysqli_query($con,$sql);
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="css/util.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
-        <link rel="stylesheet" type="text/css" href="css/styleHelp.css">
+    <link rel="stylesheet" type="text/css" href="css/styleHelp.css">
 
     <!--===============================================================================================-->
     
@@ -78,14 +78,14 @@ $result = mysqli_query($con,$sql);
 
             <div class="topbar-child2">
 					<span class="topbar-email">
-						สวัสดี Guest | <a href="loginPage.php">ลงชื่อเข้าใช้</a>
+						สวัสดี Guest | <a href="../loginPage.php">ลงชื่อเข้าใช้</a>
 					</span>
             </div>
         </div>
 
         <div class="wrap_header">
             <!-- Logo -->
-            <a href="index.php" class="logo" >
+            <a href="indexMember2.php" class="logo" >
                 <font size="5"><b>Bogoshipda</b></font>
                 <!-- <img src="images/icons/logo.png" alt="IMG-LOGO">-->
             </a>
@@ -95,22 +95,22 @@ $result = mysqli_query($con,$sql);
                 <nav class="menu">
                     <ul class="main_menu">
                         <li>
-                            <a href="index.php">หน้าแรก</a>
+                            <a href="indexMember2.php">หน้าแรก</a>
                         </li>
 
                         <li>
-                            <a href="product.php">สินค้า</a>
+                            <a href="../product.php">สินค้า</a>
                         </li>
 
                         <li>
-                            <a href="review.php">รีวิว</a>
+                            <a href="../review.php">รีวิว</a>
                         </li>
 
                         <li>
-                            <a href="design.php">ออกแบบ</a>
+                            <a href="../design.php">ออกแบบ</a>
                         </li>
                         <li class="sale-noti">
-                            <a href="help.php">ช่วยเหลือ</a>
+                            <a href="../help.php">ช่วยเหลือ</a>
                         </li>
                     </ul>
                 </nav>
@@ -121,7 +121,7 @@ $result = mysqli_query($con,$sql);
 
 
                 <div class="header-wrapicon2">
-                    <img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+                    <img src="../images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
                     <span class="header-icons-noti"><?php
                         $quantity=0;
                         if(empty($_SESSION["shopping_cart"]))
@@ -155,7 +155,7 @@ $result = mysqli_query($con,$sql);
 
                                                 if($row3['img']==="" || empty($row3)){
                                                     // echo"Hello";
-                                                    echo '<img src="images/no-picture.jpg">';
+                                                    echo '<img src="../images/no-picture.jpg">';
                                                 }
                                                 else {
                                                     echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
@@ -164,7 +164,7 @@ $result = mysqli_query($con,$sql);
                                             </div>
 
                                             <div class="header-cart-item-txt">
-                                                <a href="product-detail.php?pdID=<?php echo $values['pdID']; ?>" class="header-cart-item-name">
+                                                <a href="../product-detail.php?pdID=<?php echo $values['pdID']; ?>" class="header-cart-item-name">
                                                     <?php echo $values["name"]; ?>
                                                 </a>
 
@@ -236,14 +236,14 @@ $result = mysqli_query($con,$sql);
                         <div class="header-cart-buttons">
                             <div class="header-cart-wrapbtn">
                                 <!-- Button -->
-                                <a href="clearcart.php" style="background-color: red" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                <a href="../clearcart.php" style="background-color: red" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
                                     ลบทั้งหมด
                                 </a>
                             </div>
 
                             <div class="header-cart-wrapbtn">
                                 <!-- Button -->
-                                <a href="cart.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                <a href="../cart.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
                                     ดูตะกร้าสินค้า
                                 </a>
                             </div>
@@ -254,161 +254,7 @@ $result = mysqli_query($con,$sql);
         </div>
     </div>
 
-    <!-- Header Mobile -->
-    <div class="wrap_header_mobile">
-        <!-- Logo moblie -->
-        <a href="index.php" class="logo-mobile">
-            <font size="5"><b>Bogoshipda</b></font>
-        </a>
 
-        <!-- Button show menu -->
-        <div class="btn-show-menu">
-            <!-- Header Icon mobile -->
-            <div class="header-icons-mobile">
-                <a href="loginPage.php" class="header-wrapicon1 dis-block">
-                    ลงชื่อเข้าใช้
-                </a>
-
-                <span class="linedivide2"></span>
-
-                <div class="header-wrapicon2">
-                    <img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                    <span class="header-icons-noti">0</span>
-
-                    <!-- Header cart noti -->
-                    <div class="header-cart header-dropdown">
-                        <ul class="header-cart-wrapitem">
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-01.jpg" alt="IMG">
-                                </div>
-
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        White Shirt With Pleat Detail Back
-                                    </a>
-
-                                    <span class="header-cart-item-info">
-											1 x $19.00
-										</span>
-                                </div>
-                            </li>
-
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-02.jpg" alt="IMG">
-                                </div>
-
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        Converse All Star Hi Black Canvas
-                                    </a>
-
-                                    <span class="header-cart-item-info">
-											1 x $39.00
-										</span>
-                                </div>
-                            </li>
-
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="images/item-cart-03.jpg" alt="IMG">
-                                </div>
-
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        Nixon Porter Leather Watch In Tan
-                                    </a>
-
-                                    <span class="header-cart-item-info">
-											1 x $17.00
-										</span>
-                                </div>
-                            </li>
-                        </ul>
-
-                        <div class="header-cart-total">
-                            Total: $75.00
-                        </div>
-
-                        <div class="header-cart-buttons">
-                            <div class="header-cart-wrapbtn">
-                                <!-- Button -->
-                                <a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    View Cart
-                                </a>
-                            </div>
-
-                            <div class="header-cart-wrapbtn">
-                                <!-- Button -->
-                                <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    Check Out
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
-					<span class="hamburger-box">
-						<span class="hamburger-inner"></span>
-					</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Menu Mobile -->
-    <div class="wrap-side-menu" >
-        <nav class="side-menu">
-            <ul class="main-menu">
-
-                <li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
-                    <div class="topbar-child2-mobile">
-							<span class="topbar-email">
-								สวัสดี Guest
-							</span>
-
-                    </div>
-                </li>
-
-                <li class="item-topbar-mobile p-l-10">
-                    <div class="topbar-social-mobile">
-                        <a href="https://twitter.com/bogoshipdastore" class="topbar-social-item fa fa-twitter"></a>
-                	<a href="https://www.instagram.com/bogoshipda_store" class="topbar-social-item fa fa-instagram"></a>
-                    </div>
-                </li>
-
-                <li class="item-menu-mobile">
-                    <a href="index.php">หน้าหลัก</a>
-                    <ul class="sub-menu">
-                        <li><a href="index.html">Homepage V1</a></li>
-                        <li><a href="home-02.html">Homepage V2</a></li>
-                        <li><a href="home-03.html">Homepage V3</a></li>
-                    </ul>
-                    <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
-                </li>
-
-                <li class="item-menu-mobile">
-                    <a href="product.html">Product</a>
-                </li>
-
-                <li class="item-menu-mobile">
-                    <a href="product.html">Review</a>
-                </li>
-
-                <li class="item-menu-mobile">
-                    <a href="cart.html">Design</a>
-                </li>
-
-                <li class="item-menu-mobile">
-                    <a href="about.html">Help</a>
-                </li>
-
-       
-            </ul>
-        </nav>
-    </div>
 </header>
 
 
@@ -421,23 +267,23 @@ $result = mysqli_query($con,$sql);
     <div class="container">
 <div class="row">
                         <div class="col-xs-3">
-    <div class="list-group">
-        <a class="list-group-item disabled" href="#"><img src="images/icons/logo.png"/></a>
-        <a href="color.php" class="list-group-item">สีสาย/สีสกรีน</a>
-        <a href="price.php" class="list-group-item">ตารางราคา</a>
-        <a href="shipping.php" class="list-group-item">ค่าจัดส่ง</a>
-        <a href="payment.php" class="list-group-item">การชำระเงิน</a>
-        <a href="faq.php" class="list-group-item">คำถามที่พบบ่อย</a>
-        <a href="contact.php" class="list-group-item">ติดต่อเรา</a>
-        <a href="terms.php" class="list-group-item">เงื่อนไขข้อตกลง</a>
-    </div>
-    <div class="list-group">
-        <a href="#" class="list-group-item disabled">ช่วยเหลือ</a>
-        <a href="how-to-order.php" class="list-group-item">ขั้นตอนสั่งซื้อ</a>
-        <a href="coupon.php" class="list-group-item">วิธีใช้งานคูปอง</a>
-        <a href="how-to-payment.php" class="list-group-item">ขั้นตอนแจ้งชำระเงิน</a>
-    </div> 
-</div>                         <div class="col-xs-9">
+                            <div class="list-group">
+                                <a class="list-group-item disabled" href="#"><img src="../images/icons/logo.png"/></a>
+                                <a href="../color.php" class="list-group-item">สีสาย/สีสกรีน</a>
+                                <a href="../price.php" class="list-group-item">ตารางราคา</a>
+                                <a href="../shipping.php" class="list-group-item">ค่าจัดส่ง</a>
+                                <a href="../payment.php" class="list-group-item">การชำระเงิน</a>
+                                <a href="../faq.php" class="list-group-item">คำถามที่พบบ่อย</a>
+                                <a href="../contact.php" class="list-group-item">ติดต่อเรา</a>
+                                <a href="../terms.php" class="list-group-item">เงื่อนไขข้อตกลง</a>
+                            </div>
+                            <div class="list-group">
+                                <a href="#" class="list-group-item disabled">ช่วยเหลือ</a>
+                                <a href="../how-to-order.php" class="list-group-item">ขั้นตอนสั่งซื้อ</a>
+                                <a href="../coupon.php" class="list-group-item">วิธีใช้งานคูปอง</a>
+                                <a href="../how-to-payment.php" class="list-group-item">ขั้นตอนแจ้งชำระเงิน</a>
+                            </div>
+                        </div>                         <div class="col-xs-9">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
     <h3 class="panel-title">การชำระเงิน</h3>
@@ -460,46 +306,46 @@ $result = mysqli_query($con,$sql);
                 {
                     echo"<tr>";
                     if($row2['bankName']=='SCB'){
-                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/scb.png\"  width=\"50%\"></td>";
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/scb.png\"  width=\"50%\"></td>";
                     }
                     else if($row2['bankName']=='KTB') {
-                        echo " <td style=\"text-align:center;\"><img src=\"images/bank/ktb.jpg\"  width=\"50%\"></td>";
+                        echo " <td style=\"text-align:center;\"><img src=\"../images/bank/ktb.jpg\"  width=\"50%\"></td>";
                     }
                     else if($row2['bankName']=='BBL'){
-                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/bbl.png\"  width=\"50%\"></td>";
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/bbl.png\"  width=\"50%\"></td>";
                     }
                     else if($row2['bankName']=='KBANK'){
-                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/kbank.png\"  width=\"50%\"></td>";
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/kbank.png\"  width=\"50%\"></td>";
                     }else if($row2['bankName']=='GSB'){
-                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/gsb.png\"  width=\"50%\"></td>";
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/gsb.png\"  width=\"50%\"></td>";
                     }  else if($row2['bankName']=='KRUNGSRI'){
-                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/krungsri.png\"  width=\"50%\"></td>";
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/krungsri.png\"  width=\"50%\"></td>";
                     }
                     else if($row2['bankName']=='TMB'){
-                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/tmb.png\"  width=\"50%\"></td>";
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/tmb.png\"  width=\"50%\"></td>";
                     }
                     else if($row2['bankName']=='UOB'){
-                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/uob.png\"  width=\"50%\"></td>";
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/uob.png\"  width=\"50%\"></td>";
                     }
                     else if($row2['bankName']=='TBANK') {
-                        echo "<td style=\"text-align:center;\"><img src=\"images/bank/tbank.png\"  width=\"50%\"></td>";
+                        echo "<td style=\"text-align:center;\"><img src=\"../images/bank/tbank.png\"  width=\"50%\"></td>";
                     }else if($row2['bankName']=='CIMB'){
-                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/cimb.png\"  width=\"50%\"></td>";
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/cimb.png\"  width=\"50%\"></td>";
                     }
                     else if($row2['bankName']=='CITIBANK'){
-                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/citibank.png\"  width=\"50%\"></td>";
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/citibank.png\"  width=\"50%\"></td>";
                     }
                     else if($row2['bankName']=='SCBT'){
-                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/standardcharter.png\"  width=\"50%\"></td>";
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/standardcharter.png\"  width=\"50%\"></td>";
                     }
                     else if($row2['bankName']=='TISCO'){
-                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/tisco.png\"  width=\"50%\"></td>";
+                        echo"<td style=\"text-align:center;\"><img src=\"../images/bank/tisco.png\"  width=\"50%\"></td>";
                     }
                     else if($row2['bankName']=='Wallet') {
-                        echo "<td style=\"text-align:center;\"><img src=\"images/bank/true.jpg\"  width=\"50%\"></td>";
+                        echo "<td style=\"text-align:center;\"><img src=\"../images/bank/true.jpg\"  width=\"50%\"></td>";
                     }
                     else if($row2['bankName']=='PrompPay') {
-                        echo "<td style=\"text-align:center;\"><img src=\"images/bank/promptpay.png\"  width=\"50%\"></td>";
+                        echo "<td style=\"text-align:center;\"><img src=\"../images/bank/promptpay.png\"  width=\"50%\"></td>";
                     }
                     echo "<td style=\"text-align:center;\">$row2[bankName]</td>
                      <td style=\"text-align:center;\">$row2[accountName]</td>
@@ -591,7 +437,7 @@ $result = mysqli_query($con,$sql);
         </div>
 
         <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
-            <a href="payment.php"><h4 class="s-text12 p-b-30">
+            <a href="../payment.php"><h4 class="s-text12 p-b-30">
                     วิธีการชำระเงิน
                 </h4></a>
             <ul>
