@@ -1,14 +1,13 @@
 <?php
 session_start();
 include ('dbConnect.php');
-$sql2 = "SELECT * FROM product";
-$result2 = mysqli_query($con,$sql2);
-$dc=0;
+$sql = "SELECT * FROM bank";
+$result = mysqli_query($con,$sql);
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>Bogoshipda | สรุปรายการสั่งซื้อ</title>
+    <title>Bogoshipda | สั่งซื้อเรียบร้อย</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -42,12 +41,13 @@ $dc=0;
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!--===============================================================================================-->
     <style>
-        .table-shipping{
-            border-color: #2b2b2b;
-            width: 100%;
-            height: 65%;
-            padding: auto;
-            margin-bottom: 10px;
+        table{
+            margin: auto;
+            width: 80%;
+            margin-bottom: 50px;
+        }
+        td{
+            padding-top: 10px;
         }
 
 
@@ -91,7 +91,7 @@ $dc=0;
                             <a href="index.php">หน้าแรก</a>
                         </li>
 
-                        <li class="sale-noti">
+                        <li>
                             <a href="product.php">สินค้า</a>
                         </li>
 
@@ -116,215 +116,104 @@ $dc=0;
 </header>
 
 <section class="cart bgwhite p-t-70 p-b-100">
-<?php if(!isset($_POST['discountShip'])){?>
-    <div class="container">
-        <!-- Cart item -->
-        <a href="cart.php"><i class="fa fa-angle-double-left" style="font-size:24px"></i> &nbsp;ย้อนกลับ</a>
-        <div class="bo9 w-size29 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
-            <h5 class="m-text20 p-b-24" align="center">
-                สรุปรายการสั่งซื้อสินค้า
-            </h5>
-            <h6 align="center" style="color: red">-ไม่มีรายการยืนยันการสั่งสินค้า-</h6>
-        </div>
-    </div>
-    <?php }else{?>
-    <form action="addToDbForGuest_action.php" method="post">
-    <div class="container">
-        <!-- Cart item -->
-        <a href="cart.php"><i class="fa fa-angle-double-left" style="font-size:24px"></i> &nbsp;ย้อนกลับ</a>
 
-        <!-- Total -->
+    <div class="container">
 
         <div class="bo9 w-size29 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
+            <table>
+                <tr>
+                    <td colspan="2">
+                         <h5 class="m-text20 p-b-24" align="center">
+                            <img src="images/icons/success.png">
+                            <br>
+                            สั่งซื้อเรียบร้อย (รอชำระเงิน)</h5>
+                            <h6 align="center" style="color: darkgray">เลขที่รายการสั่งซื้อของคุณคือ #  </h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">จำนวนเงินที่ต้องชำระ
+                        <h4 style="color: #ffaeba">฿</h4>
+                    </td>
+                    <td align="center">สถานะรายการสั่งซื้อ
+                    <h4 style="color: limegreen">รอชำระเงิน</h4>
+                    </td>
+                </tr>
+            </table>
+            <h6 align="center" style="color: red">กรุณาชำระเงินภายในวันที่ หากไม่ได้ชำระเงินภายในวันที่กำหนด รายการสั่งซื้อของคุณจะถูกยกเลิกโดยอัตโนมัติ</h6>
+            <hr>
             <h5 class="m-text20 p-b-24" align="center">
-                สรุปรายการสั่งซื้อสินค้า
-            </h5>
-            <h6 align="center" style="color: red">ตรวจสอบความถูกต้องก่อนยืนยันการสั่งซื้อ</h6>
+                วิธีการชำระเงิน</h5>
+            <table>
+                <thead style=" color:#ffaeba">
+                <tr>
+                    <th></th>
+                    <th style="text-align:center;">ธนาคาร</th>
+                    <th style="text-align:center;">ชื่อที่บัญชี</th>
+                    <th style="text-align:center;">เลขบัญชี</th>
 
-            <!--  -->
-            <div class="flex-w flex-sb bo17 p-t-20 p-b-20 p-l-20 p-r-20 m-b-30 m-t-25">
-					<span class="s-text18 w-size15 w-full-sm">
-                        ที่อยู่ในการจัดส่ง :
-					</span>
+                </tr>
+                </thead>
 
-                <div class="w-size16 w-full-sm">
-                    <?php echo "<input type=\"hidden\" name=\"nameShip\" value=\"$_POST[nameShip]\">";?>
-                    <?php echo "<input type=\"hidden\" name=\"addressShip\" value=\"$_POST[addressShip]\">";?>
-                    <?php echo "<input type=\"hidden\" name=\"telShip\" value=\"$_POST[telShip]\">";?>
-                    <?php echo $_POST['nameShip']."( โทร. ".$_POST['telShip']." )"."<br>".$_POST['addressShip']?>
-                </div>
-            </div>
+                <?php
 
-            <div class="flex-w flex-sb bo18 p-t-20 p-b-20 p-l-20 p-r-20 m-b-30 m-t-25">
-					<span class="s-text18 w-size15 w-full-sm">
-                        ข้อความถึงเจ้าของร้าน :
-					</span>
+                while($row2= mysqli_fetch_assoc($result))// show the information from query
+                {
+                    echo"<tr>";
+                    if($row2['bankName']=='SCB'){
+                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/scb.png\"  width=\"20%\"></td>";
+                    }
+                    else if($row2['bankName']=='KTB') {
+                        echo " <td style=\"text-align:center;\"><img src=\"images/bank/ktb.jpg\"  width=\"20%\"></td>";
+                    }
+                    else if($row2['bankName']=='BBL'){
+                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/bbl.png\"  width=\"20%\"></td>";
+                    }
+                    else if($row2['bankName']=='KBANK'){
+                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/kbank.png\"  width=\"20%\"></td>";
+                    }else if($row2['bankName']=='GSB'){
+                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/gsb.png\"  width=\"20%\"></td>";
+                    }  else if($row2['bankName']=='KRUNGSRI'){
+                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/krungsri.png\"  width=\"20%\"></td>";
+                    }
+                    else if($row2['bankName']=='TMB'){
+                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/tmb.png\"  width=\"20%\"></td>";
+                    }
+                    else if($row2['bankName']=='UOB'){
+                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/uob.png\"  width=\"20%\"></td>";
+                    }
+                    else if($row2['bankName']=='TBANK') {
+                        echo "<td style=\"text-align:center;\"><img src=\"images/bank/tbank.png\"  width=\"20%\"></td>";
+                    }else if($row2['bankName']=='CIMB'){
+                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/cimb.png\"  width=\"20%\"></td>";
+                    }
+                    else if($row2['bankName']=='CITIBANK'){
+                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/citibank.png\"  width=\"20%\"></td>";
+                    }
+                    else if($row2['bankName']=='SCBT'){
+                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/standardcharter.png\"  width=\"20%\"></td>";
+                    }
+                    else if($row2['bankName']=='TISCO'){
+                        echo"<td style=\"text-align:center;\"><img src=\"images/bank/tisco.png\"  width=\"20%\"></td>";
+                    }
+                    else if($row2['bankName']=='Wallet') {
+                        echo "<td style=\"text-align:center;\"><img src=\"images/bank/true.jpg\"  width=\"20%\"></td>";
+                    }
+                    else if($row2['bankName']=='PrompPay') {
+                        echo "<td style=\"text-align:center;\"><img src=\"images/bank/promptpay.png\"  width=\"20%\"></td>";
+                    }
+                    echo "<td style=\"text-align:center;\">$row2[bankName]</td>
+                     <td style=\"text-align:center;\">$row2[accountName]</td>
+					 <td style=\"text-align:center;\">$row2[accountNumber]</td>
+                  
+                    </tr>";
 
-                <div class="w-size16 w-full-sm">
-                    <?php if($_POST['msgShip']==""||$_POST['msgShip']==" "||$_POST['msgShip']=="-"){echo "-";echo "<input type=\"hidden\" name=\"msgShip\" value=\"-\">";}else{ echo $_POST['msgShip'];echo "<input type=\"hidden\" name=\"msgShip\" value=\"$_POST[msgShip]\">";}?>
-                </div>
-            </div>
 
-            <div class="flex-w flex-sb-m bo16 p-t-20 p-b-20 p-l-20 p-r-20  ">
-					<span class="s-text18 w-size15 w-full-sm">
-						รายละเอียดสินค้าที่สั่งซื้อ :
-					</span>
 
-                <div class="w-size16 w-full-sm m-b-10">
-                    <table class="p-t-10 p-b-10" width="100%">
-                        <tr>
-                            <td width="20%"></td>
-                            <td width="50%" align="center">ชื่อสินค้า</td>
-                            <td width="10%" align="center">จำนวน</td>
-                            <td width="20%" align="right">ราคารวม</td>
-                        </tr>
-                        <?php
-                        $total = 0;
-                        if(!empty($_SESSION["shopping_cart"]))
-                        {
-                            foreach($_SESSION["shopping_cart"] as $keys => $values)
-                            {
-                                if($values["pdID"]!==null)
-                                {
-                                    ?>
-
-                                    <tr >
-                                        <td align="center"></td>
-                                        <td><?php echo $values["name"]; ?></td>
-                                        <td align="center"><?php echo $values["quantity"]; ?></td>
-                                        <td align="right">฿<?php echo ($values["quantity"] * $values["price"]); ?></td>
-                                    </tr>
-
-                                    <?php
-                                    $total = $total + ($values["quantity"] * $values["price"]);
-                                    //echo $total;
-                                }
-                                else{
-                                    unset($_SESSION["shopping_cart"][$keys]);
-                                    ?>
-                                    <tr>
-                                        <td colspan="4" style="text-align: center;color: red"> - ไม่มีสินค้าที่เลือก -</td>
-                                    </tr>
-                                    <?php
-
-                                }
-                            }
-
-                        }
-                        else{
-                            ?>
-                            <tr>
-                                <td colspan="4" style="text-align: center;color: red"> - ไม่มีสินค้าที่เลือก -</td>
-                            </tr>
-                            <?php
-                        }
-                        ?>
-
-                    </table>
-                </div>
-                <span class="s-text18 w-size16 w-full-sm">
-					</span>
-                <div class="w-size30 w-full-sm" align="right">
-                    <b>
-                        <?php
-                        if(!empty($_SESSION["shopping_cart"])){
-                            if($total!==null) {
-
-                                  echo "฿ ".number_format($total, 0);
-
-                            }
-                        }?>
-                    </b>
-                </div>
-            </div>
-
-            <!--  -->
-            <div class="flex-w flex-sb bo16 p-t-20 p-b-20 p-l-20 p-r-20 ">
-					<span class="s-text18 w-size15 w-full-sm">
-						วิธีการจัดส่งสินค้า :
-					</span>
-
-                <div class="w-size31  w-full-sm p-t-7">
-                    <?php if($_POST['ship']=='Regis'){
-                       echo "พัสดุลงทะเบียน";
-                    }elseif ($_POST['ship']=='Ems'){
-                        echo "พัสดุด่วนพิเศษ (EMS)";
-                    }elseif ($_POST['ship']=='Kerry'){
-                        echo "Kerry Express";
-                    }?>
-                    </div>
-                    <div class="w-size15  w-full-sm" align="right">
-                        ฿ <?php
-                        if($_POST['ship']=='Regis'){
-                            $ship = 30;
-                            if($_POST['countShip']>5){
-                                $addShip = ($_POST['countShip']-5)*5;
-                            }
-                            $sc=number_format(($ship+$addShip), 0);
-                            echo number_format(($ship+$addShip), 0);
-                        }elseif ($_POST['ship']=='Ems'){
-                            $ship = 50;
-                            if($_POST['countShip']>5){
-                                $addShip = ($_POST['countShip']-5)*5;
-                            }
-                            $sc=number_format(($ship+$addShip), 0);
-                            echo number_format(($ship+$addShip), 0);
-
-                        }elseif ($_POST['ship']=='Kerry'){
-                            $ship = 50;
-                            if($_POST['countShip']>5){
-                                $addShip = ($_POST['countShip']-5)*5;
-                            }
-                            $sc=number_format(($ship+$addShip), 0);
-                            echo number_format(($ship+$addShip), 0);
-                        }
-                        $sp=($ship+$addShip);
-                         echo "<input type=\"hidden\" name=\"shipPrice\" value=\"$sp\">";
-
-                       ?>
-                </div>
-
-            </div>
-
-            <div class="flex-w flex-sb bo16 p-t-20 p-b-20 p-l-20 p-r-20 ">
-					<span class="s-text18 w-size15 w-full-sm">
-						ส่วนลด :
-					</span>
-                <div class="w-size15 w-full-sm" align="right">
-                    ฿ <?php echo $_POST['discountShip']; $dc=$_POST['discountShip'];?>
-                </div>
-
-            </div>
-            <!--  -->
-            <div class="flex-w flex-sb-m p-b-30 p-l-20 p-r-20 m-t-20">
-					<span class="m-text22 w-size19 w-full-sm">
-						ยอดชำระเงินทั้งหมด :
-					</span>
-
-                <div class="w-size15 w-full-sm fs-25 text-pink" align="right">
-                    <b>฿ <?php
-                        echo  number_format((($total-$dc)+$sc), 0);
-                        ?></b>
-                </div>
-            </div>
-
-            <div class="size15 trans-0-4">
-                <!-- Button -->
-                    <input type="hidden" name="codeID" value="<?php echo $_POST['codeID']?>">
-                    <input type="hidden" name="ship" value="<?php echo $_POST['ship']?>">
-                    <input type="hidden" name="dc" value="<?php echo $dc?>">
-                    <button type="submit" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-                        สั่งซื้อสินค้า
-                    </button>
-
-            </div>
+                }
+                ?>
+            </table>
         </div>
-
     </div>
-    </form>
-    <?php }?>
-
-
 
 </section>
 <!-- Banner2 -->

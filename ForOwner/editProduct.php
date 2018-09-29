@@ -28,7 +28,7 @@ $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bogoshipda Admin</title>
+    <title>Bogoshipda Admin | แก้ไขสินค้า</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -124,7 +124,7 @@ $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
-                <a href="bank.php"><img class="bg-icon" src="../img/menu_bar_admin/account.png" style="width:100%" alt="Image">บัญชีรับเงิน</a>
+                <a href="bank.php"><img class="bg-icon" src="../img/menu_bar_admin/account.png" style="width:100%" alt="Image">บัญชี</a>
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
@@ -218,7 +218,7 @@ $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
                                     <option value="brown" style="color: #72552a" <?php if(isset($row2['color']) && ($row2['color']=='brown'))echo 'selected' ?>>สีน้ำตาล</option>
                                     <option value="black" <?php if(isset($row2['color']) && ($row2['color']=='black'))echo 'selected' ?>>สีดำ</option>
                                 </select>
-                                <div class="btn-group" style="margin: 0 0 2% 0">
+                                <div class="btn-group" style="margin: 2% 0 2% 0">
                                     <label>คำอธิบายสินค้า:</label>
                                     <textarea class="form-control" style="min-width: 320%" rows="5" name="description"><?php echo $row2['description'];?></textarea>
                                 </div>

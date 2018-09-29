@@ -29,7 +29,7 @@ $result2 = mysqli_query($con,$sql2);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bogoshipda Admin</title>
+    <title>Bogoshipda Admin | รายการแจ้งชำระเงิน</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -39,6 +39,9 @@ $result2 = mysqli_query($con,$sql2);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/png" href="../images/icons/favicon.png"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/util.css">
+
     <style>
         div.sticky{
             position: sticky;
@@ -117,42 +120,6 @@ $result2 = mysqli_query($con,$sql2);
             background-color: #edf9f7;
         }
         /* Style buttons */
-        .btn-view {
-            background-color: #CCC  ; /* Blue background */
-            border: none; /* Remove borders */
-            color: white; /* White text */
-            padding: 0px; /* Some padding */
-            font-size: 16px; /* Set a font size */
-            cursor: pointer; /* Mouse pointer on hover */
-            border-radius: 10px;
-			width: 30px;
-			height: 30px;
-			margin-left:0px;
-			
-        }
-
-        /* Darker background on mouse-over */
-        .btn-view:hover {
-            background-color: #6CF;
-        }
-        .btn-delete {
-            background-color: #ccc; /* Blue background */
-            border: none; /* Remove borders */
-            color: white; /* White text */
-            padding: 0px; /* Some padding */
-            font-size: 16px; /* Set a font size */
-            cursor: pointer; /* Mouse pointer on hover */
-            border-radius: 10px;
-			width: 30px;
-			height: 30px;
-			margin-left:0px;
-        }
-
-        /* Darker background on mouse-over */
-        .btn-delete:hover {
-            background-color: #d15252;
-        }
-		
 		.bg-icon{
 			background-color: #666;
 			border-radius: 8px;
@@ -168,6 +135,36 @@ $result2 = mysqli_query($con,$sql2);
         .color-link{
             color: #ed80aa;
         }
+
+        .btn-outline-success {
+            color: #28a745;
+            background-color: transparent;
+            background-image: none;
+            border-color: #28a745;
+        }
+
+        .btn-outline-success:hover {
+            color: #fff;
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-outline-success:focus, .btn-outline-success.focus {
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.5);
+        }
+
+        .btn-outline-success.disabled, .btn-outline-success:disabled {
+            color: #28a745;
+            background-color: transparent;
+        }
+
+        .btn-outline-success:active, .btn-outline-success.active,
+        .show > .btn-outline-success.dropdown-toggle {
+            color: #fff;
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
     </style>
 </head>
 <body>
@@ -223,7 +220,7 @@ $result2 = mysqli_query($con,$sql2);
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
-                <a href="bank.php"><img class="bg-icon" src="../img/menu_bar_admin/account.png" style="width:100%" alt="Image">บัญชีรับเงิน</a>
+                <a href="bank.php"><img class="bg-icon" src="../img/menu_bar_admin/account.png" style="width:100%" alt="Image">บัญชี</a>
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
@@ -267,8 +264,9 @@ $result2 = mysqli_query($con,$sql2);
                     <th style="text-align:center;">ช่องทางชำระเงิน</th>
                     <th style="text-align:center;">จำนวนเงิน (บาท)</th>
                     <th style="width:10%;text-align:center;">วันที่ชำระเงิน</th>
-                    <th style="width:10%;text-align:center;">ยืนยันชำระเงิน</th>
-                    <th style="width:5%;text-align:center;"></th>
+                    <td style="text-align: center">orderID</td>
+                    <th style="width:5%;text-align:center;">ยืนยันชำระเงิน</th>
+
                 </tr>
 
                 <tr>
@@ -277,13 +275,10 @@ $result2 = mysqli_query($con,$sql2);
                     <td style="width:15%;text-align:center;">name</td>
                     <td style="text-align:center;">bank</td>
                     <td style="text-align:center;">000</td>
-                    <td style="width:10%;text-align:center;">วันที่ชำระเงิน</td>
-                    <td style="width:10%;text-align:center;">ยืนยันชำระเงิน</td>
+                    <td style="width:10%;text-align:center;">26-09-2018 17.30</td>
+                    <td style="text-align: center"><a href="orderInfo.php" class="color-link">order ID</a></td>
                     <td style="width:5%;text-align:center;">
-                        <form action="paymentInfo.php" method="get">
-                            <input style='display: none;' type="text" name="uID" value=''>
-                            <button class='btn-view' type="submit"><i class="fa fa-search"></i></button>
-                        </form>
+                        <button type="button" class="btn btn-outline-success">ยืนยัน</button>
                     </td>
                 </tr>
 
@@ -313,6 +308,7 @@ $result2 = mysqli_query($con,$sql2);
         </div>
     </div>
 </div>
+
 
 <!--<footer class="container-fluid">-->
 <!--    <p>Footer Text</p>-->

@@ -27,7 +27,7 @@ $result2 = mysqli_query($con,$sql2);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Manage Order</title>
+    <title>Bogoshipda Admin | รายละเอียดใบสั่งซื้อ</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -134,7 +134,7 @@ $result2 = mysqli_query($con,$sql2);
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
-                <a href="bank.php"><img class="bg-icon" src="../img/menu_bar_admin/account.png" style="width:100%" alt="Image">บัญชีรับเงิน</a>
+                <a href="bank.php"><img class="bg-icon" src="../img/menu_bar_admin/account.png" style="width:100%" alt="Image">บัญชี</a>
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
@@ -163,7 +163,7 @@ $result2 = mysqli_query($con,$sql2);
         <div class="col-sm-9">
             <form method="post" action="Action/addProduct_action.php" enctype="multipart/form-data">
             <div class="row" style="margin-top: 5px">
-                <div class="col-sm-4"><a href="order.php" class="btn btn-primary" role="button" style="margin-left: 2%;margin-top: 3%" >< กลับไปหน้ารายการสั่งซื้อทั้งหมด</a></div>
+                <div class="col-sm-4"><a href="order.php" class="btn btn-info" role="button" style="margin-left: 2%;margin-top: 3%" >< กลับไปหน้ารายการสั่งซื้อทั้งหมด</a></div>
                 <div class="col-sm-4" align="center"><h3><b>Order ID : </b></h3></div>
 
                 <div class="col-sm-4 " align="right">

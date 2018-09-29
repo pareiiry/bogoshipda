@@ -25,7 +25,7 @@ $resultB = mysqli_query($con,$sqlB);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bogoshipda Admin</title>
+    <title>Bogoshipda Admin | Banner</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -120,7 +120,7 @@ $resultB = mysqli_query($con,$sqlB);
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
-                <a href="bank.php"><img class="bg-icon" src="../img/menu_bar_admin/account.png" style="width:100%" alt="Image">บัญชีรับเงิน</a>
+                <a href="bank.php"><img class="bg-icon" src="../img/menu_bar_admin/account.png" style="width:100%" alt="Image">บัญชี</a>
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->

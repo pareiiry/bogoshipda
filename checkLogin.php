@@ -25,7 +25,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if($status== "member")
         {
-            header("location:indexMember.php");
+            header("location:member/indexMember2.php");
         }
         else
         {

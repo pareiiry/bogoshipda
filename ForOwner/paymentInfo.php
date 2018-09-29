@@ -27,7 +27,7 @@ $result2 = mysqli_query($con,$sql2);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Manage Order</title>
+    <title>Bogoshipda Admin | รายละเอียดการชำระเงิน</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -77,7 +77,62 @@ $result2 = mysqli_query($con,$sql2);
             padding-top: 15px;
             padding-bottom: 15px;
         }
+        .btn-outline-success {
+            color: #28a745;
+            background-color: transparent;
+            background-image: none;
+            border-color: #28a745;
+        }
 
+        .btn-outline-success:hover {
+            color: #fff;
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-outline-success:focus, .btn-outline-success.focus {
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.5);
+        }
+
+        .btn-outline-success.disabled, .btn-outline-success:disabled {
+            color: #28a745;
+            background-color: transparent;
+        }
+
+        .btn-outline-success:active, .btn-outline-success.active,
+        .show > .btn-outline-success.dropdown-toggle {
+            color: #fff;
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        .btn-outline-danger {
+            color: #dc3545;
+            background-color: transparent;
+            background-image: none;
+            border-color: #dc3545;
+        }
+
+        .btn-outline-danger:hover {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-outline-danger:focus, .btn-outline-danger.focus {
+            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.5);
+        }
+
+        .btn-outline-danger.disabled, .btn-outline-danger:disabled {
+            color: #dc3545;
+            background-color: transparent;
+        }
+
+        .btn-outline-danger:active, .btn-outline-danger.active,
+        .show > .btn-outline-danger.dropdown-toggle {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
     </style>
 </head>
 <body>
@@ -133,7 +188,7 @@ $result2 = mysqli_query($con,$sql2);
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
-                <a href="bank.php"><img class="bg-icon" src="../img/menu_bar_admin/account.png" style="width:100%" alt="Image">บัญชีรับเงิน</a>
+                <a href="bank.php"><img class="bg-icon" src="../img/menu_bar_admin/account.png" style="width:100%" alt="Image">บัญชี</a>
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
@@ -162,7 +217,7 @@ $result2 = mysqli_query($con,$sql2);
         <div class="col-sm-9">
             <form method="post" action="Action/addProduct_action.php" enctype="multipart/form-data">
             <div class="row" style="margin-top: 5px">
-                <div class="col-sm-4"><a href="payment.php" class="btn btn-primary" role="button" style="margin-left: 2%;margin-top: 3%" >< กลับไปหน้ารายการแจ้งชำระเงินทั้งหมด</a></div>
+                <div class="col-sm-4"><a href="payment.php" class="btn btn-info" role="button" style="margin-left: 2%;margin-top: 3%" >< กลับไปหน้ารายการแจ้งชำระเงินทั้งหมด</a></div>
                 <div class="col-sm-4" align="center"><h3><b>Payment ID : </b></h3></div>
 
                 <div class="col-sm-4 " align="right">
@@ -182,12 +237,9 @@ $result2 = mysqli_query($con,$sql2);
                         <div class="panel-body" style="margin: 0% 2% 0% 2%">
                             <!--                            <form method="post">-->
                             <table width="100%" border="1px black">
+
                                 <tr>
-                                    <td width="20%">Order Id : </td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>สถานะ : </td>
+                                    <td width="20%">สถานะ : </td>
                                     <td></td>
                                 </tr>
                                 <tr>
@@ -217,6 +269,13 @@ $result2 = mysqli_query($con,$sql2);
                                 <tr>
                                     <td>รูปสลิป : </td>
                                     <td></td>
+                                </tr>
+                                <tr>
+                                    <td>การตวรสอบ</td>
+                                    <td>
+                                        <button type="button" class="btn btn-outline-success">ยืนยัน</button>
+                                        <button type="button" class="btn btn-outline-danger">ปฏิเสธ</button>
+                                    </td>
                                 </tr>
                             </table>
                         </div>

@@ -5,7 +5,7 @@ include ('dbConnect.php');
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>Bogoshipda | ขั้นตอนแจ้งชำระเงิน</title>
+    <title>Bogoshipda | คำถามที่พบบ่อย</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -380,25 +380,29 @@ include ('dbConnect.php');
                 </li>
 
                 <li class="item-menu-mobile">
-                    <a href="index.php">HOME</a>
-
+                    <a href="index.php">หน้าหลัก</a>
+                    <ul class="sub-menu">
+                        <li><a href="index.html">Homepage V1</a></li>
+                        <li><a href="home-02.html">Homepage V2</a></li>
+                        <li><a href="home-03.html">Homepage V3</a></li>
+                    </ul>
                     <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
                 </li>
 
                 <li class="item-menu-mobile">
-                    <a href="product.php">Product</a>
+                    <a href="product.html">Product</a>
                 </li>
 
                 <li class="item-menu-mobile">
-                    <a href="review.php">Review</a>
+                    <a href="product.html">Review</a>
                 </li>
 
                 <li class="item-menu-mobile">
-                    <a href="design.php">Design</a>
+                    <a href="cart.html">Design</a>
                 </li>
 
                 <li class="item-menu-mobile">
-                    <a href="help.php">Help</a>
+                    <a href="about.html">Help</a>
                 </li>
 
        
@@ -436,18 +440,120 @@ include ('dbConnect.php');
 </div>                         <div class="col-xs-9">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-    <h3 class="panel-title">ขั้นตอนแจ้งชำระเงิน</h3>
+    <h3 class="panel-title">คำถามที่พบบ่อย</h3>
 </div>
 <div class="panel-body">
-    1. ไปที่ประวัติการสั่งซื้อ
-    <br>2. เลือกรายการสั่งซื้อที่ต้องการแจ้งชำระเงิน
-    <br>3. เลือก "แจ้งชำระเงิน"
-    <br>4. กรอกรายละเอียดข้อมูลการโอนเงิน
-</div>
-    </div>
-    </div>
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="heading-buy">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-buy" aria-expanded="false" aria-controls="collapse-buy">
+                        สกรีนชิ้นเดียว หรือ สกรีนจำนวนน้อย ๆ ได้หรือไม่
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse-buy" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-buy">
+                <div class="panel-body">
+                    สั่งทำ 1 ชิ้นได้ค่ะ ลูกค้าสามารถสั่งซื้อเนมแท็กจากหน้าสินค้าหรือออกแบบเองจากทางเว็บไซต์ได้เลยค่ะ <br>สามารถสั่งซื้อไม่มีขั้นต่ำ 1 ชิ้นทางเราก็ทำค่ะ
+                </div>
+            </div>
         </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="heading-fabric">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-fabric" aria-expanded="true" aria-controls="collapse-fabric">
+                        สามารถเลือกขนาดและความยาวได้หรือไม่
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse-fabric" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-fabric">
+                <div class="panel-body">
+                    สำหรับขนาดความกว้างของสายไม่สามารถเลือกได้ ทางร้านมีขนาดเดียวคือ 2.5 ซม. <br>ส่วนความยาวของสายลูกค้าสามารถกำหนดได้ค่ะ
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        สามารถสกรีนมากกว่า 1 สีได้หรือไม่
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                    ลูกค้าสกรีนคละสีได้ค่ะ
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="heading-screen">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-screen" aria-expanded="false" aria-controls="collapse-screen">
+                        สกรีนตรงไหนได้บ้าง
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse-screen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-screen">
+                <div class="panel-body">
+                    สามารถสกรีนได้ทั้งสาย ทั้งด้านหน้าและด้านหลัง ในขอบเขตทีทางเราได้กำหนดไว้ในหน้าออกแบบสินค้าค่ะ
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        ราคาสกรีนเท่าไหร่
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="panel-body">
+                    ราคาขึ้นอยู่กับการสกรีน สกรีนด้านเดียว กับสองด้านราคาแตกต่างกัน แต่ทุกขนาดความยาวราคาเท่ากันค่ะ
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="heading-order">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-order" aria-expanded="false" aria-controls="collapse-order">
+                        ระยะเวลาในการผลิตสินค้า
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse-order" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-order">
+                <div class="panel-body">
+                    ระยะเวลาในการผลิตสินค้าประมาณ 3-5 วันหลังแจ้งชำระเงินเรียบร้อยแล้ว <br>แต่หากมีงานต่อคิวอาจต้องรอเพิ่มจากที่แจ้งข้างต้นประมาณ 1-2 วัน
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="heading-size">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-size" aria-expanded="false" aria-controls="collapse-size">
+                        จัดส่งสินค้าอย่างไร
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse-size" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-size">
+                <div class="panel-body">
+                    ทางเราจัดดส่งสินค้าทางไปรษณีย์ จัดส่งสินค้ามี 2 แบบ คือ <br> แบบลงทะเบียนใช้ระยะเวลาประมาณ 5-7 วัน <br>แบบด่วน (EMS) ใช้ระยะเวลาประมาณ 1-3 วัน <br> ระยะเวลาขึ้นอยุ่กับพื้นที่ค่ะ
+                </div>
+            </div>
+        </div>
+        
+        <br />
+        <br />
+        <p class='txt-right'> <br><b></b></p>
     </div>
+</div>                            </div>
+                        </div>
+                    </div>
+    </div>
+    
     </section>
 
 <!-- Banner2 -->
@@ -461,6 +567,7 @@ include ('dbConnect.php');
 
 
 <!-- Shipping -->
+
 
 
 <!-- Footer -->
