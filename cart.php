@@ -208,7 +208,7 @@ $discount=0;
                                         </div>
                                     </td>
                                     <td class="column-5">฿ <?php echo ($values["quantity"] * $values["price"]); ?></td>
-                                    <td class="column-6">  <?php echo "<a href='deleteFromCare_acion.php?pdID=$values[pdID]' style='background-color: red;margin-left: 2%' class='flex-c-m bg1 bo-rad-5 hov1 s-text1 trans-0-4'>
+                                    <td class="column-6">  <?php echo "<a href='deleteFromCart_action.php?pdID=$values[pdID]' style='background-color: red;margin-left: 2%' class='flex-c-m bg1 bo-rad-5 hov1 s-text1 trans-0-4'>
                                             X
                                          </a>";?>  </td>
                                 </tr>
