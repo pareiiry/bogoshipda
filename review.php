@@ -229,7 +229,7 @@ $result2 = mysqli_query($con,$sql2);
 
                             <div class="header-cart-wrapbtn">
                                 <!-- Button -->
-                                <a href="cart.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                <a href="loginPage.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
                                     ดูตะกร้าสินค้า
                                 </a>
                             </div>

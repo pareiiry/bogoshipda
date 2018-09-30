@@ -18,6 +18,34 @@ $sql = "SELECT * FROM user WHERE uID = '".$_SESSION['ID']."' ";
 //$objResult = mysqli_fetch_array($objQuery);
 $result = mysqli_query($con,$sql);
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
+$sqlOrder = "SELECT * FROM order_table WHERE orderID='".$_GET['orderID']."'";
+$resultOrder = mysqli_query($con,$sqlOrder);
+$rowOrder  = mysqli_fetch_array($resultOrder ,MYSQLI_ASSOC);
+$dateTime = date_format(date_create($rowOrder['dateTime']),'d-m-Y');
+if($rowOrder['orderStatus']=='waiting for payment'){
+    $orderStatus = "รอชำระเงิน";
+}
+else if($rowOrder['orderStatus']=='waiting for verify'){
+    $orderStatus = "รอตรวจสอบ";
+}
+else if($rowOrder['orderStatus']=='prepare to send order'){
+    $orderStatus = "เตรียมจัดส่งสินค้า";
+}
+else if($rowOrder['orderStatus']=='sent order'){
+    $orderStatus = "จัดส่งสินค้าแล้ว";
+}
+else if($rowOrder['orderStatus']=='cancel'){
+    $orderStatus = "การสั่งซื้อถูกยกเลิก";
+}
+
+if($rowOrder['trackingNumber']==NULL){
+    $trackingNumber = "-";
+}
+else{
+    $trackingNumber = $rowOrder['trackingNumber'];
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -301,19 +329,19 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
                 <table>
                     <tr>
                         <td>เลขที่ใบสั่งซื้อ :</td>
-                        <td>#</td>
+                        <td><?php echo $rowOrder['orderID']; ?></td>
                     </tr>
                     <tr>
                         <td>วันที่สั่งซื้อ :</td>
-                        <td>26-09-2018</td>
+                        <td><?php echo $dateTime;?></td>
                     </tr>
                     <tr>
                         <td>สถานะ :</td>
-                        <td>จัดส่งแล้ว</td>
+                        <td><?php echo $orderStatus;?></td>
                     </tr>
                     <tr>
                         <td>เลขพัสดุ :</td>
-                        <td>EX123456789TH</td>
+                        <td><?php echo $trackingNumber;?></td>
                     </tr>
                 </table>
             </div>
@@ -330,24 +358,42 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
                 </tr>
                 </thead>
-                <tr>
-                    <td>000001</td>
-                    <td>1</td>
-                    <td style="text-align: right">400</td>
-                    <td style="text-align: right">400</td>
-                </tr>
+
+                <?php
+                $sqlgpd = "SELECT * FROM groupproduct WHERE gpdID= '".$rowOrder['gpdID']."'";
+                $resultgpd = mysqli_query($con,$sqlgpd);
+                while($rowgpd = mysqli_fetch_assoc($resultgpd))
+                {
+                    $sqlPD = "SELECT * FROM product WHERE pdID= '".$rowgpd['productID']."'";
+                    $resultPD = mysqli_query($con,$sqlPD);
+                    $rowPD = mysqli_fetch_array($resultPD,MYSQLI_ASSOC);
+                    echo "
+                                    <tr>
+                                        <td style=\"text-align: left; \">$rowPD[name]</td>
+                                        <td>$rowgpd[amount]</td>
+                                        <td style=\"text-align: right;\">$rowPD[price]</td>
+                                        <td style=\"text-align: right; \">$rowgpd[priceAmount]</td>
+                                    </tr>";
+
+                }
+                ?>
                 <tr>
                     <td colspan="3" class="tf">ยอดรวมสินค้า</td>
-                    <td class="tf">400</td>
+                    <td class="tf">฿ <?php echo $rowOrder['priceAmount'];?></td>
                 </tr>
                 <tr>
                     <td colspan="3" class="tf">ส่วนลด</td>
-                    <td class="tf">40</td>
+                    <td class="tf">฿ <?php echo $rowOrder['discountPrice'];?></td>
                 </tr>
                 <tr>
                     <td colspan="3" class="tf">ค่าจัดส่ง</td>
-                    <td class="tf">440</td>
+                    <td class="tf">฿ <?php echo $rowOrder['shipPrice'];?></td>
                 </tr>
+                <tr>
+                    <td colspan="3" class="tf">ราคาสุทธิ</td>
+                    <td class="tf" style="color: red">฿ <?php echo $rowOrder['netPrice'];?></td>
+                </tr>
+
             </table>
         </div>
     </div>

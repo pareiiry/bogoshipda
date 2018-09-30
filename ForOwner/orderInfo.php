@@ -13,16 +13,39 @@ if($_SESSION['usertype'] != "owner" && $_SESSION['usertype'] != "admin")
 }
 include ('../dbConnect.php');
 $sql = "SELECT * FROM user WHERE uID = '".$_SESSION['ID']."' ";
-//$objQuery = mysqli_query($strSQL);
-//$objResult = mysqli_fetch_array($objQuery);
 $result = mysqli_query($con,$sql);
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
+$sqlOrder = "SELECT * FROM order_table WHERE orderID='".$_GET['orderID']."'";
+$resultOrder = mysqli_query($con,$sqlOrder);
+$rowOrder  = mysqli_fetch_array($resultOrder ,MYSQLI_ASSOC);
+if($rowOrder['orderStatus']=='waiting for payment'){
+    $orderStatus = "รอชำระเงิน";
+}
+else if($rowOrder['orderStatus']=='waiting for verify'){
+    $orderStatus = "รอตรวจสอบ";
+}
+else if($rowOrder['orderStatus']=='prepare to send order'){
+    $orderStatus = "เตรียมจัดส่งสินค้า";
+}
+else if($rowOrder['orderStatus']=='sent order'){
+    $orderStatus = "จัดส่งสินค้าแล้ว";
+}
+else if($rowOrder['orderStatus']=='cancel'){
+    $orderStatus = "การสั่งซื้อถูกยกเลิก";
+}
+if($rowOrder['howShip']=='Regis'){
+    $howShip = "พัสดุลงทะเบียน";
+}elseif ($rowOrder['howShip']=='Ems'){
+    $howShip = "พัสดุด่วนพิเศษ (EMS)";
+}elseif ($rowOrder['howShip']='Kerry'){
+    $howShip = "Kerry Express";
+}
+$dateTime = date_format(date_create($rowOrder['dateTime']),'d-m-Y');
 
-$sql2 = "SELECT * FROM product";
-//$objQuery = mysqli_query($strSQL);
-//$objResult = mysqli_fetch_array($objQuery);
-$result2 = mysqli_query($con,$sql2);
+$sqlU = "SELECT * FROM user WHERE uID= '".$rowOrder['uID']."'";
+$resultU = mysqli_query($con,$sqlU);
+$rowU = mysqli_fetch_array($resultU,MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -164,7 +187,7 @@ $result2 = mysqli_query($con,$sql2);
             <form method="post" action="Action/addProduct_action.php" enctype="multipart/form-data">
             <div class="row" style="margin-top: 5px">
                 <div class="col-sm-4"><a href="order.php" class="btn btn-info" role="button" style="margin-left: 2%;margin-top: 3%" >< กลับไปหน้ารายการสั่งซื้อทั้งหมด</a></div>
-                <div class="col-sm-4" align="center"><h3><b>Order ID : </b></h3></div>
+                <div class="col-sm-4" align="center"><h3><b>Order ID : <?php echo $rowOrder['orderID'];?></b></h3></div>
 
                 <div class="col-sm-4 " align="right">
 
@@ -183,20 +206,20 @@ $result2 = mysqli_query($con,$sql2);
 <!--                            <form method="post">-->
                                 <table width="100%" border="1px black">
                                     <tr>
-                                        <td width="35%">สถานะ : </td>
-                                        <td></td>
+                                        <td width="35%">สถานะ :</td>
+                                        <td><?php echo $orderStatus;?></td>
                                     </tr>
                                     <tr>
-                                        <td>สั่งเมื่อ : </td>
-                                        <td></td>
+                                        <td>สั่งเมื่อ :</td>
+                                        <td><?php echo $dateTime ;?></td>
                                     </tr>
                                     <tr>
                                         <td>การจัดส่ง : </td>
-                                        <td></td>
+                                        <td><?php echo $howShip;?></td>
                                     </tr>
                                     <tr>
-                                        <td>รายละเอียดเพิ่มเติม : </td>
-                                        <td></td>
+                                        <td>ข้อความถึงผู้ขาย : </td>
+                                        <td><?php echo $rowOrder['msgShip'];?></td>
                                     </tr>
                                 </table>
                         </div>
@@ -251,15 +274,15 @@ $result2 = mysqli_query($con,$sql2);
                             <table width="100%" border="1px black">
                                 <tr>
                                     <td width="35%">ผู้สั่งซื้อ : </td>
-                                    <td></td>
+                                    <td><?php echo $rowU['name'];?></td>
                                 </tr>
                                 <tr>
                                     <td>อีเมล : </td>
-                                    <td></td>
+                                    <td><?php echo $rowU['email'];?></td>
                                 </tr>
                                 <tr>
                                     <td>เบอร์โทร : </td>
-                                    <td></td>
+                                    <td><?php echo $rowU['phone_number'];?></td>
                                 </tr>
                             </table>
                         </div>
@@ -272,15 +295,15 @@ $result2 = mysqli_query($con,$sql2);
                             <table width="100%" border="1px black">
                                 <tr>
                                     <td width="35%">ชื่อผู้รับ : </td>
-                                    <td></td>
+                                    <td><?php echo $rowOrder['nameShip'];?></td>
                                 </tr>
                                 <tr>
                                     <td>ที่อยู่ : </td>
-                                    <td></td>
+                                    <td><?php echo $rowOrder['addressShip'];?></td>
                                 </tr>
                                 <tr>
                                     <td>เบอร์โทร : </td>
-                                    <td></td>
+                                    <td><?php echo $rowOrder['telShip'];?></td>
                                 </tr>
                             </table>
                         </div>
@@ -295,34 +318,52 @@ $result2 = mysqli_query($con,$sql2);
                         <div class="panel-heading fs-25"><b>รายการสินค้า</b></div>
                         <div class="panel-body" style="margin: 0% 2% 0% 2%">
                             <!--                            <form method="post">-->
+
                             <table width="100%" border="1px black">
                                 <tr>
-                                    <th width="10%"></th>
                                     <th width="45%">สินค้า</th>
                                     <th style="text-align: right; padding-right: 10px;">ราคาต่อชิ้น</th>
                                     <th>จำนวน</th>
                                     <th style="text-align: right">ราคารวม</th>
                                 </tr>
+                                <?php
+                                $sqlgpd = "SELECT * FROM groupproduct WHERE gpdID= '".$rowOrder['gpdID']."'";
+                                $resultgpd = mysqli_query($con,$sqlgpd);
+                                while($rowgpd = mysqli_fetch_assoc($resultgpd))
+                                {
+                                    $sqlPD = "SELECT * FROM product WHERE pdID= '".$rowgpd['productID']."'";
+                                    $resultPD = mysqli_query($con,$sqlPD);
+                                    $rowPD = mysqli_fetch_array($resultPD,MYSQLI_ASSOC);
+                                    echo "
+                                    <tr>
+                                        <td>$rowPD[name]</td>
+                                        <td style=\"text-align: right; padding-right: 10px;\">$rowPD[price]</td>
+                                        <td style=\"text-align: center\">$rowgpd[amount]</td>
+                                        <td style=\"text-align: right; \">$rowgpd[priceAmount]</td>
+                                    </tr>";
+
+                                }
+                                ?>
+
                                 <tr>
-                                    <td></td>
-                                    <td>name</td>
-                                    <td style="text-align: right; padding-right: 10px;">200</td>
-                                    <td style="text-align: center">1</td>
-                                    <td style="text-align: right; ">200</td>
-                                </tr>
-                                <tr>
-                                    <td></td>
+
                                     <td></td>
                                     <td style="padding-right: 5px"></td>
                                     <td style="color: #9d9d9d; padding: 5px;">ค่าขนส่ง</td>
-                                    <td style="text-align: right"><b>+ </b></td>
+                                    <td style="text-align: right"><b>+ <?php echo $rowOrder['shipPrice'];?></b></td>
+                                </tr>
+                                <tr>
+
+                                    <td></td>
+                                    <td style="padding-right: 5px"></td>
+                                    <td style="color: #9d9d9d; padding: 5px;">ส่วนลด</td>
+                                    <td style="text-align: right;color: red"><b>- <?php echo $rowOrder['discountPrice'];?></b></td>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
                                     <td style="color: #9d9d9d; font-size: 17px; padding: 5px;">ยอดชำระเงินทั้งหมด</td>
-                                    <td style="text-align: right; color: #4cae4c "><b>฿</b></td>
+                                    <td style="text-align: right; color: #4cae4c "><b>฿ <?php echo $rowOrder['netPrice'];?></b></td>
                                 </tr>
                             </table>
                         </div>

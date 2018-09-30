@@ -211,7 +211,7 @@ else{
                 <span class="linedivide1"></span>
 
                 <div class="header-wrapicon2">
-                    <img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+                    <img src="../images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
                     <span class="header-icons-noti"><?php
                         $quantity=0;
                         if(empty($_SESSION["shopping_cart"]))
@@ -245,7 +245,7 @@ else{
 
                                                 if($row3['img']==="" || empty($row3)){
                                                     // echo"Hello";
-                                                    echo '<img src="images/no-picture.jpg">';
+                                                    echo '<img src="../images/no-picture.jpg">';
                                                 }
                                                 else {
                                                     echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
@@ -365,9 +365,9 @@ else{
                                 {
                                     if (empty($rowSP)) {
                                         echo '
-                                    <div class="item-slick3" data-thumb="images/no-picture.jpg">
+                                    <div class="item-slick3" data-thumb="../images/no-picture.jpg">
                                     <div class="wrap-pic-w">
-                                        <img src="images/no-picture.jpg">;
+                                        <img src="../images/no-picture.jpg">;
                                     </div>
                                 </div>';
 
@@ -395,9 +395,9 @@ else{
 
                                     if ($rowSP['img']==="" || empty($rowSP)) {
                                         echo '
-                                        <div class="item-slick3" data-thumb="images/no-picture.jpg">
+                                        <div class="item-slick3" data-thumb="../images/no-picture.jpg">
                                         <div class="wrap-pic-w">
-                                        <img src="images/no-picture.jpg">
+                                        <img src="../images/no-picture.jpg">
                                     </div>
                                 </div>';
 

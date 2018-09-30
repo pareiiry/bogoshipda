@@ -14,10 +14,12 @@ if($_SESSION['usertype'] != "member")
 
 include ('../dbConnect.php');
 $sql = "SELECT * FROM user WHERE uID = '".$_SESSION['ID']."' ";
-//$objQuery = mysqli_query($strSQL);
-//$objResult = mysqli_fetch_array($objQuery);
 $result = mysqli_query($con,$sql);
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
+$sqlOrder = "SELECT * FROM order_table WHERE uID='".$row['uID']."'";
+$resultOrder = mysqli_query($con,$sqlOrder);
+//$rowOrder  = mysqli_fetch_array($resultOrder ,MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -298,7 +300,7 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
                 <h6 class="p-b-10" align="left"><b>สถานะใบสั่งซื้อ</b></h6>
                 <ul>
                     <li>รอชำระเงิน – ได้ทำรายการสั่งซื้อเรียบร้อยแล้ว</li>
-                    <li>แจ้งชำระเงิน – ได้รับการยืนยันชำระเงินเรียบร้อยแล้ว</li>
+                    <li>รอตรวจสอบ – ได้รับการแจ้งชำระเงิน รอยืนยันการชำระเงิน</li>
                     <li>เตรียมจัดส่งสินค้า – อยู่ในระหว่างผลิตสินค้า เพื่อรอจัดส่ง</li>
                     <li>จัดส่งสินค้า – สินค้าได้จัดส่งออกจากร้านเรียบร้อยแล้วค่ะ</li>
                     <li>การสั่งซื้อถูกยกเลิก – ใบสั่งซื้อที่ไม่ชำระเงินและไม่ยืนยันการชำระเงินเข้ามาภายในระยะเวลาที่กำหนด</li>
@@ -313,28 +315,64 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
                     <th style="text-align:center;">เลขที่ใบสั่งซื้อ</th>
                     <th style="text-align:center;">วันที่สั่งซื้อ</th>
                     <th style="text-align:center;">สถานะ</th>
-                    <th style="text-align:center;">ราคา</th>
+                    <th style="text-align:center;">ราคารวม</th>
                     <th style="text-align:center;">รายละเอียด</th>
                     <th style="text-align:center;">แจ้งชำระเงิน</th>
                 </tr>
                 </thead>
-                <tr>
-                    <td>000001</td>
-                    <td>26-09-2018</td>
-                    <td>รอจัดส่ง</td>
-                    <td style="text-align: right">400</td>
+              <?php  while($rowOrder = mysqli_fetch_assoc($resultOrder))
+                {
+                    if($rowOrder['orderStatus']=='waiting for payment'){
+                        $orderStatus = "รอชำระเงิน";
+                    }
+                    else if($rowOrder['orderStatus']=='waiting for verify'){
+                        $orderStatus = "รอตรวจสอบ";
+                    }
+                    else if($rowOrder['orderStatus']=='prepare to send order'){
+                        $orderStatus = "เตรียมจัดส่งสินค้า";
+                    }
+                    else if($rowOrder['orderStatus']=='sent order'){
+                        $orderStatus = "จัดส่งสินค้าแล้ว";
+                    }
+                    else if($rowOrder['orderStatus']=='cancel'){
+                        $orderStatus = "การสั่งซื้อถูกยกเลิก";
+                    }
+
+                    $dateTime = date_format(date_create($rowOrder['dateTime']),'d-m-Y');
+               echo " <tr>
+                    <td>$rowOrder[orderID]</td>
+                    <td>$dateTime</td>
+                    <td>$orderStatus</td>
+                    <td style=\"text-align: right\">฿ $rowOrder[netPrice]</td>
                     <td>
-                        <form action="orderDetail.php" method="get">
-                            <input style='display: none;' type="text" name="orderID" value=''>
-                            <button class='btn-view' type="submit"><i class="fa fa-search"></i></button>
-                        </form>
-                    </td>
-                    <td>
-                        <button type="submit" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 ">
-                            <a href="infoPayment.php" style="color: #ffffff">แจ้งชำระเงิน</a>
-                        </button >
-                    </td>
-                </tr>
+                  
+                            <a href=\"orderDetail.php?orderID=$rowOrder[orderID]\"><button class='btn-view' type=\"submit\"><i class=\"fa fa-search\"></i></button></a>
+              
+                    </td>";
+              if($rowOrder['orderStatus']=='waiting for payment') {
+                  echo "<td>
+                        <a href=\"infoPayment.php?orderID=$rowOrder[orderID]\" style=\"color: #ffffff\"><button type=\"submit\" class=\"flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 \">
+                            แจ้งชำระเงิน
+                        </button ></a>
+                    </td>";
+              }
+              else if($rowOrder['orderStatus']=='waiting for verify') {
+                  echo "<td style='color: red'>
+                        รอการตรวจสอบ    
+                    </td>";
+              }
+              else if($rowOrder['orderStatus']=='cancel') {
+                  echo "<td style='color: grey'>
+                        ยกเลิก 
+                    </td>";
+              }
+              else {
+                  echo "<td style='color: #1e7e34'>      
+                           ได้รับการยืนยันแล้ว                   
+                    </td>";
+              }
+                echo "</tr>";
+                }?>
 
             </table>
         </div>

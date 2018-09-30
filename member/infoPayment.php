@@ -18,6 +18,8 @@ $sql = "SELECT * FROM user WHERE uID = '".$_SESSION['ID']."' ";
 //$objResult = mysqli_fetch_array($objQuery);
 $result = mysqli_query($con,$sql);
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">

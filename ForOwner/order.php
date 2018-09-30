@@ -13,17 +13,12 @@ if($_SESSION['usertype'] != "owner" && $_SESSION['usertype'] != "admin")
 }
 include ('../dbConnect.php');
 $sql = "SELECT * FROM user WHERE uID = '".$_SESSION['ID']."' ";
-//$objQuery = mysqli_query($strSQL);
-//$objResult = mysqli_fetch_array($objQuery);
 $result = mysqli_query($con,$sql);
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 
-$sql2 = "SELECT * FROM user";
-//$objQuery = mysqli_query($strSQL);
-//$objResult = mysqli_fetch_array($objQuery);
-$result2 = mysqli_query($con,$sql2);
-//$row_getimgGID = mysqli_fetch_array($result2,MYSQLI_ASSOC);
+$sqlOrder = "SELECT * FROM order_table";
+$resultOrder = mysqli_query($con,$sqlOrder);
 
 ?>
 <!DOCTYPE html>
@@ -283,15 +278,41 @@ $result2 = mysqli_query($con,$sql2);
                 <tr class="header">
                     <th style="width:10%;text-align:center;"></th>
                     <th style="width:10%;text-align:center;">Order ID</th>
+                    <th style="width:10%;text-align:center;">วันที่สั่งซื้อ</th>
                     <th style="width:20%;text-align:center;">ชื่อผู้สั่งซื้อ</th>
                     <th style="width:20%;text-align:center;">ยอดสั่งซื้อ(บาท)</th>
                 </tr>
-                <tr>
-                    <td style="width:10%;text-align:center;"></td>
-                    <td style="width:10%;text-align:center;"><b><a href="orderInfo.php" class="color-link">Order ID</a></b></td>
-                    <td style="width:20%;text-align:center;">ชื่อผู้สั่งซื้อ</td>
-                    <td style="width:20%;text-align:center;">000</td>
-                </tr>
+                <?php
+                $orderStatus="";
+                while($rowOrder = mysqli_fetch_assoc($resultOrder))
+                {   $dateTime = date_format(date_create($rowOrder['dateTime']),'d-m-Y');
+                    if($rowOrder['orderStatus']=='waiting for payment'){
+                        $orderStatus = "รอชำระเงิน";
+                    }
+                    else if($rowOrder['orderStatus']=='waiting for verify'){
+                        $orderStatus = "รอตรวจสอบ";
+                    }
+                    else if($rowOrder['orderStatus']=='prepare to send order'){
+                        $orderStatus = "เตรียมจัดส่งสินค้า";
+                    }
+                    else if($rowOrder['orderStatus']=='sent order'){
+                        $orderStatus = "จัดส่งสินค้าแล้ว";
+                    }
+                    else if($rowOrder['orderStatus']=='cancel'){
+                        $orderStatus = "การสั่งซื้อถูกยกเลิก";
+                    }
+
+                    $sqlU = "SELECT * FROM user WHERE uID= '".$rowOrder['uID']."'";
+                    $resultU = mysqli_query($con,$sqlU);
+                    $rowU = mysqli_fetch_array($resultU,MYSQLI_ASSOC);
+                echo "<tr>
+                    <td style=\"width:10%;text-align:center;\">$orderStatus</td>
+                    <td style=\"width:10%;text-align:center;\"><b><a href=\"orderInfo.php?orderID=$rowOrder[orderID]\" class=\"color-link\">$rowOrder[orderID]</a></b></td>
+                    <td style=\"width:10 %;text-align:center;\">$dateTime</td>
+                    <td style=\"width:20%;text-align:center;\">$rowU[name]</td>
+                    <td style=\"width:20%;text-align:center;\">฿ $rowOrder[netPrice]</td>
+                </tr>";
+                }?>
             </table>
 
             <script>

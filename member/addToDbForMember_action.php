@@ -48,7 +48,7 @@ if(!empty($_SESSION["shopping_cart"]))
     }
         $netPrice=number_format((($total-$discount)+$shipPrice), 0,'.', '');
         echo $netPrice;
-        $sqlaod="INSERT INTO order_table (orderID,uID,gpdID,allAmount,priceAmount,codeID,shipPrice,howShip,netPrice,dateTime,nameShip,addressShip,telShip,msgShip)VALUES('$orderID ','$uID','$gpdID','$sumQuantity','$total','$codeID','$shipPrice','$howShip','$netPrice','$dateTime','$nameShip','$addressShip','$telShip','$msgShip')";//คำสั่งเพิ่มข้อมูล
+        $sqlaod="INSERT INTO order_table (orderID,uID,gpdID,allAmount,priceAmount,codeID,discountPrice,shipPrice,howShip,netPrice,dateTime,nameShip,addressShip,telShip,msgShip,orderStatus)VALUES('$orderID ','$uID','$gpdID','$sumQuantity','$total','$codeID','$discount','$shipPrice','$howShip','$netPrice','$dateTime','$nameShip','$addressShip','$telShip','$msgShip','waiting for payment')";//คำสั่งเพิ่มข้อมูล
         $sql_queryaod = mysqli_query($con,$sqlaod);
 
       //  echo $netPrice.$total.$dateTime.$sumCost.$sumQuantity.$telShip.$codeID;
