@@ -387,7 +387,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                     tr = table.getElementsByTagName("tr");
                     for (i = 0; i < tr.length; i++) {
                         td = tr[i].getElementsByTagName("td")[1];
-                        td2 = tr[i].getElementsByTagName("td")[2];
+                        td2 = tr[i].getElementsByTagName("td")[5];
                         if (td||td2) {
                             if (td.innerHTML.toUpperCase().indexOf(filter) > -1 || td2.innerHTML.toUpperCase().indexOf(filter) > -1) {
                                 tr[i].style.display = "";
