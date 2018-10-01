@@ -14,12 +14,11 @@ if($_SESSION['usertype'] != "member")
 
 include ('../dbConnect.php');
 $sql = "SELECT * FROM user WHERE uID = '".$_SESSION['ID']."' ";
-//$objQuery = mysqli_query($strSQL);
-//$objResult = mysqli_fetch_array($objQuery);
 $result = mysqli_query($con,$sql);
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
-
+$sql2 = "SELECT * FROM bank";
+$result2 = mysqli_query($con,$sql2);
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -287,14 +286,10 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 </header>
 
-
-
-<!-- Banner -->
-
-
 <!-- Product -->
 <section class="bgwhite p-t-55 p-b-65">
     <div class="container">
+        <form action="uploadPayment_action.php" method="post" enctype="multipart/form-data">
         <div class="bo9 w-size20 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-auto m-l-auto p-lr-15-sm">
             <h4 class="p-b-24" align="center">
                 แจ้งชำระเงิน
@@ -302,14 +297,67 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
             <!--  -->
             <div class="flex-w flex-sb-m">
-					<span class="s-text18 w-size19 w-full-sm" style="padding-left: 1px">
+                <span class="s-text18 w-size19 w-full-sm p-t-10">
+                    เลขที่ใบสั่งซื้อ :
+				</span>
+                <div class="w-size20 w-full-sm p-b-3">
+                    <input class="form-control" type="text" value="<?php echo $_GET['orderID'];?>" disabled>
+                    <input id="orderID" name="orderID" type="hidden" value="<?php echo $_GET['orderID'];?>">
+                </div>
+
+                <span class="s-text18 w-size19 w-full-sm" style="padding-left: 1px">
 						บัญชีที่โอนเงิน* :
 					</span>
 
                 <span class="m-text21 w-size20 w-full-sm">
 
-                     <select class="form-control" name="bankName">
+                     <select class="form-control" name="bankName" id="bankName">
+                      <?php  while($row2= mysqli_fetch_assoc($result2))// show the information from query
+                {
+                    if($row2['bankName']=='SCB'){
+                        echo "<option value=\"$row2[bankID]\">ธนาคารไทยพาณิชย์ | $row2[accountName] | $row2[accountNumber]</option>";
+                     }
+                    else if($row2['bankName']=='KTB') {
+                        echo "<option value=\"$row2[bankID]\">ธนาคารกรุงไทย | $row2[accountName] | $row2[accountNumber]</option>";
+                    }
+                    else if($row2['bankName']=='BBL'){
+                        echo "<option value=\"$row2[bankID]\">ธนาคารกรุงเทพ | $row2[accountName] | $row2[accountNumber]</option>";
+                    }
+                    else if($row2['bankName']=='KBANK'){
+                        echo "<option value=\"$row2[bankID]\">ธนาคารกสิกร | $row2[accountName] | $row2[accountNumber]</option>";
+                    }else if($row2['bankName']=='GSB'){
+                        echo "<option value=\"$row2[bankID]\">ธนาคารออมสิน | $row2[accountName] | $row2[accountNumber]</option>";
+                    }  else if($row2['bankName']=='KRUNGSRI'){
+                        echo "<option value=\"$row2[bankID]\">ธนาคารกรุงศรีอยุธยา | $row2[accountName] | $row2[accountNumber]</option>";
+                    }
+                    else if($row2['bankName']=='TMB'){
+                        echo "<option value=\"$row2[bankID]\">ธนาคารทหารไทย | $row2[accountName] | $row2[accountNumber]</option>";
+                    }
+                   else if($row2['bankName']=='UOB'){
+                       echo "<option value=\"$row2[bankID]\">ธนาคารยูโอบี | $row2[accountName] | $row2[accountNumber]</option>";
+                    }
+                    else if($row2['bankName']=='TBANK') {
+                        echo "<option value=\"$row2[bankID]\">ธนาคารธนชาติ | $row2[accountName] | $row2[accountNumber]</option>";
+                    }else if($row2['bankName']=='CIMB'){
+                        echo "<option value=\"$row2[bankID]\">ธนาคารซีไอเอ็มบี | $row2[accountName] | $row2[accountNumber]</option>";
+                    }
+                    else if($row2['bankName']=='CITIBANK'){
+                        echo "<option value=\"$row2[bankID]\">ซิตี้แบงค์ | $row2[accountName] | $row2[accountNumber]</option>";
+                    }
+                    else if($row2['bankName']=='SCBT'){
+                        echo "<option value=\"$row2[bankID]\">Standard Chartered | $row2[accountName] | $row2[accountNumber]</option>";
+                    }
+                    else if($row2['bankName']=='TISCO'){
+                        echo "<option value=\"$row2[bankID]\">ทิสโก้แบงค์ | $row2[accountName] | $row2[accountNumber]</option>";
+                    }
+                    else if($row2['bankName']=='Wallet') {
+                        echo "<option value=\"$row2[bankID]\">ทรูวอลเลท | $row2[accountName] | $row2[accountNumber]</option>";
+                    }
+                    else if($row2['bankName']=='PrompPay') {
+                        echo "<option value=\"$row2[bankID]\">พร้อมเพย์ | $row2[accountName] | $row2[accountNumber]</option>";
+                    }
 
+				}?>
                      </select>
 					</span>
                 <span class="s-text18 w-size19 w-full-sm p-t-10">
@@ -317,27 +365,25 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 					</span>
 
                 <div class="w-size20 w-full-sm p-t-10">
-                    <input type="date" id="dateTransfer" name="dateTranfer" style="width: 200px" value="<?php echo date("Y-m-d"); ?>">
+                    <input type="date" id="date" name="date" style="width: 200px" value="<?php echo date("Y-m-d"); ?>" required>
                 </div>
 
                 <span class="s-text18 w-size19 w-full-sm p-t-5">
                        เวลา(โดยประมาณ)* :
 					</span>
                 <div class="w-size20 w-full-sm p-b-10 p-t-10">
-                    <input type="time" id="time" name="time" style="width: 80px" />
+
+                    <input type="time" id="time" name="time" style="width: 120px" required/>
                 </div>
 
                 <span class="s-text18 w-size19 w-full-sm">
                         จำนวนเงิน* :
 					</span>
 
-                <div class="w-size20 w-full-sm">
-                    <textarea class="form-control" style="width: 30%" rows="1" name="addressShip" required></textarea>
+                <div class="w-size20 w-full-sm border">
+                    <input class="form-control" type="text" id="pricePay" name="pricePay" value="" required>
                 </div>
             </div>
-
-
-
 
                 <div class="flex-w flex-sb bo16 p-t-15 p-b-20">
 
@@ -347,31 +393,8 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
                     <div class="w-size20 w-full-sm">
                         <div class="uppic">
-                            <form method="post" action="#" enctype="multipart/form-data">
-                                <input style="margin:2% 0 2% 0 " type="file" name="filesToUpload[]" id="filesToUpload" multiple onchange="makeFileList();">
-                                <!--                                        <input type="submit">-->
-                            </form>
+                                <input style="margin:2% 0 2% 0 " type="file" name="filesToUploadPay[]" id="filesToUploadPay" required>
 
-                            <script>
-                                function makeFileList() {
-                                    var input = document.getElementById("filesToUpload");
-                                    var ul = document.getElementById("fileList");
-                                    while (ul.hasChildNodes()) {
-                                        ul.removeChild(ul.firstChild);
-                                    }
-                                    for (var i = 0; i < input.files.length; i++) {
-                                        var li = document.createElement("li");
-                                        li.innerHTML = input.files[i].name;
-                                        ul.appendChild(li);
-                                    }
-                                    if(!ul.hasChildNodes()) {
-                                        var li = document.createElement("li");
-                                        li.innerHTML = 'ไม่มีรูปภาพที่เลือก';
-                                        ul.appendChild(li);
-                                    }
-                                }
-
-                            </script>
 
                     </div>
 
@@ -390,14 +413,8 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
         </div>
 
-
-
-
-
-
-                <!-- Pagination -->
-
         </div>
+        </form>
     </div>
 </section>
 

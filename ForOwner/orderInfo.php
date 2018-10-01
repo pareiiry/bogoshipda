@@ -46,6 +46,15 @@ $dateTime = date_format(date_create($rowOrder['dateTime']),'d-m-Y');
 $sqlU = "SELECT * FROM user WHERE uID= '".$rowOrder['uID']."'";
 $resultU = mysqli_query($con,$sqlU);
 $rowU = mysqli_fetch_array($resultU,MYSQLI_ASSOC);
+
+
+$sqlOrder2 = "SELECT * FROM order_table WHERE orderStatus='waiting for payment'";
+$resultOrder2 = mysqli_query($con,$sqlOrder2);
+$countNoti = mysqli_num_rows($resultOrder2);
+
+$sqlOrder3 = "SELECT * FROM order_table WHERE orderStatus='waiting for verify'";
+$resultOrder3 = mysqli_query($con,$sqlOrder3);
+$countNotiPay = mysqli_num_rows($resultOrder3);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -101,6 +110,25 @@ $rowU = mysqli_fetch_array($resultU,MYSQLI_ASSOC);
             padding-bottom: 15px;
             text-align: center;
         }
+        .menu-icons-noti {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: red;
+            color: white;
+            font-family: Montserrat-Medium;
+            font-size: 12px;
+            position: absolute;
+            top: -7px;
+            right: 10px;
+        }
 
     </style>
 </head>
@@ -133,11 +161,11 @@ $rowU = mysqli_fetch_array($resultU,MYSQLI_ASSOC);
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
-                <a href="order.php"><img class="bg-icon-current" src="../img/menu_bar_admin/order.png" style="width:100%" alt="Image">สั่งซื้อ<span class="menu-icons-noti">1</span></a>
+                <a href="order.php"><img class="bg-icon-current" src="../img/menu_bar_admin/order.png" style="width:100%" alt="Image">สั่งซื้อ<span class="menu-icons-noti"><?php echo $countNoti;?></a>
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
-                <a href="payment.php"><img class="bg-icon" src="../img/menu_bar_admin/payment.png" style="width:100%" alt="Image">ชำระเงิน</a>
+                <a href="payment.php"><img class="bg-icon" src="../img/menu_bar_admin/payment.png" style="width:100%" alt="Image">ชำระเงิน<span class="menu-icons-noti"><?php echo $countNotiPay;?></a>
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
@@ -186,7 +214,7 @@ $rowU = mysqli_fetch_array($resultU,MYSQLI_ASSOC);
         <div class="col-sm-9">
             <form method="post" action="Action/addProduct_action.php" enctype="multipart/form-data">
             <div class="row" style="margin-top: 5px">
-                <div class="col-sm-4"><a href="order.php" class="btn btn-info" role="button" style="margin-left: 2%;margin-top: 3%" >< กลับไปหน้ารายการสั่งซื้อทั้งหมด</a></div>
+                <div class="col-sm-4"><a href="javascript:history.back()" class="btn btn-info" role="button" style="margin-left: 2%;margin-top: 3%" >< กลับไปหน้ารายการสั่งซื้อทั้งหมด</a></div>
                 <div class="col-sm-4" align="center"><h3><b>Order ID : <?php echo $rowOrder['orderID'];?></b></h3></div>
 
                 <div class="col-sm-4 " align="right">

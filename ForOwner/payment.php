@@ -24,6 +24,13 @@ $sql2 = "SELECT * FROM user";
 //$objResult = mysqli_fetch_array($objQuery);
 $result2 = mysqli_query($con,$sql2);
 //$row_getimgGID = mysqli_fetch_array($result2,MYSQLI_ASSOC);
+$sqlOrder2 = "SELECT * FROM order_table WHERE orderStatus='waiting for payment'";
+$resultOrder2 = mysqli_query($con,$sqlOrder2);
+$countNoti = mysqli_num_rows($resultOrder2);
+
+$sqlOrder3 = "SELECT * FROM order_table WHERE orderStatus='waiting for verify'";
+$resultOrder3 = mysqli_query($con,$sqlOrder3);
+$countNotiPay = mysqli_num_rows($resultOrder3);
 
 ?>
 <!DOCTYPE html>
@@ -164,6 +171,25 @@ $result2 = mysqli_query($con,$sql2);
             background-color: #28a745;
             border-color: #28a745;
         }
+        .menu-icons-noti {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: red;
+            color: white;
+            font-family: Montserrat-Medium;
+            font-size: 12px;
+            position: absolute;
+            top: -7px;
+            right: 10px;
+        }
 
     </style>
 </head>
@@ -196,11 +222,11 @@ $result2 = mysqli_query($con,$sql2);
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
-                <a href="order.php"><img class="bg-icon" src="../img/menu_bar_admin/order.png" style="width:100%" alt="Image">สั่งซื้อ<span class="menu-icons-noti">1</span></a>
+                <a href="order.php"><img class="bg-icon" src="../img/menu_bar_admin/order.png" style="width:100%" alt="Image">สั่งซื้อ<span class="menu-icons-noti"><?php echo $countNoti;?></a>
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
-                <a href="payment.php"><img class="bg-icon-current" src="../img/menu_bar_admin/payment.png" style="width:100%" alt="Image">ชำระเงิน</a>
+                <a href="payment.php"><img class="bg-icon-current" src="../img/menu_bar_admin/payment.png" style="width:100%" alt="Image">ชำระเงิน<span class="menu-icons-noti"><?php echo $countNotiPay;?></a>
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
@@ -258,30 +284,98 @@ $result2 = mysqli_query($con,$sql2);
 
             <table id="myTable" border="1px black">
                 <tr class="header">
-                    <th style="width:10%;text-align:center;"></th>
                     <th style="width:5%;text-align:center;">Payment ID</th>
                     <th style="width:15%;text-align:center;">ผู้แจ้งชำระเงิน</th>
                     <th style="text-align:center;">ช่องทางชำระเงิน</th>
-                    <th style="text-align:center;">จำนวนเงิน (บาท)</th>
+                    <th style="text-align:center;">ราคาสุทธิ (บาท)</th>
                     <th style="width:10%;text-align:center;">วันที่ชำระเงิน</th>
                     <td style="text-align: center">orderID</td>
                     <th style="width:5%;text-align:center;">ยืนยันชำระเงิน</th>
 
                 </tr>
+                <?php
+                $sqlPayment = "SELECT * FROM payment";
+                $resultPayment = mysqli_query($con,$sqlPayment);
+                while($rowPayment = mysqli_fetch_assoc($resultPayment))// show the information from query
+                {
+                    $sqlOrder4 = "SELECT * FROM order_table WHERE orderID='".$rowPayment['orderID']."'";
+                    $resultOrder4 = mysqli_query($con,$sqlOrder4);
+                    $rowOrder4 = mysqli_fetch_array($resultOrder4,MYSQLI_ASSOC);
 
-                <tr>
-                    <td style="width:10%;text-align:center;"></td>
-                    <td style="width:5%;text-align:center;"><b><a href="paymentInfo.php" class="color-link">Payment ID</a></b> </td>
-                    <td style="width:15%;text-align:center;">name</td>
-                    <td style="text-align:center;">bank</td>
-                    <td style="text-align:center;">000</td>
-                    <td style="width:10%;text-align:center;">26-09-2018 17.30</td>
-                    <td style="text-align: center"><a href="orderInfo.php" class="color-link">order ID</a></td>
-                    <td style="width:5%;text-align:center;">
-                        <button type="button" class="btn btn-outline-success">ยืนยัน</button>
-                    </td>
-                </tr>
+                    $sqlUser = "SELECT * FROM user WHERE uID='".$rowOrder4['uID']."'";
+                    $resultUser = mysqli_query($con,$sqlUser);
+                    $rowUser = mysqli_fetch_array($resultUser,MYSQLI_ASSOC);
 
+                    $sqlBank = "SELECT * FROM bank WHERE bankID='".$rowPayment['bankID']."'";
+                    $resultBank = mysqli_query($con,$sqlBank);
+                    $rowBank= mysqli_fetch_array($resultBank,MYSQLI_ASSOC);
+                    $bank ="";
+                    if($rowBank['bankName']=='SCB'){
+                        $bank ="ธนาคารไทยพาณิชย์ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                    }
+                    else if($rowBank['bankName']=='KTB') {
+                        $bank ="ธนาคารกรุงไทย | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                    }
+                    else if($rowBank['bankName']=='BBL'){
+                        $bank ="ธนาคารกรุงเทพ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                    }
+                    else if($rowBank['bankName']=='KBANK'){
+                        $bank ="ธนาคารกสิกร | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                    }else if($rowBank['bankName']=='GSB'){
+                        $bank ="ธนาคารออมสิน | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                    }  else if($rowBank['bankName']=='KRUNGSRI'){
+                        $bank ="ธนาคารกรุงศรีอยุธยา | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                    }
+                    else if($rowBank['bankName']=='TMB'){
+                        $bank ="ธนาคารทหารไทย | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                    }
+                    else if($rowBank['bankName']=='UOB'){
+                        $bank ="ธนาคารยูโอบี | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                    }
+                    else if($rowBank['bankName']=='TBANK') {
+                        $bank ="ธนาคารธนชาติ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                    }else if($rowBank['bankName']=='CIMB'){
+                        $bank ="ธนาคารซีไอเอ็มบี | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                    }
+                    else if($rowBank['bankName']=='CITIBANK'){
+                        $bank ="ซิตี้แบงค์ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                    }
+                    else if($rowBank['bankName']=='SCBT'){
+                        $bank ="Standard Chartered | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                    }
+                    else if($rowBank['bankName']=='TISCO'){
+                        $bank ="ทิสโก้แบงค์ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                    }
+                    else if($rowBank['bankName']=='Wallet') {
+                        $bank ="ทรูวอลเลท | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                    }
+                    else if($rowBank['bankName']=='PrompPay') {
+                        $bank ="พร้อมเพย์ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                    }
+
+
+                echo "<tr>
+                    <td style=\"width:5%;text-align:center;\"><b><a href=\"paymentInfo.php?paymentID=$rowPayment[paymentID]\" class=\"color-link\">$rowPayment[paymentID]</a></b> </td>
+                    <td style=\"width:15%;text-align:center;\">$rowUser[name]</td>
+                    <td style=\"text-align:center;\">$bank</td>
+                    <td style=\"text-align:center;\">$rowOrder4[netPrice]</td>
+                    <td style=\"width:10%;text-align:center;\">$rowPayment[dateCreate]</td>
+                    <td style=\"text-align: center\"><a href=\"orderInfo.php?orderID=$rowPayment[orderID]\" class=\"color-link\">$rowPayment[orderID]</a></td>
+                    <td style=\"width:5%;text-align:center;\">";
+                        if($rowPayment['checked']=='0'){
+                        echo "
+                             <form action='Action/updateStatusTosendOrder_action.php' method='post'>
+                             <input type='hidden' name='paymentID' value='$rowPayment[paymentID]'>
+                             <input type='hidden' name='orderID' value='$rowPayment[orderID]'>
+                                <button type=\"submit\" class=\"btn btn-outline-success\">ยืนยัน</button>
+                                </form>";
+                        }
+                        else{
+                            echo "<span style='color: #1e7e34'>ยืนยันแล้ว</span>";
+                        }
+                    echo "</td>
+                </tr>";
+                }?>
             </table>
 
             <script>

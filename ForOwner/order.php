@@ -20,6 +20,13 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 $sqlOrder = "SELECT * FROM order_table";
 $resultOrder = mysqli_query($con,$sqlOrder);
 
+$sqlOrder2 = "SELECT * FROM order_table WHERE orderStatus='waiting for payment'";
+$resultOrder2 = mysqli_query($con,$sqlOrder2);
+$countNoti = mysqli_num_rows($resultOrder2);
+
+$sqlOrder3 = "SELECT * FROM order_table WHERE orderStatus='waiting for verify'";
+$resultOrder3 = mysqli_query($con,$sqlOrder3);
+$countNotiPay = mysqli_num_rows($resultOrder3);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -214,11 +221,11 @@ $resultOrder = mysqli_query($con,$sqlOrder);
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
-                <a href="order.php"><img class="bg-icon-current" src="../img/menu_bar_admin/order.png" style="width:100%" alt="Image">สั่งซื้อ<span class="menu-icons-noti">1</span></a>
+                <a href="order.php"><img class="bg-icon-current" src="../img/menu_bar_admin/order.png" style="width:100%" alt="Image">สั่งซื้อ <span class="menu-icons-noti"><?php echo $countNoti;?></span></a>
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
-                <a href="payment.php"><img class="bg-icon" src="../img/menu_bar_admin/payment.png" style="width:100%" alt="Image">ชำระเงิน</a>
+                <a href="payment.php"><img class="bg-icon" src="../img/menu_bar_admin/payment.png" style="width:100%" alt="Image">ชำระเงิน <span class="menu-icons-noti"><?php echo $countNotiPay;?></span></a>
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->

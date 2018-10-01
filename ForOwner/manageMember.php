@@ -25,6 +25,14 @@ $sql2 = "SELECT * FROM user";
 $result2 = mysqli_query($con,$sql2);
 //$row_getimgGID = mysqli_fetch_array($result2,MYSQLI_ASSOC);
 
+$sqlOrder2 = "SELECT * FROM order_table WHERE orderStatus='waiting for payment'";
+$resultOrder2 = mysqli_query($con,$sqlOrder2);
+$countNoti = mysqli_num_rows($resultOrder2);
+
+$sqlOrder3 = "SELECT * FROM order_table WHERE orderStatus='waiting for verify'";
+$resultOrder3 = mysqli_query($con,$sqlOrder3);
+$countNotiPay = mysqli_num_rows($resultOrder3);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -167,6 +175,25 @@ $result2 = mysqli_query($con,$sql2);
 			background-color: #aadcd8;
 			border-radius: 8px;
 		}
+        .menu-icons-noti {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: red;
+            color: white;
+            font-family: Montserrat-Medium;
+            font-size: 12px;
+            position: absolute;
+            top: -7px;
+            right: 10px;
+        }
 
     </style>
 </head>
@@ -199,11 +226,11 @@ $result2 = mysqli_query($con,$sql2);
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
-                <a href="order.php"><img class="bg-icon" src="../img/menu_bar_admin/order.png" style="width:100%" alt="Image">สั่งซื้อ<span class="menu-icons-noti">1</span></a>
+                <a href="order.php"><img class="bg-icon" src="../img/menu_bar_admin/order.png" style="width:100%" alt="Image">สั่งซื้อ<span class="menu-icons-noti"><?php echo $countNoti;?></a>
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
-                <a href="payment.php"><img class="bg-icon" src="../img/menu_bar_admin/payment.png" style="width:100%" alt="Image">ชำระเงิน</a>
+                <a href="payment.php"><img class="bg-icon" src="../img/menu_bar_admin/payment.png" style="width:100%" alt="Image">ชำระเงิน<span class="menu-icons-noti"><?php echo $countNotiPay;?></a>
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
