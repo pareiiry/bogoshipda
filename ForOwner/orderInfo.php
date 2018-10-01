@@ -55,6 +55,58 @@ $countNoti = mysqli_num_rows($resultOrder2);
 $sqlOrder3 = "SELECT * FROM order_table WHERE orderStatus='waiting for verify'";
 $resultOrder3 = mysqli_query($con,$sqlOrder3);
 $countNotiPay = mysqli_num_rows($resultOrder3);
+
+
+$sqlPay = "SELECT * FROM payment WHERE orderID='".$_GET['orderID']."'";
+$resultPay = mysqli_query($con,$sqlPay);
+$rowPay = mysqli_fetch_array($resultPay,MYSQLI_ASSOC);
+
+$sqlBank = "SELECT * FROM bank WHERE bankID='".$rowPay['bankID']."'";
+$resultBank = mysqli_query($con,$sqlBank);
+$rowBank= mysqli_fetch_array($resultBank,MYSQLI_ASSOC);
+$bank ="";
+if($rowBank['bankName']=='SCB'){
+    $bank ="ธนาคารไทยพาณิชย์ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}
+else if($rowBank['bankName']=='KTB') {
+    $bank ="ธนาคารกรุงไทย | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}
+else if($rowBank['bankName']=='BBL'){
+    $bank ="ธนาคารกรุงเทพ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}
+else if($rowBank['bankName']=='KBANK'){
+    $bank ="ธนาคารกสิกร | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}else if($rowBank['bankName']=='GSB'){
+    $bank ="ธนาคารออมสิน | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}  else if($rowBank['bankName']=='KRUNGSRI'){
+    $bank ="ธนาคารกรุงศรีอยุธยา | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}
+else if($rowBank['bankName']=='TMB'){
+    $bank ="ธนาคารทหารไทย | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}
+else if($rowBank['bankName']=='UOB'){
+    $bank ="ธนาคารยูโอบี | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}
+else if($rowBank['bankName']=='TBANK') {
+    $bank ="ธนาคารธนชาติ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}else if($rowBank['bankName']=='CIMB'){
+    $bank ="ธนาคารซีไอเอ็มบี | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}
+else if($rowBank['bankName']=='CITIBANK'){
+    $bank ="ซิตี้แบงค์ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}
+else if($rowBank['bankName']=='SCBT'){
+    $bank ="Standard Chartered | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}
+else if($rowBank['bankName']=='TISCO'){
+    $bank ="ทิสโก้แบงค์ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}
+else if($rowBank['bankName']=='Wallet') {
+    $bank ="ทรูวอลเลท | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}
+else if($rowBank['bankName']=='PrompPay') {
+    $bank ="พร้อมเพย์ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -272,21 +324,21 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                     </div>
 
                     <div class="panel panel-default">
-                        <div class="panel-heading fs-25"><b>รายละเอียดการชำระเงิน</b></div>
+                        <div class="panel-heading fs-25"><b>รายละเอียดการชำระเงิน  <?php if($rowPay['checked']=='0'){echo "<span style='color: red'>(ยังไม่ได้ยืนยันการชำระเงิน)</span>";}else{echo "<span style='color: darkgreen'>(ยืนยันการชำระเงินแล้ว)</span>";}?></b></div>
                         <div class="panel-body" style="margin: 0% 2% 0% 2%">
                             <!--                            <form method="post">-->
                             <table width="100%" border="1px black">
                                 <tr>
                                     <td width="35%">Payment ID : </td>
-                                    <td></td>
+                                    <td><?php echo $rowPay['paymentID']; ?></td>
                                 </tr>
                                 <tr>
                                     <td>ชำระเงินเมื่อ : </td>
-                                    <td></td>
+                                    <td><?php echo $rowPay['dateCreate']; ?></td>
                                 </tr>
                                 <tr>
                                     <td>ช่องทางชำระเงิน : </td>
-                                    <td></td>
+                                    <td><?php echo $bank;?></td>
                                 </tr>
                             </table>
                         </div>
