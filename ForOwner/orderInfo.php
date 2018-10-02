@@ -313,11 +313,11 @@ else if($rowBank['bankName']=='PrompPay') {
                             <table width="100%" border="1px black">
                                 <tr>
                                     <td width="35%">รหัสพัสดุ : </td>
-                                    <td></td>
+                                    <td><?php if($rowOrder['trackingNumber']!=NULL)echo $rowOrder['trackingNumber'];else echo "-"; ?></td>
                                 </tr>
                                 <tr>
                                     <td>จัดส่งเมื่อ : </td>
-                                    <td></td>
+                                    <td><?php if($rowOrder['trackingNumber']!=NULL)echo $rowOrder['dateTimeSendProduct'];else echo "-"; ?></td>
                                 </tr>
                             </table>
                         </div>

@@ -33,6 +33,10 @@ $sqlOrder3 = "SELECT * FROM order_table WHERE orderStatus='waiting for verify'";
 $resultOrder3 = mysqli_query($con,$sqlOrder3);
 $countNotiPay = mysqli_num_rows($resultOrder3);
 
+
+$sqlOrder = "SELECT * FROM order_table WHERE orderStatus IN ('prepare to send order','sent order')";
+$resultOrder = mysqli_query($con,$sqlOrder);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -349,20 +353,68 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                     <th style="text-align: center;">รหัสพัสดุ</th>
                     <th style="text-align: center; width: 5%">ยืนยันจัดส่ง</th>
                 </tr>
-                <tr>
-                    <td style="width:5%;text-align:center;"></td>
-                    <td style="width:5%;text-align:center;"><b><a href="orderInfo.php" class="color-link">Order ID</a></b> </td>
-                    <td style="text-align: center;">วันที่ยืนยันรับเงิน</td>
-                    <td style="width:20%;text-align:center;">ผู้สั่งซื้อ</td>
-                    <td style="width:20%;text-align:left;">
-                        <b>ส่งแบบ : </b>
-                        <br><b>ผู้รับ : </b>
+                <?php
+                $howShip="";
+                $orderStatus="";
+                while($rowOrder = mysqli_fetch_assoc($resultOrder))
+                {
+                if($rowOrder['orderStatus']=='waiting for payment'){
+                $orderStatus = "รอชำระเงิน";
+                }
+                else if($rowOrder['orderStatus']=='waiting for verify'){
+                $orderStatus = "รอตรวจสอบ";
+                }
+                else if($rowOrder['orderStatus']=='prepare to send order'){
+                $orderStatus = "เตรียมจัดส่งสินค้า";
+                }
+                else if($rowOrder['orderStatus']=='sent order'){
+                $orderStatus = "จัดส่งสินค้าแล้ว";
+                }
+                else if($rowOrder['orderStatus']=='cancel'){
+                $orderStatus = "การสั่งซื้อถูกยกเลิก";
+                }
+                if($rowOrder['howShip']=='Regis'){
+                $howShip = "พัสดุลงทะเบียน";
+                }elseif ($rowOrder['howShip']=='Ems'){
+                $howShip = "พัสดุด่วนพิเศษ (EMS)";
+                }elseif ($rowOrder['howShip']='Kerry'){
+                $howShip = "Kerry Express";
+                }
+                $dateTime = date_format(date_create($rowOrder['dateTime']),'d-m-Y');
+
+                $sqlU = "SELECT * FROM user WHERE uID= '".$rowOrder['uID']."'";
+                $resultU = mysqli_query($con,$sqlU);
+                $rowU = mysqli_fetch_array($resultU,MYSQLI_ASSOC);
+
+                    $sqlPay = "SELECT * FROM payment WHERE orderID='".$rowOrder['orderID']."'";
+                    $resultPay = mysqli_query($con,$sqlPay);
+                    $rowPay = mysqli_fetch_array($resultPay,MYSQLI_ASSOC);
+                echo "<tr>
+                    <td style=\"width:10%;text-align:center;\">$orderStatus</td>
+                    <td style=\"width:5%;text-align:center;\"><b><a href=\"orderInfo.php?orderID=$rowOrder[orderID]\" class=\"color-link\">$rowOrder[orderID]</a></b> </td>
+                    <td style=\"width:10%;text-align: center;\">$rowPay[dateVerifyPayment]</td>
+                    <td style=\"width:15%;text-align:center;\">$rowU[name]</td>
+                    <td style=\"width:25%;text-align:left;\">
+                        <b>ส่งแบบ : $howShip</b>
+                        <br><b>ผู้รับ</b> : $rowOrder[nameShip] ( โทร. $rowOrder[telShip] )<br>$rowOrder[addressShip]</br>
+                    </td>";
+                    if($rowOrder['trackingNumber']==NULL){
+                        echo "<form action='Action/addTracking_action.php' method='post'>
+                    <input type='hidden' name='orderID' value='$rowOrder[orderID]'>
+                    <td style=\"text-align: center;\"><input type='text' class='form-control' value='' name='trackingNumber' placeholder='กรุณาระบุรหัสพัสดุ...' required></td>
+                    <td style=\"text-align: center\">
+                        <button type=\"submit\" class=\"btn btn-outline-success\">ยืนยัน</button>
                     </td>
-                    <td style="text-align: center;">รหัสพัสดุ</td>
-                    <td style="text-align: center">
-                        <button type="button" class="btn btn-outline-success">ยืนยัน</button>
-                    </td>
-                </tr>
+                    </form>";
+                    }
+                    else{
+                        echo "  <td style=\"text-align: center;\">$rowOrder[trackingNumber]</td>
+                                <td style=\"text - align: center;\">ยืนยันการจัดส่งแล้ว</td>";
+                    }
+
+
+                echo "</tr>";
+                }?>
             </table>
 
             <script>
@@ -373,8 +425,8 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                     table = document.getElementById("myTable");
                     tr = table.getElementsByTagName("tr");
                     for (i = 0; i < tr.length; i++) {
-                        td = tr[i].getElementsByTagName("td")[1];
-                        td2 = tr[i].getElementsByTagName("td")[2];
+                        td = tr[i].getElementsByTagName("td")[0];
+                        td2 = tr[i].getElementsByTagName("td")[3];
                         if (td||td2) {
                             if (td.innerHTML.toUpperCase().indexOf(filter) > -1 || td2.innerHTML.toUpperCase().indexOf(filter) > -1) {
                                 tr[i].style.display = "";

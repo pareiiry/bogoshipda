@@ -485,40 +485,40 @@ else{
     </div>
 </div>
 
-<section class="newproduct bgwhite p-t-45 p-b-105">
-
-
-    <div class="container">
-        <div class="wrap-dropdown-content bo7 p-t-15 p-b-14">
-            <h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
-                รีวิวสินค้า (0)
-                <i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="true"></i>
-                <i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
-            </h5>
-
-            <div class="dropdown-content dis-none p-t-15 p-b-23">
-                <div class="rating-main">
-                    <div class="rating-name">name</div>
-                    <div class="rating-rating">
-                        <div class="stars">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
-                    </div>
-                    <div class="rating-comment">comment</div>
-                    <div class="rating-pic"><img src="../images/no-picture.jpg"></div>
-                    <div class="rating-time">10-09-2018 18:26</div>
-                    <hr>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
-    </section>
+<!--<section class="newproduct bgwhite p-t-45 p-b-105">-->
+<!---->
+<!---->
+<!--    <div class="container">-->
+<!--        <div class="wrap-dropdown-content bo7 p-t-15 p-b-14">-->
+<!--            <h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">-->
+<!--                รีวิวสินค้า (0)-->
+<!--                <i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="true"></i>-->
+<!--                <i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>-->
+<!--            </h5>-->
+<!---->
+<!--            <div class="dropdown-content dis-none p-t-15 p-b-23">-->
+<!--                <div class="rating-main">-->
+<!--                    <div class="rating-name">name</div>-->
+<!--                    <div class="rating-rating">-->
+<!--                        <div class="stars">-->
+<!--                            <span class="fa fa-star checked"></span>-->
+<!--                            <span class="fa fa-star checked"></span>-->
+<!--                            <span class="fa fa-star checked"></span>-->
+<!--                            <span class="fa fa-star"></span>-->
+<!--                            <span class="fa fa-star"></span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="rating-comment">comment</div>-->
+<!--                    <div class="rating-pic"><img src="../images/no-picture.jpg"></div>-->
+<!--                    <div class="rating-time">10-09-2018 18:26</div>-->
+<!--                    <hr>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!---->
+<!---->
+<!--    </div>-->
+<!--    </section>-->
 
 
 <!-- Footer -->

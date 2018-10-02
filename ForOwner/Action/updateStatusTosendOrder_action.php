@@ -9,8 +9,7 @@ $sql2="UPDATE payment SET checked='1',dateVerifyPayment='$dateTime' WHERE paymen
 $sql_query2=mysqli_query($con,$sql2);
 
     if($sql_query2) {
-        echo "<script type='text/javascript'>alert('ยืนยันการชำระเงินเรียบร้อยแล้ว')";
-        echo "<meta http-equiv ='refresh'content='0;URL=../payment.php'>";
+        echo "<script type='text/javascript'>alert('ยืนยันการชำระเงินเรียบร้อยแล้ว');location.replace(document.referrer);</script>";
     }else{
         echo "<script type='text/javascript'>alert('เกิดข้อผิดพลาดในการบันทึกการยืนยันการชำระเงิน');window.history.go(-1);</script>" ;
     }

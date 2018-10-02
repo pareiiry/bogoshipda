@@ -21,6 +21,7 @@ $sql2 = "SELECT * FROM product";
 $result2 = mysqli_query($con,$sql2);
 $dc=0;
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -233,7 +234,7 @@ $dc=0;
                                         <td align="center"></td>
                                         <td><?php echo $values["name"]; ?></td>
                                         <td align="center"><?php echo $values["quantity"]; ?></td>
-                                        <td align="right">฿<?php echo ($values["quantity"] * $values["price"]); ?></td>
+                                        <td align="right">฿ <?php echo number_format($values["quantity"] * $values["price"]); ?></td>
                                     </tr>
 
                                     <?php
@@ -297,19 +298,20 @@ $dc=0;
                     <div class="w-size15  w-full-sm" align="right">
                         ฿ <?php
                         $addShip=0;
+                        $sc=0;
                         if($_POST['ship']=='Regis'){
                             $ship = 30;
                             if($_POST['countShip']>5){
                                 $addShip = ($_POST['countShip']-5)*5;
                             }
-                            $sc=number_format(($ship+$addShip), 0);
+                            $sc=$ship+$addShip;
                             echo number_format(($ship+$addShip), 0);
                         }elseif ($_POST['ship']=='Ems'){
                             $ship = 50;
                             if($_POST['countShip']>5){
                                 $addShip = ($_POST['countShip']-5)*5;
                             }
-                            $sc=number_format(($ship+$addShip), 0);
+                            $sc=$ship+$addShip;
                             echo number_format(($ship+$addShip), 0);
 
                         }elseif ($_POST['ship']=='Kerry'){
@@ -317,7 +319,7 @@ $dc=0;
                             if($_POST['countShip']>5){
                                 $addShip = ($_POST['countShip']-5)*5;
                             }
-                            $sc=number_format(($ship+$addShip), 0);
+                            $sc=$ship+$addShip;
                             echo number_format(($ship+$addShip), 0);
                         }
                         $sp=($ship+$addShip);
