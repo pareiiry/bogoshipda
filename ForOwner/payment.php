@@ -361,16 +361,21 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                     <td style=\"text-align:center;\">$rowOrder4[netPrice]</td>
                     <td style=\"width:10%;text-align:center;\">$rowPayment[dateCreate]</td>
                     <td style=\"text-align: center\"><a href=\"orderInfo.php?orderID=$rowPayment[orderID]\" class=\"color-link\">$rowPayment[orderID]</a></td>
-                    <td style=\"width:5%;text-align:center;\">";
+                    <td style=\"width:10%;text-align:center;\">";
                         if($rowPayment['checked']=='0'){
-                        echo "
+                            if($rowOrder4['orderStatus']=="cancel"){
+                                echo "<span style='color: grey'>ถูกปฏิเสธ</span>";
+                            }else {
+                                echo "
                              <form action='Action/updateStatusTosendOrder_action.php' method='post'>
                              <input type='hidden' name='paymentID' value='$rowPayment[paymentID]'>
                              <input type='hidden' name='orderID' value='$rowPayment[orderID]'>
                                 <button type=\"submit\" class=\"btn btn-outline-success\">ยืนยัน</button>
                                 </form>";
+                            }
                         }
                         else{
+
                             echo "<span style='color: #1e7e34'>ยืนยันแล้ว</span>";
                         }
                     echo "</td>

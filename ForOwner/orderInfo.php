@@ -324,7 +324,17 @@ else if($rowBank['bankName']=='PrompPay') {
                     </div>
 
                     <div class="panel panel-default">
-                        <div class="panel-heading fs-25"><b>รายละเอียดการชำระเงิน  <?php if($rowPay['checked']=='0'){echo "<span style='color: red'>(ยังไม่ได้ยืนยันการชำระเงิน)</span>";}else{echo "<span style='color: darkgreen'>(ยืนยันการชำระเงินแล้ว)</span>";}?></b></div>
+                        <div class="panel-heading fs-25"><b>รายละเอียดการชำระเงิน  <?php
+                                if($rowPay['checked']=='0'){
+                                    if($rowOrder['orderStatus']=="cancel"){
+                                        echo "<span style='color: grey'>(ถูกปฏิเสธ)</span>";
+                                    }
+                                    else {
+                                        echo "<span style='color: red'>(ยังไม่ได้ยืนยันการชำระเงิน)</span>";
+                                    }
+                                } else{
+                                        echo "<span style='color: darkgreen'>(ยืนยันการชำระเงินแล้ว)</span>";
+                                }?></b></div>
                         <div class="panel-body" style="margin: 0% 2% 0% 2%">
                             <!--                            <form method="post">-->
                             <table width="100%" border="1px black">

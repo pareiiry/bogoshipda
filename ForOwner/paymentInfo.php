@@ -31,6 +31,67 @@ $countNoti = mysqli_num_rows($resultOrder2);
 $sqlOrder3 = "SELECT * FROM order_table WHERE orderStatus='waiting for verify'";
 $resultOrder3 = mysqli_query($con,$sqlOrder3);
 $countNotiPay = mysqli_num_rows($resultOrder3);
+
+$sqlPay = "SELECT * FROM payment WHERE paymentID='".$_GET['paymentID']."'";
+$resultPay = mysqli_query($con,$sqlPay);
+$rowPay = mysqli_fetch_array($resultPay,MYSQLI_ASSOC);
+
+$sqlOrder = "SELECT * FROM order_table WHERE orderID='".$rowPay['orderID']."'";
+$resultOrder= mysqli_query($con,$sqlOrder);
+$rowOrder = mysqli_fetch_array($resultOrder,MYSQLI_ASSOC);
+
+$sqlUser = "SELECT * FROM user WHERE uID='".$rowOrder['uID']."'";
+$resultUser = mysqli_query($con,$sqlUser);
+$rowUser = mysqli_fetch_array($resultUser,MYSQLI_ASSOC);
+
+$sqlBank = "SELECT * FROM bank WHERE bankID='".$rowPay['bankID']."'";
+$resultBank = mysqli_query($con,$sqlBank);
+$rowBank= mysqli_fetch_array($resultBank,MYSQLI_ASSOC);
+$bank ="";
+if($rowBank['bankName']=='SCB'){
+    $bank ="ธนาคารไทยพาณิชย์ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}
+else if($rowBank['bankName']=='KTB') {
+    $bank ="ธนาคารกรุงไทย | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}
+else if($rowBank['bankName']=='BBL'){
+    $bank ="ธนาคารกรุงเทพ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}
+else if($rowBank['bankName']=='KBANK'){
+    $bank ="ธนาคารกสิกร | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}else if($rowBank['bankName']=='GSB'){
+    $bank ="ธนาคารออมสิน | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}  else if($rowBank['bankName']=='KRUNGSRI'){
+    $bank ="ธนาคารกรุงศรีอยุธยา | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}
+else if($rowBank['bankName']=='TMB'){
+    $bank ="ธนาคารทหารไทย | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}
+else if($rowBank['bankName']=='UOB'){
+    $bank ="ธนาคารยูโอบี | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}
+else if($rowBank['bankName']=='TBANK') {
+    $bank ="ธนาคารธนชาติ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}else if($rowBank['bankName']=='CIMB'){
+    $bank ="ธนาคารซีไอเอ็มบี | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}
+else if($rowBank['bankName']=='CITIBANK'){
+    $bank ="ซิตี้แบงค์ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}
+else if($rowBank['bankName']=='SCBT'){
+    $bank ="Standard Chartered | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}
+else if($rowBank['bankName']=='TISCO'){
+    $bank ="ทิสโก้แบงค์ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}
+else if($rowBank['bankName']=='Wallet') {
+    $bank ="ทรูวอลเลท | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}
+else if($rowBank['bankName']=='PrompPay') {
+    $bank ="พร้อมเพย์ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -245,7 +306,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
             <form method="post" action="Action/addProduct_action.php" enctype="multipart/form-data">
             <div class="row" style="margin-top: 5px">
                 <div class="col-sm-4"><a href="payment.php" class="btn btn-info" role="button" style="margin-left: 2%;margin-top: 3%" >< กลับไปหน้ารายการแจ้งชำระเงินทั้งหมด</a></div>
-                <div class="col-sm-4" align="center"><h3><b>Payment ID : </b></h3></div>
+                <div class="col-sm-4" align="center"><h3><b>Payment ID : <?php echo $rowPay['paymentID'];?></b></h3></div>
 
                 <div class="col-sm-4 " align="right">
 
@@ -267,41 +328,64 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
 
                                 <tr>
                                     <td width="20%">สถานะ : </td>
-                                    <td></td>
+                                    <td><?php if($rowPay['checked']==1){echo "<span style='color: #1e7e34'>ยืนยันการชำระเงินแล้ว</span>";}else{ if($rowOrder['orderStatus']=="cancel"){
+                                            echo "<span style='color: grey'>ถูกปฏิเสธ</span>";
+                                        }else{echo "<span style='color: red'>รอตรวจสอบ</span>";}}?></td>
                                 </tr>
                                 <tr>
                                     <td>เวลาที่ชำระเงิน : </td>
-                                    <td></td>
+                                    <td><?php echo $rowPay['date']." ".$rowPay['time'];?></td>
                                 </tr>
                                 <tr>
                                     <td>ช่องทางชำระเงิน : </td>
-                                    <td></td>
+                                    <td> <?php echo $bank;?></td>
                                 </tr>
                                 <tr>
-                                    <td>จำนวนเงิน : </td>
-                                    <td></td>
+                                    <td>จำนวนเงินที่แจ้งชำระ : </td>
+                                    <td><?php echo $rowPay['pricePayInput'];?></td>
                                 </tr>
                                 <tr>
                                     <td>เวลาที่แจ้งชำระเงิน : </td>
-                                    <td></td>
+                                    <td><?php echo $rowPay['dateCreate'];?></td>
                                 </tr>
                                 <tr>
                                     <td>เวลายืนยันยอด : </td>
-                                    <td></td>
+                                    <td><?php if($rowPay['checked']==1){echo $rowPay['dateVerifyPayment'];}else{ echo "-";} ?></td>
                                 </tr>
                                 <tr>
                                     <td>ผู้แจ้งยอด : </td>
-                                    <td></td>
+                                    <td><?php echo $rowUser['name'];?></td>
                                 </tr>
                                 <tr>
                                     <td>รูปสลิป : </td>
-                                    <td></td>
+                                    <td><?php echo '<img style="width:30%" src="data:image/*;base64,' . base64_encode($rowPay['slipImage']) . '"/>';?></td>
                                 </tr>
                                 <tr>
                                     <td>การตวรสอบ</td>
                                     <td>
-                                        <button type="button" class="btn btn-outline-success">ยืนยัน</button>
-                                        <button type="button" class="btn btn-outline-danger">ปฏิเสธ</button>
+                                        <?php if($rowPay['checked']=='0'){
+                                            if($rowOrder['orderStatus']=="cancel"){
+                                                echo "<span style='color: grey'>ถูกปฏิเสธ</span>";
+                                            }else{
+                                       echo "
+                                       <form action='Action/updateStatusTosendOrder_action.php' method='post'>
+                                            <input type='hidden' name='paymentID' value='$rowPay[paymentID]'>
+                                            <input type='hidden' name='orderID' value='$rowPay[orderID]'>
+                                            <button type=\"submit\" class=\"btn btn-outline-success\">ยืนยัน</button>
+                                        </form>
+                                        <form action='Action/updateCancelStatusTosendOrder_action.php' method='post'>
+                                            <input type='hidden' name='orderID' value='$rowPay[orderID]'>
+                                            <button type=\"submit\" class=\"btn btn-outline-danger\">ปฏิเสธ</button>
+                                         </form>";
+                                        }
+                                        }
+                                        else{
+
+                                                echo "<span style='color: #1e7e34'>ยืนยันแล้ว</span>";
+
+
+                                        }?>
+
                                     </td>
                                 </tr>
                             </table>
