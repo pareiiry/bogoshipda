@@ -22,6 +22,12 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 $sql2 = "SELECT * FROM product ORDER BY dateCreate DESC";
 $result2 = mysqli_query($con,$sql2);
 
+$sqlReview = "SELECT * FROM review ORDER BY dateTime DESC";
+$resultReview = mysqli_query($con,$sqlReview);
+
+
+$sqlReview2 = "SELECT * FROM review ORDER BY dateTime DESC";
+$resultReview2 = mysqli_query($con,$sqlReview2);
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -295,8 +301,20 @@ $result2 = mysqli_query($con,$sql2);
             </div>
 
             <div class=" t-center m-t-30">
+                <?php
+                $sumScore=0;
+                $iScore=0;
+                while($rowReviews= mysqli_fetch_assoc($resultReview2)){
+                    $sc2=number_format($rowReviews['score'],0);
+                    $sumScore+=$sc2;
+                    $iScore++;
+                }
+                $totalScore=$sumScore/$iScore;
+
+
+                ?>
                 คะแนนของร้าน
-                <h2>-</h2>
+                <h2><?php echo $totalScore; ?></h2>
                 (เต็ม 5)
             </div>
 
@@ -310,23 +328,23 @@ $result2 = mysqli_query($con,$sql2);
 <?php
 
 
-while($row2= mysqli_fetch_assoc($result2))// show the information from query
+while($rowReview= mysqli_fetch_assoc($resultReview))// show the information from query
 {
-    $sql3 = "SELECT * FROM image WHERE pdID= '" . $row2['pdID'] . "' LIMIT 1";
-    $result3 = mysqli_query($con, $sql3);
-    $row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC);
-
                     echo  "<div class=\"col-sm-12 col-md-4 col-lg-3 p-b-50\">
                         <!-- Block2 -->
                         <div class=\"block2\">
                             <div class=\"block2-img wrap-pic-w of-hidden pos-relative\">";
 
- if($row3['img']===""){
+ if($rowReview['img']===""){
      echo '<img src="../images/no-picture.jpg">';
  }
  else {
-     echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
+     echo '<img src="data:image/*;base64,' . base64_encode($rowReview['img']) . '"/>';
  }
+    $sqlU = "SELECT * FROM user WHERE uID = '".$rowReview['uID']."' ";
+    $resultU = mysqli_query($con,$sqlU);
+    $rowU = mysqli_fetch_array($resultU,MYSQLI_ASSOC);
+    $sc=number_format($rowReview['score'],0);
                     echo "
                                 <div class=\"block2 trans-0-4\">
                                     
@@ -336,18 +354,20 @@ while($row2= mysqli_fetch_assoc($result2))// show the information from query
 
                             <div class=\"block2-txt p-t-20\">
                                 <span class=\"block2-name dis-block s-text3 p-b-5\">
-                                    username
+                                    $rowU[name]
                                 </span>
-                                 <div class=\"star-rating\">
-                                         <span class=\"fa fa-star-o\" data-rating=\"1\"></span>
-                                         <span class=\"fa fa-star-o\" data-rating=\"2\"></span>
-                                         <span class=\"fa fa-star-o\" data-rating=\"3\"></span>
-                                         <span class=\"fa fa-star-o\" data-rating=\"4\"></span>
-                                         <span class=\"fa fa-star-o\" data-rating=\"5\"></span>
-                                         <input type=\"hidden\" name=\"whatever1\" class=\"rating-value\" value=\"4\">
+                            <div class=\"star-rating\">";
+                                for($i=0;$i<$sc;$i++){
+                                    echo "<span class=\"fa fa-star\" ></span>";
+                                }
+                                $space=5-$sc;
+                                for($i=0;$i<$space;$i++){
+                                    echo "<span class=\"fa fa-star-o\" ></span>";
+                                }
+                                 echo"
                                      </div>
-                    <div class=\"rating-comment block2-name dis-block s-text3 p-b-5\">comment</div>
-                    <div class=\"rating-time block2-name dis-block s-text3 p-b-5\">10-09-2018 18:26</div>
+                    <div class=\"rating-comment block2-name dis-block s-text3 p-b-5\">$rowReview[comment]</div>
+                    <div class=\"rating-time block2-name dis-block s-text3 p-b-5\">$rowReview[dateTime]</div>
                                 
                             </div>
                         </div>
@@ -492,30 +512,6 @@ while($row2= mysqli_fetch_assoc($result2))// show the information from query
 <script type="text/javascript" src="../vendor/lightbox2/js/lightbox.min.js"></script>
 <!--===============================================================================================-->
 <script type="text/javascript" src="../vendor/sweetalert/sweetalert.min.js"></script>
-<script type="text/javascript">
-
-    var $star_rating = $('.star-rating .fa');
-
-    var SetRatingStar = function() {
-        return $star_rating.each(function() {
-            if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
-                return $(this).removeClass('fa-star-o').addClass('fa-star');
-            } else {
-                return $(this).removeClass('fa-star').addClass('fa-star-o');
-            }
-        });
-    };
-
-    $star_rating.on('click', function() {
-        $star_rating.siblings('input.rating-value').val($(this).data('rating'));
-        return SetRatingStar();
-    });
-
-    SetRatingStar();
-    $(document).ready(function() {
-
-    });
-</script>
 
 <!--===============================================================================================-->
 <script src="../js/main.js"></script>
