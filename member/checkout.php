@@ -340,7 +340,7 @@ $dc=0;
 
             </div>
             <!--  -->
-            <div class="flex-w flex-sb-m p-b-30 p-l-20 p-r-20 m-t-20">
+            <div class="flex-w flex-sb-m p-b-30 p-l-20 p-r-20 m-tเ-20">
 					<span class="m-text22 w-size19 w-full-sm">
 						ยอดชำระเงินทั้งหมด :
 					</span>

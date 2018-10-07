@@ -312,50 +312,48 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
     <div class="container">
         <div class="col-sm-6 center">
             <label>ให้คะแนนสินค้า</label>
+<form action="addReview_action.php" method="post" enctype="multipart/form-data">
+
                                      <div class="star-rating">
                                          <span class="fa fa-star-o" data-rating="1"></span>
                                          <span class="fa fa-star-o" data-rating="2"></span>
                                          <span class="fa fa-star-o" data-rating="3"></span>
                                          <span class="fa fa-star-o" data-rating="4"></span>
                                          <span class="fa fa-star-o" data-rating="5"></span>
-                                         <input type="hidden" name="whatever1" class="rating-value" value="">
+                                         <input type="hidden" name="score" class="rating-value" value="">
                                      </div>
 
             <div class="form-group">
-                <textarea class="form-control"  rows="5" id="comment" placeholder="แสดงความคิดเห็น"></textarea>
+                <textarea class="form-control"  rows="5" id="comment" name="comment" placeholder="แสดงความคิดเห็น"></textarea>
             </div>
 
             <div class="uppic">
-                <form method="post" action="#" enctype="multipart/form-data">
-                    <input style="margin:2% 0 2% 0 " type="file" name="filesToUpload[]" id="filesToUpload" multiple onchange="makeFileList();">
-                    <!--                                        <input type="submit">-->
-                </form>
-
-
-                <script>
-                    function makeFileList() {
-                        var input = document.getElementById("filesToUpload");
-                        var ul = document.getElementById("fileList");
-                        while (ul.hasChildNodes()) {
-                            ul.removeChild(ul.firstChild);
-                        }
-                        for (var i = 0; i < input.files.length; i++) {
-                            var li = document.createElement("li");
-                            li.innerHTML = input.files[i].name;
-                            ul.appendChild(li);
-                        }
-                        if(!ul.hasChildNodes()) {
-                            var li = document.createElement("li");
-                            li.innerHTML = 'ไม่มีรูปภาพที่เลือก';
-                            ul.appendChild(li);
-                        }
-                    }
-
-                </script>
-
+                    <input style="margin:2% 0 2% 0 " type="file" name="filesToUpload[]" id="filesToUpload" onchange="makeFileList();">
             </div>
-            <button type="button" class="btn btn-outline-success">ยืนยัน</button>
-            <button type="button" class="btn btn-outline-danger">ยกเลิก</button>
+            <input type="hidden" name="uID" value="<?php echo $row["uID"];?>">
+            <input type="submit" class="btn btn-outline-success" value="ยืนยัน">
+            <input type="reset" class="btn btn-outline-danger" value="ยกเลิก">
+</form>
+            <script>
+                function makeFileList() {
+                    var input = document.getElementById("filesToUpload");
+                    var ul = document.getElementById("fileList");
+                    while (ul.hasChildNodes()) {
+                        ul.removeChild(ul.firstChild);
+                    }
+                    for (var i = 0; i < input.files.length; i++) {
+                        var li = document.createElement("li");
+                        li.innerHTML = input.files[i].name;
+                        ul.appendChild(li);
+                    }
+                    if(!ul.hasChildNodes()) {
+                        var li = document.createElement("li");
+                        li.innerHTML = 'ไม่มีรูปภาพที่เลือก';
+                        ul.appendChild(li);
+                    }
+                }
+
+            </script>
                     </div>
 
                 <!-- Pagination -->
