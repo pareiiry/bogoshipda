@@ -18,6 +18,10 @@ $sql = "SELECT * FROM user WHERE uID = '".$_SESSION['ID']."' ";
 //$objResult = mysqli_fetch_array($objQuery);
 $result = mysqli_query($con,$sql);
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
+
+$sqlReview = "SELECT * FROM review WHERE uID = '".$_SESSION['ID']."' ";
+$resultReview = mysqli_query($con,$sqlReview);
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -298,28 +302,47 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
             <table class="table-striped ordertable" width="100%">
                 <thead style=" color:#ffaeba">
                 <tr>
-                    <th style="text-align:center;">รูป</th>
-                    <th style="text-align:center;">วันที่รีวิว</th>
-                    <th style="text-align:center;">คะแนน</th>
-                    <th style="text-align:left;">ความคิดเห็น</th>
+                    <th style="text-align:center;width: 25%">รูป</th>
+                    <th style="text-align:center;width: 10%">วันที่รีวิว</th>
+                    <th style="text-align:center;width: 15%">คะแนน</th>
+                    <th style="text-align:left;width: 25%">ความคิดเห็น</th>
                 </tr>
                 </thead>
-                <tr>
-                    <td></td>
-                    <td>26-09-2018</td>
+                <?php
+                while($rowReview= mysqli_fetch_assoc($resultReview))
+                {
+
+                    $sc=number_format($rowReview['score'],0);
+
+                    echo "<tr>
+                    <td>";
+                    if($rowReview['img']===""){
+                    echo '<img style="width:30%" src="../images/no-picture.jpg">';
+                    }
+                    else {
+                        echo '<img style="width:30%" src="data:image/*;base64,' . base64_encode($rowReview['img']) . '"/>';
+                    }
+                    echo " </td>
+                    <td>$rowReview[dateTime]</td>
                     <td>
-                        <div class="star-rating">
-                            <span class="fa fa-star-o" data-rating="1"></span>
-                            <span class="fa fa-star-o" data-rating="2"></span>
-                            <span class="fa fa-star-o" data-rating="3"></span>
-                            <span class="fa fa-star-o" data-rating="4"></span>
-                            <span class="fa fa-star-o" data-rating="5"></span>
-                            <input type="hidden" name="whatever1" class="rating-value" value="4">
+                        <div class=\"star-rating\">";
+
+                       for($i=0;$i<$sc;$i++){
+                            echo "<span class=\"fa fa-star\" ></span>";
+                       }
+                       $space=5-$sc;
+                        for($i=0;$i<$space;$i++){
+                            echo "<span class=\"fa fa-star-o\" ></span>";
+                        }
+
+                            echo"
                         </div>
                     </td>
-                    <td style="text-align: left">sdhsaiurhfkjsnf;sf</td>
+                    <td style=\"text-align: left\">$rowReview[comment]</td>
 
                 </tr>
+                    ";
+                }?>
 
             </table>
         </div>
@@ -463,30 +486,6 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 <script type="text/javascript" src="../vendor/lightbox2/js/lightbox.min.js"></script>
 <!--===============================================================================================-->
 <script type="text/javascript" src="../vendor/sweetalert/sweetalert.min.js"></script>
-<script type="text/javascript">
-
-    var $star_rating = $('.star-rating .fa');
-
-    var SetRatingStar = function() {
-        return $star_rating.each(function() {
-            if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
-                return $(this).removeClass('fa-star-o').addClass('fa-star');
-            } else {
-                return $(this).removeClass('fa-star').addClass('fa-star-o');
-            }
-        });
-    };
-
-    $star_rating.on('click', function() {
-        $star_rating.siblings('input.rating-value').val($(this).data('rating'));
-        return SetRatingStar();
-    });
-
-    SetRatingStar();
-    $(document).ready(function() {
-
-    });
-</script>
 
 <!--===============================================================================================-->
 <script src="../js/main.js"></script>
