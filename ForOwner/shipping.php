@@ -51,8 +51,6 @@ $resultOrder = mysqli_query($con,$sqlOrder);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/png" href="../images/icons/favicon.png"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/util.css">
     <style>
 
         div.sticky{
@@ -101,7 +99,7 @@ $resultOrder = mysqli_query($con,$sqlOrder);
             padding: 0px 20px 0px 40px;
             border: 1px solid #ddd;
 			margin-top:10px;
-			margin-left:90px;
+			margin-left:40px;
             /*margin-bottom: 2px;*/
             border-radius: 8px;
 			height:35px;	
@@ -111,7 +109,7 @@ $resultOrder = mysqli_query($con,$sqlOrder);
             border-collapse: collapse;
             width: 100%;
             border-top: 1px solid #ddd;
-            /*font-size: 18px;*/
+            font-size: 12px;
         }
 
         #myTable th, #myTable td {
@@ -343,15 +341,15 @@ $resultOrder = mysqli_query($con,$sqlOrder);
             <hr>
 
 
-            <table id="myTable" border="1px black">
+            <table id="myTable" >
                 <tr class="header">
-                    <th style="width:5%;text-align:center;"></th>
+                    <th style="width:5%;text-align:center;">สถานะ</th>
                     <th style="width:5%;text-align:center;">Order ID</th>
-                    <th style="text-align: center;">วันที่ยืนยันรับเงิน</th>
-                    <th style="width:20%;text-align:center;">ชื่อผู้สั่งซื้อ</th>
-                    <th style="width:20%;text-align:center;">รายละเอียดการส่งของ</th>
-                    <th style="text-align: center;">รหัสพัสดุ</th>
-                    <th style="text-align: center; width: 5%">ยืนยันจัดส่ง</th>
+                    <th style="width:12%; text-align: center;">วันที่ยืนยันรับเงิน</th>
+                    <th style="width:10%;text-align:center;">ชื่อผู้สั่งซื้อ</th>
+                    <th style="width:17%;text-align:center;">รายละเอียดการส่งของ</th>
+                    <th style="width: 16%; text-align: center;">รหัสพัสดุ</th>
+                    <th style="width:10%; text-align: center;">ยืนยันจัดส่ง</th>
                 </tr>
                 <?php
                 $howShip="";
@@ -365,13 +363,13 @@ $resultOrder = mysqli_query($con,$sqlOrder);
                 $orderStatus = "รอตรวจสอบ";
                 }
                 else if($rowOrder['orderStatus']=='prepare to send order'){
-                $orderStatus = "เตรียมจัดส่งสินค้า";
+                $orderStatus = "เตรียมจัดส่ง";
                 }
                 else if($rowOrder['orderStatus']=='sent order'){
-                $orderStatus = "จัดส่งสินค้าแล้ว";
+                $orderStatus = "จัดส่งแล้ว";
                 }
                 else if($rowOrder['orderStatus']=='cancel'){
-                $orderStatus = "การสั่งซื้อถูกยกเลิก";
+                $orderStatus = "ยกเลิก";
                 }
                 if($rowOrder['howShip']=='Regis'){
                 $howShip = "พัสดุลงทะเบียน";
@@ -409,7 +407,7 @@ $resultOrder = mysqli_query($con,$sqlOrder);
                     }
                     else{
                         echo "  <td style=\"text-align: center;\">$rowOrder[trackingNumber]</td>
-                                <td style=\"text - align: center;\">ยืนยันการจัดส่งแล้ว</td>";
+                                <td style=\"text-align: center; color: limegreen\">ยืนยันแล้ว</td>";
                     }
 
 

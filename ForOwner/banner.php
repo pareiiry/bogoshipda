@@ -223,7 +223,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
 
                                         </script>
                                     </div>
-                                <input  class="form-control btn btn-success" type="submit" value="เพิ่มรูปภาพ" style="margin-top: 3%">
+                                <input  class="form-control btn btn-info" type="submit" value="เพิ่มรูปภาพ" style="margin-top: 3%">
                             </div>
                         </div>
                     </div>
@@ -236,15 +236,15 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                                 <table class="table">
                                     <thead style=" color:#00a9a3">
                                     <tr>
-                                        <th style="width:10%;text-align:center;">รูปภาพ</th>
-                                        <th style="width:5%;text-align:center;"></th>
+                                        <th colspan="2" style="width:90%;text-align:center;">รูปภาพ</th>
+
                                     </tr>
                                     </thead>
                                         <?php
                                         while($rowB = mysqli_fetch_assoc($resultB))// show the information from query
                                         {
-                                                echo '<tr><td style="text-align: center"><img style="width:50%" src="data:image/*;base64,' . base64_encode($rowB['bImg']) . '"/></td>';
-                                                ?><td>
+                                                echo '<tr><td style="text-align: center"><img style="width:100%" src="data:image/*;base64,' . base64_encode($rowB['bImg']) . '"/></td>';
+                                                ?><td style="padding-top: 70px">
                                                 <form action="Action/deleteBanner.php" method="get">
                                                     <input style='display: none;' type="text" name="bID" value='<?php echo $rowB['bID'];?>'>
                                                     <button class='btn-delete' type="submit"><i class="fa fa-trash"></i></button>

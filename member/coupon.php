@@ -325,9 +325,8 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
     <h3 class="panel-title">วิธีใช้งานคูปอง</h3>
 </div>
 <div class="panel-body">
-    ในหน้าสั่งซื้อสินค้า กรอกรหัสคูปองที่มีในช่อง COUPON CODE แล้วคลิก APPLY COUPON
-    ระบบจะทำการประมวลผลคูปองว่าสามารถใช้งานได้หรือ หากใช้งานได้ระบบจะแสดงส่วนลดสินค้า
-    <br><img width="50%" src="../images/coupon.jpg" />
+    ในหน้าสั่งซื้อสินค้า กรอกรหัสในช่อง <b style="color: #ffaeba">"โค้ดส่วนลด"</b> แล้วคลิก <b style="color: #ffaeba">"ใช้โค้ด"</b>
+    <br>ระบบจะทำการประมวลผลคูปองว่าสามารถใช้งานได้หรือ หากใช้งานได้ระบบจะแสดงส่วนลดสินค้า
 </div>
     </div>
     </div>

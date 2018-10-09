@@ -26,10 +26,10 @@ else if($rowOrder['orderStatus']=='waiting for verify'){
     $orderStatus = "รอตรวจสอบ";
 }
 else if($rowOrder['orderStatus']=='prepare to send order'){
-    $orderStatus = "เตรียมจัดส่งสินค้า";
+    $orderStatus = "เตรียมจัดส่ง";
 }
 else if($rowOrder['orderStatus']=='sent order'){
-    $orderStatus = "จัดส่งสินค้าแล้ว";
+    $orderStatus = "จัดส่งแล้ว";
 }
 else if($rowOrder['orderStatus']=='cancel'){
     $orderStatus = "การสั่งซื้อถูกยกเลิก";
@@ -66,46 +66,46 @@ $resultBank = mysqli_query($con,$sqlBank);
 $rowBank= mysqli_fetch_array($resultBank,MYSQLI_ASSOC);
 $bank ="";
 if($rowBank['bankName']=='SCB'){
-    $bank ="ธนาคารไทยพาณิชย์ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+    $bank ="ธนาคารไทยพาณิชย์ | ".$rowBank['accountNumber'];
 }
 else if($rowBank['bankName']=='KTB') {
-    $bank ="ธนาคารกรุงไทย | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+    $bank ="ธนาคารกรุงไทย | ".$rowBank['accountNumber'];
 }
 else if($rowBank['bankName']=='BBL'){
-    $bank ="ธนาคารกรุงเทพ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+    $bank ="ธนาคารกรุงเทพ | ".$rowBank['accountNumber'];
 }
 else if($rowBank['bankName']=='KBANK'){
-    $bank ="ธนาคารกสิกร | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+    $bank ="ธนาคารกสิกร | ".$rowBank['accountNumber'];
 }else if($rowBank['bankName']=='GSB'){
-    $bank ="ธนาคารออมสิน | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+    $bank ="ธนาคารออมสิน | ".$rowBank['accountNumber'];
 }  else if($rowBank['bankName']=='KRUNGSRI'){
-    $bank ="ธนาคารกรุงศรีอยุธยา | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+    $bank ="ธนาคารกรุงศรีอยุธยา | ".$rowBank['accountNumber'];
 }
 else if($rowBank['bankName']=='TMB'){
-    $bank ="ธนาคารทหารไทย | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+    $bank ="ธนาคารทหารไทย | ".$rowBank['accountNumber'];
 }
 else if($rowBank['bankName']=='UOB'){
-    $bank ="ธนาคารยูโอบี | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+    $bank ="ธนาคารยูโอบี | ".$rowBank['accountNumber'];
 }
 else if($rowBank['bankName']=='TBANK') {
-    $bank ="ธนาคารธนชาติ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+    $bank ="ธนาคารธนชาติ | ".$rowBank['accountNumber'];
 }else if($rowBank['bankName']=='CIMB'){
-    $bank ="ธนาคารซีไอเอ็มบี | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+    $bank ="ธนาคารซีไอเอ็มบี | ".$rowBank['accountNumber'];
 }
 else if($rowBank['bankName']=='CITIBANK'){
-    $bank ="ซิตี้แบงค์ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+    $bank ="ซิตี้แบงค์ | ".$rowBank['accountNumber'];
 }
 else if($rowBank['bankName']=='SCBT'){
-    $bank ="Standard Chartered | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+    $bank ="Standard Chartered | ".$rowBank['accountNumber'];
 }
 else if($rowBank['bankName']=='TISCO'){
-    $bank ="ทิสโก้แบงค์ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+    $bank ="ทิสโก้แบงค์ | ".$rowBank['accountNumber'];
 }
 else if($rowBank['bankName']=='Wallet') {
-    $bank ="ทรูวอลเลท | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+    $bank ="ทรูวอลเลท | ".$rowBank['accountNumber'];
 }
 else if($rowBank['bankName']=='PrompPay') {
-    $bank ="พร้อมเพย์ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+    $bank ="พร้อมเพย์ | ".$rowBank['accountNumber'];
 }
 ?>
 <!DOCTYPE html>
@@ -181,7 +181,33 @@ else if($rowBank['bankName']=='PrompPay') {
             top: -7px;
             right: 10px;
         }
+    .orderinfo {
+        font-size: 14px;
 
+    }
+        #myTable {
+            border-collapse: collapse;
+            width: 100%;
+            border-top: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        #myTable th, #myTable td {
+            text-align: left;
+            padding: 12px;
+        }
+
+        #myTable tr {
+            border-bottom: 1px solid #ddd;
+        }
+
+        #myTable tr.header {
+            background-color: #edf9f7;
+            color: #00a9a3;
+        }
+        #myTable tr:hover {
+            background-color: #edf9f7;
+        }
     </style>
 </head>
 <body>
@@ -284,7 +310,7 @@ else if($rowBank['bankName']=='PrompPay') {
                         <div class="panel-heading fs-25"><b>รายละเอียดการสั่งซื้อ</b></div>
                         <div class="panel-body" style="margin: 0% 2% 0% 2%">
 <!--                            <form method="post">-->
-                                <table width="100%" border="1px black">
+                                <table class="orderinfo" width="100%">
                                     <tr>
                                         <td width="35%">สถานะ :</td>
                                         <td><?php echo $orderStatus;?></td>
@@ -310,7 +336,7 @@ else if($rowBank['bankName']=='PrompPay') {
                         <div class="panel-heading fs-25"><b>รายละเอียดการจัดส่ง</b></div>
                         <div class="panel-body" style="margin: 0% 2% 0% 2%">
                             <!--                            <form method="post">-->
-                            <table width="100%" border="1px black">
+                            <table class="orderinfo" width="100%">
                                 <tr>
                                     <td width="35%">รหัสพัสดุ : </td>
                                     <td><?php if($rowOrder['trackingNumber']!=NULL)echo $rowOrder['trackingNumber'];else echo "-"; ?></td>
@@ -333,11 +359,11 @@ else if($rowBank['bankName']=='PrompPay') {
                                         echo "<span style='color: red'>(ยังไม่ได้ยืนยันการชำระเงิน)</span>";
                                     }
                                 } else{
-                                        echo "<span style='color: darkgreen'>(ยืนยันการชำระเงินแล้ว)</span>";
+                                        echo "<span style='color: limegreen'>(ยืนยันการชำระเงินแล้ว)</span>";
                                 }?></b></div>
                         <div class="panel-body" style="margin: 0% 2% 0% 2%">
                             <!--                            <form method="post">-->
-                            <table width="100%" border="1px black">
+                            <table class="orderinfo" width="100%">
                                 <tr>
                                     <td width="35%">Payment ID : </td>
                                     <td><?php echo $rowPay['paymentID']; ?></td>
@@ -361,7 +387,7 @@ else if($rowBank['bankName']=='PrompPay') {
                         <div class="panel-heading fs-25"><B>รายละเอียดผู้สั่งซื้อ</B></div>
                         <div class="panel-body" style="margin: 0% 2% 0% 2%">
                             <!--                            <form method="post">-->
-                            <table width="100%" border="1px black">
+                            <table  class="orderinfo" width="100%">
                                 <tr>
                                     <td width="35%">ผู้สั่งซื้อ : </td>
                                     <td><?php echo $rowU['name'];?></td>
@@ -382,7 +408,7 @@ else if($rowBank['bankName']=='PrompPay') {
                         <div class="panel-heading fs-25"><b>รายละเอียดผู้รับ</b></div>
                         <div class="panel-body" style="margin: 0% 2% 0% 2%">
                             <!--                            <form method="post">-->
-                            <table width="100%" border="1px black">
+                            <table class="orderinfo" width="100%">
                                 <tr>
                                     <td width="35%">ชื่อผู้รับ : </td>
                                     <td><?php echo $rowOrder['nameShip'];?></td>
@@ -409,12 +435,12 @@ else if($rowBank['bankName']=='PrompPay') {
                         <div class="panel-body" style="margin: 0% 2% 0% 2%">
                             <!--                            <form method="post">-->
 
-                            <table width="100%" border="1px black">
+                            <table  class="table-striped" width="100%" style="font-size: 14px;">
                                 <tr>
-                                    <th width="45%">สินค้า</th>
+                                    <th style="padding-left: 10px" width="45%">สินค้า</th>
                                     <th style="text-align: right; padding-right: 10px;">ราคาต่อชิ้น</th>
                                     <th>จำนวน</th>
-                                    <th style="text-align: right">ราคารวม</th>
+                                    <th style="text-align: right; padding-right: 10px;">ราคารวม</th>
                                 </tr>
                                 <?php
                                 $sqlgpd = "SELECT * FROM groupproduct WHERE gpdID= '".$rowOrder['gpdID']."'";
@@ -426,10 +452,10 @@ else if($rowBank['bankName']=='PrompPay') {
                                     $rowPD = mysqli_fetch_array($resultPD,MYSQLI_ASSOC);
                                     echo "
                                     <tr>
-                                        <td>$rowPD[name]</td>
+                                        <td style='padding-left: 10px;'>$rowPD[name]</td>
                                         <td style=\"text-align: right; padding-right: 10px;\">$rowPD[price]</td>
                                         <td style=\"text-align: center\">$rowgpd[amount]</td>
-                                        <td style=\"text-align: right; \">$rowgpd[priceAmount]</td>
+                                        <td style=\"text-align: right; padding-right: 10px; \">$rowgpd[priceAmount]</td>
                                     </tr>";
 
                                 }
@@ -440,20 +466,20 @@ else if($rowBank['bankName']=='PrompPay') {
                                     <td></td>
                                     <td style="padding-right: 5px"></td>
                                     <td style="color: #9d9d9d; padding: 5px;">ค่าขนส่ง</td>
-                                    <td style="text-align: right"><b>+ <?php echo $rowOrder['shipPrice'];?></b></td>
+                                    <td style="text-align: right; padding-right: 10px;"><b>+ <?php echo $rowOrder['shipPrice'];?></b></td>
                                 </tr>
                                 <tr>
 
                                     <td></td>
                                     <td style="padding-right: 5px"></td>
                                     <td style="color: #9d9d9d; padding: 5px;">ส่วนลด</td>
-                                    <td style="text-align: right;color: red"><b>- <?php echo $rowOrder['discountPrice'];?></b></td>
+                                    <td style="text-align: right;color: red; padding-right: 10px;"><b>- <?php echo $rowOrder['discountPrice'];?></b></td>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td></td>
                                     <td style="color: #9d9d9d; font-size: 17px; padding: 5px;">ยอดชำระเงินทั้งหมด</td>
-                                    <td style="text-align: right; color: #4cae4c "><b>฿ <?php echo $rowOrder['netPrice'];?></b></td>
+                                    <td style="text-align: right; color: #4cae4c; padding-right: 10px;"><b>฿ <?php echo $rowOrder['netPrice'];?></b></td>
                                 </tr>
                             </table>
                         </div>

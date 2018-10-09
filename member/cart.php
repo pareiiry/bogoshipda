@@ -326,7 +326,7 @@ $discount=0;
             <?php
                 if(isset($_POST['codePromo'])) {
                     //echo $_POST['codePromo'];
-                    include ('dbConnect.php');
+                    include ('../dbConnect.php');
                     $sqlC = "SELECT * FROM code WHERE codeText = '".$_POST['codePromo']."'";
                     $resultC = mysqli_query($con, $sqlC);
                     $rowC = mysqli_fetch_array($resultC,MYSQLI_ASSOC);

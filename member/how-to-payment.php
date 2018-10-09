@@ -326,9 +326,9 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
     <h3 class="panel-title">ขั้นตอนแจ้งชำระเงิน</h3>
 </div>
 <div class="panel-body">
-    1. ไปที่ประวัติการสั่งซื้อ
+    1. ไปที่ <b style="color: #ffaeba">"ประวัติการสั่งซื้อ"</b>
     <br>2. เลือกรายการสั่งซื้อที่ต้องการแจ้งชำระเงิน
-    <br>3. เลือก "แจ้งชำระเงิน"
+    <br>3. เลือก <b style="color: #ffaeba">"แจ้งชำระเงิน"</b>
     <br>4. กรอกรายละเอียดข้อมูลการโอนเงิน
 </div>
     </div>

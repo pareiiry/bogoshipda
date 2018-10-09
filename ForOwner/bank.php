@@ -226,7 +226,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                                 </div>
                                 
                                 
-                                   <input  class="form-control btn btn-success" type="submit" value="เพิ่มบัญชี" style="margin-top: 3%">
+                                   <input  class="form-control btn btn-info" type="submit" value="เพิ่มบัญชี" style="margin-top: 3%">
 
 
                             </div>
@@ -238,14 +238,14 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                         <div class="panel panel-default">
                             <div class="panel-body" >
 
-                                <table class="table">
+                                <table class="table" style="font-size: 12px">
                                     <thead style=" color:#00a9a3">
                                     <tr>
-                                        <th style="width:10%;text-align:center;"></th>
+                                        <th style="width:15%;text-align:center;"></th>
                                         <th style="width:10%;text-align:center;">ธนาคาร</th>
                                         <th style="width:15%;text-align:center;">ชื่อบัญชี</th>
                                         <th style="width:15%;text-align:center;">เลขที่บัญชี</th>
-                                        <th style="width:5%;text-align:center;"></th>
+                                        <th style="width:15%;text-align:center;"></th>
                                     </tr>
                                     </thead>
                                     <?php

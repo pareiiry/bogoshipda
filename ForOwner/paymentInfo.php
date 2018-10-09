@@ -221,6 +221,11 @@ else if($rowBank['bankName']=='PrompPay') {
             top: -7px;
             right: 10px;
         }
+    .pinfo td{
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
     </style>
 </head>
 <body>
@@ -324,11 +329,11 @@ else if($rowBank['bankName']=='PrompPay') {
                         <div class="panel-heading fs-25"><B>รายละเอียดการชำระเงิน</B></div>
                         <div class="panel-body" style="margin: 0% 2% 0% 2%">
                             <!--                            <form method="post">-->
-                            <table width="100%" border="1px black">
+                            <table class="pinfo"  width="100%">
 
                                 <tr>
                                     <td width="20%">สถานะ : </td>
-                                    <td><?php if($rowPay['checked']==1){echo "<span style='color: #1e7e34'>ยืนยันการชำระเงินแล้ว</span>";}else{ if($rowOrder['orderStatus']=="cancel"){
+                                    <td><?php if($rowPay['checked']==1){echo "<span style='color: limegreen'>ยืนยันการชำระเงินแล้ว</span>";}else{ if($rowOrder['orderStatus']=="cancel"){
                                             echo "<span style='color: grey'>ถูกปฏิเสธ</span>";
                                         }else{echo "<span style='color: red'>รอตรวจสอบ</span>";}}?></td>
                                 </tr>
@@ -381,7 +386,7 @@ else if($rowBank['bankName']=='PrompPay') {
                                         }
                                         else{
 
-                                                echo "<span style='color: #1e7e34'>ยืนยันแล้ว</span>";
+                                                echo "<span style='color: limegreen'>ยืนยันแล้ว</span>";
 
 
                                         }?>

@@ -95,7 +95,29 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
             top: -7px;
             right: 10px;
         }
+        #myTable {
+            border-collapse: collapse;
+            width: 100%;
+            border-top: 1px solid #ddd;
+            font-size: 12px;
+        }
 
+        #myTable th, #myTable td {
+            text-align: left;
+            padding: 12px;
+        }
+
+        #myTable tr {
+            border-bottom: 1px solid #ddd;
+        }
+
+        #myTable tr.header {
+            background-color: #edf9f7;
+            color: #00a9a3;
+        }
+        #myTable tr:hover {
+            background-color: #edf9f7;
+        }
     </style>
 </head>
 <body>
@@ -221,7 +243,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                                         <option value="percent">%</option>
                                     </select>
                                 </div>
-                                <input  class="form-control btn btn-success" type="submit" value="เพิ่มส่วนลด" style="margin-top: 3%">
+                                <input  class="form-control btn btn-info" type="submit" value="เพิ่มส่วนลด" style="margin-top: 3%">
 
 
                             </div>
@@ -233,16 +255,16 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                         <div class="panel panel-default">
                             <div class="panel-body" >
 
-                                <table class="table">
+                                <table class="table" style="font-size: 12px">
                                     <thead style=" color:#00a9a3">
                                     <tr>
-                                        <th style="width:10%;text-align:center;">สถานะ</th>
+                                        <th style="width:15%;text-align:center;">สถานะ</th>
                                         <th style="width:15%;text-align:center;">วันที่เริ่มใช้งาน</th>
                                         <th style="width:15%;text-align:center;">วันที่สิ้นสุด</th>
-                                        <th style="width:20%;text-align:center;">รหัส</th>
+                                        <th style="width:15%;text-align:center;">รหัส</th>
                                         <th style="width:15%;text-align:center;">ส่วนลด</th>
-                                        <th style="width:5%;text-align:center;">หน่วย</th>
-                                        <th style="width:5%;text-align:center;"></th>
+                                        <th style="width:10%;text-align:center;">หน่วย</th>
+                                        <th style="width:15%;text-align:center;"></th>
                                     </tr>
                                     </thead>
                                     <?php
@@ -254,10 +276,10 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                         $drnM = new DateTime("now", new DateTimeZone('Asia/Bangkok'));
                         $drnM = $drnM ->format("Y-m-d");
                         if($row2['dateDelete']>$drnM){
-                            echo"<td style=\"text-align:center;color: #1BA135\">Active</td>";
+                            echo"<td style=\"text-align:center;color: #1BA135\">ใช้งาน</td>";
                         }
                         else{
-                            echo"<td style=\"text-align:center;color: red\">Unactive</td>";
+                            echo"<td style=\"text-align:center;color: red\">ไม่ใช้งาน</td>";
                         }
 
                      echo"<td style=\"text-align:center;\">$row2[dateCreate]</td>

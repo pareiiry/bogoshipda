@@ -178,7 +178,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
         <div class="col-sm-9">
             <form method="post" action="Action/addProduct_action.php" enctype="multipart/form-data">
             <div class="row" style="margin-top: 5px">
-                <div class="col-sm-4"><a href="indexForOwner.php" class="btn btn-primary" role="button" style="margin-left: 2%;margin-top: 3%" >< กลับไปหน้ารายการสินค้า</a></div>
+                <div class="col-sm-4"><a href="indexForOwner.php" class="btn btn-info" role="button" style="margin-left: 2%;margin-top: 3%" >< กลับไปหน้ารายการสินค้า</a></div>
                 <div class="col-sm-4" align="center"><h4>จัดการสินค้า</h4></div>
 
                 <div class="col-sm-4 " align="right">
@@ -272,7 +272,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
 
                                 <div class="btn-group" style="margin: 2% 0 2% 0">
                                     <label>คำอธิบายสินค้า:</label>
-                                    <textarea class="form-control" style="min-width: 320%" rows="5" name="description"></textarea>
+                                    <textarea class="form-control" style="min-width: 245%" rows="5" name="description"></textarea>
                                 </div>
 <!--                            </form>-->
                         </div>

@@ -41,6 +41,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/png" href="../images/icons/favicon.png"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
     <style>
 
         div.sticky{
@@ -90,7 +91,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
             padding: 0px 20px 0px 40px;
             border: 1px solid #ddd;
 			margin-top:10px;
-			margin-left:90px;
+			margin-left:40px;
             /*margin-bottom: 2px;*/
             border-radius: 8px;
 			height:35px;	
@@ -100,7 +101,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
             border-collapse: collapse;
             width: 100%;
             border-top: 1px solid #ddd;
-            /*font-size: 18px;*/
+            font-size: 12px;
         }
 
         #myTable th, #myTable td {
@@ -283,9 +284,9 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
 
             <table id="myTable">
                 <tr class="header">
-                    <th style="width:10%;text-align:center;"></th>
-                    <th style="width:10%;text-align:center;">Order ID</th>
-                    <th style="width:10%;text-align:center;">วันที่สั่งซื้อ</th>
+                    <th style="width:20%;text-align:center;">สถานะ</th>
+                    <th style="width:20%;text-align:center;">Order ID</th>
+                    <th style="width:20%;text-align:center;">วันที่สั่งซื้อ</th>
                     <th style="width:20%;text-align:center;">ชื่อผู้สั่งซื้อ</th>
                     <th style="width:20%;text-align:center;">ยอดสั่งซื้อ(บาท)</th>
                 </tr>
@@ -300,13 +301,13 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                         $orderStatus = "รอตรวจสอบ";
                     }
                     else if($rowOrder['orderStatus']=='prepare to send order'){
-                        $orderStatus = "เตรียมจัดส่งสินค้า";
+                        $orderStatus = "เตรียมจัดส่ง";
                     }
                     else if($rowOrder['orderStatus']=='sent order'){
-                        $orderStatus = "จัดส่งสินค้าแล้ว";
+                        $orderStatus = "จัดส่งแล้ว";
                     }
                     else if($rowOrder['orderStatus']=='cancel'){
-                        $orderStatus = "การสั่งซื้อถูกยกเลิก";
+                        $orderStatus = "ยกเลิก";
                     }
 
                     $sqlU = "SELECT * FROM user WHERE uID= '".$rowOrder['uID']."'";
@@ -314,10 +315,10 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                     $rowU = mysqli_fetch_array($resultU,MYSQLI_ASSOC);
                 echo "<tr>
                     <td style=\"width:10%;text-align:center;\">$orderStatus</td>
-                    <td style=\"width:10%;text-align:center;\"><b><a href=\"orderInfo.php?orderID=$rowOrder[orderID]\" class=\"color-link\">$rowOrder[orderID]</a></b></td>
-                    <td style=\"width:10 %;text-align:center;\">$dateTime</td>
+                    <td style=\"width:20%;text-align:center;\"><b><a href=\"orderInfo.php?orderID=$rowOrder[orderID]\" class=\"color-link\">$rowOrder[orderID]</a></b></td>
+                    <td style=\"width:10%;text-align:center;\">$dateTime</td>
                     <td style=\"width:20%;text-align:center;\">$rowU[name]</td>
-                    <td style=\"width:20%;text-align:center;\">฿ $rowOrder[netPrice]</td>
+                    <td style=\"width:20%;text-align:right; padding-right: 8%\">$rowOrder[netPrice]</td>
                 </tr>";
                 }?>
             </table>

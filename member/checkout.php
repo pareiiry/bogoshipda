@@ -193,7 +193,7 @@ $dc=0;
                     <?php echo "<input type=\"hidden\" name=\"nameShip\" value=\"$_POST[nameShip]\">";?>
                     <?php echo "<input type=\"hidden\" name=\"addressShip\" value=\"$_POST[addressShip]\">";?>
                     <?php echo "<input type=\"hidden\" name=\"telShip\" value=\"$_POST[telShip]\">";?>
-                    <?php echo $_POST['nameShip']."( โทร. ".$_POST['telShip']." )"."<br>".$_POST['addressShip']?>
+                    <?php echo $_POST['nameShip']."(โทร. ".$_POST['telShip'].")"."<br>".$_POST['addressShip']?>
                 </div>
             </div>
 
@@ -216,7 +216,7 @@ $dc=0;
                     <table class="p-t-10 p-b-10" width="100%">
                         <tr>
                             <td width="20%"></td>
-                            <td width="50%" align="center">ชื่อสินค้า</td>
+                            <td width="50%" align="left">ชื่อสินค้า</td>
                             <td width="10%" align="center">จำนวน</td>
                             <td width="20%" align="right">ราคารวม</td>
                         </tr>

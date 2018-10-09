@@ -97,7 +97,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
             padding: 0px 20px 0px 40px;
             border: 1px solid #ddd;
 			margin-top:10px;
-			margin-left:90px;
+			margin-left:40px;
             /*margin-bottom: 2px;*/
             border-radius: 8px;
 			height:35px;	
@@ -107,7 +107,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
             border-collapse: collapse;
             width: 100%;
             border-top: 1px solid #ddd;
-            /*font-size: 18px;*/
+            font-size: 14px;
         }
 
         #myTable th, #myTable td {
@@ -288,11 +288,11 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
 
             <table id="myTable">
                 <tr class="header">
-                    <th style="width:10%;text-align:center;">uID</th>
+                    <th style="width:20%;text-align:center;">uID</th>
                     <th style="width:20%;text-align:center;">ชื่อผู้ใช้</th>
                     <th style="width:20%;text-align:center;">E-mail</th>
                     <th style="width:20%;text-align:center;">สิทธิ์การเข้าใช้</th>
-                    <th style="width:10%;text-align:center;"></th>
+                    <th style="width:20%;text-align:center;"></th>
                 </tr>
                 <?php
                 while($row2= mysqli_fetch_assoc($result2))// show the information from query
@@ -334,10 +334,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                        <div class=\"col-md-2\">
                         </div>
                         <div class=\"col-md-4\">
-                        <form action=\"Action/deleteAdmin.php\" method=\"get\">
-                                <input style='display: none;' type=\"text\" name=\"uID\" value='$row2[uID]'>
-                                <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
-                        </form>
+                        
                         </div>
                         <div class=\"col-md-2\">
                         </div>

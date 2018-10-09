@@ -64,7 +64,62 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
         .uppic{
             text-align: left;
         }
+        .btn-outline-success {
+            color: #28a745;
+            background-color: transparent;
+            background-image: none;
+            border-color: #28a745;
+        }
 
+        .btn-outline-success:hover {
+            color: #fff;
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-outline-success:focus, .btn-outline-success.focus {
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.5);
+        }
+
+        .btn-outline-success.disabled, .btn-outline-success:disabled {
+            color: #28a745;
+            background-color: transparent;
+        }
+
+        .btn-outline-success:active, .btn-outline-success.active,
+        .show > .btn-outline-success.dropdown-toggle {
+            color: #fff;
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        .btn-outline-danger {
+            color: #dc3545;
+            background-color: transparent;
+            background-image: none;
+            border-color: #dc3545;
+        }
+
+        .btn-outline-danger:hover {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-outline-danger:focus, .btn-outline-danger.focus {
+            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.5);
+        }
+
+        .btn-outline-danger.disabled, .btn-outline-danger:disabled {
+            color: #dc3545;
+            background-color: transparent;
+        }
+
+        .btn-outline-danger:active, .btn-outline-danger.active,
+        .show > .btn-outline-danger.dropdown-toggle {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
     </style>
 </head>
 <body class="animsition">
@@ -356,8 +411,8 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
                 <div class="size15 trans-0-4 t-center">
 
-                    <input class="btn btn-success" type="submit" value="บันทึก" style="margin-left: 2%;margin-top: 3%">
-                    <a href="index.php" class="btn btn-danger" role="button" type="clear" style="margin-left: 2%;margin-top: 3%" >ยกเลิก</a>
+                    <button class="btn btn-outline-success" type="submit"  style="margin-left: 2%;margin-top: 3%">บันทึก</button>
+                        <button class="btn btn-outline-danger" type="clear" style="margin-left: 2%;margin-top: 3%" >ยกเลิก</button>
                     <!-- Button -->
 
                 </div>

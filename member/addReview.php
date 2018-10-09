@@ -82,8 +82,66 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
             padding-left: 10px;
             text-align: left;
         }
+        .btn-outline-success {
+            color: #28a745;
+            background-color: transparent;
+            background-image: none;
+            border-color: #28a745;
+        }
+
+        .btn-outline-success:hover {
+            color: #fff;
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-outline-success:focus, .btn-outline-success.focus {
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.5);
+        }
+
+        .btn-outline-success.disabled, .btn-outline-success:disabled {
+            color: #28a745;
+            background-color: transparent;
+        }
+
+        .btn-outline-success:active, .btn-outline-success.active,
+        .show > .btn-outline-success.dropdown-toggle {
+            color: #fff;
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        .btn-outline-danger {
+            color: #dc3545;
+            background-color: transparent;
+            background-image: none;
+            border-color: #dc3545;
+        }
+
+        .btn-outline-danger:hover {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-outline-danger:focus, .btn-outline-danger.focus {
+            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.5);
+        }
+
+        .btn-outline-danger.disabled, .btn-outline-danger:disabled {
+            color: #dc3545;
+            background-color: transparent;
+        }
+
+        .btn-outline-danger:active, .btn-outline-danger.active,
+        .show > .btn-outline-danger.dropdown-toggle {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
     </style>
 </head>
+
 <body class="animsition">
 
 <!-- Header -->
@@ -330,9 +388,9 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
             <div class="uppic">
                     <input style="margin:2% 0 2% 0 " type="file" name="filesToUpload[]" id="filesToUpload" onchange="makeFileList();">
             </div>
-            <input type="hidden" name="uID" value="<?php echo $row["uID"];?>">
-            <input type="submit" class="btn btn-outline-success" value="ยืนยัน">
-            <input type="reset" class="btn btn-outline-danger" value="ยกเลิก">
+    <input type="hidden" name="uID" value="<?php echo $row["uID"];?>">
+    <button type="submit" class="btn btn-outline-success">ยืนยัน</button>
+    <button type="reset" class="btn btn-outline-danger">ยกเลิก</button>
 </form>
             <script>
                 function makeFileList() {

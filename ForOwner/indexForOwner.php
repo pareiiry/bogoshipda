@@ -95,7 +95,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
             padding: 0px 20px 0px 40px;
             border: 1px solid #ddd;
 			margin-top:10px;
-			margin-left:90px;
+			margin-left:40px;
             /*margin-bottom: 2px;*/
             border-radius: 8px;
 			height:35px;	
@@ -105,7 +105,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
             border-collapse: collapse;
             width: 100%;
             border-top: 1px solid #ddd;
-            /*font-size: 18px;*/
+            font-size: 12px;
         }
 
         #myTable th, #myTable td {
@@ -281,23 +281,26 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
 
         <div class="col-sm-9">
             <div class="row" style="margin-top: 5px">
-                <div class="col-sm-4"><a href="addProduct.php" class="btn btn-success" role="button" style="margin-left: 2%;margin-top: 3%" >+ เพิ่มสินค้า</a></div>
+                <div class="col-sm-4"><a href="addProduct.php" class="btn btn-info" role="button" style="margin-left: 2%;margin-top: 3%" >+ เพิ่มสินค้า</a></div>
                 <div class="col-sm-4" align="center"><h3><b>รายการสินค้า</b></h3></div>
                 <div class="col-sm-4"><input type="text" id="myInput" onkeyup="search()" placeholder="ค้นหาสินค้า..." title="Type in a name" width="100%" align="right"></div>
             </div>
+
 
             <hr>
 
 
             <table id="myTable">
+                <thead>
                 <tr class="header">
-                    <th style="width:20%;text-align:center;">รูปสินค้า</th>
-                    <th style="width:10%;text-align:center;">รหัสสินค้า</th>
+                    <th style="width:15%;text-align:center;">รูปสินค้า</th>
+                    <th style="width:15%;text-align:center;">รหัสสินค้า</th>
                     <th style="width:20%;text-align:center;">ชื่อสินค้า</th>
                     <th style="width:10%;text-align:center;">ราคาขาย</th>
                     <th style="width:10%;text-align:center;">ต้นุทน</th>
                     <th style="width:10%;text-align:center;">จัดการ</th>
                 </tr>
+                </thead>
                 <?php
                 while($row2= mysqli_fetch_assoc($result2))// show the information from query
                 {

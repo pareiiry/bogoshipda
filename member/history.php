@@ -367,7 +367,7 @@ $resultOrder = mysqli_query($con,$sqlOrder);
                     </td>";
               }
               else {
-                  echo "<td style='color: #1e7e34'>      
+                  echo "<td style='color: limegreen'>      
                            ได้รับการยืนยันแล้ว                   
                     </td>";
               }

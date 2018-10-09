@@ -46,8 +46,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/png" href="../images/icons/favicon.png"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/util.css">
+
 
     <style>
         div.sticky{
@@ -97,7 +96,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
             padding: 0px 20px 0px 40px;
             border: 1px solid #ddd;
 			margin-top:10px;
-			margin-left:90px;
+			margin-left:40px;
             /*margin-bottom: 2px;*/
             border-radius: 8px;
 			height:35px;	
@@ -107,7 +106,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
             border-collapse: collapse;
             width: 100%;
             border-top: 1px solid #ddd;
-            /*font-size: 18px;*/
+            font-size: 12px;
         }
 
         #myTable th, #myTable td {
@@ -282,15 +281,15 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
             <hr>
 
 
-            <table id="myTable" border="1px black">
+            <table id="myTable">
                 <tr class="header">
                     <th style="width:5%;text-align:center;">Payment ID</th>
                     <th style="width:15%;text-align:center;">ผู้แจ้งชำระเงิน</th>
-                    <th style="text-align:center;">ช่องทางชำระเงิน</th>
+                    <th style="width:25%; text-align:center;">ช่องทางชำระเงิน</th>
                     <th style="text-align:center;">ราคาสุทธิ (บาท)</th>
                     <th style="width:10%;text-align:center;">วันที่ชำระเงิน</th>
-                    <td style="text-align: center">orderID</td>
-                    <th style="width:5%;text-align:center;">ยืนยันชำระเงิน</th>
+                    <th style="text-align: center">orderID</th>
+                    <th style="width:12%; text-align:center;">ยืนยันชำระเงิน</th>
 
                 </tr>
                 <?php
@@ -311,46 +310,46 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                     $rowBank= mysqli_fetch_array($resultBank,MYSQLI_ASSOC);
                     $bank ="";
                     if($rowBank['bankName']=='SCB'){
-                        $bank ="ธนาคารไทยพาณิชย์ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                        $bank ="ธนาคารไทยพาณิชย์ | ".$rowBank['accountNumber'];
                     }
                     else if($rowBank['bankName']=='KTB') {
-                        $bank ="ธนาคารกรุงไทย | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                        $bank ="ธนาคารกรุงไทย | ".$rowBank['accountNumber'];
                     }
                     else if($rowBank['bankName']=='BBL'){
-                        $bank ="ธนาคารกรุงเทพ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                        $bank ="ธนาคารกรุงเทพ | ".$rowBank['accountNumber'];
                     }
                     else if($rowBank['bankName']=='KBANK'){
-                        $bank ="ธนาคารกสิกร | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                        $bank ="ธนาคารกสิกร | ".$rowBank['accountNumber'];
                     }else if($rowBank['bankName']=='GSB'){
-                        $bank ="ธนาคารออมสิน | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                        $bank ="ธนาคารออมสิน | ".$rowBank['accountNumber'];
                     }  else if($rowBank['bankName']=='KRUNGSRI'){
-                        $bank ="ธนาคารกรุงศรีอยุธยา | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                        $bank ="ธนาคารกรุงศรีอยุธยา | ".$rowBank['accountNumber'];
                     }
                     else if($rowBank['bankName']=='TMB'){
-                        $bank ="ธนาคารทหารไทย | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                        $bank ="ธนาคารทหารไทย | ".$rowBank['accountNumber'];
                     }
                     else if($rowBank['bankName']=='UOB'){
-                        $bank ="ธนาคารยูโอบี | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                        $bank ="ธนาคารยูโอบี | ".$rowBank['accountNumber'];
                     }
                     else if($rowBank['bankName']=='TBANK') {
-                        $bank ="ธนาคารธนชาติ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                        $bank ="ธนาคารธนชาติ | ".$rowBank['accountNumber'];
                     }else if($rowBank['bankName']=='CIMB'){
-                        $bank ="ธนาคารซีไอเอ็มบี | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                        $bank ="ธนาคารซีไอเอ็มบี | ".$rowBank['accountNumber'];
                     }
                     else if($rowBank['bankName']=='CITIBANK'){
-                        $bank ="ซิตี้แบงค์ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                        $bank ="ซิตี้แบงค์ | ".$rowBank['accountNumber'];
                     }
                     else if($rowBank['bankName']=='SCBT'){
-                        $bank ="Standard Chartered | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                        $bank ="Standard Chartered | ".$rowBank['accountNumber'];
                     }
                     else if($rowBank['bankName']=='TISCO'){
-                        $bank ="ทิสโก้แบงค์ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                        $bank ="ทิสโก้แบงค์ | ".$rowBank['accountNumber'];
                     }
                     else if($rowBank['bankName']=='Wallet') {
-                        $bank ="ทรูวอลเลท | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                        $bank ="ทรูวอลเลท | ".$rowBank['accountNumber'];
                     }
                     else if($rowBank['bankName']=='PrompPay') {
-                        $bank ="พร้อมเพย์ | ".$rowBank['accountName']." | ".$rowBank['accountNumber'];
+                        $bank ="พร้อมเพย์ | ".$rowBank['accountNumber'];
                     }
 
 
@@ -376,7 +375,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                         }
                         else{
 
-                            echo "<span style='color: #1e7e34'>ยืนยันแล้ว</span>";
+                            echo "<span style='color: limegreen'>ยืนยันแล้ว</span>";
                         }
                     echo "</td>
                 </tr>";

@@ -449,7 +449,7 @@ while($row2= mysqli_fetch_assoc($result2))// show the information from query
                                         <input type=\"hidden\" name=\"name\" value=\"$row2[name]\">
                                         <input type=\"hidden\" name=\"price\" value=\"$row2[price]\">
                                         <input type=\"hidden\" name=\"pdID\" value=\"$row2[pdID]\">
-                                        <input type=\"submit\" value=\"Add to Cart\" class=\"flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4\">
+                                        <input type=\"submit\" value=\"เพิ่มลงตะกร้า\" class=\"flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4\">
                                     </form>
                                     </div>
                                 </div>
