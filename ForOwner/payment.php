@@ -352,13 +352,13 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                         $bank ="พร้อมเพย์ | ".$rowBank['accountNumber'];
                     }
 
-
+                    $datePayment = date_format(date_create($rowPayment['dateCreate']),'d-m-Y H:i:s');
                 echo "<tr>
                     <td style=\"width:5%;text-align:center;\"><b><a href=\"paymentInfo.php?paymentID=$rowPayment[paymentID]\" class=\"color-link\">$rowPayment[paymentID]</a></b> </td>
                     <td style=\"width:15%;text-align:center;\">$rowUser[name]</td>
                     <td style=\"text-align:center;\">$bank</td>
                     <td style=\"text-align:center;\">$rowOrder4[netPrice]</td>
-                    <td style=\"width:10%;text-align:center;\">$rowPayment[dateCreate]</td>
+                    <td style=\"width:10%;text-align:center;\">$datePayment</td>
                     <td style=\"text-align: center\"><a href=\"orderInfo.php?orderID=$rowPayment[orderID]\" class=\"color-link\">$rowPayment[orderID]</a></td>
                     <td style=\"width:10%;text-align:center;\">";
                         if($rowPayment['checked']=='0'){
