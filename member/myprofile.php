@@ -55,6 +55,7 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
     <link rel="stylesheet" type="text/css" href="../css/util.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <!--===============================================================================================-->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
     <style>
 
@@ -120,6 +121,13 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
             background-color: #dc3545;
             border-color: #dc3545;
         }
+        a:hover {
+            text-decoration: none;!important;
+            color: #ffaeba;!important;
+        }
+        a {
+            color: #666666;!important;
+        }
     </style>
 </head>
 <body class="animsition">
@@ -147,7 +155,7 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
         <div class="wrap_header">
             <!-- Logo -->
             <a href="indexMember2.php" class="logo" >
-                <font size="5"><b>Bogoshipda</b></font>
+         <font size="5"><b>Bogoshipda</b></font>
                 <!-- <img src="images/icons/logo.png" alt="IMG-LOGO">-->
             </a>
 
@@ -156,7 +164,7 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
                 <nav class="menu">
                     <ul class="main_menu">
                         <li>
-                            <a href="indexMember2.php.php">หน้าแรก</a>
+                            <a href="indexMember2.php">หน้าแรก</a>
                         </li>
 
                         <li>
@@ -355,67 +363,116 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
             </h4>
 
             <!--  -->
-            <div class="flex-w flex-sb-m">
-					<span class="s-text18 w-size19 w-full-sm">
-						ชื่อ-นามสกุล :
-					</span>
+            <div class="flex-w flex-sb-m ">
+<!--                <div class="form-group">-->
+<!--                    <label>ชื่อ-นามสกุล :</label>-->
+<!--                    <input class="form- border" name="name" value="--><?php //echo $row['name'];?><!--">-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>อีเมล์ :</label>-->
+<!--                    <input class="form- border" name="email" value="--><?php //echo $row['email'];?><!--">-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>ที่อยู่ :</label>-->
+<!--                    <input class="form- border" name="address" value="--><?php //echo $row['address'];?><!--">-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>เบอร์โทร :</label>-->
+<!--                    <input class="form- border" name="address" value="--><?php //echo $row['address'];?><!--">-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>เพศ :</label>-->
+<!--                    <input class="form- border" name="address" value="--><?php //echo $row['address'];?><!--">-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>วันเกิด :</label>-->
+<!--                    <input class="form- border" name="address" value="--><?php //echo $row['address'];?><!--">-->
+<!--                </div>-->
 
-                <span class="m-text21 w-size20 w-full-sm">
 
-					</span>
+                <form class="form-horizontal" method="post" action="editProfile_action.php">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">อีเมลล์</label>
+                        <div class="col-md-8 col-sm-9">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                <input type="email" class="form-control" name="email" id="email" value="<?php echo $row['email'];?>" disabled>
+                                <input type="hidden" class="form-control" name="email" id="email" value="<?php echo $row['email'];?>">
+                            </div>
+                        </div>
+                    </div>
 
-                <span class="s-text18 w-size19 w-full-sm">
-						อีเมล์ :
-					</span>
-                <div class="w-size20 w-full-sm p-t-10">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">รหัสผ่าน</label>
+                        <div class="col-md-5 col-sm-8">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input type="password" class="form-control" name="password" id="password" value="<?php echo $row['password'];?>" required>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="form-group">
+                        <label class="control-label col-sm-3">Confirm Password <span class="text-danger">*</span></label>
+                        <div class="col-md-5 col-sm-8">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="Confirm your password" value="" required>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">ชื่อ-นามสกุล </label>
+                        <div class="col-md-8 col-sm-9">
+                            <input type="text" class="form-control" name="name" id="name" placeholder="กรอกชื่อ-นามสกุล" value="<?php echo $row['name'];?>" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">วันเกิด <span class="text-danger">*</span></label>
+                        <div class="col-md-6 col-sm-8">
+                            <input class="form-control" type="date" name="dob" value="<?php echo $row['dob'];?>" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">เพศ <span class="text-danger">*</span></label>
+                        <div class="col-md-8 col-sm-9">
+                            <label>
+                                <input name="gender" type="radio"  value="Male" <?php if($row['gender']=='Male') {echo 'checked';}?>>
+                                ชาย </label>
+                               
+                            <label>
+                                <input name="gender" type="radio"  value="Female" <?php if($row['gender']=='Female') {echo 'checked';}?>>
+                                หญิง </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">เบอร์โทรศัพท์ <span class="text-danger">*</span></label>
+                        <div class="col-md-8 col-sm-8">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                                <input type="text" class="form-control" name="phone_number" id="phone_number" value="<?php echo $row['phone_number'];?>" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">ที่อยู่ <span class="text-danger">*</span></label>
+                        <div class="col-md-8 col-sm-9">
+                            <textarea style="resize:none;" rows="3" class="form-control" name="address" id="address" placeholder="กรอกที่อยู่" required><?php echo $row['address'];?></textarea>
+                        </div>
+                    </div>
 
-                </div>
+                    <div class="size15 trans-0-4 t-center">
 
-                <span class="s-text18 w-size19 w-full-sm">
-                       ที่อยู่ :
-					</span>
-                <div class="w-size20 w-full-sm p-b-10 p-t-10">
+                        <button class="btn btn-outline-success" type="submit"  style="margin-left: 2%;margin-top: 3%">บันทึก</button>
+                        <button class="btn btn-outline-danger" type="button" style="margin-left: 2%;margin-top: 3%" onclick="window.history.go(-1);">ยกเลิก</button>
+                        <!-- Button -->
 
-                </div>
+                    </div>
+                </form>
 
-                <span class="s-text18 w-size19 w-full-sm">
-                        เบอร์โทร :
-					</span>
-                <div class="w-size20 w-full-sm">
-
-                </div>
-                <span class="s-text18 w-size19 w-full-sm">
-                        เพศ :
-					</span>
-
-                <div class="w-size20 w-full-sm">
-
-                </div>
-                <span class="s-text18 w-size19 w-full-sm">
-                        วันเกิด :
-					</span>
-
-                <div class="w-size20 w-full-sm">
-
-                </div>
             </div>
 
 
 
-
-
-
-
-
-
-
-                <div class="size15 trans-0-4 t-center">
-
-                    <button class="btn btn-outline-success" type="submit"  style="margin-left: 2%;margin-top: 3%">บันทึก</button>
-                        <button class="btn btn-outline-danger" type="clear" style="margin-left: 2%;margin-top: 3%" >ยกเลิก</button>
-                    <!-- Button -->
-
-                </div>
 
         </div>
 
