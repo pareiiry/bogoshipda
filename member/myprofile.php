@@ -362,34 +362,6 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
                 ข้อมูลส่วนตัว
             </h4>
 
-            <!--  -->
-            <div class="flex-w flex-sb-m ">
-<!--                <div class="form-group">-->
-<!--                    <label>ชื่อ-นามสกุล :</label>-->
-<!--                    <input class="form- border" name="name" value="--><?php //echo $row['name'];?><!--">-->
-<!--                </div>-->
-<!--                <div class="form-group">-->
-<!--                    <label>อีเมล์ :</label>-->
-<!--                    <input class="form- border" name="email" value="--><?php //echo $row['email'];?><!--">-->
-<!--                </div>-->
-<!--                <div class="form-group">-->
-<!--                    <label>ที่อยู่ :</label>-->
-<!--                    <input class="form- border" name="address" value="--><?php //echo $row['address'];?><!--">-->
-<!--                </div>-->
-<!--                <div class="form-group">-->
-<!--                    <label>เบอร์โทร :</label>-->
-<!--                    <input class="form- border" name="address" value="--><?php //echo $row['address'];?><!--">-->
-<!--                </div>-->
-<!--                <div class="form-group">-->
-<!--                    <label>เพศ :</label>-->
-<!--                    <input class="form- border" name="address" value="--><?php //echo $row['address'];?><!--">-->
-<!--                </div>-->
-<!--                <div class="form-group">-->
-<!--                    <label>วันเกิด :</label>-->
-<!--                    <input class="form- border" name="address" value="--><?php //echo $row['address'];?><!--">-->
-<!--                </div>-->
-
-
                 <form class="form-horizontal" method="post" action="editProfile_action.php">
                     <div class="form-group">
                         <label class="control-label col-sm-3">อีเมลล์</label>
@@ -404,7 +376,7 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
                     <div class="form-group">
                         <label class="control-label col-sm-3">รหัสผ่าน</label>
-                        <div class="col-md-5 col-sm-8">
+                        <div class="col-md-8 col-sm-9">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                 <input type="password" class="form-control" name="password" id="password" value="<?php echo $row['password'];?>" required>
@@ -427,13 +399,13 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-3">วันเกิด <span class="text-danger">*</span></label>
-                        <div class="col-md-6 col-sm-8">
+                        <label class="control-label col-sm-3">วันเกิด </label>
+                        <div class="col-md-4 col-sm-5">
                             <input class="form-control" type="date" name="dob" value="<?php echo $row['dob'];?>" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-3">เพศ <span class="text-danger">*</span></label>
+                        <label class="control-label col-sm-3">เพศ</label>
                         <div class="col-md-8 col-sm-9">
                             <label>
                                 <input name="gender" type="radio"  value="Male" <?php if($row['gender']=='Male') {echo 'checked';}?>>
@@ -445,7 +417,7 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-3">เบอร์โทรศัพท์ <span class="text-danger">*</span></label>
+                        <label class="control-label col-sm-3">เบอร์โทรศัพท์ </label>
                         <div class="col-md-8 col-sm-8">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
@@ -454,7 +426,7 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-3">ที่อยู่ <span class="text-danger">*</span></label>
+                        <label class="control-label col-sm-3">ที่อยู่</label>
                         <div class="col-md-8 col-sm-9">
                             <textarea style="resize:none;" rows="3" class="form-control" name="address" id="address" placeholder="กรอกที่อยู่" required><?php echo $row['address'];?></textarea>
                         </div>
@@ -471,17 +443,6 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
             </div>
 
-
-
-
-        </div>
-
-
-
-
-
-
-                <!-- Pagination -->
 
         </div>
     </div>
