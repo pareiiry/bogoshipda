@@ -327,48 +327,96 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
 
                     <table class="custom-date">
                         <tr>
-                            <td>แสดงตั้งแต่วันที่ </td>
-                            <td><input type="date" class="form-control" id="date" name="date"  value="<?php echo date("Y-m-d"); ?>"></td>
-                            <td>ถึง </td>
-                            <td><input type="date" class="form-control" id="date" name="date" value="<?php echo date("Y-m-d"); ?>"></td>
+                            <form action="" method="get">
+                                <td>แสดงตั้งแต่วันที่ </td>
+                                <td><input type="date" class="form-control" id="dateSt" name="dateSt"  value="<?php if(isset($_GET['dateSt'])){echo $_GET['dateSt'];}else echo date('d-m-Y');?>" onchange='this.form.submit()'></td>
+                                <td>ถึง </td>
+                                <td><input type="date" class="form-control" id="dateEn" name="dateEn" value="<?php if(isset($_GET['dateEn'])){echo $_GET['dateEn'];}else echo date('d-m-Y');?>" min="" onchange='this.form.submit()'></td>
+                            </form>
                         </tr>
                     </table>
 
 
-            <table class="list table-striped">
-                <thead>
-                    <th style="width:10%;text-align:center;">วันที่สั่งซื้อ</th>
-                    <th style="width:10%;text-align:center;">Order ID</th>
-                    <th style="width:10%;text-align:center;">จำนวน</th>
-                    <th style="width:20%;text-align:center;">ราคา(บาท)</th>
+        <?php
+        if(isset($_GET)){
+            if($_GET['dateSt']!="" && $_GET['dateEn']!=""){
+                if($_GET['dateSt']<=$_GET['dateEn']){
+                    $sqlPayment = "SELECT * FROM payment WHERE (dateVerifyPayment >= '".$_GET['dateSt']."' AND dateVerifyPayment <='".$_GET['dateEn'].":23:59:59')";
+                    $resultPayment = mysqli_query($con,$sqlPayment);
+                    echo "<table class=\"list table-striped\">
+                    <thead>
+                         <th style=\"width:10%;text-align:center;\">วันที่สั่งซื้อ</th>
+                        <th style=\"width:10%;text-align:center;\">Order ID</th>
+                        <th style=\"width:10%;text-align:center;\">จำนวน</th>
+                        <th style=\"width:20%;text-align:center;\">ราคา(บาท)</th>
+                    </thead>";
+                    if($resultPayment->num_rows == 0){
+                        echo "
+                            <tr>
+                            <td colspan='4' style=\"text-align:center;color: red;\">-ไม่มีรายการสั่งซื้อ-</td>
+                            </tr>
+                        ";
+                    }
+                    else {
+                        $totalPrice = 0;
+                        $totalAmount = 0;
+                        $totalOrder = 0;
+                        while ($rowPayment = mysqli_fetch_assoc($resultPayment)) {
+                            $sqlOrderTable = "SELECT * FROM order_table WHERE orderID = '" . $rowPayment['orderID'] . "'";
+                            $resultOrderTable = mysqli_query($con, $sqlOrderTable);
+                            $rowOrderTable = mysqli_fetch_array($resultOrderTable, MYSQLI_ASSOC);
 
-                </thead>
-                <tr>
-                    <td style="width:10%;text-align:center;"></td>
-                    <td style="width:10%;text-align:center;">Order ID</td>
-                    <td style="width:20%;text-align:center;">xxx</td>
-                    <td style="width:20%;text-align:center;">xxx</td>
-                </tr>
+                            $date = date_format(date_create($rowPayment['dateVerifyPayment']), 'd-m-Y');
+                            $price = number_format($rowOrderTable['priceAmount'] - $rowOrderTable['discountPrice']);
+                            echo "
+                            <tr>
+                            <td style=\"width:10%;text-align:center;\">$date</td>
+                            <td style=\"width:10%;text-align:center;\">$rowOrderTable[orderID]</td>
+                            <td style=\"width:20%;text-align:center;\">$rowOrderTable[allAmount]</td>
+                            <td style=\"width:20%;text-align:center;\">$price</td>
+                            </tr>
+                        ";
 
-            </table>
+                            $totalPrice += ($rowOrderTable['priceAmount'] - $rowOrderTable['discountPrice']);
+                            $totalAmount += $rowOrderTable['allAmount'];
+                            $totalOrder++;
+                        }
 
-                <table class="tb" width="80%">
-                    <tr>
-                        <td colspan="2">
-                            รายการสั่งซื้อทั้งหมด
-                            <br> รายการ
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="50%">จำนวนสินค้าที่ขายได้
-                        <br> ชิ้น
-                        </td>
-                        <td>ราคารวม
-                            <br> บาท
-                        </td>
-                    </tr>
+                        $totalPrice_f=number_format($totalPrice);
 
-                </table>
+                        echo "
+                          <table class=\"tb\" width=\"80%\">
+                                            <tr>
+                                                <td colspan=\"2\">
+                                                    รายการสั่งซื้อทั้งหมด <br>$totalOrder
+                                                    <br> รายการ
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width=\"50%\">จำนวนสินค้าที่ขายได้<br> $totalAmount
+                                                <br> ชิ้น
+                                                </td>
+                                                <td>ราคารวม <br>$totalPrice_f
+                                                    <br> บาท
+                                                </td>
+                                            </tr>
+                        
+                                        </table>
+
+                                       
+                                  
+                        ";
+                    }
+
+
+                }
+                else{
+                    echo "<script type='text/javascript'>alert('โปรดตรวจสอบ!! วันที่เริ่มต้นต้องน้อยกว่าวันที่สิ้นสุด');</script>";
+                }
+            }
+        }
+        ?>
+
             </div>
         </div>
         </div>
