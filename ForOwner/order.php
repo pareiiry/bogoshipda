@@ -325,7 +325,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
 
             <script>
                 function search() {
-                    var input, filter, table, tr, td, i,td2;
+                    var input, filter, table, tr, td, i,td2,td3;
                     input = document.getElementById("myInput");
                     filter = input.value.toUpperCase();
                     table = document.getElementById("myTable");
@@ -333,8 +333,9 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                     for (i = 0; i < tr.length; i++) {
                         td = tr[i].getElementsByTagName("td")[1];
                         td2 = tr[i].getElementsByTagName("td")[3];
-                        if (td||td2) {
-                            if (td.innerHTML.toUpperCase().indexOf(filter) > -1 || td2.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        td3 = tr[i].getElementsByTagName("td")[0];
+                        if (td||td2||td3) {
+                            if (td.innerHTML.toUpperCase().indexOf(filter) > -1 || td2.innerHTML.toUpperCase().indexOf(filter) > -1 || td3.innerHTML.toUpperCase().indexOf(filter) > -1) {
                                 tr[i].style.display = "";
                             } else {
                                 tr[i].style.display = "none";

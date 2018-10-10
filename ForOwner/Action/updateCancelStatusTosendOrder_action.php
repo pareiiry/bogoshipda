@@ -1,6 +1,7 @@
 <?php
 include ('../../dbConnect.php');
 $orderID=$_POST['orderID'];
+date_default_timezone_set("Asia/Bangkok");
 $dateTime = date('Y-m-d H:i:s');
 $sql="UPDATE order_table SET orderStatus='cancel' WHERE orderID='$orderID'";
 $sql_query=mysqli_query($con,$sql);

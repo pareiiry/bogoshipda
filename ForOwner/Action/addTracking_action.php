@@ -2,7 +2,7 @@
 include ('../../dbConnect.php');
 $orderID=$_POST['orderID'];
 $trackingNumber = $_POST['trackingNumber'];
-
+date_default_timezone_set("Asia/Bangkok");
 $dateTime = date('Y-m-d H:i:s');
 
 $sql="UPDATE order_table SET orderStatus='sent order',trackingNumber='$trackingNumber',dateTimeSendProduct='$dateTime' WHERE orderID='$orderID'";

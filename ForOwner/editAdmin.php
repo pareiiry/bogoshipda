@@ -6,20 +6,20 @@ if($_SESSION['ID'] == "")
     header("location:../loginPage.php");
     exit();
 }
-if($_SESSION['Status'] != "owner" && $_SESSION['Status'] != "Admin")
+if($_SESSION['usertype'] != "owner" && $_SESSION['usertype'] != "admin")
 {
-    //echo "ของ Adminเท่านั้นจ้าาา";
+    echo "ของ Adminเท่านั้นจ้าาา";
     exit();
 }
 include ('../dbConnect.php');
-$sql = "SELECT * FROM usertable WHERE uID = '".$_SESSION['ID']."' ";
+$sql = "SELECT * FROM user WHERE uID = '".$_SESSION['ID']."' ";
 //$objQuery = mysqli_query($strSQL);
 //$objResult = mysqli_fetch_array($objQuery);
 $result = mysqli_query($con,$sql);
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 
-$sql2 = "SELECT * FROM usertable WHERE uID = '".$_GET['uID']."' ";;
+$sql2 = "SELECT * FROM user WHERE uID = '".$_GET['uID']."' ";;
 //$objQuery = mysqli_query($strSQL);
 //$objResult = mysqli_fetch_array($objQuery);
 $result2 = mysqli_query($con,$sql2);
@@ -182,7 +182,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
             <form method="post" action="Action/editAdmin_action.php" enctype="multipart/form-data">
                 <input type="hidden" name="uID" value="<?php echo $row2['uID'];?>">
                 <div class="row" style="margin-top: 5px">
-                    <div class="col-sm-4"><a href="manageMember.php" class="btn btn-primary" role="button" style="margin-left: 2%;margin-top: 3%" >< กลับไปรายชื่อผู้ใช้และสมาชิก</a></div>
+                    <div class="col-sm-4"><a href="manageMember.php" class="btn btn-info" role="button" style="margin-left: 2%;margin-top: 3%" >< กลับไปรายชื่อผู้ใช้และสมาชิก</a></div>
                     <div class="col-sm-4" align="center"><h4>USER ID: <?php echo $row2['uID'];?></h4></div>
 
                     <div class="col-sm-4 " align="right">

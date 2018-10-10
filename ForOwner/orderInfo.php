@@ -321,7 +321,7 @@ else if($rowBank['bankName']=='PrompPay') {
                                     </tr>
                                     <tr>
                                         <td>การจัดส่ง : </td>
-                                        <td><?php echo $howShip;?></td>
+                                        <td><?php  echo $howShip;?></td>
                                     </tr>
                                     <tr>
                                         <td>ข้อความถึงผู้ขาย : </td>
@@ -343,7 +343,7 @@ else if($rowBank['bankName']=='PrompPay') {
                                 </tr>
                                 <tr>
                                     <td>จัดส่งเมื่อ : </td>
-                                    <td><?php if($rowOrder['trackingNumber']!=NULL)echo $rowOrder['dateTimeSendProduct'];else echo "-"; ?></td>
+                                    <td><?php if($rowOrder['trackingNumber']!=NULL){ $dateTimeSendPd = date_format(date_create($rowOrder['dateTimeSendProduct']),'d-m-Y H:i:s'); echo $dateTimeSendPd;}else echo "-"; ?></td>
                                 </tr>
                             </table>
                         </div>
@@ -351,6 +351,7 @@ else if($rowBank['bankName']=='PrompPay') {
 
                     <div class="panel panel-default">
                         <div class="panel-heading fs-25"><b>รายละเอียดการชำระเงิน  <?php
+                                if($orderStatus!='รอชำระเงิน'){
                                 if($rowPay['checked']=='0'){
                                     if($rowOrder['orderStatus']=="cancel"){
                                         echo "<span style='color: grey'>(ถูกปฏิเสธ)</span>";
@@ -360,7 +361,7 @@ else if($rowBank['bankName']=='PrompPay') {
                                     }
                                 } else{
                                         echo "<span style='color: limegreen'>(ยืนยันการชำระเงินแล้ว)</span>";
-                                }?></b></div>
+                                }}?></b></div>
                         <div class="panel-body" style="margin: 0% 2% 0% 2%">
                             <!--                            <form method="post">-->
                             <table class="orderinfo" width="100%">
@@ -370,7 +371,7 @@ else if($rowBank['bankName']=='PrompPay') {
                                 </tr>
                                 <tr>
                                     <td>ชำระเงินเมื่อ : </td>
-                                    <td><?php echo $rowPay['dateCreate']; ?></td>
+                                    <td><?php $datePay = date_format(date_create($rowPay['dateCreate']),'d-m-Y H:i:s'); echo $datePay; ?></td>
                                 </tr>
                                 <tr>
                                     <td>ช่องทางชำระเงิน : </td>

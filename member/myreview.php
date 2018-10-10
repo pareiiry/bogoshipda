@@ -322,8 +322,10 @@ $resultReview = mysqli_query($con,$sqlReview);
                     else {
                         echo '<img style="width:30%" src="data:image/*;base64,' . base64_encode($rowReview['img']) . '"/>';
                     }
+
+                    $dateReview = date_format(date_create($rowReview['dateTime']),'d-m-Y H:i:s');
                     echo " </td>
-                    <td>$rowReview[dateTime]</td>
+                    <td>$dateReview</td>
                     <td>
                         <div class=\"star-rating\">";
 

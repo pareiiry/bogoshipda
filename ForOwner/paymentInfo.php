@@ -308,7 +308,7 @@ else if($rowBank['bankName']=='PrompPay') {
         </div>
 
         <div class="col-sm-9">
-            <form method="post" action="Action/addProduct_action.php" enctype="multipart/form-data">
+
             <div class="row" style="margin-top: 5px">
                 <div class="col-sm-4"><a href="payment.php" class="btn btn-info" role="button" style="margin-left: 2%;margin-top: 3%" >< กลับไปหน้ารายการแจ้งชำระเงินทั้งหมด</a></div>
                 <div class="col-sm-4" align="center"><h3><b>Payment ID : <?php echo $rowPay['paymentID'];?></b></h3></div>
@@ -339,7 +339,7 @@ else if($rowBank['bankName']=='PrompPay') {
                                 </tr>
                                 <tr>
                                     <td>เวลาที่ชำระเงิน : </td>
-                                    <td><?php echo $rowPay['date']." ".$rowPay['time'];?></td>
+                                    <td><?php $date= date_format(date_create($rowPay['date']),'d-m-Y'); echo $date." ".$rowPay['time'];?></td>
                                 </tr>
                                 <tr>
                                     <td>ช่องทางชำระเงิน : </td>
@@ -351,11 +351,11 @@ else if($rowBank['bankName']=='PrompPay') {
                                 </tr>
                                 <tr>
                                     <td>เวลาที่แจ้งชำระเงิน : </td>
-                                    <td><?php echo $rowPay['dateCreate'];?></td>
+                                    <td><?php $date2= date_format(date_create($rowPay['dateCreate']),'d-m-Y H:i:s'); echo $date2;?></td>
                                 </tr>
                                 <tr>
                                     <td>เวลายืนยันยอด : </td>
-                                    <td><?php if($rowPay['checked']==1){echo $rowPay['dateVerifyPayment'];}else{ echo "-";} ?></td>
+                                    <td><?php if($rowPay['checked']==1){$date3= date_format(date_create($rowPay['dateVerifyPayment']),'d-m-Y H:i:s');echo $date3;}else{ echo "-";} ?></td>
                                 </tr>
                                 <tr>
                                     <td>ผู้แจ้งยอด : </td>

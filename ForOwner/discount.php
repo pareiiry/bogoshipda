@@ -281,9 +281,10 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                         else{
                             echo"<td style=\"text-align:center;color: red\">ไม่ใช้งาน</td>";
                         }
-
-                     echo"<td style=\"text-align:center;\">$row2[dateCreate]</td>
-                     <td style=\"text-align:center;\">$row2[dateDelete]</td>
+                        $dateD = date_format(date_create($row2['dateDelete']),'d-m-Y');
+                        $dateC = date_format(date_create($row2['dateCreate']),'d-m-Y');
+                     echo"<td style=\"text-align:center;\">$dateC</td>
+                     <td style=\"text-align:center;\">$dateD</td>
                      <td style=\"text-align:center;\">$row2[codeText]</td>
                      <td style=\"text-align:center;\">$row2[discount]</td>";
                     if($row2['unitDiscount']=='bath'){

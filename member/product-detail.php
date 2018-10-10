@@ -360,7 +360,7 @@ else{
                 <div class="slick3">
                         <?php
                       //echo "<script>alert($pic_count);</script>";
-                            if($pic_count>1) {
+                            if($pic_count>=1) {
                                 while ($rowSP = mysqli_fetch_assoc($resultSP))// show the information from query
                                 {
                                     if (empty($rowSP)) {
@@ -381,36 +381,44 @@ else{
                                     }
                                 }
                             }
-                            else{
-                                while ($rowSP = mysqli_fetch_assoc($resultSP))// show the information from query
-                                {
-                                    $image = base64_decode($rowSP['img']);
-                                    /** check if the image is db */
-                                    if($image!=null)
-                                    {
-                                        $db_img = imagecreatefromstring($image);
-                                        Header("Content-type: image/jpeg");
-                                        imagejpeg($db_img);
-                                    }
-
-                                    if ($rowSP['img']==="" || empty($rowSP)) {
-                                        echo '
-                                        <div class="item-slick3" data-thumb="../images/no-picture.jpg">
+                            elseif($pic_count==0){
+                                echo '
+                                        <div class="item-slick3" data-thumb="images/no-picture.jpg">
                                         <div class="wrap-pic-w">
-                                        <img src="../images/no-picture.jpg">
+                                        <img src="images/no-picture.jpg">
                                     </div>
-                                </div>';
-
-                                    } else {
-                                        echo '
-                                    <div class="item-slick3" data-thumb="data:image/*;base64,' . base64_encode($rowSP['img']) . '" >
-                                    <div class="wrap-pic-w">
-                                        <img src="data:image/*;base64,' . base64_encode($rowSP['img']) . '"/>
-                                    </div>
-                                </div>';
-                                    }
-                                }
+                                    </div>';
                             }
+//                            else{
+//                                while ($rowSP = mysqli_fetch_assoc($resultSP))// show the information from query
+//                                {
+//                                    $image = base64_decode($rowSP['img']);
+//                                    /** check if the image is db */
+//                                    if($image!=null)
+//                                    {
+//                                        $db_img = imagecreatefromstring($image);
+//                                        Header("Content-type: image/jpeg");
+//                                        imagejpeg($db_img);
+//                                    }
+//
+//                                    if ($rowSP['img']==="" || empty($rowSP)) {
+//                                        echo '
+//                                        <div class="item-slick3" data-thumb="../images/no-picture.jpg">
+//                                        <div class="wrap-pic-w">
+//                                        <img src="../images/no-picture.jpg">
+//                                    </div>
+//                                </div>';
+//
+//                                    } else {
+//                                        echo '
+//                                    <div class="item-slick3" data-thumb="data:image/*;base64,' . base64_encode($rowSP['img']) . '" >
+//                                    <div class="wrap-pic-w">
+//                                        <img src="data:image/*;base64,' . base64_encode($rowSP['img']) . '"/>
+//                                    </div>
+//                                </div>';
+//                                    }
+//                                }
+//                            }
 
                 echo '</div>';
                         ?>

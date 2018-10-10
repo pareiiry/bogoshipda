@@ -387,10 +387,11 @@ $resultOrder = mysqli_query($con,$sqlOrder);
                     $sqlPay = "SELECT * FROM payment WHERE orderID='".$rowOrder['orderID']."'";
                     $resultPay = mysqli_query($con,$sqlPay);
                     $rowPay = mysqli_fetch_array($resultPay,MYSQLI_ASSOC);
+                    $date = date_format(date_create($rowPay['dateVerifyPayment']),'d-m-Y H:i:s');
                 echo "<tr>
                     <td style=\"width:10%;text-align:center;\">$orderStatus</td>
                     <td style=\"width:5%;text-align:center;\"><b><a href=\"orderInfo.php?orderID=$rowOrder[orderID]\" class=\"color-link\">$rowOrder[orderID]</a></b> </td>
-                    <td style=\"width:10%;text-align: center;\">$rowPay[dateVerifyPayment]</td>
+                    <td style=\"width:10%;text-align: center;\">$date</td>
                     <td style=\"width:15%;text-align:center;\">$rowU[name]</td>
                     <td style=\"width:25%;text-align:left;\">
                         <b>ส่งแบบ : $howShip</b>

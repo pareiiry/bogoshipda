@@ -1,16 +1,16 @@
 <?php
 session_start();
-if($_SESSION['ID'] == "")
-{
-    //echo "Please Login!";
-    header("location:../loginPage.php");
-    exit();
-}
-if($_SESSION['Status'] != "owner" && $_SESSION['Status'] != "admin")
-{
-    //echo "ของ Adminเท่านั้นจ้าาา";
-    exit();
-}
+//if($_SESSION['ID'] == "")
+//{
+//    //echo "Please Login!";
+//    header("location:../loginPage.php");
+//    exit();
+//}
+//if($_SESSION['Status'] != "owner" && $_SESSION['Status'] != "admin")
+//{
+//    //echo "ของ Adminเท่านั้นจ้าาา";
+//    exit();
+//}
 include ('../dbConnect.php');
 $sql = "SELECT * FROM usertable WHERE uID = '".$_SESSION['ID']."' ";
 //$objQuery = mysqli_query($strSQL);

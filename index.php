@@ -444,7 +444,7 @@ $result2 = mysqli_query($con,$sql2);
                         <div class=\"block2-img wrap-pic-w of-hidden pos-relative\">";
                    //print_r($row3);
                     //echo $row3['img'];
-                    if($row3['img']===""){
+                    if($row3['img']==="" || empty($row3)){
                         echo '<img src="images/no-picture.jpg">';
                     }
                     else {
