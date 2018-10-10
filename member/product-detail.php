@@ -383,9 +383,9 @@ else{
                             }
                             elseif($pic_count==0){
                                 echo '
-                                        <div class="item-slick3" data-thumb="images/no-picture.jpg">
+                                        <div class="item-slick3" data-thumb="../images/no-picture.jpg">
                                         <div class="wrap-pic-w">
-                                        <img src="images/no-picture.jpg">
+                                        <img src="../images/no-picture.jpg">
                                     </div>
                                     </div>';
                             }
