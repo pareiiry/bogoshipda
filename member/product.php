@@ -32,14 +32,125 @@ else{
 }
 
 
-$sql2 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC LIMIT $pageshow,9";
-$result2 = mysqli_query($con,$sql2);
+if(isset($_GET)){
+    //all color
+    if ($_GET['color'] == 'all') {
+        if (isset($_GET['search'])) {
+            if ($_GET['search'] == '') {
+                $sql2 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC LIMIT $pageshow,9";
+                $result2 = mysqli_query($con, $sql2);
 
-$sql3 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC";
-$result3 = mysqli_query($con,$sql3);
-$all_pd_count = mysqli_num_rows($result3);
-$cal=$all_pd_count/9;
-$page_of_pd = ceil($cal);
+                $sql3 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC";
+                $result3 = mysqli_query($con, $sql3);
+                $all_pd_count = mysqli_num_rows($result3);
+                $cal = $all_pd_count / 9;
+                $page_of_pd = ceil($cal);
+            } else {
+                $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.name LIKE '%" . $_GET['search'] . "%' ORDER BY dateCreate DESC LIMIT $pageshow,9";
+                $result2 = mysqli_query($con, $sql2);
+
+                $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.name LIKE '%" . $_GET['search'] . "%' ORDER BY dateCreate DESC";
+                $result3 = mysqli_query($con, $sql3);
+                $all_pd_count = mysqli_num_rows($result3);
+                $cal = $all_pd_count / 9;
+                $page_of_pd = ceil($cal);
+            }
+
+        } else {
+            $sql2 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC LIMIT $pageshow,9";
+            $result2 = mysqli_query($con, $sql2);
+
+            $sql3 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC";
+            $result3 = mysqli_query($con, $sql3);
+            $all_pd_count = mysqli_num_rows($result3);
+            $cal = $all_pd_count / 9;
+            $page_of_pd = ceil($cal);
+
+        }
+
+    }
+    // other color
+    else {
+        if ($_GET['color'] == '' || !isset($_GET['color'] )) {
+            if (isset($_GET['search'])) {
+                if ($_GET['search'] == '') {
+                    $sql2 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC LIMIT $pageshow,9";
+                    $result2 = mysqli_query($con, $sql2);
+
+                    $sql3 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC";
+                    $result3 = mysqli_query($con, $sql3);
+                    $all_pd_count = mysqli_num_rows($result3);
+                    $cal = $all_pd_count / 9;
+                    $page_of_pd = ceil($cal);
+                } else {
+                    $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.name LIKE '%".$_GET['search']."%' ORDER BY dateCreate DESC LIMIT $pageshow,9";
+                    $result2 = mysqli_query($con, $sql2);
+
+                    $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.name LIKE '%".$_GET['search']."%' ORDER BY dateCreate DESC";
+                    $result3 = mysqli_query($con, $sql3);
+                    $all_pd_count = mysqli_num_rows($result3);
+                    $cal = $all_pd_count / 9;
+                    $page_of_pd = ceil($cal);
+                }
+
+            } else {
+                $sql2 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC LIMIT $pageshow,9";
+                $result2 = mysqli_query($con, $sql2);
+
+                $sql3 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC";
+                $result3 = mysqli_query($con, $sql3);
+                $all_pd_count = mysqli_num_rows($result3);
+                $cal = $all_pd_count / 9;
+                $page_of_pd = ceil($cal);
+            }
+        } else {
+            if (isset($_GET['search'])) {
+                if ($_GET['search'] == '' ) {
+                    $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.color='".$_GET['color']."' ORDER BY dateCreate DESC LIMIT $pageshow,9";
+                    $result2 = mysqli_query($con, $sql2);
+
+                    $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.color='".$_GET['color']."' ORDER BY dateCreate DESC";
+                    $result3 = mysqli_query($con, $sql3);
+                    $all_pd_count = mysqli_num_rows($result3);
+                    $cal = $all_pd_count / 9;
+                    $page_of_pd = ceil($cal);
+                } else {
+                    $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.color='".$_GET['color']."' AND product.name LIKE '%".$_GET['search']."%' ORDER BY dateCreate DESC LIMIT $pageshow,9";
+                    $result2 = mysqli_query($con, $sql2);
+
+                    $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.color='".$_GET['color']."' AND product.name LIKE '%".$_GET['search']."%' ORDER BY dateCreate DESC";
+                    $result3 = mysqli_query($con, $sql3);
+                    $all_pd_count = mysqli_num_rows($result3);
+                    $cal = $all_pd_count / 9;
+                    $page_of_pd = ceil($cal);
+                }
+
+            } else {
+                $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.color='".$_GET['color']."' ORDER BY dateCreate DESC LIMIT $pageshow,9";
+                $result2 = mysqli_query($con, $sql2);
+
+                $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.color='".$_GET['color']."' ORDER BY dateCreate DESC";
+                $result3 = mysqli_query($con, $sql3);
+                $all_pd_count = mysqli_num_rows($result3);
+                $cal = $all_pd_count / 9;
+                $page_of_pd = ceil($cal);
+            }
+
+        }
+    }
+
+}
+//no search
+else{
+    $sql2 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC LIMIT $pageshow,9";
+    $result2 = mysqli_query($con,$sql2);
+
+    $sql3 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC";
+    $result3 = mysqli_query($con,$sql3);
+    $all_pd_count = mysqli_num_rows($result3);
+    $cal=$all_pd_count/9;
+    $page_of_pd = ceil($cal);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -335,102 +446,108 @@ $page_of_pd = ceil($cal);
                         ค้นหาจากสี
                     </h4>
 
+                    <form action="" method="get">
+                        <div class="filter-color p-t-22 p-b-50 bo3">
+                            <div class="m-text15 p-b-12">
+                            </div>
 
+                            <ul class="flex-w">
+                                <li class="m-r-10">
+                                    <input class="checkbox-color-filter" id="color-filter1" type="checkbox" name="color" onclick='this.form.submit()' value="white" <?php echo isset($_GET['color']) ? $_GET['color'] : '' ?>>
+                                    <label class="color-filter color-filter1" for="color-filter1"></label>
+                                </li>
 
-                    <div class="filter-color p-t-22 p-b-50 bo3">
-                        <div class="m-text15 p-b-12">
+                                <li class="m-r-10">
+                                    <input class="checkbox-color-filter" id="color-filter2" type="checkbox" name="color" onclick='this.form.submit()' value="cream" <?php echo isset($_GET['color']) ? $_GET['color'] : '' ?>>
+                                    <label class="color-filter color-filter2" for="color-filter2"></label>
+                                </li>
 
+                                <li class="m-r-10">
+                                    <input class="checkbox-color-filter" id="color-filter3" type="checkbox" name="color" onclick='this.form.submit()' value="milktea" <?php echo isset($_GET['color']) ? $_GET['color'] : '' ?>>
+                                    <label class="color-filter color-filter3" for="color-filter3"></label>
+                                </li>
+
+                                <li class="m-r-10">
+                                    <input class="checkbox-color-filter" id="color-filter4" type="checkbox" name="color" onclick='this.form.submit()' value="yellow" <?php echo isset($_GET['color']) ? $_GET['color'] : '' ?>>
+                                    <label class="color-filter color-filter4" for="color-filter4"></label>
+                                </li>
+
+                                <li class="m-r-10">
+                                    <input class="checkbox-color-filter" id="color-filter5" type="checkbox" name="color" onclick='this.form.submit()' value="green" <?php echo isset($_GET['color']) ? $_GET['color'] : '' ?>>
+                                    <label class="color-filter color-filter5" for="color-filter5"></label>
+                                </li>
+
+                                <li class="m-r-10">
+                                    <input class="checkbox-color-filter" id="color-filter6" type="checkbox" name="color" onclick='this.form.submit()' value="darkgreen" <?php echo isset($_GET['color']) ? $_GET['color'] : '' ?>>
+                                    <label class="color-filter color-filter6" for="color-filter6"></label>
+                                </li>
+
+                                <li class="m-r-10">
+                                    <input class="checkbox-color-filter" id="color-filter7" type="checkbox" name="color" onclick='this.form.submit()' value="mint"<?php echo isset($_GET['color']) ? $_GET['color'] : '' ?>>
+                                    <label class="color-filter color-filter7" for="color-filter7"></label>
+                                </li>
+                                <li class="m-r-10">
+                                    <input class="checkbox-color-filter" id="color-filter8" type="checkbox" name="color" onclick='this.form.submit()' value="sky" <?php echo isset($_GET['color']) ? $_GET['color'] : '' ?>>
+                                    <label class="color-filter color-filter8" for="color-filter8"></label>
+                                </li>
+                                <li class="m-r-10">
+                                    <input class="checkbox-color-filter" id="color-filter9" type="checkbox" name="color" onclick='this.form.submit()' value="orange" <?php echo isset($_GET['color']) ? $_GET['color'] : '' ?>>
+                                    <label class="color-filter color-filter9" for="color-filter9"></label>
+                                </li>
+                                <li class="m-r-10">
+                                    <input class="checkbox-color-filter" id="color-filter10" type="checkbox" name="color" onclick='this.form.submit()' value="lightpink" <?php echo isset($_GET['color']) ? $_GET['color'] : '' ?>>
+                                    <label class="color-filter color-filter10" for="color-filter10"></label>
+                                </li>
+                                <li class="m-r-10">
+                                    <input class="checkbox-color-filter" id="color-filter11" type="checkbox" name="color" onclick='this.form.submit()' value="pink" <?php echo isset($_GET['color']) ? $_GET['color'] : '' ?>>
+                                    <label class="color-filter color-filter11" for="color-filter11"></label>
+                                </li>
+                                <li class="m-r-10">
+                                    <input class="checkbox-color-filter" id="color-filter12" type="checkbox" name="color" onclick='this.form.submit()' value="darkpink" <?php echo isset($_GET['color']) ? $_GET['color'] : '' ?>>
+                                    <label class="color-filter color-filter12" for="color-filter12"></label>
+                                </li>
+                                <li class="m-r-10">
+                                    <input class="checkbox-color-filter" id="color-filter13" type="checkbox" name="color" onclick='this.form.submit()' value="red" <?php echo isset($_GET['color']) ? $_GET['color'] : '' ?>>
+                                    <label class="color-filter color-filter13" for="color-filter13"></label>
+                                </li>
+                                <li class="m-r-10">
+                                    <input class="checkbox-color-filter" id="color-filter14" type="checkbox" name="color" onclick='this.form.submit()' value="purple" <?php echo isset($_GET['color']) ? $_GET['color'] : '' ?>>
+                                    <label class="color-filter color-filter14" for="color-filter14"></label>
+                                </li>
+                                <li class="m-r-10">
+                                    <input class="checkbox-color-filter" id="color-filter15" type="checkbox" name="color" onclick='this.form.submit()' value="lightgray" <?php echo isset($_GET['color']) ? $_GET['color'] : '' ?>>
+                                    <label class="color-filter color-filter15" for="color-filter15"></label>
+                                </li>
+                                <li class="m-r-10">
+                                    <input class="checkbox-color-filter" id="color-filter16" type="checkbox" name="color" onclick='this.form.submit()' value="darkgray" <?php echo isset($_GET['color']) ? $_GET['color'] : '' ?>>
+                                    <label class="color-filter color-filter16" for="color-filter16"></label>
+                                </li>
+                                <li class="m-r-10">
+                                    <input class="checkbox-color-filter" id="color-filter17" type="checkbox" name="color" onclick='this.form.submit()' value="brown" <?php echo isset($_GET['color']) ? $_GET['color'] : '' ?>>
+                                    <label class="color-filter color-filter17" for="color-filter17"></label>
+                                </li>
+                                <li class="m-r-10">
+                                    <input class="checkbox-color-filter" id="color-filter18" type="checkbox" name="color" onclick='this.form.submit()' value="black" <?php echo isset($_GET['color']) ? $_GET['color'] : '' ?>>
+                                    <label class="color-filter color-filter18" for="color-filter18"></label>
+                                </li>
+                                <li class="m-r-10">
+                                    <input class="checkbox-color-filter" id="color-filter19" type="checkbox" name="color" onclick='this.form.submit()' value="all" <?php echo isset($_GET['color']) ? $_GET['color'] : '' ?>>
+                                    <label class="color-filter color-filter19" for="color-filter19">ALL</label>
+                                </li>
+                            </ul>
+                            <!--                        <input type="hidden" name="color" value="--><?php //if(isset($_GET['search'])){echo $_GET['search'];}else{echo '';}?><!--">-->
+                            <!--                    </form>-->
                         </div>
 
-                        <ul class="flex-w">
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter1" type="checkbox" name="color-filter1">
-                                <label class="color-filter color-filter1" for="color-filter1"></label>
-                            </li>
-
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter2" type="checkbox" name="color-filter2">
-                                <label class="color-filter color-filter2" for="color-filter2"></label>
-                            </li>
-
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter3" type="checkbox" name="color-filter3">
-                                <label class="color-filter color-filter3" for="color-filter3"></label>
-                            </li>
-
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter4" type="checkbox" name="color-filter4">
-                                <label class="color-filter color-filter4" for="color-filter4"></label>
-                            </li>
-
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter5" type="checkbox" name="color-filter5">
-                                <label class="color-filter color-filter5" for="color-filter5"></label>
-                            </li>
-
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter6" type="checkbox" name="color-filter6">
-                                <label class="color-filter color-filter6" for="color-filter6"></label>
-                            </li>
-
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter7" type="checkbox" name="color-filter7">
-                                <label class="color-filter color-filter7" for="color-filter7"></label>
-                            </li>
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter8" type="checkbox" name="color-filter8">
-                                <label class="color-filter color-filter8" for="color-filter8"></label>
-                            </li>
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter9" type="checkbox" name="color-filter9">
-                                <label class="color-filter color-filter9" for="color-filter9"></label>
-                            </li>
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter10" type="checkbox" name="color-filter10">
-                                <label class="color-filter color-filter10" for="color-filter10"></label>
-                            </li>
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter11" type="checkbox" name="color-filter11">
-                                <label class="color-filter color-filter11" for="color-filter11"></label>
-                            </li>
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter12" type="checkbox" name="color-filter12">
-                                <label class="color-filter color-filter12" for="color-filter12"></label>
-                            </li>
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter13" type="checkbox" name="color-filter13">
-                                <label class="color-filter color-filter13" for="color-filter13"></label>
-                            </li>
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter14" type="checkbox" name="color-filter14">
-                                <label class="color-filter color-filter14" for="color-filter14"></label>
-                            </li>
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter15" type="checkbox" name="color-filter15">
-                                <label class="color-filter color-filter15" for="color-filter15"></label>
-                            </li>
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter16" type="checkbox" name="color-filter16">
-                                <label class="color-filter color-filter16" for="color-filter16"></label>
-                            </li>
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter17" type="checkbox" name="color-filter17">
-                                <label class="color-filter color-filter17" for="color-filter17"></label>
-                            </li>
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter18" type="checkbox" name="color-filter18">
-                                <label class="color-filter color-filter18" for="color-filter18"></label>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="search-product pos-relative bo4 of-hidden">
-                        <input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Search Products...">
-
-                        <button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
-                            <i class="fs-12 fa fa-search" aria-hidden="true"></i>
-                        </button>
-                    </div>
+                        <!--                    <form action="" method="get">-->
+                        <div class="search-product pos-relative bo4 of-hidden">
+                            <!--                        <input type="hidden" name="color" value="--><?php //if(isset($_GET['color'])){echo $_GET['color'];}else{echo 'all';}?><!--">-->
+                            <input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search" placeholder="Search Products..." value="<?php if(isset($_GET['search'])){echo $_GET['search'];}else{echo '';}?>">
+                            <button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4" type="submit">
+                                <i class="fs-12 fa fa-search" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
 
