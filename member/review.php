@@ -289,8 +289,6 @@ $resultReview2 = mysqli_query($con,$sqlReview2);
 </header>
 
 
-<!-- Banner -->
-
 
 <!-- Product -->
 <section class="bgwhite p-t-55 p-b-65">
@@ -309,7 +307,7 @@ $resultReview2 = mysqli_query($con,$sqlReview2);
                     $sumScore+=$sc2;
                     $iScore++;
                 }
-                $totalScore=$sumScore/$iScore;
+                $totalScore=number_format(($sumScore/$iScore),1);
 
 
                 ?>
