@@ -19,11 +19,11 @@ else{
 
 
 
-if(isset($_GET)){
+if(isset($_POST) ){
     //all color
-        if ($_GET['color'] == 'all') {
-            if (isset($_GET['search'])) {
-                if ($_GET['search'] == '') {
+    if ($_POST['color'] == 'all') {
+            if (isset($_POST['search'])) {
+                if ($_POST['search'] == '') {
                     $sql2 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC LIMIT $pageshow,9";
                     $result2 = mysqli_query($con, $sql2);
 
@@ -33,10 +33,10 @@ if(isset($_GET)){
                     $cal = $all_pd_count / 9;
                     $page_of_pd = ceil($cal);
                 } else {
-                    $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.name LIKE '%" . $_GET['search'] . "%' ORDER BY dateCreate DESC LIMIT $pageshow,9";
+                    $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.name LIKE '%" . $_POST['search'] . "%' ORDER BY dateCreate DESC LIMIT $pageshow,9";
                     $result2 = mysqli_query($con, $sql2);
 
-                    $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.name LIKE '%" . $_GET['search'] . "%' ORDER BY dateCreate DESC";
+                    $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.name LIKE '%" . $_POST['search'] . "%' ORDER BY dateCreate DESC";
                     $result3 = mysqli_query($con, $sql3);
                     $all_pd_count = mysqli_num_rows($result3);
                     $cal = $all_pd_count / 9;
@@ -58,9 +58,9 @@ if(isset($_GET)){
         }
     // other color
     else {
-        if ($_GET['color'] == '' || !isset($_GET['color'] )) {
-            if (isset($_GET['search'])) {
-                if ($_GET['search'] == '') {
+        if ($_POST['color'] == '' || !isset($_POST['color'] )) {
+            if (isset($_POST['search'])) {
+                if ($_POST['search'] == '') {
                     $sql2 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC LIMIT $pageshow,9";
                     $result2 = mysqli_query($con, $sql2);
 
@@ -70,10 +70,10 @@ if(isset($_GET)){
                     $cal = $all_pd_count / 9;
                     $page_of_pd = ceil($cal);
                 } else {
-                    $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.name LIKE '%".$_GET['search']."%' ORDER BY dateCreate DESC LIMIT $pageshow,9";
+                    $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.name LIKE '%".$_POST['search']."%' ORDER BY dateCreate DESC LIMIT $pageshow,9";
                     $result2 = mysqli_query($con, $sql2);
 
-                    $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.name LIKE '%".$_GET['search']."%' ORDER BY dateCreate DESC";
+                    $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.name LIKE '%".$_POST['search']."%' ORDER BY dateCreate DESC";
                     $result3 = mysqli_query($con, $sql3);
                     $all_pd_count = mysqli_num_rows($result3);
                     $cal = $all_pd_count / 9;
@@ -91,21 +91,21 @@ if(isset($_GET)){
                 $page_of_pd = ceil($cal);
             }
         } else {
-            if (isset($_GET['search'])) {
-                if ($_GET['search'] == '' ) {
-                    $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.color='".$_GET['color']."' ORDER BY dateCreate DESC LIMIT $pageshow,9";
+            if (isset($_POST['search'])) {
+                if ($_POST['search'] == '' ) {
+                    $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.color='".$_POST['color']."' ORDER BY dateCreate DESC LIMIT $pageshow,9";
                     $result2 = mysqli_query($con, $sql2);
 
-                    $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.color='".$_GET['color']."' ORDER BY dateCreate DESC";
+                    $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.color='".$_POST['color']."' ORDER BY dateCreate DESC";
                     $result3 = mysqli_query($con, $sql3);
                     $all_pd_count = mysqli_num_rows($result3);
                     $cal = $all_pd_count / 9;
                     $page_of_pd = ceil($cal);
                 } else {
-                    $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.color='".$_GET['color']."' AND product.name LIKE '%".$_GET['search']."%' ORDER BY dateCreate DESC LIMIT $pageshow,9";
+                    $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.color='".$_POST['color']."' AND product.name LIKE '%".$_POST['search']."%' ORDER BY dateCreate DESC LIMIT $pageshow,9";
                     $result2 = mysqli_query($con, $sql2);
 
-                    $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.color='".$_GET['color']."' AND product.name LIKE '%".$_GET['search']."%' ORDER BY dateCreate DESC";
+                    $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.color='".$_POST['color']."' AND product.name LIKE '%".$_POST['search']."%' ORDER BY dateCreate DESC";
                     $result3 = mysqli_query($con, $sql3);
                     $all_pd_count = mysqli_num_rows($result3);
                     $cal = $all_pd_count / 9;
@@ -113,10 +113,10 @@ if(isset($_GET)){
                 }
 
             } else {
-                $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.color='".$_GET['color']."' ORDER BY dateCreate DESC LIMIT $pageshow,9";
+                $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.color='".$_POST['color']."' ORDER BY dateCreate DESC LIMIT $pageshow,9";
                 $result2 = mysqli_query($con, $sql2);
 
-                $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.color='".$_GET['color']."' ORDER BY dateCreate DESC";
+                $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.color='".$_POST['color']."' ORDER BY dateCreate DESC";
                 $result3 = mysqli_query($con, $sql3);
                 $all_pd_count = mysqli_num_rows($result3);
                 $cal = $all_pd_count / 9;
@@ -413,7 +413,7 @@ else{
                     </h4>
 
 
-                    <form action="" method="get">
+                    <form action="" method="post">
                     <div class="filter-color p-t-22 p-b-50 bo3">
                         <div class="m-text15 p-b-12">
                         </div>
