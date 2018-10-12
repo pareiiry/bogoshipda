@@ -113,7 +113,7 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
                         </li>
 
                         <li>
-                            <a href="../product.php">สินค้า</a>
+                            <a href="../product.php?color=all">สินค้า</a>
                         </li>
 
                         <li>
@@ -328,21 +328,24 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
     <table>
         <tr>
             <th>รูปแบบการส่ง/จำนวน</th>
-            <th>1-3</th>
-            <th>4 ชิ้นขึ้นไป </th>
+            <th>1-4</th>
+            <th>5 ชิ้นขึ้นไป </th>
 
         </tr>
         <tr>
             <td>ลงทะเบียน</td>
             <td>30 บาท</td>
             <td>+ เพิ่มชิ้นละ 5 บาท</td>
-
         </tr>
         <tr>
             <td>EMS</td>
             <td>50 บาท</td>
             <td>+ เพิ่มชิ้นละ 5 บาท</td>
-
+        </tr>
+        <tr>
+            <td>Kerry</td>
+            <td>50 บาท</td>
+            <td>+ เพิ่มชิ้นละ 5 บาท</td>
         </tr>
     </table>
 </div>

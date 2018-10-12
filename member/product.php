@@ -227,7 +227,7 @@ else{
                         </li>
 
                         <li class="sale-noti">
-                            <a href="product.php">สินค้า</a>
+                            <a href="product.php?color=all">สินค้า</a>
                         </li>
 
                         <li>

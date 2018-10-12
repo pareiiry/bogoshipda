@@ -113,7 +113,7 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
                         </li>
 
                         <li>
-                            <a href="../product.php">สินค้า</a>
+                            <a href="../product.php?color=all">สินค้า</a>
                         </li>
 
                         <li>

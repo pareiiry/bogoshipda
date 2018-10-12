@@ -99,7 +99,7 @@ $result = mysqli_query($con,$sql);
                         </li>
 
                         <li>
-                            <a href="product.php">สินค้า</a>
+                            <a href="product.php?color=all">สินค้า</a>
                         </li>
 
                         <li>

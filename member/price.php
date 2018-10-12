@@ -58,7 +58,7 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
     
     <style>
         table, tr, td, th{
-            margin-left: 250px;
+            margin-left: 35%;
             border: 1px solid #ddd;
             text-align: center;
             padding: 10px 20px;
@@ -111,7 +111,7 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
                         </li>
 
                         <li>
-                            <a href="../product.php">สินค้า</a>
+                            <a href="../product.php?color=all">สินค้า</a>
                         </li>
 
                         <li>
@@ -323,7 +323,16 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
     <h3 class="panel-title">ตารางราคา</h3>
 </div>
 <div class="panel-body">
- <img width="100%" src="../images/price.jpg" />
+    <table>
+        <tr>
+            <th>1 ด้าน</th>
+            <th>หน้า - หลัง</th>
+        </tr>
+        <tr>
+            <td>100 บาท</td>
+            <td>120 บาท</td>
+        </tr>
+    </table>
 </div>
     </div>
     </div>

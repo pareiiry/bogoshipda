@@ -81,7 +81,7 @@ $result2 = mysqli_query($con,$sql2);
                         </li>
 
                         <li>
-                            <a href="product.php">สินค้า</a>
+                            <a href="product.php?color=all">สินค้า</a>
                         </li>
 
                         <li>

@@ -108,7 +108,7 @@ $resultReview2 = mysqli_query($con,$sqlReview2);
                         </li>
 
                         <li>
-                            <a href="product.php">สินค้า</a>
+                            <a href="product.php?color=all">สินค้า</a>
                         </li>
 
                         <li class="sale-noti">
