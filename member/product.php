@@ -541,6 +541,7 @@ else{
 
                         <!--                    <form action="" method="get">-->
                         <div class="search-product pos-relative bo4 of-hidden">
+                            <input type="hidden" name="color" value="<?php echo isset($_GET['color']) ? $_GET['color'] : 'all' ?>">
                             <!--                        <input type="hidden" name="color" value="--><?php //if(isset($_GET['color'])){echo $_GET['color'];}else{echo 'all';}?><!--">-->
                             <input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search" placeholder="Search Products..." value="<?php if(isset($_GET['search'])){echo $_GET['search'];}else{echo '';}?>">
                             <button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4" type="submit">
