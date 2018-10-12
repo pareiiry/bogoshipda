@@ -271,7 +271,7 @@ $resultReview2 = mysqli_query($con,$sqlReview2);
                     $sumScore+=$sc2;
                     $iScore++;
                 }
-                $totalScore=$sumScore/$iScore;
+                $totalScore=number_format(($sumScore/$iScore),1);
 
                 ?>
                 คะแนนของร้าน
