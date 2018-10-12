@@ -325,10 +325,11 @@ $resultReview2 = mysqli_query($con,$sqlReview2);
                         for($i=0;$i<$space;$i++){
                             echo "<span class=\"fa fa-star-o\" ></span>";
                         }
+                        $dateReview = date_format(date_create($rowReview['dateTime']),'d-m-Y H:i:s');
                         echo"
                                      </div>
                     <div class=\"rating-comment block2-name dis-block s-text3 p-b-5\">$rowReview[comment]</div>
-                    <div class=\"rating-time block2-name dis-block s-text3 p-b-5\">$rowReview[dateTime]</div>
+                    <div class=\"rating-time block2-name dis-block s-text3 p-b-5\">$dateReview</div>
                                 
                             </div>
                         </div>
