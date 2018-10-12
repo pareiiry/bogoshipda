@@ -17,9 +17,13 @@ else{
 }
 
 
+if(!isset($_POST)){
+    $_POST['color']='';
+    $_POST['search']='';
+}
 
 
-if(isset($_POST) ){
+if(isset($_POST)){
     //all color
     if ($_POST['color'] == 'all') {
             if (isset($_POST['search'])) {
