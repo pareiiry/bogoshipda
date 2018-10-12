@@ -32,7 +32,19 @@ else{
 }
 
 
-if(isset($_GET)){
+if(!isset($_GET)){
+    $sql2 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC LIMIT $pageshow,9";
+    $result2 = mysqli_query($con,$sql2);
+
+    $sql3 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC";
+    $result3 = mysqli_query($con,$sql3);
+    $all_pd_count = mysqli_num_rows($result3);
+    $cal=$all_pd_count/9;
+    $page_of_pd = ceil($cal);
+
+}
+//no search
+else{
     //all color
     if ($_GET['color'] == 'all') {
         if (isset($_GET['search'])) {
@@ -138,18 +150,6 @@ if(isset($_GET)){
 
         }
     }
-
-}
-//no search
-else{
-    $sql2 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC LIMIT $pageshow,9";
-    $result2 = mysqli_query($con,$sql2);
-
-    $sql3 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC";
-    $result3 = mysqli_query($con,$sql3);
-    $all_pd_count = mysqli_num_rows($result3);
-    $cal=$all_pd_count/9;
-    $page_of_pd = ceil($cal);
 }
 ?>
 <!DOCTYPE html>
