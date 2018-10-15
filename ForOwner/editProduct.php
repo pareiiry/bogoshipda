@@ -316,7 +316,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                                     }
 
                                 </script>
-                                <button class='form-control btn btn-info' type="submit">อัพโหลดรูปภาพ</button>
+                                <button class='form-control btn btn-info' type="submit" style="width: 85%; ">อัพโหลดรูปภาพ</button>
                             </form>
                         </div>
 
