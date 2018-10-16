@@ -702,6 +702,30 @@ $result2 = mysqli_query($con,$sql2);
     })();
 
 </script>
+
+<script src="../js/html2canvas.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(document).on('click', '#addToTheBag', function() {
+            html2canvas([document.getElementById('shirtDiv')], {
+                onrendered: function (canvas) {
+                    var imagedata = canvas.toDataURL('image/png');
+                    var imgdata = imagedata.replace(/^data:image\/(png|jpg);base64,/, "");
+                    //ajax call to save image inside folder
+                    $.ajax({
+                        url: 'save_image.php',
+                        data: {imgdata:imgdata},
+                        type: 'post',
+                        success: function (response) {
+                            console.log(response);
+                            //$('#image_id img').attr('src', response);
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>
 <script src="../js/main.js"></script>
 </body>
 </html>
