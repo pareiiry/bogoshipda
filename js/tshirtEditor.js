@@ -10,6 +10,7 @@ var line5;
 var line6;
 var line7;
 var line8;
+var f=1;
  	$(document).ready(function() {
 		//setup front side canvas 
  		canvas = new fabric.Canvas('tcanvas', {
@@ -255,27 +256,47 @@ var line8;
 	
 		//canvas.add(new fabric.fabric.Object({hasBorders:true,hasControls:false,hasRotatingPoint:false,selectable:false,type:'rect'}));
 	   $("#drawingArea").hover(
-	        function() { 	        	
-	        	 canvas.add(line1);
-		         canvas.add(line2);
-		         canvas.add(line3);
-		         canvas.add(line4);
-                canvas.add(line5);
-                canvas.add(line6);
-                canvas.add(line7);
-                canvas.add(line8);
-		         canvas.renderAll();
+	        function() {
+                if (f===2) {
+                    canvas.add(line1);
+                    canvas.add(line2);
+                    canvas.add(line3);
+                    canvas.add(line4);
+
+                    canvas.add(line5);
+                    canvas.add(line6);
+                    canvas.add(line7);
+                    canvas.add(line8);
+                }
+                else {
+                    canvas.add(line1);
+                    canvas.add(line2);
+                    canvas.add(line3);
+                    canvas.add(line4);
+
+                }
+                canvas.renderAll();
 	        },
-	        function() {	        	
+	        function() {
+                if (f===2) {
 	        	 canvas.remove(line1);
 		         canvas.remove(line2);
 		         canvas.remove(line3);
 		         canvas.remove(line4);
+
                 canvas.remove(line5);
                 canvas.remove(line6);
                 canvas.remove(line7);
                 canvas.remove(line8);
-		         canvas.renderAll();
+                }
+                else {
+                    canvas.remove(line1);
+                    canvas.remove(line2);
+                    canvas.remove(line3);
+                    canvas.remove(line4);
+
+                }
+                canvas.renderAll();
 	        }
 	    );
 	   
@@ -296,6 +317,7 @@ var line8;
 		   function() {
 			   	if ($(this).attr("data-original-title") == "2 ด้าน") {
 			   		$(this).attr('data-original-title', '1 ด้าน');
+					f=1;
 			        $("#tshirtFacing").attr("src","img/strap1.png");
 			        a = JSON.stringify(canvas);
 			        canvas.clear();
@@ -309,6 +331,7 @@ var line8;
 			        
 			    } else {
 			    	$(this).attr('data-original-title', '2 ด้าน');
+			    	f=2;
 			    	$("#tshirtFacing").attr("src","img/strap2.png");
 			    	b = JSON.stringify(canvas);
 			    	canvas.clear();
@@ -330,6 +353,7 @@ var line8;
 	   line2 = new fabric.Line([617,57,617,142], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
 	   line3 = new fabric.Line([110,57,110,141], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
 	   line4 = new fabric.Line([110,141,617,141], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+
         line5 = new fabric.Line([110,257,617,257], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
         line6 = new fabric.Line([617,257,617,342], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
         line7 = new fabric.Line([110,257,110,341], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
