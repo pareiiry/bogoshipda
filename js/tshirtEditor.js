@@ -6,6 +6,10 @@ var line1;
 var line2;
 var line3;
 var line4;
+var line5;
+var line6;
+var line7;
+var line8;
  	$(document).ready(function() {
 		//setup front side canvas 
  		canvas = new fabric.Canvas('tcanvas', {
@@ -57,8 +61,8 @@ var line4;
 		document.getElementById('add-text').onclick = function() {
 			var text = $("#text-string").val();
 		    var textSample = new fabric.Text(text, {
-		      left: fabric.util.getRandomInt(50, 500),
-		      top: fabric.util.getRandomInt(20, 90),
+		      left: fabric.util.getRandomInt(250, 500),
+		      top: fabric.util.getRandomInt(70, 130),
 		      fontFamily: 'helvetica',
 		      angle: 0,
 		      fill: '#000000',
@@ -83,8 +87,8 @@ var line4;
 	  		var el = e.target;
 	  		/*temp code*/
 	  		var offset = 50;
-	        var left = fabric.util.getRandomInt(0 + offset, 500 - offset);
-	        var top = fabric.util.getRandomInt(0 + offset, 100 - offset);
+	        var left = fabric.util.getRandomInt(200 + offset, 500 - offset);
+	        var top = fabric.util.getRandomInt(70 + offset, 130 - offset);
 	        var angle = fabric.util.getRandomInt(-20, 40);
 	        var width = fabric.util.getRandomInt(30, 50);
 	        var opacity = (function(min, max){ return Math.random() * (max - min) + min; })(0.5, 1);
@@ -231,6 +235,7 @@ var line4;
 				//
 			}
 		});
+
 		
 		$('#text-strokecolor').miniColors({
 			change: function(hex, rgb) {
@@ -254,7 +259,11 @@ var line4;
 	        	 canvas.add(line1);
 		         canvas.add(line2);
 		         canvas.add(line3);
-		         canvas.add(line4); 
+		         canvas.add(line4);
+                canvas.add(line5);
+                canvas.add(line6);
+                canvas.add(line7);
+                canvas.add(line8);
 		         canvas.renderAll();
 	        },
 	        function() {	        	
@@ -262,6 +271,10 @@ var line4;
 		         canvas.remove(line2);
 		         canvas.remove(line3);
 		         canvas.remove(line4);
+                canvas.remove(line5);
+                canvas.remove(line6);
+                canvas.remove(line7);
+                canvas.remove(line8);
 		         canvas.renderAll();
 	        }
 	    );
@@ -270,12 +283,20 @@ var line4;
 		   var color = $(this).css("background-color");
 		   document.getElementById("shirtDiv").style.backgroundColor = color;		   
 	   });
-	   
-	   $('#flip').click(
-		   function() {			   
-			   	if ($(this).attr("data-original-title") == "แสดงด้านหลัง") {
-			   		$(this).attr('data-original-title', 'แสดงด้านหน้า');
-			        $("#tshirtFacing").attr("src","img/strap.png");
+
+        $("#font-family").change(function() {
+            var activeObject = canvas.getActiveObject();
+            if (activeObject && activeObject.type === 'text') {
+                activeObject.fontFamily = this.value;
+                canvas.renderAll();
+            }
+        });
+
+        $('#strap').change(
+		   function() {
+			   	if ($(this).attr("data-original-title") == "2 ด้าน") {
+			   		$(this).attr('data-original-title', '1 ด้าน');
+			        $("#tshirtFacing").attr("src","img/strap1.png");
 			        a = JSON.stringify(canvas);
 			        canvas.clear();
 			        try
@@ -287,14 +308,14 @@ var line4;
 			        {}
 			        
 			    } else {
-			    	$(this).attr('data-original-title', 'แสดงด้านหลัง');
-			    	$("#tshirtFacing").attr("src","img/strap.png");
+			    	$(this).attr('data-original-title', '2 ด้าน');
+			    	$("#tshirtFacing").attr("src","img/strap2.png");
 			    	b = JSON.stringify(canvas);
 			    	canvas.clear();
 			    	try
 			        {
 			           var json = JSON.parse(a);
-			           canvas.loadFromJSON(a);			           
+			           canvas.loadFromJSON(a);
 			        }
 			        catch(e)
 			        {}
@@ -305,11 +326,15 @@ var line4;
 			    },200);			   	
         });	   
 	   $(".clearfix button,a").tooltip();
-	   line1 = new fabric.Line([0,10,517,10], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
-	   line2 = new fabric.Line([517,10,517,93], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
-	   line3 = new fabric.Line([0,10,0,93], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
-	   line4 = new fabric.Line([0,93,517,93], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
-	 });//doc ready
+	   line1 = new fabric.Line([110,57,617,57], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+	   line2 = new fabric.Line([617,57,617,142], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+	   line3 = new fabric.Line([110,57,110,141], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+	   line4 = new fabric.Line([110,141,617,141], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+        line5 = new fabric.Line([110,257,617,257], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+        line6 = new fabric.Line([617,257,617,342], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+        line7 = new fabric.Line([110,257,110,341], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+        line8 = new fabric.Line([110,341,617,341], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+ 	});//doc ready
 	 
 	 
 	 function getRandomNum(min, max) {

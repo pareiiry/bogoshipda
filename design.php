@@ -92,7 +92,17 @@ $result2 = mysqli_query($con,$sql2);
             width: 20px;
             height: 20px;
         }
-
+        .text-fontcolor {
+            border: 1px solid #CCC;
+            margin: 2px;
+            zoom: 1;
+            vertical-align: top;
+            display: inline-block;
+            cursor: pointer;
+            overflow: hidden;
+            width: 20px;
+            height: 20px;
+        }
         .rotate {
             -webkit-transform:rotate(90deg);
             -moz-transform:rotate(90deg);
@@ -330,7 +340,15 @@ $result2 = mysqli_query($con,$sql2);
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab1">
-
+                            <div class="well">
+                                <!--					      	<h3>Tee Styles</h3>-->
+                                <!--						      <p>-->
+                                <select id="strap">
+                                    <option value="1" selected="selected">1 ด้าน</option>
+                                    <option value="2">2 ด้าน</option>
+                                </select>
+                                <!--						      </p>-->
+                            </div>
                             <div class="well">
                                 <ul class="nav">
                                     <li class="color-preview" title="ขาว" style="background-color:#ffffff;"></li>
@@ -361,6 +379,7 @@ $result2 = mysqli_query($con,$sql2);
                                     <button id="add-text" class="btn" title="Add text"><i class="fa fa-check" aria-hidden="true"></i>
                                         </i></button>
                                     <hr>
+
                                 </div>
                                 <div id="avatarlist">
                                     <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/astro1-b.png">
@@ -413,7 +432,7 @@ $result2 = mysqli_query($con,$sql2);
                     </div>
                 </div>
             </div>
-            <div class="span9">
+            <div class="span9" style="height: 600px">
                 <div align="center" style="min-height: 32px;">
                     <div class="clearfix">
                         <div class="btn-group inline pull-left" id="texteditor" style="display:block">
@@ -451,9 +470,6 @@ $result2 = mysqli_query($con,$sql2);
                                 <button class="btn" id="send-to-back" title="Send to Back">
                                     <i class="fa fa-chevron-down" aria-hidden="true"></i>
                                 </button>
-                                <button id="flip" type="button" class="btn" title="Show Back View">
-                                    <i class="fa fa-refresh" aria-hidden="true"></i>
-                                </button>
                                 <button id="remove-selected" class="btn" title="Delete selected item">
                                     <i class="fa fa-trash" aria-hidden="true"></i></button>
                             </div>
@@ -461,10 +477,10 @@ $result2 = mysqli_query($con,$sql2);
                     </div>
                 </div>
                 <!--	EDITOR      -->
-                <div id="shirtDiv" class="page" style="width: 870px; height: 300px; position: relative; background-color: rgb(255, 255, 255);">
-                    <img id="tshirtFacing" src="img/strap.png"></img>
-                    <div id="drawingArea" style="position: absolute;top: 100px;left: 250px;z-index: 10;width: 595px;height: 83px;">
-                        <canvas id="tcanvas" width=520 height="110" class="hover" style="-webkit-user-select: none;"></canvas>
+                <div id="shirtDiv" class="page" style="width: 870px; height: 500px; position: relative; background-color: rgb(255, 255, 255);">
+                    <img id="tshirtFacing" src="img/strap1.png"></img>
+                    <div id="drawingArea" style="position: absolute;top: 50px;left: 150px;z-index: 10;width: 595px;height: 83px;">
+                        <canvas id="tcanvas" width=700 height="400" class="hover" style="-webkit-user-select: none;"></canvas>
                     </div>
                 </div>
                 <!--					<div id="shirtBack" class="page" style="width: 530px; height: 630px; position: relative; background-color: rgb(255, 255, 255); display:none;">-->
