@@ -493,7 +493,7 @@ $result2 = mysqli_query($con,$sql2);
                     </div>
                 </div>
             </div>
-            <div class="span9" style="height: 600px">
+            <div class="span7" style="height: 600px">
                 <div align="center" style="min-height: 32px;">
                     <div class="clearfix">
                         <div class="btn-group inline pull-left" id="texteditor" style="display:block">
@@ -538,10 +538,10 @@ $result2 = mysqli_query($con,$sql2);
                     </div>
                 </div>
                 <!--	EDITOR      -->
-                <div id="shirtDiv" class="page" style="width: 870px; height: 500px; position: relative; background-color: rgb(255, 255, 255);">
+                <div id="shirtDiv" class="page" style="width: 670px; height: 500px; position: relative; background-color: rgb(255, 255, 255);">
                     <img id="tshirtFacing" src="../img/strap1.png">
-                    <div id="drawingArea" style="position: absolute;top: 50px;left: 150px;z-index: 10;width: 595px;height: 83px;">
-                        <canvas id="tcanvas" width=700 height="400" class="hover" style="-webkit-user-select: none;"></canvas>
+                    <div id="drawingArea" style="position: absolute;top: 50px;left: 155px;z-index: 10;width: 595px;height: 83px;">
+                        <canvas id="tcanvas" width=530 height="400" class="hover" style="-webkit-user-select: none;"></canvas>
                     </div>
                 </div>
                 <!--					<div id="shirtBack" class="page" style="width: 530px; height: 630px; position: relative; background-color: rgb(255, 255, 255); display:none;">-->
@@ -554,6 +554,12 @@ $result2 = mysqli_query($con,$sql2);
                 <!--	/EDITOR		-->
             </div>
 
+            <div class="span2">
+                <div class="well">
+                    <h3 align="center">฿</h3>
+                    <button type="button" class="btn btn-large btn-block btn-primary" name="addToTheBag" id="addToTheBag">เพิ่มลงตะกร้า</button>
+                </div>
+            </div>
 
         </div>
 

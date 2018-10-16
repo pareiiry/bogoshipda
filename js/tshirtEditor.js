@@ -62,7 +62,7 @@ var f=1;
 		document.getElementById('add-text').onclick = function() {
 			var text = $("#text-string").val();
 		    var textSample = new fabric.Text(text, {
-		      left: fabric.util.getRandomInt(250, 500),
+		      left: fabric.util.getRandomInt(100, 300),
 		      top: fabric.util.getRandomInt(70, 130),
 		      fontFamily: 'helvetica',
 		      angle: 0,
@@ -88,7 +88,7 @@ var f=1;
 	  		var el = e.target;
 	  		/*temp code*/
 	  		var offset = 50;
-	        var left = fabric.util.getRandomInt(200 + offset, 500 - offset);
+	        var left = fabric.util.getRandomInt(100 + offset, 300 - offset);
 	        var top = fabric.util.getRandomInt(70 + offset, 130 - offset);
 	        var angle = fabric.util.getRandomInt(-20, 40);
 	        var width = fabric.util.getRandomInt(30, 50);
@@ -372,15 +372,15 @@ var f=1;
 			    },200);			   	
         });	   
 	   $(".clearfix button,a").tooltip();
-	   line1 = new fabric.Line([110,57,617,57], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
-	   line2 = new fabric.Line([617,57,617,142], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
-	   line3 = new fabric.Line([110,57,110,141], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
-	   line4 = new fabric.Line([110,141,617,141], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+	   line1 = new fabric.Line([0,57,512,57], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+	   line2 = new fabric.Line([512,57,512,142], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+	   line3 = new fabric.Line([0,57,0,141], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+	   line4 = new fabric.Line([0,141,512,141], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
 
-        line5 = new fabric.Line([110,257,617,257], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
-        line6 = new fabric.Line([617,257,617,342], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
-        line7 = new fabric.Line([110,257,110,341], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
-        line8 = new fabric.Line([110,341,617,341], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+        line5 = new fabric.Line([0,257,512,257], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+        line6 = new fabric.Line([512,257,512,342], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+        line7 = new fabric.Line([0,257,0,341], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+        line8 = new fabric.Line([0,341,512,341], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
  	});//doc ready
 	 
 	 
