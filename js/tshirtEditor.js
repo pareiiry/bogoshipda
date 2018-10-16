@@ -237,7 +237,30 @@ var f=1;
 			}
 		});
 
-		
+        $( "#imgInp" ).change(function() {
+
+            var e = $(this);
+            var reader = new FileReader();
+            reader.onload = function (event){
+                var imgObj = new Image();
+                imgObj.src = event.target.result;
+                imgObj.onload = function () {
+                    var image = new fabric.Image(imgObj);
+                    image.set({
+                        angle: 0,
+
+                    });
+                    canvas.centerObject(image);
+                    canvas.add(image);
+                    canvas.renderAll();
+                }
+            }
+
+
+            reader.readAsDataURL(e[0].files[0]);
+
+        });
+
 		$('#text-strokecolor').miniColors({
 			change: function(hex, rgb) {
 			  var activeObject = canvas.getActiveObject();
