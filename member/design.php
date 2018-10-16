@@ -174,7 +174,7 @@ $result2 = mysqli_query($con,$sql2);
 
         <div class="wrap_header">
             <!-- Logo -->
-            <a href="index.php" class="logo" >
+            <a href="indexMember2.php" class="logo" >
                 <font size="5"><b>Bogoshipda</b></font>
                 <!-- <img src="images/icons/logo.png" alt="IMG-LOGO">-->
             </a>
@@ -184,7 +184,7 @@ $result2 = mysqli_query($con,$sql2);
                 <nav class="menu">
                     <ul class="main_menu">
                         <li>
-                            <a href="index.php">หน้าแรก</a>
+                            <a href="indexMember2.php">หน้าแรก</a>
                         </li>
 
                         <li>
