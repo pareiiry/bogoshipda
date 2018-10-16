@@ -1,7 +1,24 @@
 <?php
-header('Location: loginPage.php');
 session_start();
-include ('dbConnect.php');
+if($_SESSION['ID'] == "")
+{
+    //echo "Please Login!";
+    header("location:../loginPage.php");
+    exit();
+}
+if($_SESSION['usertype'] != "member")
+{
+    //echo "ของ Adminเท่านั้นจ้าาา";
+    exit();
+}
+
+include ('../dbConnect.php');
+$sql = "SELECT * FROM user WHERE uID = '".$_SESSION['ID']."' ";
+//$objQuery = mysqli_query($strSQL);
+//$objResult = mysqli_fetch_array($objQuery);
+$result = mysqli_query($con,$sql);
+$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
 $sql2 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC LIMIT 10";
 $result2 = mysqli_query($con,$sql2);
 ?>
@@ -10,49 +27,48 @@ $result2 = mysqli_query($con,$sql2);
 <head>
     <meta charset="utf-8">
     <title>Bogoshipda | ออกแบบ</title>
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" type="image/png" href="images/icons/favicon.png"/>
-    <link rel="stylesheet" type="text/css" href="fonts/themify/themify-icons.css">
+    <link rel="icon" type="image/png" href="../images/icons/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="../fonts/themify/themify-icons.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="../fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="fonts/elegant-font/html-css/style.css">
+    <link rel="stylesheet" type="text/css" href="../fonts/elegant-font/html-css/style.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/animate/animate.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/css-hamburgers/hamburgers.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/animsition/css/animsition.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/select2/select2.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/daterangepicker/daterangepicker.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/slick/slick.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/lightbox2/css/lightbox.min.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/lightbox2/css/lightbox.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="css/util.css">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/util.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
     <!--===============================================================================================-->
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <!--[if IE]><script type="text/javascript" src="js/excanvas.js"></script><![endif]-->
+    <!--[if IE]><script type="text/javascript" src="../js/excanvas.js"></script><![endif]-->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script type="text/javascript" src="js/fabric.js"></script>
-    <script type="text/javascript" src="js/tshirtEditor.js"></script>
-    <script type="text/javascript" src="js/jquery.miniColors.min.js"></script>
+    <script type="text/javascript" src="../js/fabric.js"></script>
+    <script type="text/javascript" src="../js/tshirtEditor.js"></script>
+    <script type="text/javascript" src="../js/jquery.miniColors.min.js"></script>
 
     <!-- Le styles -->
-    <link type="text/css" rel="stylesheet" href="css/jquery.miniColors.css" />
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="../css/jquery.miniColors.css" />
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 
     <script type="text/javascript">
     </script>
@@ -151,7 +167,7 @@ $result2 = mysqli_query($con,$sql2);
 
             <div class="topbar-child2">
 					<span class="topbar-email">
-						สวัสดี Guest | <a href="loginPage.php">ลงชื่อเข้าใช้</a>
+						สวัสดี คุณ <?php echo "".$row["name"];?>
 					</span>
             </div>
         </div>
@@ -191,10 +207,32 @@ $result2 = mysqli_query($con,$sql2);
 
             <!-- Header Icon -->
             <div class="header-icons">
+                <div class="header-wrapicon1">
+                    <img src="../images/icons/icon-header-01.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+                    <div class="header-cart header-dropdown">
+                        <center><?php echo "".$row["name"];?></center><hr>
+                        <li>
+                            <a href="myprofile.php">ข้อมูลส่วนตัว</a>
+                        </li>
+                        <li>
+                            <a href="history.php">ประวัติการสั่งซื้อ</a>
+                        </li>
+                        <li>
+                            <a href="addReview.php">เพิ่มรีวิวสินค้า</a>
+                        </li>
+                        <li>
+                            <a href="myreview.php">รีวิวของฉัน</a>
+                        </li>
+                        <li>
+                            <a href="../logout.php">ลงชื่อออก</a>
+                        </li>
+                    </div>
+                </div>
 
+                <span class="linedivide1"></span>
 
                 <div class="header-wrapicon2">
-                    <img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+                    <img src="../images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
                     <span class="header-icons-noti"><?php
                         $quantity=0;
                         if(empty($_SESSION["shopping_cart"]))
@@ -228,7 +266,7 @@ $result2 = mysqli_query($con,$sql2);
 
                                                 if($row3['img']==="" || empty($row3)){
                                                     // echo"Hello";
-                                                    echo '<img src="images/no-picture.jpg">';
+                                                    echo '<img src="../images/no-picture.jpg">';
                                                 }
                                                 else {
                                                     echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
@@ -316,7 +354,7 @@ $result2 = mysqli_query($con,$sql2);
 
                             <div class="header-cart-wrapbtn">
                                 <!-- Button -->
-                                <a href="loginPage.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                <a href="cart.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
                                     ดูตะกร้าสินค้า
                                 </a>
                             </div>
@@ -384,50 +422,50 @@ $result2 = mysqli_query($con,$sql2);
 
                                 </div>
                                 <div id="avatarlist">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/astro1-b.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/astro1-w.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/astro2-b.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/astro2-w.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/b1a4-b.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/b1a4-w.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/bp1-b.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/bp1-w.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/bp2-b.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/bp2-w.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/bts1-b.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/bts1-w.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/bts2-b.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/bts2-w.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/bts3-b.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/bts3-w.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/exo1-b.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/exo1-w.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/exo2-b.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/exo2-w.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/exo3-b.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/exo3-w.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/got7-b.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/got7-w.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/icon-b.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/icon-w.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/mon-b.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/mon-w.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/mon2-b.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/mon2-w.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/seventeen-b.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/seventeen-w.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/seventeen2-b.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/seventeen2-w.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/twice-b.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/twice-w.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/wo-b.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/wo-w.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/heart-b.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/heart-w.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/heartl-b.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/heartl-w.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/line-b.png">
-                                    <img style="cursor:pointer;" class="img-polaroid" src="img/kpop/line-w.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/astro1-b.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/astro1-w.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/astro2-b.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/astro2-w.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/b1a4-b.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/b1a4-w.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/bp1-b.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/bp1-w.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/bp2-b.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/bp2-w.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/bts1-b.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/bts1-w.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/bts2-b.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/bts2-w.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/bts3-b.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/bts3-w.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/exo1-b.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/exo1-w.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/exo2-b.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/exo2-w.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/exo3-b.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/exo3-w.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/got7-b.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/got7-w.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/icon-b.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/icon-w.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/mon-b.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/mon-w.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/mon2-b.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/mon2-w.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/seventeen-b.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/seventeen-w.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/seventeen2-b.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/seventeen2-w.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/twice-b.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/twice-w.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/wo-b.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/wo-w.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/heart-b.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/heart-w.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/heartl-b.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/heartl-w.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/line-b.png">
+                                    <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/line-w.png">
                                 </div>
                             </div>
                         </div>
@@ -480,7 +518,7 @@ $result2 = mysqli_query($con,$sql2);
                 </div>
                 <!--	EDITOR      -->
                 <div id="shirtDiv" class="page" style="width: 870px; height: 500px; position: relative; background-color: rgb(255, 255, 255);">
-                    <img id="tshirtFacing" src="img/strap1.png"></img>
+                    <img id="tshirtFacing" src="../img/strap1.png">
                     <div id="drawingArea" style="position: absolute;top: 50px;left: 150px;z-index: 10;width: 595px;height: 83px;">
                         <canvas id="tcanvas" width=700 height="400" class="hover" style="-webkit-user-select: none;"></canvas>
                     </div>
@@ -598,12 +636,12 @@ $result2 = mysqli_query($con,$sql2);
 <!--===============================================================================================-->
 
 <!--===============================================================================================-->
-<script type="text/javascript" src="vendor/animsition/js/animsition.min.js"></script>
+<script type="text/javascript" src="../vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
-<script type="text/javascript" src="vendor/bootstrap/js/popper.js"></script>
-<script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../vendor/bootstrap/js/popper.js"></script>
+<script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
-<script type="text/javascript" src="vendor/select2/select2.min.js"></script>
+<script type="text/javascript" src="../vendor/select2/select2.min.js"></script>
 <script type="text/javascript">
     $(".selection-1").select2({
         minimumResultsForSearch: 20,
@@ -611,19 +649,19 @@ $result2 = mysqli_query($con,$sql2);
     });
 </script>
 <!--===============================================================================================-->
-<script type="text/javascript" src="vendor/slick/slick.min.js"></script>
-<script type="text/javascript" src="js/slick-custom.js"></script>
+<script type="text/javascript" src="../vendor/slick/slick.min.js"></script>
+<script type="text/javascript" src="../js/slick-custom.js"></script>
 <!--===============================================================================================-->
-<script type="text/javascript" src="vendor/countdowntime/countdowntime.js"></script>
+<script type="text/javascript" src="../vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
-<script type="text/javascript" src="vendor/lightbox2/js/lightbox.min.js"></script>
+<script type="text/javascript" src="../vendor/lightbox2/js/lightbox.min.js"></script>
 <!--===============================================================================================-->
-<script type="text/javascript" src="vendor/sweetalert/sweetalert.min.js"></script>
+<script type="text/javascript" src="../vendor/sweetalert/sweetalert.min.js"></script>
 <!--===============================================================================================-->
 <!-- Le javascript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="js/bootstrap.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 <script type="text/javascript">
 
     var _gaq = _gaq || [];
@@ -637,6 +675,6 @@ $result2 = mysqli_query($con,$sql2);
     })();
 
 </script>
-<script src="js/main.js"></script>
+<script src="../js/main.js"></script>
 </body>
 </html>

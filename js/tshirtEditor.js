@@ -318,7 +318,7 @@ var f=1;
 			   	if ($(this).attr("data-original-title") == "2 ด้าน") {
 			   		$(this).attr('data-original-title', '1 ด้าน');
 					f=1;
-			        $("#tshirtFacing").attr("src","img/strap1.png");
+			        $("#tshirtFacing").attr("src","../img/strap1.png");
 			        a = JSON.stringify(canvas);
 			        canvas.clear();
 			        try
@@ -332,7 +332,7 @@ var f=1;
 			    } else {
 			    	$(this).attr('data-original-title', '2 ด้าน');
 			    	f=2;
-			    	$("#tshirtFacing").attr("src","img/strap2.png");
+			    	$("#tshirtFacing").attr("src","../img/strap2.png");
 			    	b = JSON.stringify(canvas);
 			    	canvas.clear();
 			    	try
