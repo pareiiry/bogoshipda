@@ -421,7 +421,9 @@ $result2 = mysqli_query($con,$sql2);
                                     <hr>
 
                                 </div>
-                                <div id="avatarlist">
+                                <input type="file" id="imgInp" >
+                                <br>
+                                <div id="avatarlist" style="margin-top: 5%">
                                     <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/astro1-b.png">
                                     <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/astro1-w.png">
                                     <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/astro2-b.png">
@@ -467,6 +469,25 @@ $result2 = mysqli_query($con,$sql2);
                                     <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/line-b.png">
                                     <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/line-w.png">
                                 </div>
+
+                                <style>
+                                    input[type="file"]{
+                                        color: transparent;
+                                    }
+                                </style>
+                                <script>
+                                    $(function () {
+                                        $('input[type="file"]').change(function () {
+                                            if ($(this).val() != "") {
+                                                $(this).css('color', '#333');
+                                            }else{
+                                                $(this).css('color', 'transparent');
+                                            }
+                                        });
+                                    })
+
+
+                                </script>
                             </div>
                         </div>
                     </div>
