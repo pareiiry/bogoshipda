@@ -11,6 +11,7 @@ var line6;
 var line7;
 var line8;
 var f=1;
+var price=100;
  	$(document).ready(function() {
 		//setup front side canvas 
  		canvas = new fabric.Canvas('tcanvas', {
@@ -281,6 +282,7 @@ var f=1;
 	   $("#drawingArea").hover(
 	        function() {
                 if (f===2) {
+
                     canvas.add(line1);
                     canvas.add(line2);
                     canvas.add(line3);
@@ -341,6 +343,7 @@ var f=1;
 			   	if ($(this).attr("data-original-title") == "2 ด้าน") {
 			   		$(this).attr('data-original-title', '1 ด้าน');
 					f=1;
+                    price=100;
 			        $("#tshirtFacing").attr("src","../img/strap1.png");
 			        a = JSON.stringify(canvas);
 			        canvas.clear();
@@ -355,6 +358,7 @@ var f=1;
 			    } else {
 			    	$(this).attr('data-original-title', '2 ด้าน');
 			    	f=2;
+                    price=120;
 			    	$("#tshirtFacing").attr("src","../img/strap2.png");
 			    	b = JSON.stringify(canvas);
 			    	canvas.clear();
@@ -365,7 +369,8 @@ var f=1;
 			        }
 			        catch(e)
 			        {}
-			    }		
+			    }
+               document.getElementById("price").value = price;
 			   	canvas.renderAll();
 			   	setTimeout(function() {
 			   		canvas.calcOffset();

@@ -556,7 +556,7 @@ $result2 = mysqli_query($con,$sql2);
 
             <div class="span2">
                 <div class="well">
-                    <h3 align="center">฿</h3>
+                    <h3 align="center">฿ <input value="100" id="price" name="price"style="width: 60px;color: #1b6d85;font-size: 20px" disabled></h3>
                     <button type="button" class="btn btn-large btn-block btn-primary" name="addToTheBag" id="addToTheBag">เพิ่มลงตะกร้า</button>
                 </div>
             </div>
