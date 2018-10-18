@@ -371,7 +371,7 @@ else if($rowBank['bankName']=='PrompPay') {
                                 </tr>
                                 <tr>
                                     <td>ชำระเงินเมื่อ : </td>
-                                    <td><?php $datePay = date_format(date_create($rowPay['dateCreate']),'d-m-Y H:i:s'); echo $datePay; ?></td>
+                                    <td><?php $datePay = date_format(date_create($rowPay['dateCreate']),'d-m-Y H:i:s'); if(!empty($rowPay))echo $datePay; ?></td>
                                 </tr>
                                 <tr>
                                     <td>ช่องทางชำระเงิน : </td>
