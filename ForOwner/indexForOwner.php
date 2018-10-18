@@ -314,7 +314,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                         $row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC);
                         echo "
                     <td style=\"text-align:center;\">";
-                        if($row3['img']==="" || empty($row3)){
+                        if($row3['imgPath']==="" || empty($row3)){
 
                             echo '<img style="width:30%" src="../images/no-picture.jpg">';
                         }
