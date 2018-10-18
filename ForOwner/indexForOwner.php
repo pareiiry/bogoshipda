@@ -47,6 +47,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">   
     <link rel="icon" type="image/png" href="../images/icons/favicon.png"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="../css/lightbox.css">
     <style>
 
         div.sticky{
@@ -193,6 +194,8 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
             top: -7px;
             right: 10px;
         }
+
+
     </style>
 </head>
 <body>
@@ -312,10 +315,11 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                         echo "
                     <td style=\"text-align:center;\">";
                         if($row3['img']==="" || empty($row3)){
+
                             echo '<img style="width:30%" src="../images/no-picture.jpg">';
                         }
                         else {
-                            echo '<img style="width:30%" src="../member/'.$row3['imgPath'].'"/>';
+                            echo '<a class="example-image-link" href="../member/'.$row3['imgPath'].'" data-lightbox="product"><img style="width:30%" src="../member/'.$row3['imgPath'].'"/></a>';
                         }
                         echo"</td>";
                     }
@@ -331,7 +335,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                             echo '<img style="width:30%" src="../images/no-picture.jpg">';
                         }
                         else {
-                            echo '<img style="width:30%" src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
+                            echo '<a class="example-image-link" href="data:image/*;base64,'.base64_encode($row3['img']).'" data-lightbox="product"><img style="width:30%" src="data:image/*;base64,' . base64_encode($row3['img']) . '"/></a>';
                         }
                         echo"</td>";
                     }
@@ -342,9 +346,21 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                      <td style=\"text-align:center;\">$row2[price]</td>
                      <td style=\"text-align:center;\">$row2[cost]</td>
                     <td style=\"text-align:center;\">
-                       <div class='row'>
+                       ";
+                       if($row2['custom']==1){
+                           echo"<div class='row'>
                        <div class=\"col-md-4\">
-                       <form action=\"editProduct.php\" method=\"get\">
+                        </div>
+                        <div class=\"col-md-6\" >
+                        <form action=\"Action/deleteProduct_action.php\" method=\"get\">
+                                <input style='display: none;' type=\"text\" name=\"pdID\" value='$row2[pdID]'>
+                                <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
+                        </form></div>
+                        </div>";
+                       }
+                       else{
+                           echo"<div class='row'>
+                       <div class=\"col-md-4\"><form action=\"editProduct.php\" method=\"get\">
                             <input style='display: none;' type=\"text\" name=\"pdID\" value='$row2[pdID]'>
                             <button class='btn-edit' type=\"submit\"><i class=\"fa fa-edit\"></i></button>
                         </form>
@@ -353,9 +369,13 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                         <form action=\"Action/deleteProduct_action.php\" method=\"get\">
                                 <input style='display: none;' type=\"text\" name=\"pdID\" value='$row2[pdID]'>
                                 <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
-                        </form>
-                        </div>
-                        </div>
+                        </form></div>
+                        </div>";
+                       }
+
+
+                        echo"
+                        
                         
                     </td>
                     </tr>
@@ -394,6 +414,6 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
 <!--<footer class="container-fluid">-->
 <!--    <p>Footer Text</p>-->
 <!--</footer>-->
-
+<script src="../js/lightbox.js"></script>
 </body>
 </html>
