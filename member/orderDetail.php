@@ -203,41 +203,73 @@ else{
                             if(!empty($_SESSION["shopping_cart"]))
                             {
                                 $total = 0;
-
                                 foreach($_SESSION["shopping_cart"] as $keys => $values)
                                 {
                                     if($values["pdID"]!==null) {
-                                        $sql3 = "SELECT * FROM image WHERE pdID= '".$values["pdID"]."' LIMIT 1";
-                                        $result3 = mysqli_query($con,$sql3);
-                                        $row3 = mysqli_fetch_array($result3,MYSQLI_ASSOC);
-                                        ?>
-                                        <li class="header-cart-item">
-                                            <div class="header-cart-item-img">
-                                                <?php
+                                        $sqlPd = "SELECT * FROM product WHERE pdID= '".$values["pdID"]."'";
+                                        $resultPd = mysqli_query($con, $sqlPd);
+                                        $rowPd = mysqli_fetch_array($resultPd, MYSQLI_ASSOC);
+                                        if ($rowPd["custom"] == 1) {
+                                            $sql3 = "SELECT * FROM design WHERE pdID= '" . $values["pdID"] . "' LIMIT 1";
+                                            $result3 = mysqli_query($con, $sql3);
+                                            $row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC); ?>
+                                            <li class="header-cart-item">
+                                                <div class="header-cart-item-img">
+                                                    <?php
+                                                    if ($row3['imgPath'] === "" || empty($row3)) {
+                                                        // echo"Hello";
+                                                        echo '<img src="../images/no-picture.jpg">';
+                                                    } else {
+                                                        echo '<img style="width:50%" src="'.$row3['imgPath'].'"/>';
+                                                    }
+                                                    ?>
+                                                </div>
+                                                <div class="header-cart-item-txt">
+                                                    <a href="product-detail.php?pdID=<?php echo $values['pdID']; ?>"
+                                                       class="header-cart-item-name">
+                                                        <?php echo $values["name"]; ?>
+                                                    </a>
 
-                                                if($row3['img']==="" || empty($row3)){
-                                                    // echo"Hello";
-                                                    echo '<img src="../images/no-picture.jpg">';
-                                                }
-                                                else {
-                                                    echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
-                                                }
-                                                ?>
-                                            </div>
-
-                                            <div class="header-cart-item-txt">
-                                                <a href="product-detail.php?pdID=<?php echo $values['pdID']; ?>" class="header-cart-item-name">
-                                                    <?php echo $values["name"]; ?>
-                                                </a>
-
-                                                <span class="header-cart-item-info">
+                                                    <span class="header-cart-item-info">
 											<?php echo $values["quantity"]; ?> x  ฿<?php echo $values["price"]; ?>
 										</span>
-                                            </div>
-                                        </li>
-                                        <?php
+                                                </div>
+                                            </li>
+                                            <?php
+                                        } else {
+                                            $sql3 = "SELECT * FROM image WHERE pdID= '" . $values["pdID"] . "' LIMIT 1";
+                                            $result3 = mysqli_query($con, $sql3);
+                                            $row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC);
+                                            ?>
+                                            <li class="header-cart-item">
+                                                <div class="header-cart-item-img">
+                                                    <?php
+
+                                                    if ($row3['img'] === "" || empty($row3)) {
+                                                        // echo"Hello";
+                                                        echo '<img src="../images/no-picture.jpg">';
+                                                    } else {
+                                                        echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
+                                                    }
+                                                    ?>
+                                                </div>
+
+                                                <div class="header-cart-item-txt">
+                                                    <a href="product-detail.php?pdID=<?php echo $values['pdID']; ?>"
+                                                       class="header-cart-item-name">
+                                                        <?php echo $values["name"]; ?>
+                                                    </a>
+
+                                                    <span class="header-cart-item-info">
+											<?php echo $values["quantity"]; ?> x  ฿<?php echo $values["price"]; ?>
+										</span>
+                                                </div>
+                                            </li>
+                                            <?php
+                                            //echo $total;
+                                        }
+
                                         $total = $total + ($values["quantity"] * $values["price"]);
-                                        //echo $total;
                                     }
                                     else{
                                         unset($_SESSION["shopping_cart"][$keys]);

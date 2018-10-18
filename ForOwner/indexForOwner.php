@@ -304,20 +304,39 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                 <?php
                 while($row2= mysqli_fetch_assoc($result2))// show the information from query
                 {
-                    $sql3 = "SELECT * FROM image WHERE pdID= '".$row2['pdID']."' LIMIT 1";
-                    $result3 = mysqli_query($con,$sql3);
-                    $row3 = mysqli_fetch_array($result3,MYSQLI_ASSOC);
-
-                    echo "
-                    <tr>
+                    echo "<tr>";
+                    if($row2['custom']==1){
+                        $sql3 = "SELECT * FROM design WHERE design.pdID= '".$row2["pdID"]."' LIMIT 1";
+                        $result3 = mysqli_query($con, $sql3);
+                        $row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC);
+                        echo "
                     <td style=\"text-align:center;\">";
-                if($row3['img']==="" || empty($row3)){
-                    echo '<img style="width:30%" src="../images/no-picture.jpg">';
-                }
-                else {
-                    echo '<img style="width:30%" src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
-                }
-                    echo"</td>
+                        if($row3['img']==="" || empty($row3)){
+                            echo '<img style="width:30%" src="../images/no-picture.jpg">';
+                        }
+                        else {
+                            echo '<img style="width:30%" src="../member/'.$row3['imgPath'].'"/>';
+                        }
+                        echo"</td>";
+                    }
+                    else{
+                        $sql3 = "SELECT * FROM image WHERE pdID= '".$row2['pdID']."' LIMIT 1";
+                        $result3 = mysqli_query($con,$sql3);
+                        $row3 = mysqli_fetch_array($result3,MYSQLI_ASSOC);
+
+                        echo "
+                 
+                    <td style=\"text-align:center;\">";
+                        if($row3['img']==="" || empty($row3)){
+                            echo '<img style="width:30%" src="../images/no-picture.jpg">';
+                        }
+                        else {
+                            echo '<img style="width:30%" src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
+                        }
+                        echo"</td>";
+                    }
+
+                echo"
                     <td>$row2[pdID]</td>
                     <td>$row2[name]</td>
                      <td style=\"text-align:center;\">$row2[price]</td>

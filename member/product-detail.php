@@ -231,41 +231,73 @@ else{
                             if(!empty($_SESSION["shopping_cart"]))
                             {
                                 $total = 0;
-
                                 foreach($_SESSION["shopping_cart"] as $keys => $values)
                                 {
                                     if($values["pdID"]!==null) {
-                                        $sql3 = "SELECT * FROM image WHERE pdID= '".$values["pdID"]."' LIMIT 1";
-                                        $result3 = mysqli_query($con,$sql3);
-                                        $row3 = mysqli_fetch_array($result3,MYSQLI_ASSOC);
-                                        ?>
-                                        <li class="header-cart-item">
-                                            <div class="header-cart-item-img">
-                                                <?php
+                                        $sqlPd = "SELECT * FROM product WHERE pdID= '".$values["pdID"]."'";
+                                        $resultPd = mysqli_query($con, $sqlPd);
+                                        $rowPd = mysqli_fetch_array($resultPd, MYSQLI_ASSOC);
+                                        if ($rowPd["custom"] == 1) {
+                                            $sql3 = "SELECT * FROM design WHERE pdID= '" . $values["pdID"] . "' LIMIT 1";
+                                            $result3 = mysqli_query($con, $sql3);
+                                            $row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC); ?>
+                                            <li class="header-cart-item">
+                                                <div class="header-cart-item-img">
+                                                    <?php
+                                                    if ($row3['imgPath'] === "" || empty($row3)) {
+                                                        // echo"Hello";
+                                                        echo '<img src="../images/no-picture.jpg">';
+                                                    } else {
+                                                        echo '<img style="width:50%" src="'.$row3['imgPath'].'"/>';
+                                                    }
+                                                    ?>
+                                                </div>
+                                                <div class="header-cart-item-txt">
+                                                    <a href="product-detail.php?pdID=<?php echo $values['pdID']; ?>"
+                                                       class="header-cart-item-name">
+                                                        <?php echo $values["name"]; ?>
+                                                    </a>
 
-                                                if($row3['img']==="" || empty($row3)){
-                                                    // echo"Hello";
-                                                    echo '<img src="../images/no-picture.jpg">';
-                                                }
-                                                else {
-                                                    echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
-                                                }
-                                                ?>
-                                            </div>
-
-                                            <div class="header-cart-item-txt">
-                                                <a href="product-detail.php?pdID=<?php echo $values['pdID']; ?>" class="header-cart-item-name">
-                                                    <?php echo $values["name"]; ?>
-                                                </a>
-
-                                                <span class="header-cart-item-info">
+                                                    <span class="header-cart-item-info">
 											<?php echo $values["quantity"]; ?> x  ฿<?php echo $values["price"]; ?>
 										</span>
-                                            </div>
-                                        </li>
-                                        <?php
+                                                </div>
+                                            </li>
+                                            <?php
+                                        } else {
+                                            $sql3 = "SELECT * FROM image WHERE pdID= '" . $values["pdID"] . "' LIMIT 1";
+                                            $result3 = mysqli_query($con, $sql3);
+                                            $row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC);
+                                            ?>
+                                            <li class="header-cart-item">
+                                                <div class="header-cart-item-img">
+                                                    <?php
+
+                                                    if ($row3['img'] === "" || empty($row3)) {
+                                                        // echo"Hello";
+                                                        echo '<img src="../images/no-picture.jpg">';
+                                                    } else {
+                                                        echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
+                                                    }
+                                                    ?>
+                                                </div>
+
+                                                <div class="header-cart-item-txt">
+                                                    <a href="product-detail.php?pdID=<?php echo $values['pdID']; ?>"
+                                                       class="header-cart-item-name">
+                                                        <?php echo $values["name"]; ?>
+                                                    </a>
+
+                                                    <span class="header-cart-item-info">
+											<?php echo $values["quantity"]; ?> x  ฿<?php echo $values["price"]; ?>
+										</span>
+                                                </div>
+                                            </li>
+                                            <?php
+                                            //echo $total;
+                                        }
+
                                         $total = $total + ($values["quantity"] * $values["price"]);
-                                        //echo $total;
                                     }
                                     else{
                                         unset($_SESSION["shopping_cart"][$keys]);
@@ -352,73 +384,80 @@ else{
         <div class="w-size13 p-t-30 respon5">
             <div class="wrap-slick3 flex-sb flex-w">
                 <div class="wrap-slick3-dots"></div>
-                <?php $sqlSP = "SELECT * FROM image WHERE pdID= '".$_GET["pdID"]."'";
-                $resultSP = mysqli_query($con,$sqlSP);
-                $pic_count = mysqli_num_rows($resultSP);
-                //$rowSP = mysqli_fetch_array($resultSP,MYSQLI_ASSOC);
-                ?>
+                <?php
+                $sqlPd = "SELECT * FROM product WHERE product.pdID='".$_GET["pdID"]."'";
+                $resultPd = mysqli_query($con, $sqlPd);
+                $rowPd = mysqli_fetch_array($resultPd,MYSQLI_ASSOC);?>
                 <div class="slick3">
-                        <?php
-                      //echo "<script>alert($pic_count);</script>";
-                            if($pic_count>=1) {
-                                while ($rowSP = mysqli_fetch_assoc($resultSP))// show the information from query
-                                {
-                                    if (empty($rowSP)) {
-                                        echo '
+                    <?php
+                if($rowPd['custom']==1){
+                    $sqlSP = "SELECT * FROM design WHERE pdID= '".$_GET["pdID"]."'";
+                    $resultSP = mysqli_query($con,$sqlSP);
+                    $pic_count = mysqli_num_rows($resultSP);
+                    if($pic_count>=1) {
+                        while ($rowSP = mysqli_fetch_assoc($resultSP))// show the information from query
+                        {
+                            if (empty($rowSP)) {
+                                echo '
                                     <div class="item-slick3" data-thumb="../images/no-picture.jpg">
                                     <div class="wrap-pic-w">
                                         <img src="../images/no-picture.jpg">;
                                     </div>
                                 </div>';
 
-                                    } else {
-                                        echo '
-                                    <div class="item-slick3" data-thumb="data:image/*;base64,' . base64_encode($rowSP['img']) . '">
+                            } else {
+                                echo '
+                                    <div class="item-slick3" data-thumb="'.$row3['imgPath'].'">
                                     <div class="wrap-pic-w">
-                                        <img src="data:image/*;base64,' . base64_encode($rowSP['img']) . '"/>
+                                        <img src="'.$row3['imgPath'].'"/>
                                     </div>
                                     </div>';
-                                    }
-                                }
                             }
-                            elseif($pic_count==0){
-                                echo '
+                        }
+                    }
+                    elseif($pic_count==0){
+                        echo '
                                         <div class="item-slick3" data-thumb="../images/no-picture.jpg">
                                         <div class="wrap-pic-w">
                                         <img src="../images/no-picture.jpg">
                                     </div>
                                     </div>';
+                    }
+
+                }else{
+                    $sqlSP = "SELECT * FROM image WHERE pdID= '".$_GET["pdID"]."'";
+                    $resultSP = mysqli_query($con,$sqlSP);
+                    $pic_count = mysqli_num_rows($resultSP);
+                    if($pic_count>=1) {
+                        while ($rowSP = mysqli_fetch_assoc($resultSP))// show the information from query
+                        {
+                            if (empty($rowSP)) {
+                                echo '
+                                    <div class="item-slick3" data-thumb="../images/no-picture.jpg">
+                                    <div class="wrap-pic-w">
+                                        <img src="../images/no-picture.jpg">;
+                                    </div>
+                                </div>';
+
+                            } else {
+                                echo '
+                                    <div class="item-slick3" data-thumb="data:image/*;base64,' . base64_encode($rowSP['img']) . '">
+                                    <div class="wrap-pic-w">
+                                        <img src="data:image/*;base64,' . base64_encode($rowSP['img']) . '"/>
+                                    </div>
+                                    </div>';
                             }
-//                            else{
-//                                while ($rowSP = mysqli_fetch_assoc($resultSP))// show the information from query
-//                                {
-//                                    $image = base64_decode($rowSP['img']);
-//                                    /** check if the image is db */
-//                                    if($image!=null)
-//                                    {
-//                                        $db_img = imagecreatefromstring($image);
-//                                        Header("Content-type: image/jpeg");
-//                                        imagejpeg($db_img);
-//                                    }
-//
-//                                    if ($rowSP['img']==="" || empty($rowSP)) {
-//                                        echo '
-//                                        <div class="item-slick3" data-thumb="../images/no-picture.jpg">
-//                                        <div class="wrap-pic-w">
-//                                        <img src="../images/no-picture.jpg">
-//                                    </div>
-//                                </div>';
-//
-//                                    } else {
-//                                        echo '
-//                                    <div class="item-slick3" data-thumb="data:image/*;base64,' . base64_encode($rowSP['img']) . '" >
-//                                    <div class="wrap-pic-w">
-//                                        <img src="data:image/*;base64,' . base64_encode($rowSP['img']) . '"/>
-//                                    </div>
-//                                </div>';
-//                                    }
-//                                }
-//                            }
+                        }
+                    }
+                    elseif($pic_count==0){
+                        echo '
+                                        <div class="item-slick3" data-thumb="../images/no-picture.jpg">
+                                        <div class="wrap-pic-w">
+                                        <img src="../images/no-picture.jpg">
+                                    </div>
+                                    </div>';
+                    }
+                }
 
                 echo '</div>';
                         ?>

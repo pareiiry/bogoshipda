@@ -1,7 +1,7 @@
 <?php
 session_start();
 include ('dbConnect.php');
-$sql2 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC LIMIT 10";
+$sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.custom=0 ORDER BY dateCreate DESC LIMIT 10";
 $result2 = mysqli_query($con,$sql2);
 
 ?>

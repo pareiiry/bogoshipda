@@ -18,10 +18,10 @@ else{
 
 
 if(!isset($_GET)){
-    $sql2 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC LIMIT $pageshow,9";
+    $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.custom=0 ORDER BY dateCreate DESC LIMIT $pageshow,9";
     $result2 = mysqli_query($con,$sql2);
 
-    $sql3 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC";
+    $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.custom=0 ORDER BY dateCreate DESC";
     $result3 = mysqli_query($con,$sql3);
     $all_pd_count = mysqli_num_rows($result3);
     $cal=$all_pd_count/9;
@@ -33,19 +33,19 @@ else{
     if ($_GET['color'] == 'all') {
         if (isset($_GET['search'])) {
             if ($_GET['search'] == '') {
-                $sql2 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC LIMIT $pageshow,9";
+                $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.custom=0 ORDER BY dateCreate DESC LIMIT $pageshow,9";
                 $result2 = mysqli_query($con, $sql2);
 
-                $sql3 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC";
+                $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.custom=0 ORDER BY dateCreate DESC";
                 $result3 = mysqli_query($con, $sql3);
                 $all_pd_count = mysqli_num_rows($result3);
                 $cal = $all_pd_count / 9;
                 $page_of_pd = ceil($cal);
             } else {
-                $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.name LIKE '%" . $_GET['search'] . "%' ORDER BY dateCreate DESC LIMIT $pageshow,9";
+                $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.custom=0 AND product.name LIKE '%" . $_GET['search'] . "%' ORDER BY dateCreate DESC LIMIT $pageshow,9";
                 $result2 = mysqli_query($con, $sql2);
 
-                $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.name LIKE '%" . $_GET['search'] . "%' ORDER BY dateCreate DESC";
+                $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.custom=0 AND product.name LIKE '%" . $_GET['search'] . "%' ORDER BY dateCreate DESC";
                 $result3 = mysqli_query($con, $sql3);
                 $all_pd_count = mysqli_num_rows($result3);
                 $cal = $all_pd_count / 9;
@@ -53,10 +53,10 @@ else{
             }
 
         } else {
-            $sql2 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC LIMIT $pageshow,9";
+            $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.custom=0 ORDER BY dateCreate DESC LIMIT $pageshow,9";
             $result2 = mysqli_query($con, $sql2);
 
-            $sql3 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC";
+            $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.custom=0 ORDER BY dateCreate DESC";
             $result3 = mysqli_query($con, $sql3);
             $all_pd_count = mysqli_num_rows($result3);
             $cal = $all_pd_count / 9;
@@ -70,19 +70,19 @@ else{
         if ($_GET['color'] == '' || !isset($_GET['color'] )) {
             if (isset($_GET['search'])) {
                 if ($_GET['search'] == '') {
-                    $sql2 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC LIMIT $pageshow,9";
+                    $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.custom=0 ORDER BY dateCreate DESC LIMIT $pageshow,9";
                     $result2 = mysqli_query($con, $sql2);
 
-                    $sql3 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC";
+                    $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.custom=0 ORDER BY dateCreate DESC";
                     $result3 = mysqli_query($con, $sql3);
                     $all_pd_count = mysqli_num_rows($result3);
                     $cal = $all_pd_count / 9;
                     $page_of_pd = ceil($cal);
                 } else {
-                    $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.name LIKE '%".$_GET['search']."%' ORDER BY dateCreate DESC LIMIT $pageshow,9";
+                    $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.name AND product.custom=0 LIKE '%".$_GET['search']."%' ORDER BY dateCreate DESC LIMIT $pageshow,9";
                     $result2 = mysqli_query($con, $sql2);
 
-                    $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.name LIKE '%".$_GET['search']."%' ORDER BY dateCreate DESC";
+                    $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.name AND product.custom=0 LIKE '%".$_GET['search']."%' ORDER BY dateCreate DESC";
                     $result3 = mysqli_query($con, $sql3);
                     $all_pd_count = mysqli_num_rows($result3);
                     $cal = $all_pd_count / 9;
@@ -90,10 +90,10 @@ else{
                 }
 
             } else {
-                $sql2 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC LIMIT $pageshow,9";
+                $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.custom=0 ORDER BY dateCreate DESC LIMIT $pageshow,9";
                 $result2 = mysqli_query($con, $sql2);
 
-                $sql3 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC";
+                $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.custom=0 ORDER BY dateCreate DESC";
                 $result3 = mysqli_query($con, $sql3);
                 $all_pd_count = mysqli_num_rows($result3);
                 $cal = $all_pd_count / 9;
@@ -102,19 +102,19 @@ else{
         } else {
             if (isset($_GET['search'])) {
                 if ($_GET['search'] == '' ) {
-                    $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.color='".$_GET['color']."' ORDER BY dateCreate DESC LIMIT $pageshow,9";
+                    $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.custom=0 AND product.color='".$_GET['color']."' ORDER BY dateCreate DESC LIMIT $pageshow,9";
                     $result2 = mysqli_query($con, $sql2);
 
-                    $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.color='".$_GET['color']."' ORDER BY dateCreate DESC";
+                    $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.custom=0 AND product.color='".$_GET['color']."' ORDER BY dateCreate DESC";
                     $result3 = mysqli_query($con, $sql3);
                     $all_pd_count = mysqli_num_rows($result3);
                     $cal = $all_pd_count / 9;
                     $page_of_pd = ceil($cal);
                 } else {
-                    $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.color='".$_GET['color']."' AND product.name LIKE '%".$_GET['search']."%' ORDER BY dateCreate DESC LIMIT $pageshow,9";
+                    $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.custom=0 AND product.color='".$_GET['color']."' AND product.name LIKE '%".$_GET['search']."%' ORDER BY dateCreate DESC LIMIT $pageshow,9";
                     $result2 = mysqli_query($con, $sql2);
 
-                    $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.color='".$_GET['color']."' AND product.name LIKE '%".$_GET['search']."%' ORDER BY dateCreate DESC";
+                    $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.custom=0 AND product.color='".$_GET['color']."' AND product.name LIKE '%".$_GET['search']."%' ORDER BY dateCreate DESC";
                     $result3 = mysqli_query($con, $sql3);
                     $all_pd_count = mysqli_num_rows($result3);
                     $cal = $all_pd_count / 9;
@@ -122,10 +122,10 @@ else{
                 }
 
             } else {
-                $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.color='".$_GET['color']."' ORDER BY dateCreate DESC LIMIT $pageshow,9";
+                $sql2 = "SELECT * FROM product WHERE product.delete=0 AND product.custom=0 AND product.color='".$_GET['color']."' ORDER BY dateCreate DESC LIMIT $pageshow,9";
                 $result2 = mysqli_query($con, $sql2);
 
-                $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.color='".$_GET['color']."' ORDER BY dateCreate DESC";
+                $sql3 = "SELECT * FROM product WHERE product.delete=0 AND product.custom=0 AND product.color='".$_GET['color']."' ORDER BY dateCreate DESC";
                 $result3 = mysqli_query($con, $sql3);
                 $all_pd_count = mysqli_num_rows($result3);
                 $cal = $all_pd_count / 9;

@@ -213,21 +213,35 @@ $discount=0;
                             <input type=\"hidden\" name=\"price2[]\" value=\"$values[price]\">
                             <input type=\"hidden\" name=\"pdID2[]\" value=\"$values[pdID]\">";
                             if($values["pdID"]!==null) {
-                                $sql3 = "SELECT * FROM image WHERE pdID= '".$values["pdID"]."' LIMIT 1";
-                                $result3 = mysqli_query($con,$sql3);
-                                $row3 = mysqli_fetch_array($result3,MYSQLI_ASSOC);
                                 ?>
                                 <tr class="table-row">
                                     <td class="column-1">
                                         <div class="cart-img-product b-rad-4 o-f-hidden">
                                             <?php
-
-                                            if($row3['img']==="" || empty($row3)){
-                                                // echo"Hello";
-                                                echo '<img src="../images/no-picture.jpg">';
-                                            }
-                                            else {
-                                                echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
+                                            $sqlPd = "SELECT * FROM product WHERE product.pdID='".$values["pdID"]."'";
+                                            $resultPd = mysqli_query($con, $sqlPd);
+                                            $rowPd = mysqli_fetch_array($resultPd,MYSQLI_ASSOC);
+                                            if($rowPd['custom']==1){
+                                                $sql3 = "SELECT * FROM design WHERE design.pdID= '".$rowPd["pdID"]."' LIMIT 1";
+                                                $result3 = mysqli_query($con, $sql3);
+                                                $row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC);
+                                                if ($row3['imgPath'] === "" || empty($row3)) {
+                                                    // echo"Hello";
+                                                    echo '<img src="../images/no-picture.jpg">';
+                                                } else {
+                                                    echo '<img src="'.$row3['imgPath'].'"/>';
+                                                }
+                                            }else{
+                                                $sql3 = "SELECT * FROM image WHERE pdID= '".$rowPd["pdID"]."' LIMIT 1";
+                                                $result3 = mysqli_query($con,$sql3);
+                                                $row3 = mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                                                if($row3['img']==="" || empty($row3)){
+                                                    // echo"Hello";
+                                                    echo '<img src="images/no-picture.jpg">';
+                                                }
+                                                else {
+                                                    echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
+                                                }
                                             }
                                             ?>
                                         </div>

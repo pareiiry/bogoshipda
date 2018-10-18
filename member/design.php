@@ -421,7 +421,8 @@ $result2 = mysqli_query($con,$sql2);
                                     <hr>
 
                                 </div>
-                                <input type="file" id="imgInp" >
+                                <button style="display:block;" class="btn btn-primary" onclick="document.getElementById('imgInp').click()">อัพโหลดไฟล์...</button>
+                                <input type='file' id="imgInp" style="display:none">
                                 <br>
                                 <div id="avatarlist" style="margin-top: 5%">
                                     <img style="cursor:pointer;" class="img-polaroid" src="../img/kpop/astro1-b.png">
@@ -556,7 +557,8 @@ $result2 = mysqli_query($con,$sql2);
 
             <div class="span2">
                 <div class="well">
-                    <h3 align="center">฿ <input value="100" id="price" name="price"style="width: 60px;color: #1b6d85;font-size: 20px" disabled></h3>
+                    <input type="hidden" name="nameUser" id="nameUser" value="<?php echo "".$row["name"];?>">
+                    <h3 align="center">฿ <input value="100" id="price" name="price" style="width: 60px;color: #1b6d85;font-size: 20px" disabled></h3>
                     <button type="button" class="btn btn-large btn-block btn-primary" name="addToTheBag" id="addToTheBag">เพิ่มลงตะกร้า</button>
                 </div>
             </div>
@@ -705,20 +707,33 @@ $result2 = mysqli_query($con,$sql2);
 
 <script src="../js/html2canvas.js"></script>
 <script type="text/javascript">
+
     $(document).ready(function () {
         $(document).on('click', '#addToTheBag', function() {
             html2canvas([document.getElementById('shirtDiv')], {
                 onrendered: function (canvas) {
                     var imagedata = canvas.toDataURL('image/png');
                     var imgdata = imagedata.replace(/^data:image\/(png|jpg);base64,/, "");
+                    //var imgDb = dataURLtoBlob(imagedata);
+                    var price =  document.getElementById("price").value;
+                    var name = document.getElementById("nameUser").value;
+                    var cost = price/2;
                     //ajax call to save image inside folder
                     $.ajax({
-                        url: 'save_image.php',
-                        data: {imgdata:imgdata},
+                        url: 'save_image_action.php',
+                        data: {imgdata:imgdata,
+                                price:price,
+                                name:name,
+                                cost:cost,
+                                imagedata:imagedata
+                        },
                         type: 'post',
                         success: function (response) {
-                            console.log(response);
+                            //console.log(response);
                             //$('#image_id img').attr('src', response);
+
+                            alert(response);
+                            location.replace(document.referrer);
                         }
                     });
                 }

@@ -196,21 +196,37 @@ else{
                                 foreach($_SESSION["shopping_cart"] as $keys => $values)
                                 {
                                     if($values["pdID"]!==null) {
-                                        $sql3 = "SELECT * FROM image WHERE pdID= '".$values["pdID"]."' LIMIT 1";
-                                        $result3 = mysqli_query($con,$sql3);
-                                        $row3 = mysqli_fetch_array($result3,MYSQLI_ASSOC);
+
                                         ?>
                                         <li class="header-cart-item">
                                             <div class="header-cart-item-img">
                                                 <?php
+                                                $sqlPd = "SELECT * FROM product WHERE product.pdID='".$values["pdID"]."'";
+                                                $resultPd = mysqli_query($con, $sqlPd);
+                                                $rowPd = mysqli_fetch_array($resultPd,MYSQLI_ASSOC);
+                                                if($rowPd['custom']==1){
+                                                    $sql3 = "SELECT * FROM design WHERE design.pdID= '".$rowPd["pdID"]."' LIMIT 1";
+                                                    $result3 = mysqli_query($con, $sql3);
+                                                    $row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC);
+                                                    if ($row3['imgPath'] === "" || empty($row3)) {
+                                                        // echo"Hello";
+                                                        echo '<img src="../images/no-picture.jpg">';
+                                                    } else {
+                                                        echo '<img src="'.$row3['imgPath'].'"/>';
+                                                    }
+                                                }else{
+                                                    $sql3 = "SELECT * FROM image WHERE pdID= '".$rowPd["pdID"]."' LIMIT 1";
+                                                    $result3 = mysqli_query($con,$sql3);
+                                                    $row3 = mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                                                    if($row3['img']==="" || empty($row3)){
+                                                        // echo"Hello";
+                                                        echo '<img src="images/no-picture.jpg">';
+                                                    }
+                                                    else {
+                                                        echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
+                                                    }
+                                                }
 
-                                                if($row3['img']==="" || empty($row3)){
-                                                    // echo"Hello";
-                                                    echo '<img src="images/no-picture.jpg">';
-                                                }
-                                                else {
-                                                    echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
-                                                }
                                                 ?>
                                             </div>
 
@@ -306,30 +322,6 @@ else{
     </div>
 
 </header>
-
-
-
-<!-- Banner -->
-
-
-<!-- container -->
-
-<!--<div class="bread-crumb bgwhite flex-w p-l-52 p-r-15 p-t-30 p-l-15-sm">-->
-<!--    <a href="index.php" class="s-text16">-->
-<!--        หนัาแรก-->
-<!--        <i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>-->
-<!--    </a>-->
-<!---->
-<!--    <a href="product.php" class="s-text16">-->
-<!--        สินค้า-->
-<!--        <i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>-->
-<!--    </a>-->
-<!---->
-<!---->
-<!--    <span class="s-text17">-->
-<!--			product name-->
-<!--		</span>-->
-<!--</div>-->
 
 <!-- Product Detail -->
 <div class="container bgwhite p-t-35 p-b-80">
@@ -547,23 +539,23 @@ else{
                     KTB &emsp;  K-BANK
                 </li>
                 <li class="p-b-9 s-text7">
-                    BBL  &emsp; Wallet   
-                </li>                
+                    BBL  &emsp; Wallet
+                </li>
                 <li class="p-b-9 s-text7">
                     SCB &emsp; PrompPay
                 </li>
             </ul>
         </div>
 
-        
+
     </div>
 
-  
+
 
         <div class="t-center s-text8 p-t-20">
             Copyright © 2018 All rights reserved. | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
         </div>
-    
+
 </footer>
 
 

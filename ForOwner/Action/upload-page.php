@@ -33,7 +33,7 @@ for ($i=0; $i<count($_FILES['filesToUpload']['name']); $i++){
 //if(count($_FILES['filesToUpload']['name'])) {
 //    $i = 0;
 //    foreach ($_FILES['filesToUpload']['name'] as $file) {
-//        $img = "uploads/clients/".$file;
+//        $img = "custom_design/clients/".$file;
 //        move_uploaded_file($_FILES['filesToUpload']['tmp_name'][$i], $img);
 //        chmod( $img , 0777 );
 //
