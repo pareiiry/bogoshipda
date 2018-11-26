@@ -329,26 +329,6 @@ $resultReview2 = mysqli_query($con,$sqlReview2);
             <div class="m-text5 t-center">
                 รีวิวจากลูกค้า
             </div>
-
-            <div class=" t-center m-t-30">
-                <?php
-                $sumScore=0;
-                $iScore=0;
-                while($rowReviews= mysqli_fetch_assoc($resultReview2)){
-                    $sc2=number_format($rowReviews['score'],0);
-                    $sumScore+=$sc2;
-                    $iScore++;
-                }
-                $totalScore=number_format(($sumScore/$iScore),1);
-
-
-                ?>
-                คะแนนของร้าน
-                <h2><?php echo $totalScore; ?></h2>
-                (เต็ม 5)
-            </div>
-
-
         </div>
 
 

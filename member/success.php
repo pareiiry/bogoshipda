@@ -176,7 +176,7 @@ $resultB = mysqli_query($con,$sqlB);
                 $rowOrder = mysqli_fetch_array($resultOrder,MYSQLI_ASSOC);?>
                 <tr>
                     <td align="center">จำนวนเงินที่ต้องชำระ
-                        <h4 style="color: #ffaeba">฿ <?php echo number_format($rowOrder['netPrice'], 0);?></h4>
+                        <h4 style="color: #ffaeba">฿ <?php echo number_format($rowOrder['netPrice'], 2);?></h4>
                     </td>
                     <td align="center">สถานะรายการสั่งซื้อ
                     <h4 style="color: limegreen">รอชำระเงิน</h4>

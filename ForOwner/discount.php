@@ -222,7 +222,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                                 <!--                            <form method="post">-->
                                 <div class="btn-group" style="margin: 0 0 2% 0;width: 100%">
                                     <label>วันที่สร้าง:</label>
-                                    <input type="date" class="form-control" id="dateCreate" name="dateCreate" value="<?php echo date("Y-m-d"); ?>">
+                                    <input type="date" class="form-control" id="dateCreate" name="dateCreate" value="<?php  echo date("Y-m-d"); ?>">
                                 </div>
                                 <div class="btn-group" style="margin: 0 0 2% 0;width: 100%">
                                     <label>วันที่สิ้นสุด:</label>
@@ -264,7 +264,6 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                                         <th style="width:15%;text-align:center;">รหัส</th>
                                         <th style="width:15%;text-align:center;">ส่วนลด</th>
                                         <th style="width:10%;text-align:center;">หน่วย</th>
-                                        <th style="width:15%;text-align:center;"></th>
                                     </tr>
                                     </thead>
                                     <?php
@@ -293,14 +292,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                     else if($row2['unitDiscount']=='percent'){
                         echo "<td style=\"text-align:center;\">%</td>";
                     }
-                    echo"
-                    <td style=\"text-align:center;\">
-                    <form action=\"Action/deleteDiscount_action.php\" method=\"get\">
-                        <input style='display: none;' type=\"text\" name=\"codeID\" value='$row2[codeID]'>
-                        <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
-                    </form>
-
-                    </td>
+                    echo"               
                     </tr>
                     ";
                    }

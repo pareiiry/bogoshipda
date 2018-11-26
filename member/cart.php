@@ -75,6 +75,10 @@ $discount=0;
             margin-bottom: 10px;
         }
 
+        .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: lightgray;
+            opacity: 1; /* Firefox */
+        }
 
     </style>
 </head>
@@ -247,7 +251,7 @@ $discount=0;
                                         </div>
                                     </td>
                                     <td class="column-2"><?php echo $values["name"]; ?></td>
-                                    <td class="column-3">฿  <?php echo $values["price"]; ?></td>
+                                    <td class="column-3">฿  <?php echo number_format($values["price"], 2); ?></td>
                                     <td class="column-4">
                                         <div class="flex-w bo5 of-hidden w-size17">
                                             <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
@@ -261,7 +265,7 @@ $discount=0;
                                             </button>
                                         </div>
                                     </td>
-                                    <td class="column-5">฿ <?php echo ($values["quantity"] * $values["price"]); ?></td>
+                                    <td class="column-5">฿ <?php echo number_format($values["quantity"] * $values["price"],2); ?></td>
                                     <td class="column-6">  <?php echo "<a href='deleteFromCart_action.php?pdID=$values[pdID]' style='background-color: red;margin-left: 2%' class='flex-c-m bg1 bo-rad-5 hov1 s-text1 trans-0-4'>
                                             X
                                          </a>";?>  </td>
@@ -299,7 +303,7 @@ $discount=0;
                             ?>
                             <tr class="table-row">
                                 <td colspan="4" style="text-align: right">รวมค่าสินค้าทั้งหมด:  &nbsp;&nbsp;</td>
-                                <td style="color: red">฿ <?php echo number_format($total, 0); ?></td>
+                                <td style="color: red">฿ <?php echo number_format($total, 2); ?></td>
                                 <td></td>
                             </tr>
                             <?php
@@ -416,7 +420,7 @@ $discount=0;
 
                 <span class="m-text21 w-size20 w-full-sm">
 
-                    <span style='color: red'>฿ <?php echo number_format($summaryPrice, 0);?></span>
+                    <span style='color: red'>฿ <?php echo number_format($summaryPrice, 2);?></span>
 					</span>
             </div>
 
@@ -513,9 +517,9 @@ $discount=0;
 
                    <span id="lastPrice" style="color: red">฿ <?php
                        if($count>5){
-                           $addShip = ($count-5)*5;
+                           $addShip = ($count-4)*5;
                        }
-                       echo number_format(($summaryPrice+30+$addShip), 0);?></span>
+                       echo number_format(($summaryPrice+30+$addShip), 2);?></span>
 					</span>
             </div>
 
@@ -659,28 +663,14 @@ $discount=0;
 <script type="text/javascript" src="../vendor/lightbox2/js/lightbox.min.js"></script>
 <!--===============================================================================================-->
 <script type="text/javascript" src="../vendor/sweetalert/sweetalert.min.js"></script>
-<script type="text/javascript">
-    $('.block2-btn-addcart').each(function(){
-        var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-        $(this).on('click', function(){
-            swal(nameProduct, "is added to cart !", "success");
-        });
-    });
 
-    $('.block2-btn-addwishlist').each(function(){
-        var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-        $(this).on('click', function(){
-            swal(nameProduct, "is added to wishlist !", "success");
-        });
-    });
-</script>
 
 <script>
     $('input[type=radio][name=ship]').change(function() {
         if (this.value == 'Regis') {
             <?php $ship = 30;
             if($count>5){
-                $addShip = ($count-5)*5;
+                $addShip = ($count-4)*5;
             }
             $lastPrice = number_format(($summaryPrice+$ship+$addShip), 0);?>
             document.getElementById("lastPrice").innerHTML = "฿ <?php echo $lastPrice;?>";
@@ -689,7 +679,7 @@ $discount=0;
         else if (this.value == 'Ems') {
             <?php $ship = 50;
             if($count>5){
-                $addShip = ($count-5)*5;
+                $addShip = ($count-4)*5;
             }
             $lastPrice = number_format(($summaryPrice+$ship+$addShip), 0);?>
             document.getElementById("lastPrice").innerHTML = "฿ <?php echo $lastPrice;?>";
@@ -697,7 +687,7 @@ $discount=0;
         else if (this.value == 'Kerry') {
             <?php $ship = 50;
             if($count>5){
-                $addShip = ($count-5)*5;
+                $addShip = ($count-4)*5;
             }
             $lastPrice = number_format(($summaryPrice+$ship+$addShip), 0);?>
             document.getElementById("lastPrice").innerHTML = "฿ <?php echo $lastPrice;?>";
@@ -711,7 +701,7 @@ $discount=0;
         if (this.value == 'Regis') {
             <?php $ship = 30;
             if($count>5){
-                $addShip = ($count-5)*5;
+                $addShip = ($count-4)*5;
             }
             $lastPrice = number_format(($summaryPrice+$ship+$addShip), 0);?>
             document.getElementById("lastPriceShip").innerHTML = "฿ <?php echo $lastPrice;?>";
@@ -720,7 +710,7 @@ $discount=0;
         else if (this.value == 'Ems') {
             <?php $ship = 50;
             if($count>5){
-                $addShip = ($count-5)*5;
+                $addShip = ($count-4)*5;
             }
             $lastPrice = number_format(($summaryPrice+$ship+$addShip), 0);?>
             document.getElementById("lastPriceShip").innerHTML = "฿ <?php echo $lastPrice;?>";
@@ -728,7 +718,7 @@ $discount=0;
         else if (this.value == 'Kerry') {
             <?php $ship = 50;
             if($count>5){
-                $addShip = ($count-5)*5;
+                $addShip = ($count-4)*5;
             }
             $lastPrice = number_format(($summaryPrice+$ship+$addShip), 0);?>
             document.getElementById("lastPriceShip").innerHTML = "฿ <?php echo $lastPrice;?>";

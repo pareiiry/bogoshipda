@@ -31,7 +31,7 @@ $resultOrder3 = mysqli_query($con,$sqlOrder3);
 $countNotiPay = mysqli_num_rows($resultOrder3);
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Bogoshipda Admin | Banner</title>
     <meta charset="utf-8">
@@ -196,10 +196,11 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
 
                                     <div class="btn-group" style="margin: 0 0 2% 0;width: 100%">
                                         <form method="post" action="#" enctype="multipart/form-data">
-                                            Select files: <input style="margin:2% 0 2% 0 " type="file" name="filesToUploadBanner[]" id="filesToUploadBanner" multiple onchange="makeFileList2();">
+                                            Select files: <input style="margin:2% 0 2% 0 " width="25px" type="file" name="filesToUploadBanner[]" id="filesToUploadBanner" multiple onchange="makeFileList2();">
                                             <!--                                        <input type="submit">-->
                                         </form>
-                                        รูปภาพที่เลือก :
+                                        <p style="color: red"> *ขนาดของรูปภาพ <br>กว้าง 1200px  สูง 300px</p>
+                                        <p>รูปภาพที่เลือก :</p>
                                         <ul id="fileList2" style="list-style-type:none"><li>ไม่มีรูปภาพที่เลือก</li></ul>
 
                                         <script>

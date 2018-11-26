@@ -58,7 +58,10 @@ $discount=0;
             padding: auto;
             margin-bottom: 10px;
         }
-
+        .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: lightgray;
+            opacity: 1; /* Firefox */
+        }
 
     </style>
 </head>
@@ -459,7 +462,7 @@ $discount=0;
 
                    <span id="lastPrice" style="color: red">฿ <?php
                        if($count>5){
-                           $addShip = ($count-5)*5;
+                           $addShip = ($count-4)*5;
                        }
                        echo number_format(($summaryPrice+30+$addShip), 0);?></span>
 					</span>
@@ -635,7 +638,7 @@ $discount=0;
         if (this.value == 'Regis') {
             <?php $ship = 30;
             if($count>5){
-                $addShip = ($count-5)*5;
+                $addShip = ($count-4)*5;
             }
             $lastPrice = number_format(($summaryPrice+$ship+$addShip), 0);?>
             document.getElementById("lastPrice").innerHTML = "฿ <?php echo $lastPrice;?>";
@@ -644,7 +647,7 @@ $discount=0;
         else if (this.value == 'Ems') {
             <?php $ship = 50;
             if($count>5){
-                $addShip = ($count-5)*5;
+                $addShip = ($count-4)*5;
             }
             $lastPrice = number_format(($summaryPrice+$ship+$addShip), 0);?>
             document.getElementById("lastPrice").innerHTML = "฿ <?php echo $lastPrice;?>";
@@ -652,7 +655,7 @@ $discount=0;
         else if (this.value == 'Kerry') {
             <?php $ship = 50;
             if($count>5){
-                $addShip = ($count-5)*5;
+                $addShip = ($count-4)*5;
             }
             $lastPrice = number_format(($summaryPrice+$ship+$addShip), 0);?>
             document.getElementById("lastPrice").innerHTML = "฿ <?php echo $lastPrice;?>";
@@ -666,7 +669,7 @@ $discount=0;
         if (this.value == 'Regis') {
             <?php $ship = 30;
             if($count>5){
-                $addShip = ($count-5)*5;
+                $addShip = ($count-4)*5;
             }
             $lastPrice = number_format(($summaryPrice+$ship+$addShip), 0);?>
             document.getElementById("lastPriceShip").innerHTML = "฿ <?php echo $lastPrice;?>";
@@ -675,7 +678,7 @@ $discount=0;
         else if (this.value == 'Ems') {
             <?php $ship = 50;
             if($count>5){
-                $addShip = ($count-5)*5;
+                $addShip = ($count-4)*5;
             }
             $lastPrice = number_format(($summaryPrice+$ship+$addShip), 0);?>
             document.getElementById("lastPriceShip").innerHTML = "฿ <?php echo $lastPrice;?>";
@@ -683,7 +686,7 @@ $discount=0;
         else if (this.value == 'Kerry') {
             <?php $ship = 50;
             if($count>5){
-                $addShip = ($count-5)*5;
+                $addShip = ($count-4)*5;
             }
             $lastPrice = number_format(($summaryPrice+$ship+$addShip), 0);?>
             document.getElementById("lastPriceShip").innerHTML = "฿ <?php echo $lastPrice;?>";

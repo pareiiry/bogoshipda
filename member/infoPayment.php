@@ -288,7 +288,7 @@ $result2 = mysqli_query($con,$sql2);
                             if($total!==null) {
                                 ?>
                                 <div class="header-cart-total">
-                                    รวมค่าสินค้า : ฿<?php echo number_format($total, 0); ?>
+                                    รวมค่าสินค้า : ฿<?php echo number_format($total, 2); ?>
                                 </div>
                                 <?php
                             }

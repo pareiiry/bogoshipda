@@ -349,7 +349,7 @@ else{
                                                     </a>
 
                                                     <span class="header-cart-item-info">
-											<?php echo $values["quantity"]; ?> x  ฿<?php echo $values["price"]; ?>
+											<?php echo $values["quantity"]; ?> x  ฿<?php echo number_format($values["price"],2); ?>
 										</span>
                                                 </div>
                                             </li>
@@ -409,7 +409,7 @@ else{
                             if($total!==null) {
                                 ?>
                                 <div class="header-cart-total">
-                                    รวมค่าสินค้า : ฿<?php echo number_format($total, 0); ?>
+                                    รวมค่าสินค้า : ฿<?php echo number_format($total, 2); ?>
                                 </div>
                                 <?php
                             }
@@ -669,7 +669,7 @@ while($row2= mysqli_fetch_assoc($result2))// show the information from query
                     <?php
                     for($pn=1;$pn<=$page_of_pd;$pn++){
 
-                        echo  "<a href=\"product.php?page=$pn\" class=\"item-pagination flex-c-m trans-0-4\">$pn</a>";
+                        echo  "<a href=\"product.php?color=all&page=$pn\" class=\"item-pagination flex-c-m trans-0-4\">$pn</a>";
 
                     }
                     ?>

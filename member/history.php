@@ -291,7 +291,7 @@ $resultOrder = mysqli_query($con,$sqlOrder);
                             if($total!==null) {
                                 ?>
                                 <div class="header-cart-total">
-                                    รวมค่าสินค้า : ฿<?php echo number_format($total, 0); ?>
+                                    รวมค่าสินค้า : ฿<?php echo number_format($total, 2); ?>
                                 </div>
                                 <?php
                             }
@@ -375,7 +375,7 @@ $resultOrder = mysqli_query($con,$sqlOrder);
                     <td>$rowOrder[orderID]</td>
                     <td>$dateTime</td>
                     <td>$orderStatus</td>
-                    <td style=\"text-align: right\">฿ $rowOrder[netPrice]</td>
+                    <td style=\"text-align: right\">฿" ?> <?php echo number_format($rowOrder['netPrice'],2); ?> <?php echo "</td>
                     <td>
                   
                             <a href=\"orderDetail.php?orderID=$rowOrder[orderID]\"><button class='btn-view' type=\"submit\"><i class=\"fa fa-search\"></i></button></a>
@@ -383,7 +383,7 @@ $resultOrder = mysqli_query($con,$sqlOrder);
                     </td>";
               if($rowOrder['orderStatus']=='waiting for payment') {
                   echo "<td>
-                        <a href=\"infoPayment.php?orderID=$rowOrder[orderID]\" style=\"color: #ffffff\"><button type=\"submit\" class=\"flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 \">
+                        <a href=\"infoPayment.php?orderID=$rowOrder[orderID]\" style=\"color: #ffffff\"><button type=\"submit\" class=\"flex-c-m sizefull bg9 bo-rad-23 hov1 s-text1 trans-0-4 \">
                             แจ้งชำระเงิน
                         </button ></a>
                     </td>";

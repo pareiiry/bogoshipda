@@ -403,27 +403,27 @@ else{
                                     <tr>
                                         <td style=\"text-align: left; \">$rowPD[name]</td>
                                         <td>$rowgpd[amount]</td>
-                                        <td style=\"text-align: right;\">$rowPD[price]</td>
-                                        <td style=\"text-align: right; \">$rowgpd[priceAmount]</td>
+                                        <td style=\"text-align: right;\"> "?> <?php echo number_format($rowPD['price'],2); ?> <?php echo "</td>
+                                        <td style=\"text-align: right; \"> "?> <?php echo number_format($rowgpd['priceAmount'],2); ?> <?php echo "</td>
                                     </tr>";
 
                 }
                 ?>
                 <tr>
                     <td colspan="3" class="tf">ยอดรวมสินค้า</td>
-                    <td class="tf">฿ <?php echo $rowOrder['priceAmount'];?></td>
+                    <td class="tf">฿ <?php echo number_format($rowOrder['priceAmount'], 2);?></td>
                 </tr>
                 <tr>
                     <td colspan="3" class="tf">ส่วนลด</td>
-                    <td class="tf">฿ <?php echo $rowOrder['discountPrice'];?></td>
+                    <td class="tf">฿ <?php echo number_format($rowOrder['discountPrice'], 2);?></td>
                 </tr>
                 <tr>
                     <td colspan="3" class="tf">ค่าจัดส่ง</td>
-                    <td class="tf">฿ <?php echo $rowOrder['shipPrice'];?></td>
+                    <td class="tf">฿ <?php echo number_format($rowOrder['shipPrice'], 2);?></td>
                 </tr>
                 <tr>
                     <td colspan="3" class="tf">ราคาสุทธิ</td>
-                    <td class="tf" style="color: red">฿ <?php echo $rowOrder['netPrice'];?></td>
+                    <td class="tf" style="color: red"><b>฿ <?php echo number_format($rowOrder['netPrice'], 2);?></b></td>
                 </tr>
 
             </table>

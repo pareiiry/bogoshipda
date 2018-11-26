@@ -606,7 +606,7 @@ while($row2= mysqli_fetch_assoc($result2))// show the information from query
                     <?php
                     for($pn=1;$pn<=$page_of_pd;$pn++){
 
-                        echo  "<a href=\"product.php?page=$pn\" class=\"item-pagination flex-c-m trans-0-4\">$pn</a>";
+                        echo  "<a href=\"product.php?color=all&page=$pn\" class=\"item-pagination flex-c-m trans-0-4\">$pn</a>";
 
                     }
                     ?>

@@ -434,7 +434,7 @@ $result2 = mysqli_query($con,$sql2);
                     </div>
                 </div>
             </div>
-            <div class="span9" style="height: 600px">
+            <div class="span6" style="height: 600px">
                 <div align="center" style="min-height: 32px;">
                     <div class="clearfix">
                         <div class="btn-group inline pull-left" id="texteditor" style="display:block">
@@ -495,7 +495,32 @@ $result2 = mysqli_query($con,$sql2);
                 <!--	/EDITOR		-->
             </div>
 
-
+            <div class="span3">
+                <div class="well">
+                    <h3>Total Prices</h3>
+                    <p>
+                    <table class="table">
+                        <tr>
+                            <td>Short Sleeve</td>
+                            <td align="right">$12.49</td>
+                        </tr>
+                        <tr>
+                            <td>Front Design</td>
+                            <td align="right">$4.99</td>
+                        </tr>
+                        <tr>
+                            <td>Back Design</td>
+                            <td align="right">$4.99</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total</strong></td>
+                            <td align="right"><strong>$22.47</strong></td>
+                        </tr>
+                    </table>
+                    </p>
+                    <button type="button" class="btn btn-large btn-block btn-success" name="addToTheBag" id="addToTheBag">Add to bag <i class="icon-briefcase icon-white"></i></button>
+                </div>
+            </div>
         </div>
 
     </section>

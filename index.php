@@ -546,10 +546,12 @@ $result2 = mysqli_query($con,$sql2);
 
             <ul>
                 <li class="p-b-9 s-text7">
-                    Thailand Post
+                    <a href="http://track.thailandpost.co.th/tracking/default.aspx">
+                        Thailand Post</a>
                 </li>
                 <li class="p-b-9 s-text7">
-                   Kerry Express
+                    <a href="https://th.kerryexpress.com/th/track/">
+                        Kerry Express</a>
                 </li>
 
             </ul>
@@ -621,15 +623,6 @@ $result2 = mysqli_query($con,$sql2);
 <script type="text/javascript" src="vendor/lightbox2/js/lightbox.min.js"></script>
 <!--===============================================================================================-->
 <script type="text/javascript" src="vendor/sweetalert/sweetalert.min.js"></script>
-<script type="text/javascript">
-    $('.block2-btn-addcart').each(function(){
-        var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-        $(this).on('click', function(){
-            swal(nameProduct, "is added to cart !", "success");
-        });
-    });
-
-</script>
 
 <!--===============================================================================================-->
 <script src="js/main.js"></script>

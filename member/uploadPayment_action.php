@@ -6,7 +6,7 @@ $pricePayInput= $_POST['pricePay'];
 $time= $_POST['time'];
 $date= $_POST['date'];
 
-if($_FILES['filesToUpload']['size'] !== 0) {
+//if($_FILES['filesToUpload']['size'] !== 0) {
 
     for ($i = 0; $i < count($_FILES['filesToUploadPay']['name']); $i++) {
         date_default_timezone_set("Asia/Bangkok");
@@ -24,4 +24,4 @@ if($_FILES['filesToUpload']['size'] !== 0) {
     }else{
         echo "<script type='text/javascript'>alert('เกิดข้อผิดพลาดในการบันทึกข้อมูล');window.history.go(-1);</script>" ;
     }
-}
+//}
