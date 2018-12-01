@@ -32,6 +32,10 @@ $sqlOrder3 = "SELECT * FROM order_table WHERE orderStatus='waiting for verify'";
 $resultOrder3 = mysqli_query($con,$sqlOrder3);
 $countNotiPay = mysqli_num_rows($resultOrder3);
 
+$sqlOrder4 = "SELECT * FROM order_table WHERE orderStatus='prepare to send order'";
+$resultOrder4 = mysqli_query($con,$sqlOrder4);
+$countNotiShipment = mysqli_num_rows($resultOrder4);
+
 $sqlPay = "SELECT * FROM payment WHERE paymentID='".$_GET['paymentID']."'";
 $resultPay = mysqli_query($con,$sqlPay);
 $rowPay = mysqli_fetch_array($resultPay,MYSQLI_ASSOC);
@@ -265,7 +269,7 @@ else if($rowBank['bankName']=='PrompPay') {
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
-                <a href="shipping.php"><img class="bg-icon" src="../img/menu_bar_admin/shipment.png" style="width:100%" alt="Image">ขนส่ง</a>
+                <a href="shipping.php"><img class="bg-icon" src="../img/menu_bar_admin/shipment.png" style="width:100%" alt="Image">ขนส่ง<span class="menu-icons-noti"><?php echo $countNotiShipment;?></a>
             </div>
         </div>
     </div><br>
@@ -363,7 +367,7 @@ else if($rowBank['bankName']=='PrompPay') {
                                 </tr>
                                 <tr>
                                     <td>รูปสลิป : </td>
-                                    <td><?php echo '<img style="width:30%" src="data:image/*;base64,' . base64_encode($rowPay['slipImage']) . '"/>';?></td>
+                                    <td><?php echo '<img style="width:30%" src="../'.$rowPay['slipImgPath'].'"/>';?></td>
                                 </tr>
                                 <tr>
                                     <td>การตวรสอบ</td>

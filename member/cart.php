@@ -235,16 +235,14 @@ $discount=0;
                                                 } else {
                                                     echo '<img src="'.$row3['imgPath'].'"/>';
                                                 }
-                                            }else{
-                                                $sql3 = "SELECT * FROM image WHERE pdID= '".$rowPd["pdID"]."' LIMIT 1";
-                                                $result3 = mysqli_query($con,$sql3);
-                                                $row3 = mysqli_fetch_array($result3,MYSQLI_ASSOC);
-                                                if($row3['img']==="" || empty($row3)){
-                                                    // echo"Hello";
-                                                    echo '<img src="images/no-picture.jpg">';
-                                                }
-                                                else {
-                                                    echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
+                                            }else {
+                                                $sql3 = "SELECT * FROM image WHERE pdID= '" . $rowPd["pdID"] . "' LIMIT 1";
+                                                $result3 = mysqli_query($con, $sql3);
+                                                $row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC);
+                                                if ($row3['pdImgPath'] === "" || empty($row3)) {
+                                                    echo '<img src="../images/no-picture.jpg">';
+                                                } else {
+                                                    echo '<img src="../' . $row3['pdImgPath'] . '"/></a>';
                                                 }
                                             }
                                             ?>

@@ -185,13 +185,20 @@ $discount=0;
                                         <div class="cart-img-product b-rad-4 o-f-hidden">
                                             <?php
 
-                                            if($row3['img']==="" || empty($row3)){
-                                                // echo"Hello";
+                                            if($row3['pdImgPath']==="" || empty($row3)){
                                                 echo '<img src="images/no-picture.jpg">';
                                             }
                                             else {
-                                                echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
+                                                echo '<img src="'.$row3['pdImgPath'].'"/></a>';
                                             }
+
+//                                            if($row3['img']==="" || empty($row3)){
+//                                                // echo"Hello";
+//                                                echo '<img src="images/no-picture.jpg">';
+//                                            }
+//                                            else {
+//                                                echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
+//                                            }
                                             ?>
                                         </div>
                                     </td>

@@ -33,6 +33,9 @@ $sqlOrder3 = "SELECT * FROM order_table WHERE orderStatus='waiting for verify'";
 $resultOrder3 = mysqli_query($con,$sqlOrder3);
 $countNotiPay = mysqli_num_rows($resultOrder3);
 
+$sqlOrder4 = "SELECT * FROM order_table WHERE orderStatus='prepare to send order'";
+$resultOrder4 = mysqli_query($con,$sqlOrder4);
+$countNotiShipment = mysqli_num_rows($resultOrder4);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -238,7 +241,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
-                <a href="shipping.php"><img class="bg-icon" src="../img/menu_bar_admin/shipment.png" style="width:100%" alt="Image">ขนส่ง</a>
+                <a href="shipping.php"><img class="bg-icon" src="../img/menu_bar_admin/shipment.png" style="width:100%" alt="Image">ขนส่ง<span class="menu-icons-noti"><?php echo $countNotiShipment;?></a>
             </div>
         </div>
     </div><br>
@@ -331,11 +334,12 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                         echo "
                  
                     <td style=\"text-align:center;\">";
-                        if($row3['img']==="" || empty($row3)){
+                        if($row3['pdImgPath']==="" || empty($row3)){
                             echo '<img style="width:30%" src="../images/no-picture.jpg">';
                         }
                         else {
-                            echo '<a class="example-image-link" href="data:image/*;base64,'.base64_encode($row3['img']).'" data-lightbox="product"><img style="width:30%" src="data:image/*;base64,' . base64_encode($row3['img']) . '"/></a>';
+                            echo '<a class="example-image-link" href="../'.$row3['pdImgPath'].'" data-lightbox="product"><img style="width:30%" src="../'.$row3['pdImgPath'].'"/></a>';
+//                            echo '<a class="example-image-link" href="data:image/*;base64,'.base64_encode($row3['img']).'" data-lightbox="product"><img style="width:30%" src="data:image/*;base64,' . base64_encode($row3['img']) . '"/></a>';
                         }
                         echo"</td>";
                     }

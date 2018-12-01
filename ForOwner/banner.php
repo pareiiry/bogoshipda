@@ -29,6 +29,10 @@ $countNoti = mysqli_num_rows($resultOrder2);
 $sqlOrder3 = "SELECT * FROM order_table WHERE orderStatus='waiting for verify'";
 $resultOrder3 = mysqli_query($con,$sqlOrder3);
 $countNotiPay = mysqli_num_rows($resultOrder3);
+
+$sqlOrder4 = "SELECT * FROM order_table WHERE orderStatus='prepare to send order'";
+$resultOrder4 = mysqli_query($con,$sqlOrder4);
+$countNotiShipment = mysqli_num_rows($resultOrder4);
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -131,7 +135,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
-                <a href="shipping.php"><img class="bg-icon" src="../img/menu_bar_admin/shipment.png" style="width:100%" alt="Image">ขนส่ง</a>
+                <a href="shipping.php"><img class="bg-icon" src="../img/menu_bar_admin/shipment.png" style="width:100%" alt="Image">ขนส่ง<span class="menu-icons-noti"><?php echo $countNotiShipment;?></a>
             </div>
         </div>
     </div><br>
@@ -244,7 +248,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
                                         <?php
                                         while($rowB = mysqli_fetch_assoc($resultB))// show the information from query
                                         {
-                                                echo '<tr><td style="text-align: center"><img style="width:100%" src="data:image/*;base64,' . base64_encode($rowB['bImg']) . '"/></td>';
+                                                echo '<tr><td style="text-align: center"><img style="width:100%" src="../'.$rowB['bImgPath'].'"/></td>';
                                                 ?><td style="padding-top: 70px">
                                                 <form action="Action/deleteBanner.php" method="get">
                                                     <input style='display: none;' type="text" name="bID" value='<?php echo $rowB['bID'];?>'>

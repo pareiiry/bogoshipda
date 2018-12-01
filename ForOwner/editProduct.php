@@ -32,6 +32,10 @@ $countNoti = mysqli_num_rows($resultOrder2);
 $sqlOrder3 = "SELECT * FROM order_table WHERE orderStatus='waiting for verify'";
 $resultOrder3 = mysqli_query($con,$sqlOrder3);
 $countNotiPay = mysqli_num_rows($resultOrder3);
+
+$sqlOrder4 = "SELECT * FROM order_table WHERE orderStatus='prepare to send order'";
+$resultOrder4 = mysqli_query($con,$sqlOrder4);
+$countNotiShipment = mysqli_num_rows($resultOrder4);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -135,7 +139,7 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
-                <a href="shipping.php"><img class="bg-icon" src="../img/menu_bar_admin/shipment.png" style="width:100%" alt="Image">ขนส่ง</a>
+                <a href="shipping.php"><img class="bg-icon" src="../img/menu_bar_admin/shipment.png" style="width:100%" alt="Image">ขนส่ง<span class="menu-icons-noti"><?php echo $countNotiShipment;?></a>
             </div>
         </div>
     </div><br>

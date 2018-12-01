@@ -264,12 +264,11 @@ $result2 = mysqli_query($con,$sql2);
                                             <div class="header-cart-item-img">
                                                 <?php
 
-                                                if($row3['img']==="" || empty($row3)){
-                                                    // echo"Hello";
+                                                if($row3['pdImgPath']==="" || empty($row3)){
                                                     echo '<img src="../images/no-picture.jpg">';
                                                 }
                                                 else {
-                                                    echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
+                                                    echo '<img src="../'.$row3['pdImgPath'].'"/></a>';
                                                 }
                                                 ?>
                                             </div>

@@ -16,11 +16,20 @@ include ('../../dbConnect.php');
     $sql_query=mysqli_query($con,$sql);
 
     for ($i = 0; $i < count($_FILES['filesToUpload']['name']); $i++) {
+
         if($_FILES['filesToUpload']['size'][$i] !== 0) {
-            $image = addslashes(file_get_contents($_FILES['filesToUpload']['tmp_name'][$i]));
-            $sql2 = "INSERT INTO image (imgID,img,pdID)VALUES('','$image','$pdID')";//คำสั่งเพิ่มข้อมูล
+            $filename = 'product_img/product_' . md5(uniqid(rand(), true)) . '.png';
+            move_uploaded_file($_FILES['filesToUpload']['tmp_name'][$i], '../../' . $filename);
+
+            $sql2 = "INSERT INTO image (imgID,pdImgPath,pdID)VALUES('','$filename','$pdID')";//คำสั่งเพิ่มข้อมูล
             $sql_query2 = mysqli_query($con, $sql2);
         }
+
+//        if($_FILES['filesToUpload']['size'][$i] !== 0) {
+//            $image = addslashes(file_get_contents($_FILES['filesToUpload']['tmp_name'][$i]));
+//            $sql2 = "INSERT INTO image (imgID,img,pdID)VALUES('','$image','$pdID')";//คำสั่งเพิ่มข้อมูล
+//            $sql_query2 = mysqli_query($con, $sql2);
+//        }
     }
 //}
 //else{

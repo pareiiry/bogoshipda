@@ -134,14 +134,20 @@ $result2 = mysqli_query($con,$sql2);
                                 <li class="header-cart-item">
                                     <div class="header-cart-item-img">
                                         <?php
-
-                                        if($row3['img']==="" || empty($row3)){
-                                           // echo"Hello";
-                                            echo '<img src="images/no-picture.jpg">';
+                                        if($row3['pdImgPath']==="" || empty($row3)){
+                                            echo '<img style="width:30%" src="images/no-picture.jpg">';
                                         }
                                         else {
-                                            echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
+                                            echo '<img src="'.$row3['pdImgPath'].'"/></a>';
                                         }
+
+//                                        if($row3['img']==="" || empty($row3)){
+//                                           // echo"Hello";
+//                                            echo '<img src="images/no-picture.jpg">';
+//                                        }
+//                                        else {
+//                                            echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
+//                                        }
                                         ?>
                                     </div>
 
@@ -401,7 +407,7 @@ $result2 = mysqli_query($con,$sql2);
             $resultB = mysqli_query($con,$sqlB);
             while($rowB = mysqli_fetch_assoc($resultB))// show the information from query
             {
-                echo ' <div class="item-slick1 item1-slick1" style="background-image: url(data:image/*;base64,' . base64_encode($rowB['bImg']) . ');">
+                echo ' <div class="item-slick1 item1-slick1" style="background-image: url('.$rowB['bImgPath'].');">
                 <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
                     <div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="zoomIn">
                         <!-- Button -->
@@ -444,12 +450,18 @@ $result2 = mysqli_query($con,$sql2);
                         <div class=\"block2-img wrap-pic-w of-hidden pos-relative\">";
                    //print_r($row3);
                     //echo $row3['img'];
-                    if($row3['img']==="" || empty($row3)){
+                    if($row3['pdImgPath']==="" || empty($row3)){
                         echo '<img src="images/no-picture.jpg">';
                     }
                     else {
-                        echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
+                        echo '<img src="'.$row3['pdImgPath'].'"/></a>';
                     }
+//                    if($row3['img']==="" || empty($row3)){
+//                        echo '<img src="images/no-picture.jpg">';
+//                    }
+//                    else {
+//                        echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
+//                    }
                     echo "
                             <div class=\"block2-overlay trans-0-4\">
                               
@@ -525,7 +537,8 @@ $result2 = mysqli_query($con,$sql2);
 
             <ul>
                 <li class="p-b-9 s-text7">
-                    bogoshipdashop@gmail.com
+                    <a href="mailto:bogoshipdashop@gmail.com?Subject=สอบถามข้อมูล" target="_top">
+                        bogoshipdashop@gmail.com</a>
                 </li>
 
                 <li class="p-b-9 s-text7">

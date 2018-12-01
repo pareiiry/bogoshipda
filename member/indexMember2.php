@@ -205,11 +205,11 @@ $result2 = mysqli_query($con,$sql2);
                                         <div class="header-cart-item-img">
                                             <?php
 
-                                            if ($row3['img'] === "" || empty($row3)) {
-                                                // echo"Hello";
+                                            if($row3['pdImgPath']==="" || empty($row3)){
                                                 echo '<img src="../images/no-picture.jpg">';
-                                            } else {
-                                                echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
+                                            }
+                                            else {
+                                                echo '<img src="../'.$row3['pdImgPath'].'"/></a>';
                                             }
                                             ?>
                                         </div>
@@ -320,7 +320,7 @@ $result2 = mysqli_query($con,$sql2);
             $resultB = mysqli_query($con,$sqlB);
             while($rowB = mysqli_fetch_assoc($resultB))// show the information from query
             {
-                echo ' <div class="item-slick1 item1-slick1" style="background-image: url(data:image/*;base64,' . base64_encode($rowB['bImg']) . ');">
+                echo ' <div class="item-slick1 item1-slick1" style="background-image: url(../'.$rowB['bImgPath'].');">
                 <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
                     <div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="zoomIn">
                         <!-- Button -->
@@ -367,7 +367,8 @@ $result2 = mysqli_query($con,$sql2);
                         echo '<img src="../images/no-picture.jpg">';
                     }
                     else {
-                        echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
+
+                        echo '<img src="../'.$row3['pdImgPath'].'"/>';
                     }
                     echo "
                             <div class=\"block2-overlay trans-0-4\">
