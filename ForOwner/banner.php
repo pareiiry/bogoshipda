@@ -18,9 +18,42 @@ $sql = "SELECT * FROM user WHERE uID = '".$_SESSION['ID']."' ";
 $result = mysqli_query($con,$sql);
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
+if(isset($_GET['page'])){
+    $page = $_GET['page'];
+    if($_GET['page']==""||$_GET['page']=="1"){
+        $pageshow=0;
 
-$sqlB = "SELECT * FROM banner";
-$resultB = mysqli_query($con,$sqlB);
+    }
+    else{
+        $pageshow=($page*5)-5;
+    }
+}
+else{
+    $pageshow=0;
+}
+
+if(!isset($_GET['page'])){
+    $sqlB = "SELECT * FROM banner LIMIT $pageshow,5";
+    $resultB = mysqli_query($con,$sqlB);
+
+    $sql3 = "SELECT * FROM banner";
+    $result3 = mysqli_query($con,$sql3);
+    $all_pd_count = mysqli_num_rows($result3);
+    $cal=$all_pd_count/5;
+    $page_of_pd = ceil($cal);
+}
+else{
+    $sqlB = "SELECT * FROM banner LIMIT $pageshow,5";
+    $resultB = mysqli_query($con,$sqlB);
+
+    $sql3 = "SELECT * FROM banner";
+    $result3 = mysqli_query($con, $sql3);
+    $all_pd_count = mysqli_num_rows($result3);
+    $cal = $all_pd_count / 5;
+    $page_of_pd = ceil($cal);
+}
+//$sqlB = "SELECT * FROM banner";
+//$resultB = mysqli_query($con,$sqlB);
 
 $sqlOrder2 = "SELECT * FROM order_table WHERE orderStatus='waiting for payment'";
 $resultOrder2 = mysqli_query($con,$sqlOrder2);
@@ -49,7 +82,31 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
     <link rel="stylesheet" type="text/css" href="../css/styleOwner.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style>
+        .pagination {
+            /*margin-right: -6px;*/
+            /*margin-left: -6px;*/
+        }
 
+        .item-pagination {
+            font-family: Montserrat-Regular;
+            font-size: 13px;
+            color: #808080;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid #eeeeee;
+            margin: 6px;
+        }
+
+        .item-pagination:hover {
+            background-color: #222222;
+            color: white;
+        }
+
+        .active-pagination {
+            background-color: #222222;
+            color: white;
+        }
         div.sticky{
             position: sticky;
             top:0;
@@ -260,8 +317,18 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
 
                                     
                                 </table>
+                                <div class="pagination flex-m flex-w p-t-26">
+                                    <?php
+                                    for($pn=1;$pn<=$page_of_pd;$pn++){
+
+                                        echo  "<a href=\"banner.php?page=$pn\" class=\"item-pagination flex-c-m trans-0-4\">$pn</a>";
+
+                                    }
+                                    ?>
                             </div>
                         </div>
+                    </div>
+
                     </div>
                 </div>
 

@@ -620,7 +620,7 @@ while($row2= mysqli_fetch_assoc($result2))// show the information from query
 
                     }
                     ?>
-            </div>
+                </div>
         </div>
     </div>
 </section>

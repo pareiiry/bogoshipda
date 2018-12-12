@@ -17,8 +17,44 @@ $result = mysqli_query($con,$sql);
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 
-$sqlOrder = "SELECT * FROM order_table";
-$resultOrder = mysqli_query($con,$sqlOrder);
+if(isset($_GET['page'])){
+    $page = $_GET['page'];
+    if($_GET['page']==""||$_GET['page']=="1"){
+        $pageshow=0;
+
+    }
+    else{
+        $pageshow=($page*10)-10;
+    }
+}
+else{
+    $pageshow=0;
+}
+
+if(!isset($_GET['page'])){
+    $sqlOrder = "SELECT * FROM order_table ORDER BY dateTime DESC LIMIT $pageshow,10";
+    $resultOrder = mysqli_query($con,$sqlOrder);
+
+    $sql3 = "SELECT * FROM order_table ORDER BY dateTime DESC";
+    $result3 = mysqli_query($con,$sql3);
+    $all_pd_count = mysqli_num_rows($result3);
+    $cal=$all_pd_count/10;
+    $page_of_pd = ceil($cal);
+}
+else{
+
+    $sqlOrder = "SELECT * FROM order_table ORDER BY dateTime DESC LIMIT $pageshow,10";
+    $resultOrder = mysqli_query($con,$sqlOrder);
+
+    $sql3 = "SELECT * FROM order_table ORDER BY dateTime DESC";
+    $result3 = mysqli_query($con, $sql3);
+    $all_pd_count = mysqli_num_rows($result3);
+    $cal = $all_pd_count / 10;
+    $page_of_pd = ceil($cal);
+}
+
+//$sqlOrder = "SELECT * FROM order_table";
+//$resultOrder = mysqli_query($con,$sqlOrder);
 
 $sqlOrder2 = "SELECT * FROM order_table WHERE orderStatus='waiting for payment'";
 $resultOrder2 = mysqli_query($con,$sqlOrder2);
@@ -47,7 +83,31 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     <style>
+        .pagination {
+            /*margin-right: -6px;*/
+            /*margin-left: -6px;*/
+        }
 
+        .item-pagination {
+            font-family: Montserrat-Regular;
+            font-size: 13px;
+            color: #808080;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid #eeeeee;
+            margin: 6px;
+        }
+
+        .item-pagination:hover {
+            background-color: #222222;
+            color: white;
+        }
+
+        .active-pagination {
+            background-color: #222222;
+            color: white;
+        }
         div.sticky{
             position: sticky;
             top:0;
@@ -326,7 +386,15 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                 </tr>";
                 }?>
             </table>
+            <div class="pagination flex-m flex-w p-t-26">
+                <?php
+                for($pn=1;$pn<=$page_of_pd;$pn++){
 
+                    echo  "<a href=\"order.php?page=$pn\" class=\"item-pagination flex-c-m trans-0-4\">$pn</a>";
+
+                }
+                ?>
+            </div>
             <script>
                 function search() {
                     var input, filter, table, tr, td, i,td2,td3;

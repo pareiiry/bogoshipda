@@ -19,11 +19,47 @@ $result = mysqli_query($con,$sql);
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 
-$sql2 = "SELECT * FROM user";
-//$objQuery = mysqli_query($strSQL);
-//$objResult = mysqli_fetch_array($objQuery);
-$result2 = mysqli_query($con,$sql2);
-//$row_getimgGID = mysqli_fetch_array($result2,MYSQLI_ASSOC);
+if(isset($_GET['page'])){
+    $page = $_GET['page'];
+    if($_GET['page']==""||$_GET['page']=="1"){
+        $pageshow=0;
+
+    }
+    else{
+        $pageshow=($page*10)-10;
+    }
+}
+else{
+    $pageshow=0;
+}
+
+if(!isset($_GET['page'])){
+    $sql2 = "SELECT * FROM user LIMIT $pageshow,10";
+    $result2 = mysqli_query($con, $sql2);
+
+    $sql3 = "SELECT * FROM user";
+    $result3 = mysqli_query($con,$sql3);
+    $all_pd_count = mysqli_num_rows($result3);
+    $cal=$all_pd_count/10;
+    $page_of_pd = ceil($cal);
+}
+else{
+
+    $sql2 = "SELECT * FROM user LIMIT $pageshow,10";
+    $result2 = mysqli_query($con, $sql2);
+
+    $sql3 = "SELECT * FROM user";
+    $result3 = mysqli_query($con, $sql3);
+    $all_pd_count = mysqli_num_rows($result3);
+    $cal = $all_pd_count / 10;
+    $page_of_pd = ceil($cal);
+}
+
+//$sql2 = "SELECT * FROM user";
+////$objQuery = mysqli_query($strSQL);
+////$objResult = mysqli_fetch_array($objQuery);
+//$result2 = mysqli_query($con,$sql2);
+////$row_getimgGID = mysqli_fetch_array($result2,MYSQLI_ASSOC);
 
 $sqlOrder2 = "SELECT * FROM order_table WHERE orderStatus='waiting for payment'";
 $resultOrder2 = mysqli_query($con,$sqlOrder2);
@@ -51,7 +87,31 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
     <link rel="icon" type="image/png" href="../images/icons/favicon.png"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style>
+        .pagination {
+            /*margin-right: -6px;*/
+            /*margin-left: -6px;*/
+        }
 
+        .item-pagination {
+            font-family: Montserrat-Regular;
+            font-size: 13px;
+            color: #808080;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid #eeeeee;
+            margin: 6px;
+        }
+
+        .item-pagination:hover {
+            background-color: #222222;
+            color: white;
+        }
+
+        .active-pagination {
+            background-color: #222222;
+            color: white;
+        }
         /* Set gray background color and 100% height */
         div.sticky{
             position: sticky;
@@ -378,7 +438,15 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
 
 
             </table>
+            <div class="pagination flex-m flex-w p-t-26">
+                <?php
+                for($pn=1;$pn<=$page_of_pd;$pn++){
 
+                    echo  "<a href=\"manageMember.php?page=$pn\" class=\"item-pagination flex-c-m trans-0-4\">$pn</a>";
+
+                }
+                ?>
+            </div>
             <script>
                 function search() {
                     var input, filter, table, tr, td, i,td2;
