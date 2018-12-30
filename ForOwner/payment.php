@@ -288,7 +288,7 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                 <a href="statistic.php"><img class="bg-icon" src="../img/menu_bar_admin/statistic.png" style="width:100%" alt="Image">สถิติ</a>
             </div>
             <div class="col-sm-3">
-
+                <a href="review.php"><img class="bg-icon" src="../img/menu_bar_admin/review.png" style="width:100%" alt="Image">รีวิว</a>
             </div>
         </div>
     </div><br>

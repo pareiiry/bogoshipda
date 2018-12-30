@@ -19,11 +19,47 @@ $result = mysqli_query($con,$sql);
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 
-$sql2 = "SELECT * FROM user";
-//$objQuery = mysqli_query($strSQL);
-//$objResult = mysqli_fetch_array($objQuery);
-$result2 = mysqli_query($con,$sql2);
-//$row_getimgGID = mysqli_fetch_array($result2,MYSQLI_ASSOC);
+if(isset($_GET['page'])){
+    $page = $_GET['page'];
+    if($_GET['page']==""||$_GET['page']=="1"){
+        $pageshow=0;
+
+    }
+    else{
+        $pageshow=($page*10)-10;
+    }
+}
+else{
+    $pageshow=0;
+}
+
+if(!isset($_GET['page'])){
+    $sql2 = "SELECT * FROM user LIMIT $pageshow,10";
+    $result2 = mysqli_query($con, $sql2);
+
+    $sql3 = "SELECT * FROM user";
+    $result3 = mysqli_query($con,$sql3);
+    $all_pd_count = mysqli_num_rows($result3);
+    $cal=$all_pd_count/10;
+    $page_of_pd = ceil($cal);
+}
+else{
+
+    $sql2 = "SELECT * FROM user LIMIT $pageshow,10";
+    $result2 = mysqli_query($con, $sql2);
+
+    $sql3 = "SELECT * FROM user";
+    $result3 = mysqli_query($con, $sql3);
+    $all_pd_count = mysqli_num_rows($result3);
+    $cal = $all_pd_count / 10;
+    $page_of_pd = ceil($cal);
+}
+
+//$sql2 = "SELECT * FROM user";
+////$objQuery = mysqli_query($strSQL);
+////$objResult = mysqli_fetch_array($objQuery);
+//$result2 = mysqli_query($con,$sql2);
+////$row_getimgGID = mysqli_fetch_array($result2,MYSQLI_ASSOC);
 
 $sqlOrder2 = "SELECT * FROM order_table WHERE orderStatus='waiting for payment'";
 $resultOrder2 = mysqli_query($con,$sqlOrder2);
@@ -40,7 +76,7 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bogoshipda Admin | สถิติร้านค้า - รายได้</title>
+    <title>Bogoshipda Admin | สมาชิก</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -51,7 +87,32 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
     <link rel="icon" type="image/png" href="../images/icons/favicon.png"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style>
+        .pagination {
+            /*margin-right: -6px;*/
+            /*margin-left: -6px;*/
+        }
 
+        .item-pagination {
+            font-family: Montserrat-Regular;
+            font-size: 13px;
+            color: #808080;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid #eeeeee;
+            margin: 6px;
+        }
+
+        .item-pagination:hover {
+            background-color: #222222;
+            color: white;
+        }
+
+        .active-pagination {
+            background-color: #222222;
+            color: white;
+        }
+        /* Set gray background color and 100% height */
         div.sticky{
             position: sticky;
             top:0;
@@ -99,42 +160,17 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
             padding: 0px 20px 0px 40px;
             border: 1px solid #ddd;
 			margin-top:10px;
-			margin-left:90px;
+			margin-left:40px;
             /*margin-bottom: 2px;*/
             border-radius: 8px;
 			height:35px;	
         }
-        .tb{
-            margin: auto;
-            margin-top: 50px;
-            margin-bottom: 30px;
-        }
-        .tb tr td{
-            text-align: center;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-collapse: collapse;
-        }
-        .custom-date{
-            margin: auto;
-            margin-top: 30px;
-            text-align: center;
-            width: 80%;
-        }
 
-        .list{
-            margin: auto;
-            margin-top: 30px;
-            text-align: center;
-            width: 80%;
-            border: 1px black;
-        }
         #myTable {
             border-collapse: collapse;
-            margin-top: 50px;
-            width: auto;
+            width: 100%;
             border-top: 1px solid #ddd;
-            /*font-size: 18px;*/
+            font-size: 14px;
         }
 
         #myTable th, #myTable td {
@@ -154,7 +190,7 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
             background-color: #edf9f7;
         }
         /* Style buttons */
-        .btn-view {
+        .btn-edit {
             background-color: #CCC  ; /* Blue background */
             border: none; /* Remove borders */
             color: white; /* White text */
@@ -169,7 +205,7 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
         }
 
         /* Darker background on mouse-over */
-        .btn-view:hover {
+        .btn-edit:hover {
             background-color: #6CF;
         }
         .btn-delete {
@@ -202,9 +238,6 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
 			background-color: #aadcd8;
 			border-radius: 8px;
 		}
-        .color-link{
-            color: #ed80aa;
-        }
         .menu-icons-noti {
             display: -webkit-box;
             display: -webkit-flex;
@@ -223,6 +256,40 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
             position: absolute;
             top: -7px;
             right: 10px;
+        }
+
+        .btn-outline-info {
+            color: #17a2b8;
+            background-color: transparent;
+            background-image: none;
+            border-color: #17a2b8;
+        }
+
+        .btn-outline-info:hover {
+            color: #fff;
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+
+        .btn-outline-info:focus, .btn-outline-info.focus {
+            box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5);
+        }
+
+        .btn-outline-info.disabled, .btn-outline-info:disabled {
+            color: #17a2b8;
+            background-color: transparent;
+        }
+
+        .btn-outline-info:not(:disabled):not(.disabled):active, .btn-outline-info:not(:disabled):not(.disabled).active,
+        .show > .btn-outline-info.dropdown-toggle {
+            color: #fff;
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+
+        .btn-outline-info:not(:disabled):not(.disabled):active:focus, .btn-outline-info:not(:disabled):not(.disabled).active:focus,
+        .show > .btn-outline-info.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5);
         }
     </style>
 </head>
@@ -271,7 +338,7 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
         <div class="row">
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
-                <a href="manageMember.php"><img class="bg-icon" src="../img/menu_bar_admin/user.png" style="width:100%" alt="Image">สมาชิก</a>
+                <a href="manageMember.php"><img class="bg-icon-current" src="../img/menu_bar_admin/user.png" style="width:100%" alt="Image">สมาชิก</a>
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
@@ -290,7 +357,7 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
     <div class="container-fluid bg-3 text-center">
         <div class="row">
             <div class="col-sm-3">
-                <a href="statistic.php"><img class="bg-icon-current" src="../img/menu_bar_admin/statistic.png" style="width:100%" alt="Image">สถิติ</a>
+                <a href="statistic.php"><img class="bg-icon" src="../img/menu_bar_admin/statistic.png" style="width:100%" alt="Image">สถิติ</a>
             </div>
             <div class="col-sm-3">
                 <a href="review.php"><img class="bg-icon" src="../img/menu_bar_admin/review.png" style="width:100%" alt="Image">รีวิว</a>
@@ -306,126 +373,124 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
         </div>
 
         <div class="col-sm-9">
-            <div class="row" style="margin-top: 5px" align="center">
-                <h3><b>สถิติร้านค้า</b></h3>
+            <div class="row" style="margin-top: 5px">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-4"><h3><b>รีวิว</b></h3></div>
+                <div class="col-sm-3"></div>
             </div>
 
             <hr>
-        <div class="col-sm-3">
-            <div class="panel panel-default">
-            <div class="list-group">
-                <a href="statistic.php" class="list-group-item list-group-item-info">รายได้</a>
-                <a href="statistic-order.php" class="list-group-item">จำนวนรายการสั่งซื้อ</a>
-
-            </div>
-            </div>
-
-        </div>
-        <div class="col-sm-9" >
-            <div class="panel panel-default">
-                <div class="row" style="margin-top: 30px" align="center">
-                    <h4><b>ยอดขาย - ต้นทุน</b></h4>
+            <div class="row">
+                <div class="col-sm-12" style="text-align: center">
+                    <button type="button" class="btn btn-outline-info"> ทั้งหมด</button>
+                    <button type="button" class="btn btn-outline-info"> 5 ดาว</button>
+                    <button type="button" class="btn btn-outline-info"> 4 ดาว</button>
+                    <button type="button" class="btn btn-outline-info"> 3 ดาว</button>
+                    <button type="button" class="btn btn-outline-info"> 2 ดาว</button>
+                    <button type="button" class="btn btn-outline-info"> 1 ดาว</button>
                 </div>
+            </div>
 
-                    <table class="custom-date">
-                        <tr><form action="" method="get">
-                            <td>แสดงตั้งแต่วันที่ </td>
-                            <td><input type="date" class="form-control" id="dateSt" name="dateSt"  value="<?php if(isset($_GET['dateSt'])){echo $_GET['dateSt'];}else echo date('d-m-Y');?>" onchange='this.form.submit()'></td>
-                            <td>ถึง </td>
-                            <td><input type="date" class="form-control" id="dateEn" name="dateEn" value="<?php if(isset($_GET['dateEn'])){echo $_GET['dateEn'];}else echo date('d-m-Y');?>" min="" onchange='this.form.submit()'></td>
-                            </form>
-                        </tr>
-                    </table>
+            <hr>
 
-        <?php
-        if(isset($_GET)){
-            if($_GET['dateSt']!="" && $_GET['dateEn']!=""){
-                if($_GET['dateSt']<=$_GET['dateEn']){
-                    $sqlPayment = "SELECT * FROM payment WHERE (dateVerifyPayment >= '".$_GET['dateSt']."' AND dateVerifyPayment <='".$_GET['dateEn'].":23:59:59')";
-                    $resultPayment = mysqli_query($con,$sqlPayment);
-                    echo "<table class=\"list table-striped\">
-                    <thead>
-                        <th style=\"width:10%;text-align:center;\">วันที่สั่งซื้อ</th>
-                        <th style=\"width:10%;text-align:center;\">Order ID</th>
-                        <th style=\"width:20%;text-align:center;\">ราคาสุทธิ(บาท)</th>
-                        <th style=\"width:10%;text-align:center;\">ต้นทุนสินค้า(บาท)</th>
-                    </thead>";
-                    if($resultPayment->num_rows == 0){
+            <table id="myTable">
+                <tr class="header">
+                    <th style="width:20%;text-align:center;">Review ID</th>
+                    <th style="width:20%;text-align:center;">วันที่รีวิว</th>
+                    <th style="width:20%;text-align:center;">ชื่อผู้ใช้</th>
+                    <th style="width:20%;text-align:center;">คะแนน</th>
+                    <th style="width:20%;text-align:center;">ความคิดเห็น</th>
+                </tr>
+                <?php
+                while($row2= mysqli_fetch_assoc($result2))// show the information from query
+                {
+                    if($row2['usertype']=="owner"){
                         echo "
-                            <tr>
-                            <td colspan='4' style=\"text-align:center;color: red;\">-ไม่มีรายการสั่งซื้อ-</td>
-                            </tr>
-                        ";
+                    <tr>
+                    <td style='text-align:center;'>$row2[uID]</td>
+                    <td style='text-align:center;'>$row2[name]</td>
+                    <td style='text-align:center;'>$row2[email]</td>
+                    <td style='text-align:center;'>$row2[usertype]</td>
+                    <td style=\"text-align:center;\">
+                       <div class='row'>
+                       <div class=\"col-md-2\">
+                        </div>
+                       <div class=\"col-md-4\">
+                       <form action=\"editAdmin.php\" method=\"get\">
+                            <input style='display: none;' type=\"text\" name=\"uID\" value='$row2[uID]'>
+                            <button class='btn-edit' type=\"submit\"><i class=\"fa fa-edit\"></i></button>
+                        </form>
+                        </div>
+                        <div class=\"col-md-2\">
+                        </div>
+                        </div>
+                        
+                    </td>
+                    </tr>
+                    ";
+                    }
+                    else if($row2['usertype']=="member"){
+                        echo "
+                    <tr>
+                    <td style='text-align:center;'>$row2[uID]</td>
+                    <td style='text-align:center;'>$row2[name]</td>
+                    <td style='text-align:center;'>$row2[email]</td>
+                    <td style='text-align:center;'>$row2[usertype]</td>
+                    <td style=\"text-align:center;\">
+                       <div class='row'>
+                       <div class=\"col-md-2\">
+                        </div>
+                        <div class=\"col-md-4\">
+                        
+                        </div>
+                        <div class=\"col-md-2\">
+                        </div>
+                        </div>
+                        
+                    </td>
+                    </tr>
+                    ";
                     }
                     else {
-                        $totalPrice = 0;
-                        $totalCost = 0;
-                        while ($rowPayment = mysqli_fetch_assoc($resultPayment)) {
-                            $sqlOrderTable = "SELECT * FROM order_table WHERE orderID = '" . $rowPayment['orderID'] . "'";
-                            $resultOrderTable = mysqli_query($con, $sqlOrderTable);
-                            $rowOrderTable = mysqli_fetch_array($resultOrderTable, MYSQLI_ASSOC);
+                        echo "
+                    <tr>
+                    <td style='text-align:center;'>$row2[uID]</td>
+                    <td>$row2[name]</td>
+                    <td>$row2[email]</td>
+                    <td style='text-align:center;'>$row2[usertype]</td>
+                    <td style=\"text-align:center;\">
+                       <div class='row'>
+                       <div class=\"col-md-4\">
+                       <form action=\"editAdmin.php\" method=\"get\">
+                            <input style='display: none;' type=\"text\" name=\"uID\" value='$row2[uID]'>
+                            <button class='btn-edit' type=\"submit\"><i class=\"fa fa-edit\"></i></button>
+                        </form>
+                        </div>
+                        <div class=\"col-md-4\" >
+                        <form action=\"Action/deleteAdmin.php\" method=\"get\">
+                                <input style='display: none;' type=\"text\" name=\"uID\" value='$row2[uID]'>
+                                <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
+                        </form>
+                        </div>
+                        </div>
+                        
+                    </td>
+                    </tr>
+                    ";
+                    }
+                }?>
 
-                            $sqlGpd = "SELECT * FROM groupproduct WHERE gpdID = '" . $rowOrderTable['gpdID'] . "'";
-                            $resultGpd = mysqli_query($con, $sqlGpd);
-                            $cost = 0;
 
-                            while ($rowGpd = mysqli_fetch_assoc($resultGpd)) {
-                                $cost += $rowGpd['costAmount'];
-                            }
+            </table>
+            <div class="pagination flex-m flex-w p-t-26">
+                <?php
+                for($pn=1;$pn<=$page_of_pd;$pn++){
 
-                            $date = date_format(date_create($rowPayment['dateVerifyPayment']), 'd-m-Y');
-                            $price = number_format($rowOrderTable['priceAmount'] - $rowOrderTable['discountPrice']);
-                            $cost_f = number_format($cost);
-                            echo "
-                            <tr>
-                            <td style=\"width:10%;text-align:center;\">$date</td>
-                            <td style=\"width:10%;text-align:center;\">$rowOrderTable[orderID]</td>
-                            <td style=\"width:20%;text-align:center;\">$price</td>
-                            <td style=\"width:20%;text-align:center;\">$cost_f</td>
-                            </tr>
-                        ";
-
-                            $totalPrice += ($rowOrderTable['priceAmount'] - $rowOrderTable['discountPrice']);
-                            $totalCost += $cost;
-                        }
-
-                    $totalPrice_f=number_format($totalPrice);
-                    $totalCost_f=number_format($totalCost);
-                    $totalProfit_f=number_format(($totalPrice-$totalCost));
-                        echo "</table>
-                         <table class=\"tb\" width=\"80%\">
-                                            <tr>
-                                                <td>ยอดขายรวม<br>$totalPrice_f
-                                                <br> บาท
-                                                </td>
-                                                <td>ต้นทุนรวม<br> $totalCost_f
-                                                    <br> บาท
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan=\"2\">
-                                                    รายได้สุทธิ<br> <spans style='color: red'>$totalProfit_f</spans>
-                                                    <br> บาท
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                                </div>
-                        ";
-                        }
-
+                    echo  "<a href=\"manageMember.php?page=$pn\" class=\"item-pagination flex-c-m trans-0-4\">$pn</a>";
 
                 }
-                else{
-                    echo "<script type='text/javascript'>alert('โปรดตรวจสอบ!! วันที่เริ่มต้นต้องน้อยกว่าวันที่สิ้นสุด');</script>";
-                }
-            }
-        }
-        ?>
-
-
-
+                ?>
+            </div>
             <script>
                 function search() {
                     var input, filter, table, tr, td, i,td2;

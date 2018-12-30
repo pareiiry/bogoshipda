@@ -331,7 +331,7 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                 <a href="statistic.php"><img class="bg-icon" src="../img/menu_bar_admin/statistic.png" style="width:100%" alt="Image">สถิติ</a>
             </div>
             <div class="col-sm-3">
-
+                <a href="review.php"><img class="bg-icon" src="../img/menu_bar_admin/review.png" style="width:100%" alt="Image">รีวิว</a>
             </div>
         </div>
     </div><br>
@@ -364,7 +364,8 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                     <th style="width:20%;text-align:center;">ชื่อสินค้า</th>
                     <th style="width:10%;text-align:center;">ราคาขาย</th>
                     <th style="width:10%;text-align:center;">ต้นุทน</th>
-                    <th style="width:10%;text-align:center;">จัดการ</th>
+                    <th style="width:10%;text-align:center;">แก้ไข</th>
+                    <th style="width:10%;text-align:center;">แสดงสินค้า</th>
                 </tr>
                 </thead>
                 <?php
@@ -413,34 +414,34 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                        ";
                        if($row2['custom']==1){
                            echo"<div class='row'>
-                       <div class=\"col-md-4\">
-                        </div>
-                        <div class=\"col-md-6\" >
+                       
+                        
                         <form action=\"Action/deleteProduct_action.php\" method=\"get\">
                                 <input style='display: none;' type=\"text\" name=\"pdID\" value='$row2[pdID]'>
                                 <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
-                        </form></div>
+                        </form>
                         </div>";
                        }
                        else{
                            echo"<div class='row'>
-                       <div class=\"col-md-4\"><form action=\"editProduct.php\" method=\"get\">
+                       <form action=\"editProduct.php\" method=\"get\">
                             <input style='display: none;' type=\"text\" name=\"pdID\" value='$row2[pdID]'>
                             <button class='btn-edit' type=\"submit\"><i class=\"fa fa-edit\"></i></button>
                         </form>
                         </div>
-                        <div class=\"col-md-6\" >
-                        <form action=\"Action/deleteProduct_action.php\" method=\"get\">
-                                <input style='display: none;' type=\"text\" name=\"pdID\" value='$row2[pdID]'>
-                                <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
-                        </form></div>
-                        </div>";
+                        ";
                        }
 
 
                         echo"
                         
                         
+                    </td>
+                    <td style=\"text-align:center;\">
+                    <div class=\"btn-group btn-toggle\"> 
+    	<button class=\"btn btn-xs btn-default\">เปิด</button>
+    	<button class=\"btn btn-xs btn-info active\">ปิด</button>
+    	</div>
                     </td>
                     </tr>
                     ";
@@ -489,5 +490,35 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
 <!--    <p>Footer Text</p>-->
 <!--</footer>-->
 <script src="../js/lightbox.js"></script>
+<script>
+    $('.btn-toggle').click(function() {
+        $(this).find('.btn').toggleClass('active');
+
+        if ($(this).find('.btn-primary').length>0) {
+            $(this).find('.btn').toggleClass('btn-primary');
+        }
+        if ($(this).find('.btn-danger').length>0) {
+            $(this).find('.btn').toggleClass('btn-danger');
+        }
+        if ($(this).find('.btn-success').length>0) {
+            $(this).find('.btn').toggleClass('btn-success');
+        }
+        if ($(this).find('.btn-info').length>0) {
+            $(this).find('.btn').toggleClass('btn-info');
+        }
+
+        $(this).find('.btn').toggleClass('btn-default');
+
+    });
+
+    $('form').submit(function(){
+        var radioValue = $("input[name='options']:checked").val();
+        if(radioValue){
+            alert("You selected - " + radioValue);
+        };
+        return false;
+    });
+</script>
+
 </body>
 </html>

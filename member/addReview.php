@@ -481,7 +481,8 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
             <ul>
                 <li class="p-b-9 s-text7">
-                    bogoshipdashop@gmail.com
+                    <a href="mailto:bogoshipdashop@gmail.com?Subject=สอบถามข้อมูล" target="_top">
+                        bogoshipdashop@gmail.com</a>
                 </li>
 
                 <li class="p-b-9 s-text7">
@@ -502,19 +503,21 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
             <ul>
                 <li class="p-b-9 s-text7">
-                    Thailand Post
+                    <a href="http://track.thailandpost.co.th/tracking/default.aspx">
+                        Thailand Post</a>
                 </li>
                 <li class="p-b-9 s-text7">
-                    Kerry Express
+                    <a href="https://th.kerryexpress.com/th/track/">
+                        Kerry Express</a>
                 </li>
 
             </ul>
         </div>
 
         <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
-            <h4 class="s-text12 p-b-30">
-                วิธีการชำระเงิน
-            </h4>
+            <a href="payment.php"><h4 class="s-text12 p-b-30">
+                    วิธีการชำระเงิน
+                </h4></a>
             <ul>
                 <li class="p-b-9 s-text7">
                     KTB &emsp;  K-BANK
@@ -538,7 +541,6 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
     </div>
 
 </footer>
-
 
 
 <!-- Back to top -->

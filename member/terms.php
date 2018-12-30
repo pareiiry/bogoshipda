@@ -414,23 +414,24 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
         <div class="w-size8 p-t-30 p-l-15 p-r-15 respon4">
             <h4 class="s-text12 p-b-30">
-                    ติดต่อเรา
-                </h4>
+                ติดต่อเรา
+            </h4>
 
-                <ul>
-                    <li class="p-b-9 s-text7">
-                        bogoshipdashop@gmail.com
-                    </li>
+            <ul>
+                <li class="p-b-9 s-text7">
+                    <a href="mailto:bogoshipdashop@gmail.com?Subject=สอบถามข้อมูล" target="_top">
+                        bogoshipdashop@gmail.com</a>
+                </li>
 
-                    <li class="p-b-9 s-text7">
-                        Tel. 082-6118627
-                    </li>
+                <li class="p-b-9 s-text7">
+                    Tel. 082-6118627
+                </li>
 
-                    <li class="p-b-9 s-text7">
-                        Line id : bogoshipdastore
-                    </li>
+                <li class="p-b-9 s-text7">
+                    Line id : bogoshipdastore
+                </li>
 
-                </ul>
+            </ul>
         </div>
 
         <div class="w-size15 p-t-30 p-l-15 p-r-15 respon4">
@@ -440,17 +441,19 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
             <ul>
                 <li class="p-b-9 s-text7">
-                    Thailand Post
+                    <a href="http://track.thailandpost.co.th/tracking/default.aspx">
+                        Thailand Post</a>
                 </li>
                 <li class="p-b-9 s-text7">
-                    Kerry Express
+                    <a href="https://th.kerryexpress.com/th/track/">
+                        Kerry Express</a>
                 </li>
 
             </ul>
         </div>
 
         <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
-            <a href="../payment.php"><h4 class="s-text12 p-b-30">
+            <a href="payment.php"><h4 class="s-text12 p-b-30">
                     วิธีการชำระเงิน
                 </h4></a>
             <ul>
@@ -458,23 +461,23 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
                     KTB &emsp;  K-BANK
                 </li>
                 <li class="p-b-9 s-text7">
-                    BBL  &emsp; Wallet   
-                </li>                
+                    BBL  &emsp; Wallet
+                </li>
                 <li class="p-b-9 s-text7">
                     SCB &emsp; PrompPay
                 </li>
             </ul>
         </div>
 
-        
+
     </div>
 
-  
 
-        <div class="t-center s-text8 p-t-20">
-            Copyright © 2018 All rights reserved. | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-        </div>
-    
+
+    <div class="t-center s-text8 p-t-20">
+        Copyright © 2018 All rights reserved. | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+    </div>
+
 </footer>
 
 

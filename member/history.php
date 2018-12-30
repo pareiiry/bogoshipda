@@ -448,7 +448,8 @@ $resultOrder = mysqli_query($con,$sqlOrder);
 
             <ul>
                 <li class="p-b-9 s-text7">
-                    bogoshipdashop@gmail.com
+                    <a href="mailto:bogoshipdashop@gmail.com?Subject=สอบถามข้อมูล" target="_top">
+                        bogoshipdashop@gmail.com</a>
                 </li>
 
                 <li class="p-b-9 s-text7">
@@ -456,9 +457,8 @@ $resultOrder = mysqli_query($con,$sqlOrder);
                 </li>
 
                 <li class="p-b-9 s-text7">
-                    line : bogoshipdastore
+                    Line id : bogoshipdastore
                 </li>
-
 
             </ul>
         </div>
@@ -470,13 +470,13 @@ $resultOrder = mysqli_query($con,$sqlOrder);
 
             <ul>
                 <li class="p-b-9 s-text7">
-                    Thailand Post
+                    <a href="http://track.thailandpost.co.th/tracking/default.aspx">
+                        Thailand Post</a>
                 </li>
-
                 <li class="p-b-9 s-text7">
-                    Kerry Express
+                    <a href="https://th.kerryexpress.com/th/track/">
+                        Kerry Express</a>
                 </li>
-
 
             </ul>
         </div>
@@ -485,7 +485,6 @@ $resultOrder = mysqli_query($con,$sqlOrder);
             <a href="payment.php"><h4 class="s-text12 p-b-30">
                     วิธีการชำระเงิน
                 </h4></a>
-
             <ul>
                 <li class="p-b-9 s-text7">
                     KTB &emsp;  K-BANK

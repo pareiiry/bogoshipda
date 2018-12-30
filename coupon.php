@@ -495,7 +495,8 @@ include ('dbConnect.php');
 
             <ul>
                 <li class="p-b-9 s-text7">
-                    bogoshipdashop@gmail.com
+                    <a href="mailto:bogoshipdashop@gmail.com?Subject=สอบถามข้อมูล" target="_top">
+                        bogoshipdashop@gmail.com</a>
                 </li>
 
                 <li class="p-b-9 s-text7">
@@ -516,10 +517,12 @@ include ('dbConnect.php');
 
             <ul>
                 <li class="p-b-9 s-text7">
-                    Thailand Post
+                    <a href="http://track.thailandpost.co.th/tracking/default.aspx">
+                        Thailand Post</a>
                 </li>
                 <li class="p-b-9 s-text7">
-                    Kerry Express
+                    <a href="https://th.kerryexpress.com/th/track/">
+                        Kerry Express</a>
                 </li>
 
             </ul>
@@ -529,31 +532,29 @@ include ('dbConnect.php');
             <a href="payment.php"><h4 class="s-text12 p-b-30">
                     วิธีการชำระเงิน
                 </h4></a>
-
             <ul>
                 <li class="p-b-9 s-text7">
                     KTB &emsp;  K-BANK
                 </li>
                 <li class="p-b-9 s-text7">
-                    BBL  &emsp; Wallet   
-                </li>                
+                    BBL  &emsp; Wallet
+                </li>
                 <li class="p-b-9 s-text7">
                     SCB &emsp; PrompPay
                 </li>
             </ul>
         </div>
 
-        
+
     </div>
 
-  
 
-        <div class="t-center s-text8 p-t-20">
-            Copyright © 2018 All rights reserved. | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-        </div>
-    
+
+    <div class="t-center s-text8 p-t-20">
+        Copyright © 2018 All rights reserved. | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+    </div>
+
 </footer>
-
 
 
 <!-- Back to top -->

@@ -508,7 +508,8 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
             <ul>
                 <li class="p-b-9 s-text7">
-                    bogoshipdashop@gmail.com
+                    <a href="mailto:bogoshipdashop@gmail.com?Subject=สอบถามข้อมูล" target="_top">
+                        bogoshipdashop@gmail.com</a>
                 </li>
 
                 <li class="p-b-9 s-text7">
@@ -529,10 +530,12 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
             <ul>
                 <li class="p-b-9 s-text7">
-                    Thailand Post
+                    <a href="http://track.thailandpost.co.th/tracking/default.aspx">
+                        Thailand Post</a>
                 </li>
                 <li class="p-b-9 s-text7">
-                    Kerry Express
+                    <a href="https://th.kerryexpress.com/th/track/">
+                        Kerry Express</a>
                 </li>
 
             </ul>
