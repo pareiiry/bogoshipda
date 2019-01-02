@@ -34,10 +34,11 @@ else{
 }
 
 if(!isset($_GET['page'])){
-    $sql2 = "SELECT * FROM user LIMIT $pageshow,10";
-    $result2 = mysqli_query($con, $sql2);
+    $sqlReview = "SELECT * FROM review ORDER BY dateTime DESC LIMIT $pageshow,10";
+    $resultReview = mysqli_query($con,$sqlReview);
 
-    $sql3 = "SELECT * FROM user";
+
+    $sql3 = "SELECT * FROM review ORDER BY dateTime DESC";
     $result3 = mysqli_query($con,$sql3);
     $all_pd_count = mysqli_num_rows($result3);
     $cal=$all_pd_count/10;
@@ -45,10 +46,10 @@ if(!isset($_GET['page'])){
 }
 else{
 
-    $sql2 = "SELECT * FROM user LIMIT $pageshow,10";
-    $result2 = mysqli_query($con, $sql2);
+    $sqlReview = "SELECT * FROM review ORDER BY dateTime DESC LIMIT $pageshow,10";
+    $resultReview = mysqli_query($con,$sqlReview);
 
-    $sql3 = "SELECT * FROM user";
+    $sql3 = "SELECT * FROM review ORDER BY dateTime DESC";
     $result3 = mysqli_query($con, $sql3);
     $all_pd_count = mysqli_num_rows($result3);
     $cal = $all_pd_count / 10;
@@ -72,6 +73,8 @@ $countNotiPay = mysqli_num_rows($resultOrder3);
 $sqlOrder4 = "SELECT * FROM order_table WHERE orderStatus='prepare to send order'";
 $resultOrder4 = mysqli_query($con,$sqlOrder4);
 $countNotiShipment = mysqli_num_rows($resultOrder4);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -338,7 +341,7 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
         <div class="row">
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
-                <a href="manageMember.php"><img class="bg-icon-current" src="../img/menu_bar_admin/user.png" style="width:100%" alt="Image">สมาชิก</a>
+                <a href="manageMember.php"><img class="bg-icon" src="../img/menu_bar_admin/user.png" style="width:100%" alt="Image">สมาชิก</a>
             </div>
             <div class="col-sm-3">
                 <!--                        <p>Some text..</p>-->
@@ -360,7 +363,7 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                 <a href="statistic.php"><img class="bg-icon" src="../img/menu_bar_admin/statistic.png" style="width:100%" alt="Image">สถิติ</a>
             </div>
             <div class="col-sm-3">
-                <a href="review.php"><img class="bg-icon" src="../img/menu_bar_admin/review.png" style="width:100%" alt="Image">รีวิว</a>
+                <a href="review.php"><img class="bg-icon-current" src="../img/menu_bar_admin/review.png" style="width:100%" alt="Image">รีวิว</a>
             </div>
         </div>
     </div><br>
@@ -382,12 +385,12 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
             <hr>
             <div class="row">
                 <div class="col-sm-12" style="text-align: center">
-                    <button type="button" class="btn btn-outline-info"> ทั้งหมด</button>
-                    <button type="button" class="btn btn-outline-info"> 5 ดาว</button>
-                    <button type="button" class="btn btn-outline-info"> 4 ดาว</button>
-                    <button type="button" class="btn btn-outline-info"> 3 ดาว</button>
-                    <button type="button" class="btn btn-outline-info"> 2 ดาว</button>
-                    <button type="button" class="btn btn-outline-info"> 1 ดาว</button>
+                    <button type="button" class="btn btn-outline-info" onclick="scoreAll()"> ทั้งหมด</button>
+                    <button type="button" class="btn btn-outline-info" onclick="score5()"> 5 ดาว</button>
+                    <button type="button" class="btn btn-outline-info" onclick="score4()"> 4 ดาว</button>
+                    <button type="button" class="btn btn-outline-info" onclick="score3()"> 3 ดาว</button>
+                    <button type="button" class="btn btn-outline-info" onclick="score2()"> 2 ดาว</button>
+                    <button type="button" class="btn btn-outline-info" onclick="score1()"> 1 ดาว</button>
                 </div>
             </div>
 
@@ -395,89 +398,30 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
 
             <table id="myTable">
                 <tr class="header">
-                    <th style="width:20%;text-align:center;">Review ID</th>
-                    <th style="width:20%;text-align:center;">วันที่รีวิว</th>
+                    <th style="width:10%;text-align:center;">Review ID</th>
+                    <th style="width:15%;text-align:center;">วันที่รีวิว</th>
                     <th style="width:20%;text-align:center;">ชื่อผู้ใช้</th>
-                    <th style="width:20%;text-align:center;">คะแนน</th>
-                    <th style="width:20%;text-align:center;">ความคิดเห็น</th>
+                    <th style="width:5%;text-align:center;">คะแนน (ดาว)</th>
+                    <th style="width:50%;text-align:center;">ความคิดเห็น</th>
                 </tr>
                 <?php
-                while($row2= mysqli_fetch_assoc($result2))// show the information from query
+                while($rowReview= mysqli_fetch_assoc($resultReview))// show the information from query
                 {
-                    if($row2['usertype']=="owner"){
+                    $sqlUser = "SELECT * FROM user WHERE uID = '".$rowReview['uID']."' ";
+                    $resultUser = mysqli_query($con,$sqlUser);
+                    $rowUser = mysqli_fetch_array($resultUser,MYSQLI_ASSOC);
+
                         echo "
-                    <tr>
-                    <td style='text-align:center;'>$row2[uID]</td>
-                    <td style='text-align:center;'>$row2[name]</td>
-                    <td style='text-align:center;'>$row2[email]</td>
-                    <td style='text-align:center;'>$row2[usertype]</td>
-                    <td style=\"text-align:center;\">
-                       <div class='row'>
-                       <div class=\"col-md-2\">
-                        </div>
-                       <div class=\"col-md-4\">
-                       <form action=\"editAdmin.php\" method=\"get\">
-                            <input style='display: none;' type=\"text\" name=\"uID\" value='$row2[uID]'>
-                            <button class='btn-edit' type=\"submit\"><i class=\"fa fa-edit\"></i></button>
-                        </form>
-                        </div>
-                        <div class=\"col-md-2\">
-                        </div>
-                        </div>
-                        
-                    </td>
+                    <tr class='$rowReview[score]'>
+                    <td style='text-align:center;'>$rowReview[reviewID]</td>
+                    <td style='text-align:center;'>$rowReview[dateTime]</td>
+                    <td style='text-align:center;'>$rowUser[name]</td>
+                    <td style='text-align:center;'>$rowReview[score]</td>
+                     <td >$rowReview[comment]</td>
+
                     </tr>
                     ";
-                    }
-                    else if($row2['usertype']=="member"){
-                        echo "
-                    <tr>
-                    <td style='text-align:center;'>$row2[uID]</td>
-                    <td style='text-align:center;'>$row2[name]</td>
-                    <td style='text-align:center;'>$row2[email]</td>
-                    <td style='text-align:center;'>$row2[usertype]</td>
-                    <td style=\"text-align:center;\">
-                       <div class='row'>
-                       <div class=\"col-md-2\">
-                        </div>
-                        <div class=\"col-md-4\">
-                        
-                        </div>
-                        <div class=\"col-md-2\">
-                        </div>
-                        </div>
-                        
-                    </td>
-                    </tr>
-                    ";
-                    }
-                    else {
-                        echo "
-                    <tr>
-                    <td style='text-align:center;'>$row2[uID]</td>
-                    <td>$row2[name]</td>
-                    <td>$row2[email]</td>
-                    <td style='text-align:center;'>$row2[usertype]</td>
-                    <td style=\"text-align:center;\">
-                       <div class='row'>
-                       <div class=\"col-md-4\">
-                       <form action=\"editAdmin.php\" method=\"get\">
-                            <input style='display: none;' type=\"text\" name=\"uID\" value='$row2[uID]'>
-                            <button class='btn-edit' type=\"submit\"><i class=\"fa fa-edit\"></i></button>
-                        </form>
-                        </div>
-                        <div class=\"col-md-4\" >
-                        <form action=\"Action/deleteAdmin.php\" method=\"get\">
-                                <input style='display: none;' type=\"text\" name=\"uID\" value='$row2[uID]'>
-                                <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
-                        </form>
-                        </div>
-                        </div>
-                        
-                    </td>
-                    </tr>
-                    ";
-                    }
+
                 }?>
 
 
@@ -486,23 +430,101 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                 <?php
                 for($pn=1;$pn<=$page_of_pd;$pn++){
 
-                    echo  "<a href=\"manageMember.php?page=$pn\" class=\"item-pagination flex-c-m trans-0-4\">$pn</a>";
+                    echo  "<a href=\"review.php?page=$pn\" class=\"item-pagination flex-c-m trans-0-4\">$pn</a>";
 
                 }
                 ?>
             </div>
             <script>
-                function search() {
-                    var input, filter, table, tr, td, i,td2;
-                    input = document.getElementById("myInput");
-                    filter = input.value.toUpperCase();
+                function scoreAll() {
+                    var filter, table, tr, td, i;
+                    filter = "";
                     table = document.getElementById("myTable");
                     tr = table.getElementsByTagName("tr");
                     for (i = 0; i < tr.length; i++) {
-                        td = tr[i].getElementsByTagName("td")[1];
-                        td2 = tr[i].getElementsByTagName("td")[2];
-                        if (td||td2) {
-                            if (td.innerHTML.toUpperCase().indexOf(filter) > -1 || td2.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        td = tr[i].getElementsByTagName("td")[3];
+                        if (td) {
+                            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                        }
+                    }
+                }
+                function score5() {
+                    var filter, table, tr, td, i;
+                    filter = "5";
+                    table = document.getElementById("myTable");
+                    tr = table.getElementsByTagName("tr");
+                    for (i = 0; i < tr.length; i++) {
+                        td = tr[i].getElementsByTagName("td")[3];
+                        if (td) {
+                            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                        }
+                    }
+                }
+                function score4() {
+                    var filter, table, tr, td, i;
+                    filter = "4";
+                    table = document.getElementById("myTable");
+                    tr = table.getElementsByTagName("tr");
+                    for (i = 0; i < tr.length; i++) {
+                        td = tr[i].getElementsByTagName("td")[3];
+                        if (td) {
+                            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                        }
+                    }
+                }
+                function score3() {
+                    var filter, table, tr, td, i;
+                    filter = "3";
+                    table = document.getElementById("myTable");
+                    tr = table.getElementsByTagName("tr");
+                    for (i = 0; i < tr.length; i++) {
+                        td = tr[i].getElementsByTagName("td")[3];
+                        if (td) {
+                            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                        }
+                    }
+                }
+                function score2() {
+                    var filter, table, tr, td, i;
+                    filter = "2";
+                    table = document.getElementById("myTable");
+                    tr = table.getElementsByTagName("tr");
+                    for (i = 0; i < tr.length; i++) {
+                        td = tr[i].getElementsByTagName("td")[3];
+                        if (td) {
+                            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                        }
+                    }
+                }
+                function score1() {
+                    var filter, table, tr, td, i;
+                    filter = "1";
+                    table = document.getElementById("myTable");
+                    tr = table.getElementsByTagName("tr");
+                    for (i = 0; i < tr.length; i++) {
+                        td = tr[i].getElementsByTagName("td")[3];
+                        if (td) {
+                            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
                                 tr[i].style.display = "";
                             } else {
                                 tr[i].style.display = "none";

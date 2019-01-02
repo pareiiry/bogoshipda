@@ -349,7 +349,7 @@ while($rowReview= mysqli_fetch_assoc($resultReview))// show the information from
      echo '<img src="../images/no-picture.jpg">';
  }
  else {
-     echo '<img src="data:image/*;base64,' . base64_encode($rowReview['img']) . '"/>';
+     echo '<img src="data:image/*;base64,' . base64_encode($rowReview['img']) . '" style="width:270px;height:270px;"/>';
  }
     $sqlU = "SELECT * FROM user WHERE uID = '".$rowReview['uID']."' ";
     $resultU = mysqli_query($con,$sqlU);

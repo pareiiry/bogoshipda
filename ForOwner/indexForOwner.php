@@ -34,10 +34,10 @@ else{
 }
 
 if(!isset($_GET['page'])){
-    $sql2 = "SELECT * FROM product WHERE product.delete = 0 ORDER BY dateCreate DESC LIMIT $pageshow,10";
+    $sql2 = "SELECT * FROM product ORDER BY dateCreate DESC LIMIT $pageshow,10";
     $result2 = mysqli_query($con,$sql2);
 
-    $sql3 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC";
+    $sql3 = "SELECT * FROM product ORDER BY dateCreate DESC";
     $result3 = mysqli_query($con,$sql3);
     $all_pd_count = mysqli_num_rows($result3);
     $cal=$all_pd_count/10;
@@ -45,10 +45,10 @@ if(!isset($_GET['page'])){
 }
 else{
 
-    $sql2 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC LIMIT $pageshow,10";
+    $sql2 = "SELECT * FROM product ORDER BY dateCreate DESC LIMIT $pageshow,10";
     $result2 = mysqli_query($con, $sql2);
 
-    $sql3 = "SELECT * FROM product WHERE product.delete=0 ORDER BY dateCreate DESC";
+    $sql3 = "SELECT * FROM product ORDER BY dateCreate DESC";
     $result3 = mysqli_query($con, $sql3);
     $all_pd_count = mysqli_num_rows($result3);
     $cal = $all_pd_count / 10;
@@ -83,7 +83,7 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/png" href="../images/icons/favicon.png"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="../css/lightbox.css">
@@ -131,18 +131,18 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                 padding: 15px;
             }
             .row.content {height: auto;}
-		}
+        }
         a {
-			font-size: 12px;
-			color:#fff;
-			}
-			
+            font-size: 12px;
+            color:#fff;
+        }
+
         a:hover {
-			color:#FFF;
+            color:#FFF;
         }
         .navbar {
             margin-bottom: 0px;
-			border-radius:0px;
+            border-radius:0px;
         }
 
         * {
@@ -158,11 +158,11 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
             /*font-size: 16px;*/
             padding: 0px 20px 0px 40px;
             border: 1px solid #ddd;
-			margin-top:10px;
-			margin-left:40px;
+            margin-top:10px;
+            margin-left:40px;
             /*margin-bottom: 2px;*/
             border-radius: 8px;
-			height:35px;	
+            height:35px;
         }
 
         #myTable {
@@ -183,9 +183,9 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
 
         #myTable tr.header {
             background-color: #edf9f7;
-			color: #00a9a3;
+            color: #00a9a3;
         }
-		#myTable tr:hover {
+        #myTable tr:hover {
             background-color: #edf9f7;
         }
         /* Style buttons */
@@ -197,10 +197,10 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
             font-size: 16px; /* Set a font size */
             cursor: pointer; /* Mouse pointer on hover */
             border-radius: 10px;
-			width: 30px;
-			height: 30px;
-			margin-left:10px;
-			
+            width: 30px;
+            height: 30px;
+            margin-left:10px;
+
         }
 
         /* Darker background on mouse-over */
@@ -215,28 +215,28 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
             font-size: 16px; /* Set a font size */
             cursor: pointer; /* Mouse pointer on hover */
             border-radius: 10px;
-			width: 30px;
-			height: 30px;
-			margin-left:10px;
+            width: 30px;
+            height: 30px;
+            margin-left:10px;
         }
 
         /* Darker background on mouse-over */
         .btn-delete:hover {
             background-color: #d15252;
         }
-		
-		.bg-icon{
-			background-color: #666;
-			border-radius: 8px;
-			
-		}
-		.bg-icon:hover {
-			background-color:#aadcd8;
-		}
-		.bg-icon-current {
-			background-color: #aadcd8;
-			border-radius: 8px;
-		}
+
+        .bg-icon{
+            background-color: #666;
+            border-radius: 8px;
+
+        }
+        .bg-icon:hover {
+            background-color:#aadcd8;
+        }
+        .bg-icon-current {
+            background-color: #aadcd8;
+            border-radius: 8px;
+        }
 
         .menu-icons-noti {
             display: -webkit-box;
@@ -331,7 +331,7 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                 <a href="statistic.php"><img class="bg-icon" src="../img/menu_bar_admin/statistic.png" style="width:100%" alt="Image">สถิติ</a>
             </div>
             <div class="col-sm-3">
-                <a href="review.php"><img class="bg-icon" src="../img/menu_bar_admin/review.png" style="width:100%" alt="Image">รีวิว</a>
+
             </div>
         </div>
     </div><br>
@@ -343,7 +343,7 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
 
         <div class="col-sm-3 sticky" style="font-size: 10px;background-color: #252525;">
             <h4 style="color: #c8c8c8;padding: 10px">Bogoshipda Admin</h4>
-            </div>
+        </div>
 
         <div class="col-sm-9">
             <div class="row" style="margin-top: 5px">
@@ -365,7 +365,7 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                     <th style="width:10%;text-align:center;">ราคาขาย</th>
                     <th style="width:10%;text-align:center;">ต้นุทน</th>
                     <th style="width:10%;text-align:center;">แก้ไข</th>
-                    <th style="width:10%;text-align:center;">แสดงสินค้า</th>
+                    <th style="width:20%;text-align:center;">แสดง</th>
                 </tr>
                 </thead>
                 <?php
@@ -405,45 +405,67 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                         echo"</td>";
                     }
 
-                echo"
+                    echo"
                     <td>$row2[pdID]</td>
                     <td>$row2[name]</td>
                      <td style=\"text-align:center;\">$row2[price]</td>
                      <td style=\"text-align:center;\">$row2[cost]</td>
                     <td style=\"text-align:center;\">
                        ";
-                       if($row2['custom']==1){
-                           echo"<div class='row'>
-                       
-                        
-                        <form action=\"Action/deleteProduct_action.php\" method=\"get\">
-                                <input style='display: none;' type=\"text\" name=\"pdID\" value='$row2[pdID]'>
-                                <button class='btn-delete' type=\"submit\"><i class=\"fa fa-trash\"></i></button>
-                        </form>
-                        </div>";
-                       }
-                       else{
-                           echo"<div class='row'>
-                       <form action=\"editProduct.php\" method=\"get\">
+                    if($row2['custom']==1){
+
+                    }
+                    else{
+                        echo"
+                       <div class=\"col-md-4\"><form action=\"editProduct.php\" method=\"get\">
                             <input style='display: none;' type=\"text\" name=\"pdID\" value='$row2[pdID]'>
                             <button class='btn-edit' type=\"submit\"><i class=\"fa fa-edit\"></i></button>
                         </form>
+                     
+                       ";
+                    }
+
+
+                    echo"
+                    </td>";
+                    if($row2['delete']==0){
+                        echo"<td>
+                     
+                                <form action=\"Action/openProduct.php\" method=\"get\" style='display:inline;'>
+                                <input style='display: none;' type=\"text\" name=\"pdID\" value='$row2[pdID]'>
+                                <button style='background-color: #7A8189;color: white;' type=\"submit\" class=\"btn btn-default\" disabled>เปิด</button>
+                                </form>
+                               
+                                
+                              
+                                <form action=\"Action/closeProduct.php\" method=\"get\" style='display:inline;'>
+                                <input style='display: none;' type=\"text\" name=\"pdID\" value='$row2[pdID]'>
+                                <button  type=\"submit\" class=\"btn btn-danger\" >ปิด</button>
+                                </form>
+                            
+                                
+                            </div>
+                        </td>";
+                    }
+                    else{
+                        echo"<td>
+                     
+                                <form action=\"Action/openProduct.php\" method=\"get\" style='display:inline;'>
+                                <input style='display: none;' type=\"text\" name=\"pdID\" value='$row2[pdID]'>
+                                <button type=\"submit\" class=\"btn btn-success\">เปิด</button>
+                                </form>
+                                <form action=\"Action/closeProduct.php\" method=\"get\" style='display:inline;'>
+                                <input style='display: none;' type=\"text\" name=\"pdID\" value='$row2[pdID]'>
+                                <button style='background-color: #7A8189;color: white;' type=\"submit\" class=\"btn btn-default\" disabled>ปิด</button>
+                                </form>
+                               
+                                
                         </div>
-                        ";
-                       }
+                    </td>";
+                    }
 
 
-                        echo"
-                        
-                        
-                    </td>
-                    <td style=\"text-align:center;\">
-                    <div class=\"btn-group btn-toggle\"> 
-    	<button class=\"btn btn-xs btn-default\">เปิด</button>
-    	<button class=\"btn btn-xs btn-info active\">ปิด</button>
-    	</div>
-                    </td>
-                    </tr>
+                    echo"</tr>
                     ";
                 }?>
 
@@ -490,35 +512,5 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
 <!--    <p>Footer Text</p>-->
 <!--</footer>-->
 <script src="../js/lightbox.js"></script>
-<script>
-    $('.btn-toggle').click(function() {
-        $(this).find('.btn').toggleClass('active');
-
-        if ($(this).find('.btn-primary').length>0) {
-            $(this).find('.btn').toggleClass('btn-primary');
-        }
-        if ($(this).find('.btn-danger').length>0) {
-            $(this).find('.btn').toggleClass('btn-danger');
-        }
-        if ($(this).find('.btn-success').length>0) {
-            $(this).find('.btn').toggleClass('btn-success');
-        }
-        if ($(this).find('.btn-info').length>0) {
-            $(this).find('.btn').toggleClass('btn-info');
-        }
-
-        $(this).find('.btn').toggleClass('btn-default');
-
-    });
-
-    $('form').submit(function(){
-        var radioValue = $("input[name='options']:checked").val();
-        if(radioValue){
-            alert("You selected - " + radioValue);
-        };
-        return false;
-    });
-</script>
-
 </body>
 </html>
