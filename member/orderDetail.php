@@ -23,6 +23,7 @@ $sqlOrder = "SELECT * FROM order_table WHERE orderID='".$_GET['orderID']."'";
 $resultOrder = mysqli_query($con,$sqlOrder);
 $rowOrder  = mysqli_fetch_array($resultOrder ,MYSQLI_ASSOC);
 $dateTime = date_format(date_create($rowOrder['dateTime']),'d-m-Y');
+$howShip = $rowOrder['howShip'];
 if($rowOrder['orderStatus']=='waiting for payment'){
     $orderStatus = "รอชำระเงิน";
 }
@@ -370,6 +371,10 @@ else{
                     <tr>
                         <td>สถานะ :</td>
                         <td><?php echo $orderStatus;?></td>
+                    </tr>
+                    <tr>
+                        <td>วิธีการจัดส่งสินค้า :</td>
+                        <td><?php echo $howShip;?></td>
                     </tr>
                     <tr>
                         <td>เลขพัสดุ :</td>
