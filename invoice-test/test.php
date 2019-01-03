@@ -1,8 +1,8 @@
 <html>
 <body>
 
-<form action="ex.php" method="post">
-    Name: <input type="text" name="name" value="Nurse"><br>
+<form action="invoice02.php" method="post">
+    <input type="hidden" name="name" value="Nurse"><br>
     <input type="submit">
 </form>
 

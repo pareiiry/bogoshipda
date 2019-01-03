@@ -35,11 +35,11 @@ $pdf->Cell(59 ,5,'',0,1);//end of line
 
 $pdf->Cell(130 ,5,iconv('UTF-8', 'cp874', '33/5 ถ.สิทธิวงศ์ ต.ช้างม่อย'),0,0);
 $pdf->Cell(25 ,5,iconv('UTF-8', 'cp874', 'วันที่'),0,0);
-$pdf->Cell(34 ,5,'[dd/mm/yyyy]',0,1);//end of line
+$pdf->Cell(34 ,5,"$_POST[dateRecieve]",0,1);//end of line
 
 $pdf->Cell(130 ,5,iconv('UTF-8', 'cp874', 'อ.เมือง จ.เชียงใหม่ 50300'),0,0);
 $pdf->Cell(25 ,5,iconv('UTF-8', 'cp874', 'เลขที่'),0,0);
-$pdf->Cell(34 ,5,'[1234567]',0,1);//end of line
+$pdf->Cell(34 ,5,"RC-$_POST[orderID]",0,1);//end of line
 
 $pdf->Cell(130 ,5,iconv('UTF-8', 'cp874', 'โทร. +66 82 611 8627'),0,0);
 
@@ -51,16 +51,16 @@ $pdf->Cell(100 ,5,iconv('UTF-8', 'cp874', 'ได้รับเงินจา�
 
 //add dummy cell at beginning of each line for indentation
 $pdf->Cell(10 ,5,'',0,0);
-$pdf->Cell(90 ,5,iconv('UTF-8', 'cp874', 'FullName'),0,1);
+$pdf->Cell(90 ,5,iconv('UTF-8', 'cp874', "$_POST[name]"),0,1);
 
 $pdf->Cell(10 ,5,'',0,0);
-$pdf->Cell(90 ,5,iconv('UTF-8', 'cp874', 'ที่อยู่'),0,1);
+$pdf->Cell(90 ,5,iconv('UTF-8', 'cp874', "ที่อยู่ $_POST[address]"),0,1);
 
 //$pdf->Cell(10 ,5,'',0,0);
 //$pdf->Cell(90 ,5,'[Address]',0,1);
 
 $pdf->Cell(10 ,5,'',0,0);
-$pdf->Cell(90 ,5,iconv('UTF-8', 'cp874', 'โทร. '),0,1);
+$pdf->Cell(90 ,5,iconv('UTF-8', 'cp874', "โทร. $_POST[tel]"),0,1);
 
 //make a dummy empty cell as a vertical spacer
 $pdf->Cell(189 ,10,'',0,1);//end of line
@@ -76,12 +76,32 @@ $pdf->Cell(30 ,5,iconv('UTF-8', 'cp874', 'ราคารวม'),1,1,'C');//end
 $pdf->SetFont('THSarabunNew','',16);
 
 //Numbers are right-aligned so we give 'R' after new line parameter
-for($i=0;$i<10;$i++){
-    $pdf->Cell(109 ,5,iconv('UTF-8', 'cp874', 'รายละเอียด'),1,0);
-    $pdf->Cell(20 ,5,iconv('UTF-8', 'cp874', 'จำนวน'),1,0,'C');
-    $pdf->Cell(30 ,5,iconv('UTF-8', 'cp874', 'ราคา'),1,0,'R');
-    $pdf->Cell(30 ,5,iconv('UTF-8', 'cp874', 'ราคารวม'),1,1,'R');//end of line
-}
+
+include('../dbConnect.php');
+
+$result=mysqli_query($con,"select * from groupproduct where gpdID in ('".$_POST['gpdID']."');");
+    while($row = mysqli_fetch_assoc($result))
+    {
+
+//
+//            $resultPD=mysqli_query($con,"select * from produc");
+//            $rowPD = mysqli_fetch_array($resultPD,MYSQLI_ASSOC);
+//            if($rowPD['pdID']==$row['pdID']){
+//                $price=number_format($rowPD['price'],2);
+//                $priceAmount=number_format($row['priceAmount'],2);
+//
+//                $pdf->Cell(109 ,5,iconv('UTF-8', 'cp874', "$rowPD[name]"),1,0);
+                $pdf->Cell(20 ,5,iconv('UTF-8', 'cp874', "$row[gpdID]"),1,0,'C');
+//                $pdf->Cell(30 ,5,iconv('UTF-8', 'cp874', "$price"),1,0,'R');
+//                $pdf->Cell(30 ,5,iconv('UTF-8', 'cp874', "$priceAmount"),1,1,'R');//end of line
+//            }
+
+
+
+
+    }
+
+mysqli_close();
 
 //summary
 $pdf->Cell(130 ,5,'',0,0);

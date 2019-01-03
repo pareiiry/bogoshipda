@@ -355,6 +355,25 @@ else{
 <section class="cart bgwhite p-t-70 p-b-100">
 
     <div class="container">
+        <?php
+        if($rowOrder['orderStatus']=='prepare to send order' || $rowOrder['orderStatus']=='sent order'){
+            $sqlPayment = "SELECT * FROM payment WHERE orderID='".$rowOrder['orderID']."'";
+            $resultPayment = mysqli_query($con,$sqlPayment);
+            $rowPayment  = mysqli_fetch_array($resultPayment ,MYSQLI_ASSOC);
+            $dateTimePayment = date_format(date_create($rowPayment['date']),'d-m-Y');
+
+            echo "<form action=\"../invoice-test/invoice02.php\" method=\"post\">
+            <input type=\"hidden\" name=\"orderID\" value=\"$rowOrder[orderID]\">
+            <input type=\"hidden\" name=\"dateRecieve\" value=\"$dateTimePayment\">
+             <input type=\"hidden\" name=\"name\" value=\"$rowOrder[nameShip]\"> 
+             <input type=\"hidden\" name=\"address\" value=\"$rowOrder[addressShip]\"> 
+             <input type=\"hidden\" name=\"tel\" value=\"$rowOrder[telShip]\">
+             <input type=\"hidden\" name=\"gpdID\" value=\" $rowOrder[gpdID]\">
+
+            <input type=\"submit\">
+        </form>";
+        }
+        ?>
 
         <div class="bo9 col-sm-10 p-l-40 p-r-40 p-t-30 p-b-38  m-l-r-auto  p-lr-15-sm">
             <h4 class="p-b-24" align="center">ประวัติการสั่งซื้อ</h4>

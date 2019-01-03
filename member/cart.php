@@ -421,7 +421,13 @@ $discount=0;
                     <span style='color: red'>฿ <?php echo number_format($summaryPrice, 2);?></span>
 					</span>
             </div>
-
+            <?php
+            if($count>5){
+                $addShip = ($count-4)*5;
+            }
+            else{
+                $addShip=0;
+            }?>
          <form action="checkout.php" method="post">
             <div class="flex-w flex-sb bo10 p-t-15 p-b-20">
 					<span class="s-text18 w-size19 w-full-sm">
@@ -460,6 +466,14 @@ $discount=0;
                     </table>
 
                 </div>
+                <span class="s-text18 w-size19 w-full-sm">
+						ค่าจัดส่งเพิ่มเติม :
+					</span>
+
+                <span class="m-text21 w-size20 w-full-sm">
+
+                    <span >฿ <?php echo number_format($addShip, 2);?></span>
+					</span>
             </div>
 
             <div class="flex-w flex-sb bo16 p-t-15 p-b-20">
@@ -514,9 +528,6 @@ $discount=0;
                 <span class="m-text21 w-size20 w-full-sm" >
 
                    <span id="lastPrice" style="color: red">฿ <?php
-                       if($count>5){
-                           $addShip = ($count-4)*5;
-                       }
                        echo number_format(($summaryPrice+30+$addShip), 2);?></span>
 					</span>
             </div>
@@ -668,7 +679,7 @@ $discount=0;
             if($count>5){
                 $addShip = ($count-4)*5;
             }
-            $lastPrice = number_format(($summaryPrice+$ship+$addShip), 0);?>
+            $lastPrice = number_format(($summaryPrice+$ship+$addShip), 2);?>
             document.getElementById("lastPrice").innerHTML = "฿ <?php echo $lastPrice;?>";
 
         }
@@ -677,7 +688,7 @@ $discount=0;
             if($count>5){
                 $addShip = ($count-4)*5;
             }
-            $lastPrice = number_format(($summaryPrice+$ship+$addShip), 0);?>
+            $lastPrice = number_format(($summaryPrice+$ship+$addShip), 2);?>
             document.getElementById("lastPrice").innerHTML = "฿ <?php echo $lastPrice;?>";
         }
         else if (this.value == 'Kerry') {
@@ -685,7 +696,7 @@ $discount=0;
             if($count>5){
                 $addShip = ($count-4)*5;
             }
-            $lastPrice = number_format(($summaryPrice+$ship+$addShip), 0);?>
+            $lastPrice = number_format(($summaryPrice+$ship+$addShip), 2);?>
             document.getElementById("lastPrice").innerHTML = "฿ <?php echo $lastPrice;?>";
 
         }
@@ -699,7 +710,7 @@ $discount=0;
             if($count>5){
                 $addShip = ($count-4)*5;
             }
-            $lastPrice = number_format(($summaryPrice+$ship+$addShip), 0);?>
+            $lastPrice = number_format(($summaryPrice+$ship+$addShip), 2);?>
             document.getElementById("lastPriceShip").innerHTML = "฿ <?php echo $lastPrice;?>";
 
         }
@@ -708,7 +719,7 @@ $discount=0;
             if($count>5){
                 $addShip = ($count-4)*5;
             }
-            $lastPrice = number_format(($summaryPrice+$ship+$addShip), 0);?>
+            $lastPrice = number_format(($summaryPrice+$ship+$addShip), 2);?>
             document.getElementById("lastPriceShip").innerHTML = "฿ <?php echo $lastPrice;?>";
         }
         else if (this.value == 'Kerry') {
@@ -716,7 +727,7 @@ $discount=0;
             if($count>5){
                 $addShip = ($count-4)*5;
             }
-            $lastPrice = number_format(($summaryPrice+$ship+$addShip), 0);?>
+            $lastPrice = number_format(($summaryPrice+$ship+$addShip), 2);?>
             document.getElementById("lastPriceShip").innerHTML = "฿ <?php echo $lastPrice;?>";
         }
     });
