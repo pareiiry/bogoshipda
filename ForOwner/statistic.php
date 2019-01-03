@@ -379,7 +379,7 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                             echo "
                             <tr>
                             <td style=\"width:10%;text-align:center;\">$date</td>
-                            <td style=\"width:10%;text-align:center;\">$rowOrderTable[orderID]</td>
+                            <td style=\"width:10%;text-align:center;\"><a href=\"orderInfo.php?orderID=$rowOrderTable[orderID]\" class=\"color-link\">$rowOrderTable[orderID]</a></td>
                             <td style=\"width:20%;text-align:center;\">$price</td>
                             <td style=\"width:20%;text-align:center;\">$cost_f</td>
                             </tr>

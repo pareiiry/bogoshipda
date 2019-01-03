@@ -441,7 +441,8 @@ else if($rowBank['bankName']=='PrompPay') {
 
                             <table  class="table-striped" width="100%" style="font-size: 14px;">
                                 <tr>
-                                    <th style="padding-left: 10px" width="45%">สินค้า</th>
+                                    <th width="20%"></th>
+                                    <th style="padding-left: 10px" width="25%">สินค้า</th>
                                     <th style="text-align: right; padding-right: 10px;">ราคาต่อชิ้น</th>
                                     <th>จำนวน</th>
                                     <th style="text-align: right; padding-right: 10px;">ราคารวม</th>
@@ -454,8 +455,45 @@ else if($rowBank['bankName']=='PrompPay') {
                                     $sqlPD = "SELECT * FROM product WHERE pdID= '".$rowgpd['productID']."'";
                                     $resultPD = mysqli_query($con,$sqlPD);
                                     $rowPD = mysqli_fetch_array($resultPD,MYSQLI_ASSOC);
-                                    echo "
-                                    <tr>
+
+
+                                    echo "<tr>";
+
+                                    if($rowPD['custom']==1){
+                                        $sql3 = "SELECT * FROM design WHERE design.pdID= '".$rowPD["pdID"]."' LIMIT 1";
+                                        $result3 = mysqli_query($con, $sql3);
+                                        $row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC);
+                                        echo "
+                                        <td style=\"text-align:center;\">";
+                                        if($row3['imgPath']==="" || empty($row3)){
+
+                                            echo '<img style="width:30%" src="../images/no-picture.jpg">';
+                                        }
+                                        else {
+                                            echo '<a class="example-image-link" href="../member/'.$row3['imgPath'].'" data-lightbox="product"><img style="width:30%" src="../member/'.$row3['imgPath'].'"/></a>';
+                                        }
+                                        echo"</td>";
+                                    }
+                                    else{
+                                        $sql3 = "SELECT * FROM image WHERE pdID= '".$rowPD['pdID']."' LIMIT 1";
+                                        $result3 = mysqli_query($con,$sql3);
+                                        $row3 = mysqli_fetch_array($result3,MYSQLI_ASSOC);
+
+                                        echo "
+                 
+                                        <td style=\"text-align:center;\">";
+                                        if($row3['pdImgPath']==="" || empty($row3)){
+                                            echo '<img style="width:30%" src="../images/no-picture.jpg">';
+                                        }
+                                        else {
+                                            echo '<a class="example-image-link" href="../'.$row3['pdImgPath'].'" data-lightbox="product"><img style="width:30%" src="../'.$row3['pdImgPath'].'"/></a>';
+//                            echo '<a class="example-image-link" href="data:image/*;base64,'.base64_encode($row3['img']).'" data-lightbox="product"><img style="width:30%" src="data:image/*;base64,' . base64_encode($row3['img']) . '"/></a>';
+                                        }
+                                        echo"</td>";
+                                    }
+
+
+                                        echo "</td>
                                         <td style='padding-left: 10px;'>$rowPD[name]</td>
                                         <td style=\"text-align: right; padding-right: 10px;\">$rowPD[price]</td>
                                         <td style=\"text-align: center\">$rowgpd[amount]</td>
