@@ -362,7 +362,8 @@ else{
             $rowPayment  = mysqli_fetch_array($resultPayment ,MYSQLI_ASSOC);
             $dateTimePayment = date_format(date_create($rowPayment['date']),'d-m-Y');
 
-            echo "<form action=\"../invoice-test/invoice02.php\" method=\"post\">
+            echo "
+        <form action=\"../invoice-test/invoice02.php\" method=\"post\" style='text-align: right;margin-right: 8%'>
             <input type=\"hidden\" name=\"orderID\" value=\"$rowOrder[orderID]\">
             <input type=\"hidden\" name=\"dateRecieve\" value=\"$dateTimePayment\">
              <input type=\"hidden\" name=\"name\" value=\"$rowOrder[nameShip]\"> 
@@ -370,7 +371,7 @@ else{
              <input type=\"hidden\" name=\"tel\" value=\"$rowOrder[telShip]\">
              <input type=\"hidden\" name=\"gpdID\" value=\" $rowOrder[gpdID]\">
 
-            <input type=\"submit\">
+            <input type=\"submit\" value='ปริ้นใบเสร็จ' class='btn badge-info' style='margin-bottom:2%; ' >
         </form>";
         }
         ?>
