@@ -273,12 +273,12 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                         //                                    print_r($result3);
                         //                                    echo mysqli_num_rows($result3);
                         while($row3= mysqli_fetch_assoc($result3)){
-                            if($row3['img']===""){
+                            if($row3['pdImgPath']===""){
                                 echo "<br><center><font color='red'>ไม่มีรูปภาพที่จะแสดง</font></center>";
                             }
                             else{
                                 echo"<tr><td align='right' style='padding: 7px'>";
-                                echo '<img class="img-thumbnail" style="width:50%" src="data:image/*;base64,'.base64_encode($row3['img']).'"/>';
+                                echo '<img class="img-thumbnail" style="width:50%" src="../'.$row3['pdImgPath'].'"/>';
                                 echo "</td><td align='left' width='50%'>"; ?>
                                 <form action="Action/deleteImg_action.php" method="get">
                                     <input style='display: none;' type="text" name="imgID" value='<?php echo $row3['imgID'];?>'>
@@ -320,7 +320,7 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                                     }
 
                                 </script>
-                                <button class='form-control btn btn-info' type="submit" style="width: 85%; ">อัพโหลดรูปภาพ</button>
+                                <button class='form-control btn btn-info' type="submit" style="width: 75%; ">อัพโหลดรูปภาพ</button>
                             </form>
                         </div>
 

@@ -89,8 +89,8 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
     <link rel="stylesheet" href="../css/lightbox.css">
     <style>
         .pagination {
-            /*margin-right: -6px;*/
-            /*margin-left: -6px;*/
+            margin-right: -6px;
+            margin-left: -6px;
         }
 
         .item-pagination {
@@ -112,6 +112,43 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
         .active-pagination {
             background-color: #222222;
             color: white;
+        }
+        .flex-w {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-wrap: wrap;
+            -moz-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            -o-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+        .flex-m {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-align-items: center;
+            align-items: center;
+        }
+        .trans-0-4 {
+            -webkit-transition: all 0.4s;
+            -o-transition: all 0.4s;
+            -moz-transition: all 0.4s;
+            transition: all 0.4s;
+        }
+        .flex-c-m {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            justify-content: center;
+            -ms-align-items: center;
+            align-items: center;
         }
         div.sticky{
             position: sticky;
@@ -361,7 +398,7 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                 <tr class="header">
                     <th style="width:15%;text-align:center;">รูปสินค้า</th>
                     <th style="width:15%;text-align:center;">รหัสสินค้า</th>
-                    <th style="width:20%;text-align:center;">ชื่อสินค้า</th>
+                    <th style="width:25%;text-align:center;">ชื่อสินค้า</th>
                     <th style="width:10%;text-align:center;">ราคาขาย</th>
                     <th style="width:10%;text-align:center;">ต้นุทน</th>
                     <th style="width:10%;text-align:center;">แก้ไข</th>

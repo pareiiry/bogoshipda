@@ -54,8 +54,8 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
 
     <style>
         .pagination {
-            /*margin-right: -6px;*/
-            /*margin-left: -6px;*/
+            margin-right: -6px;
+            margin-left: -6px;
         }
 
         .item-pagination {
@@ -77,6 +77,43 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
         .active-pagination {
             background-color: #222222;
             color: white;
+        }
+        .flex-w {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-wrap: wrap;
+            -moz-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            -o-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+        .flex-m {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-align-items: center;
+            align-items: center;
+        }
+        .trans-0-4 {
+            -webkit-transition: all 0.4s;
+            -o-transition: all 0.4s;
+            -moz-transition: all 0.4s;
+            transition: all 0.4s;
+        }
+        .flex-c-m {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            justify-content: center;
+            -ms-align-items: center;
+            align-items: center;
         }
         div.sticky{
             position: sticky;
@@ -314,9 +351,9 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                 <tr class="header">
                     <th style="width:5%;text-align:center;">Payment ID</th>
                     <th style="width:15%;text-align:center;">ผู้แจ้งชำระเงิน</th>
-                    <th style="width:25%; text-align:center;">ช่องทางชำระเงิน</th>
-                    <th style="text-align:center;">ราคาสุทธิ (บาท)</th>
-                    <th style="width:10%;text-align:center;">วันที่ชำระเงิน</th>
+                    <th style="width:15%; text-align:center;">ช่องทางชำระเงิน</th>
+                    <th style="width:15%; text-align:center;">ราคาสุทธิ (บาท)</th>
+                    <th style="width:15%;text-align:center;">วันที่ชำระเงิน</th>
                     <th style="text-align: center">orderID</th>
                     <th style="width:12%; text-align:center;">ยืนยันชำระเงิน</th>
 
@@ -372,46 +409,46 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                     $rowBank= mysqli_fetch_array($resultBank,MYSQLI_ASSOC);
                     $bank ="";
                     if($rowBank['bankName']=='SCB'){
-                        $bank ="ธนาคารไทยพาณิชย์ | ".$rowBank['accountNumber'];
+                        $bank ="ธนาคารไทยพาณิชย์";
                     }
                     else if($rowBank['bankName']=='KTB') {
-                        $bank ="ธนาคารกรุงไทย | ".$rowBank['accountNumber'];
+                        $bank ="ธนาคารกรุงไทย";
                     }
                     else if($rowBank['bankName']=='BBL'){
-                        $bank ="ธนาคารกรุงเทพ | ".$rowBank['accountNumber'];
+                        $bank ="ธนาคารกรุงเทพ";
                     }
                     else if($rowBank['bankName']=='KBANK'){
-                        $bank ="ธนาคารกสิกร | ".$rowBank['accountNumber'];
+                        $bank ="ธนาคารกสิกร";
                     }else if($rowBank['bankName']=='GSB'){
-                        $bank ="ธนาคารออมสิน | ".$rowBank['accountNumber'];
+                        $bank ="ธนาคารออมสิน";
                     }  else if($rowBank['bankName']=='KRUNGSRI'){
-                        $bank ="ธนาคารกรุงศรีอยุธยา | ".$rowBank['accountNumber'];
+                        $bank ="ธนาคารกรุงศรีอยุธยา";
                     }
                     else if($rowBank['bankName']=='TMB'){
-                        $bank ="ธนาคารทหารไทย | ".$rowBank['accountNumber'];
+                        $bank ="ธนาคารทหารไทย";
                     }
                     else if($rowBank['bankName']=='UOB'){
-                        $bank ="ธนาคารยูโอบี | ".$rowBank['accountNumber'];
+                        $bank ="ธนาคารยูโอบี";
                     }
                     else if($rowBank['bankName']=='TBANK') {
-                        $bank ="ธนาคารธนชาติ | ".$rowBank['accountNumber'];
+                        $bank ="ธนาคารธนชาติ";
                     }else if($rowBank['bankName']=='CIMB'){
-                        $bank ="ธนาคารซีไอเอ็มบี | ".$rowBank['accountNumber'];
+                        $bank ="ธนาคารซีไอเอ็มบี";
                     }
                     else if($rowBank['bankName']=='CITIBANK'){
-                        $bank ="ซิตี้แบงค์ | ".$rowBank['accountNumber'];
+                        $bank ="ซิตี้แบงค์";
                     }
                     else if($rowBank['bankName']=='SCBT'){
-                        $bank ="Standard Chartered | ".$rowBank['accountNumber'];
+                        $bank ="Standard Chartered";
                     }
                     else if($rowBank['bankName']=='TISCO'){
-                        $bank ="ทิสโก้แบงค์ | ".$rowBank['accountNumber'];
+                        $bank ="ทิสโก้แบงค์";
                     }
                     else if($rowBank['bankName']=='Wallet') {
-                        $bank ="ทรูวอลเลท | ".$rowBank['accountNumber'];
+                        $bank ="ทรูวอลเลท";
                     }
                     else if($rowBank['bankName']=='PrompPay') {
-                        $bank ="พร้อมเพย์ | ".$rowBank['accountNumber'];
+                        $bank ="พร้อมเพย์";
                     }
 
                     $datePayment = date_format(date_create($rowPayment['dateCreate']),'d-m-Y H:i:s');

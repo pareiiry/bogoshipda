@@ -506,22 +506,25 @@ else if($rowBank['bankName']=='PrompPay') {
                                 <tr>
 
                                     <td></td>
+                                    <td></td>
                                     <td style="padding-right: 5px"></td>
                                     <td style="color: #9d9d9d; padding: 5px;">ค่าขนส่ง</td>
-                                    <td style="text-align: right; padding-right: 10px;"><b>+ <?php echo $rowOrder['shipPrice'];?></b></td>
+                                    <td style="text-align: right; padding-right: 10px;"><b>+ <?php echo number_format($rowOrder['shipPrice'], 2);?></b></td>
                                 </tr>
                                 <tr>
 
                                     <td></td>
+                                    <td></td>
                                     <td style="padding-right: 5px"></td>
                                     <td style="color: #9d9d9d; padding: 5px;">ส่วนลด</td>
-                                    <td style="text-align: right;color: red; padding-right: 10px;"><b>- <?php echo $rowOrder['discountPrice'];?></b></td>
+                                    <td style="text-align: right;color: red; padding-right: 10px;"><b>- <?php echo number_format($rowOrder['discountPrice'], 2);?></b></td>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td></td>
+                                    <td></td>
                                     <td style="color: #9d9d9d; font-size: 17px; padding: 5px;">ยอดชำระเงินทั้งหมด</td>
-                                    <td style="text-align: right; color: #4cae4c; padding-right: 10px;"><b>฿ <?php echo $rowOrder['netPrice'];?></b></td>
+                                    <td style="text-align: right; color: #4cae4c; padding-right: 10px;"><b>฿ <?php echo number_format($rowOrder['netPrice'], 2);?></b></td>
                                 </tr>
                             </table>
                         </div>
