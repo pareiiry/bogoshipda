@@ -78,22 +78,22 @@ $pdf->SetFont('THSarabunNew','',16);
 //Numbers are right-aligned so we give 'R' after new line parameter
 
 include('../dbConnect.php');
-
-$result=mysqli_query($con,"select * from groupproduct where gpdID in ('".$_POST['gpdID']."');");
+//where gpdID in ('".$_POST['gpdID']."')
+$result=mysqli_query($con,"select * from groupproduct ");
     while($row = mysqli_fetch_assoc($result))
     {
 
 //
-//            $resultPD=mysqli_query($con,"select * from produc");
-//            $rowPD = mysqli_fetch_array($resultPD,MYSQLI_ASSOC);
+            $resultPD=mysqli_query($con,"select * from produc");
+            $rowPD = mysqli_fetch_array($resultPD,MYSQLI_ASSOC);
 //            if($rowPD['pdID']==$row['pdID']){
-//                $price=number_format($rowPD['price'],2);
-//                $priceAmount=number_format($row['priceAmount'],2);
-//
-//                $pdf->Cell(109 ,5,iconv('UTF-8', 'cp874', "$rowPD[name]"),1,0);
+                $price=number_format($rowPD['price'],2);
+                $priceAmount=number_format($row['priceAmount'],2);
+
+                $pdf->Cell(109 ,5,iconv('UTF-8', 'cp874', "$rowPD[name]"),1,0);
                 $pdf->Cell(20 ,5,iconv('UTF-8', 'cp874', "$row[gpdID]"),1,0,'C');
-//                $pdf->Cell(30 ,5,iconv('UTF-8', 'cp874', "$price"),1,0,'R');
-//                $pdf->Cell(30 ,5,iconv('UTF-8', 'cp874', "$priceAmount"),1,1,'R');//end of line
+                $pdf->Cell(30 ,5,iconv('UTF-8', 'cp874', "$price"),1,0,'R');
+                $pdf->Cell(30 ,5,iconv('UTF-8', 'cp874', "$priceAmount"),1,1,'R');//end of line
 //            }
 
 
