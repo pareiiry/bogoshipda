@@ -50,6 +50,8 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/png" href="../images/icons/favicon.png"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="dist/Chart.bundle.js"></script>
+    <script src="utils.js"></script>
     <style>
 
         div.sticky{
@@ -358,6 +360,9 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                         ";
                     }
                     else {
+                        unset($dates);
+                        unset($prices);
+                        unset($cost_f);
                         $totalPrice = 0;
                         $totalCost = 0;
                         while ($rowPayment = mysqli_fetch_assoc($resultPayment)) {
@@ -384,15 +389,28 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                             <td style=\"width:20%;text-align:center;\">$cost_f</td>
                             </tr>
                         ";
+                            //--add date array and data line chart????--//
+                            $dates[] = $date;
+                            $prices[] = $price;
+                            $cost_fs[] =$cost_f;
+
 
                             $totalPrice += ($rowOrderTable['priceAmount'] - $rowOrderTable['discountPrice']);
                             $totalCost += $cost;
                         }
 
+
+
                     $totalPrice_f=number_format($totalPrice);
                     $totalCost_f=number_format($totalCost);
                     $totalProfit_f=number_format(($totalPrice-$totalCost));
+
                         echo "</table>
+
+                        <div style=\"width:80%;margin: 10%\">
+                            <canvas id=\"canvas\"></canvas>
+                        </div>
+                        
                          <table class=\"tb\" width=\"80%\">
                                             <tr>
                                                 <td>ยอดขายรวม<br>$totalPrice_f
@@ -446,6 +464,68 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                     }
                 }
             </script>
+
+                <script>
+                    //var MONTHS = ['30-11-2018', '12-12-2018', '12-12-2018'];
+                    // var MONTHS = ['30-11-2018', '12-12-2018', '12-12-2018'];
+                    var config = {
+                        type: 'line',
+                        data: {
+                            labels: <?php echo json_encode($dates); ?>,
+                            datasets: [{
+                                label: 'ยอดขาย',
+                                lineTension: 0,
+                                backgroundColor: window.chartColors.red,
+                                borderColor: window.chartColors.red,
+                                data: <?php echo json_encode($prices, JSON_NUMERIC_CHECK); ?>,
+                                fill: false,
+                            }, {
+                                label: 'ต้นทุน',
+                                fill: false,
+                                lineTension: 0,
+                                backgroundColor: window.chartColors.blue,
+                                borderColor: window.chartColors.blue,
+                                data: <?php echo json_encode($cost_fs, JSON_NUMERIC_CHECK); ?>,
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            title: {
+                                display: true,
+                                text: 'กราฟแสดงสถิติ ยอดขาย - ต้นทุน'
+                            },
+                            tooltips: {
+                                mode: 'index',
+                                intersect: false,
+                            },
+                            hover: {
+                                mode: 'nearest',
+                                intersect: true
+                            },
+                            scales: {
+                                xAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'วันที่สั่งซื้อ'
+                                    }
+                                }],
+                                yAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'ยอดขาย - ต้นทุน'
+                                    }
+                                }]
+                            }
+                        }
+                    };
+
+                    window.onload = function() {
+                        var ctx = document.getElementById('canvas').getContext('2d');
+                        window.myLine = new Chart(ctx, config);
+                    };
+                    </script>
 
         </div>
     </div>
