@@ -451,7 +451,7 @@ $discount=0;
 
                         <tr>
                             <td>
-                                <input type="radio" name="ship" value="Ems" > + พัสดุด่วนพิเศษ (EMS)<br>ระยะเวลาจัดส่ง :   1 - 2 วันทำการ
+                                <input type="radio" name="ship" value="EMS" > + พัสดุด่วนพิเศษ (EMS)<br>ระยะเวลาจัดส่ง :   1 - 2 วันทำการ
                             </td>
                             <td> ค่าจัดส่ง </td>
                             <td>50 บาท</td>

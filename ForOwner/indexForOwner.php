@@ -445,8 +445,8 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                     echo"
                     <td>$row2[pdID]</td>
                     <td>$row2[name]</td>
-                     <td style=\"text-align:center;\">$row2[price]</td>
-                     <td style=\"text-align:center;\">$row2[cost]</td>
+                     <td style=\"text-align:center;\"> ";?> <?php echo number_format($row2['price'],2); ?> <?php echo "</td>
+                     <td style=\"text-align:center;\"> ";?> <?php echo number_format($row2['cost'], 2); ?> <?php echo "</td>
                     <td style=\"text-align:center;\">
                        ";
                     if($row2['custom']==1){

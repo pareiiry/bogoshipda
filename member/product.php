@@ -319,7 +319,7 @@ else{
                                                     </a>
 
                                                     <span class="header-cart-item-info">
-											<?php echo $values["quantity"]; ?> x  ฿<?php echo $values["price"]; ?>
+											<?php echo $values["quantity"]; ?> x  ฿<?php echo number_format($values["price"], 2); ?>
 										</span>
                                                 </div>
                                             </li>
@@ -349,7 +349,7 @@ else{
                                                     </a>
 
                                                     <span class="header-cart-item-info">
-											<?php echo $values["quantity"]; ?> x  ฿<?php echo number_format($values["price"],2); ?>
+											<?php echo $values["quantity"]; ?> x  ฿<?php echo number_format($values["price"], 2); ?>
 										</span>
                                                 </div>
                                             </li>

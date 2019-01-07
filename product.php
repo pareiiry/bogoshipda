@@ -287,7 +287,7 @@ else{
                                                 </a>
 
                                                 <span class="header-cart-item-info">
-											<?php echo $values["quantity"]; ?> x  ฿<?php echo $values["price"]; ?>
+											<?php echo $values["quantity"]; ?> x  ฿<?php echo number_format($values["price"], 2); ?>
 										</span>
                                             </div>
                                         </li>
@@ -345,7 +345,7 @@ else{
                             if($total!==null) {
                                 ?>
                                 <div class="header-cart-total">
-                                    รวมค่าสินค้า : ฿<?php echo number_format($total, 0); ?>
+                                    รวมค่าสินค้า : ฿<?php echo number_format($total, 2); ?>
                                 </div>
                                 <?php
                             }
@@ -596,7 +596,7 @@ while($row2= mysqli_fetch_assoc($result2))// show the information from query
                                 </a>
 
                                 <span class=\"block2-price m-text6 p-r-5\">
-										฿ $row2[price]
+									฿ ";?> <?php echo number_format($row2['price'], 2); ?> <?php echo "
 									</span>
                             </div>
                         </div>

@@ -203,7 +203,7 @@ $resultReview = mysqli_query($con,$sqlReview);
                                                     </a>
 
                                                     <span class="header-cart-item-info">
-											<?php echo $values["quantity"]; ?> x  ฿<?php echo $values["price"]; ?>
+											<?php echo $values["quantity"]; ?> x  ฿<?php echo number_format($values["price"], 2); ?>
 										</span>
                                                 </div>
                                             </li>
@@ -232,7 +232,7 @@ $resultReview = mysqli_query($con,$sqlReview);
                                                     </a>
 
                                                     <span class="header-cart-item-info">
-											<?php echo $values["quantity"]; ?> x  ฿<?php echo $values["price"]; ?>
+											<?php echo $values["quantity"]; ?> x  ฿<?php echo number_format($values["price"], 2); ?>
 										</span>
                                                 </div>
                                             </li>
@@ -292,7 +292,7 @@ $resultReview = mysqli_query($con,$sqlReview);
                             if($total!==null) {
                                 ?>
                                 <div class="header-cart-total">
-                                    รวมค่าสินค้า : ฿<?php echo number_format($total, 0); ?>
+                                    รวมค่าสินค้า : ฿<?php echo number_format($total, 2); ?>
                                 </div>
                                 <?php
                             }

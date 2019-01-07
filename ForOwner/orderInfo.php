@@ -36,7 +36,7 @@ else if($rowOrder['orderStatus']=='cancel'){
 }
 if($rowOrder['howShip']=='Regis'){
     $howShip = "พัสดุลงทะเบียน";
-}elseif ($rowOrder['howShip']=='Ems'){
+}elseif ($rowOrder['howShip']=='EMS'){
     $howShip = "พัสดุด่วนพิเศษ (EMS)";
 }elseif ($rowOrder['howShip']='Kerry'){
     $howShip = "Kerry Express";
@@ -495,9 +495,9 @@ else if($rowBank['bankName']=='PrompPay') {
 
                                         echo "</td>
                                         <td style='padding-left: 10px;'>$rowPD[name]</td>
-                                        <td style=\"text-align: right; padding-right: 10px;\">$rowPD[price]</td>
-                                        <td style=\"text-align: center\">$rowgpd[amount]</td>
-                                        <td style=\"text-align: right; padding-right: 10px; \">$rowgpd[priceAmount]</td>
+                                        <td style=\"text-align: right; padding-right: 10px;\"> ";?> <?php echo number_format($rowPD['price'], 2); ?> <?php echo "</td>
+                                        <td style=\"text-align: center\"> $rowgpd[amount]</td>
+                                        <td style=\"text-align: right; padding-right: 10px; \"> ";?> <?php echo number_format($rowgpd['priceAmount'], 2); ?> <?php echo "</td>
                                     </tr>";
 
                                 }
