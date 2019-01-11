@@ -235,7 +235,7 @@ else{
                                                 </a>
 
                                                 <span class="header-cart-item-info">
-											<?php echo $values["quantity"]; ?> x  ฿<?php echo $values["price"]; ?>
+											<?php echo $values["quantity"]; ?> x  ฿<?php echo number_format($values["price"], 2); ?>
 										</span>
                                             </div>
                                         </li>
@@ -293,7 +293,7 @@ else{
                             if($total!==null) {
                                 ?>
                                 <div class="header-cart-total">
-                                    รวมค่าสินค้า : ฿<?php echo number_format($total, 0); ?>
+                                    รวมค่าสินค้า : ฿<?php echo number_format($total, 2); ?>
                                 </div>
                                 <?php
                             }
@@ -412,7 +412,7 @@ else{
             </h4>
 
             <span class="m-text17 p">
-					฿ <?php echo $rowShow['price'];?>
+					฿ <?php echo number_format($rowShow['price'],2);?>
 				</span>
 
 

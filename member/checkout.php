@@ -289,7 +289,7 @@ $dc=0;
                 <div class="w-size31  w-full-sm p-t-7">
                     <?php if($_POST['ship']=='Regis'){
                        echo "พัสดุลงทะเบียน";
-                    }elseif ($_POST['ship']=='Ems'){
+                    }elseif ($_POST['ship']=='EMS'){
                         echo "พัสดุด่วนพิเศษ (EMS)";
                     }elseif ($_POST['ship']=='Kerry'){
                         echo "Kerry Express";
@@ -306,7 +306,7 @@ $dc=0;
                             }
                             $sc=$ship+$addShip;
                             echo number_format(($ship+$addShip), 2);
-                        }elseif ($_POST['ship']=='Ems'){
+                        }elseif ($_POST['ship']=='EMS'){
                             $ship = 50;
                             if($_POST['countShip']>5){
                                 $addShip = ($_POST['countShip']-4)*5;

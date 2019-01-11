@@ -201,7 +201,7 @@ $resultOrder = mysqli_query($con,$sqlOrder);
                                                     </a>
 
                                                     <span class="header-cart-item-info">
-											<?php echo $values["quantity"]; ?> x  ฿<?php echo $values["price"]; ?>
+											<?php echo $values["quantity"]; ?> x  ฿<?php echo number_format($values["price"], 2); ?>
 										</span>
                                                 </div>
                                             </li>
@@ -231,7 +231,7 @@ $resultOrder = mysqli_query($con,$sqlOrder);
                                                     </a>
 
                                                     <span class="header-cart-item-info">
-											<?php echo $values["quantity"]; ?> x  ฿<?php echo $values["price"]; ?>
+											<?php echo $values["quantity"]; ?> x  ฿<?php echo number_format($values["price"], 2); ?>
 										</span>
                                                 </div>
                                             </li>

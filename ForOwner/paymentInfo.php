@@ -351,7 +351,7 @@ else if($rowBank['bankName']=='PrompPay') {
                                 </tr>
                                 <tr>
                                     <td>จำนวนเงินที่แจ้งชำระ : </td>
-                                    <td><?php echo $rowPay['pricePayInput'];?></td>
+                                    <td><?php echo number_format($rowPay['pricePayInput'], 2);?></td>
                                 </tr>
                                 <tr>
                                     <td>เวลาที่แจ้งชำระเงิน : </td>

@@ -151,19 +151,14 @@ include ('dbConnect.php');
                                         ?>
                                         <li class="header-cart-item">
                                             <div class="header-cart-item-img">
+                                                <?php
+
                                                 if($row3['pdImgPath']==="" || empty($row3)){
-                                                echo '<img src="images/no-picture.jpg">';
+                                                    echo '<img src="images/no-picture.jpg">';
                                                 }
                                                 else {
-                                                echo '<img src="'.$row3['pdImgPath'].'"/></a>';
+                                                    echo '<img src="'.$row3['pdImgPath'].'"/></a>';
                                                 }
-//                                                if($row3['img']==="" || empty($row3)){
-//                                                    // echo"Hello";
-//                                                    echo '<img src="images/no-picture.jpg">';
-//                                                }
-//                                                else {
-//                                                    echo '<img src="data:image/*;base64,' . base64_encode($row3['img']) . '"/>';
-//                                                }
                                                 ?>
                                             </div>
 
@@ -173,7 +168,7 @@ include ('dbConnect.php');
                                                 </a>
 
                                                 <span class="header-cart-item-info">
-											<?php echo $values["quantity"]; ?> x  ฿<?php echo $values["price"]; ?>
+											<?php echo $values["quantity"]; ?> x  ฿<?php echo number_format($values["price"], 2); ?>
 										</span>
                                             </div>
                                         </li>
@@ -231,7 +226,7 @@ include ('dbConnect.php');
                             if($total!==null) {
                                 ?>
                                 <div class="header-cart-total">
-                                    รวมค่าสินค้า : ฿<?php echo number_format($total, 0); ?>
+                                    รวมค่าสินค้า : ฿<?php echo number_format($total, 2); ?>
                                 </div>
                                 <?php
                             }
