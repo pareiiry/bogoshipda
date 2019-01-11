@@ -79,27 +79,20 @@ $pdf->SetFont('THSarabunNew','',16);
 
 include('../dbConnect.php');
 //where gpdID in ('".$_POST['gpdID']."')
-$result=mysqli_query($con,"select * from groupproduct ");
-    while($row = mysqli_fetch_assoc($result))
-    {
+$result = mysqli_query($con,"select * from groupproduct where gpdID in ('".$_POST['gpdID']."')");
+while($row = mysqli_fetch_assoc($result))
+{
+    $resultPD=mysqli_query($con,"select * from product where pdID in ('".$row['productID']."')");
+    $rowPD = mysqli_fetch_array($resultPD,MYSQLI_ASSOC);
+    $price=number_format($rowPD['price'],2);
+    $priceAmount=number_format($row['priceAmount'],2);
 
-//
-            $resultPD=mysqli_query($con,"select * from produc");
-            $rowPD = mysqli_fetch_array($resultPD,MYSQLI_ASSOC);
-//            if($rowPD['pdID']==$row['pdID']){
-                $price=number_format($rowPD['price'],2);
-                $priceAmount=number_format($row['priceAmount'],2);
+    $pdf->Cell(109 ,5,iconv('UTF-8', 'cp874', "$rowPD[name]"),1,0);
+    $pdf->Cell(20 ,5,iconv('UTF-8', 'cp874', "$row[amount]"),1,0,'C');
+    $pdf->Cell(30 ,5,iconv('UTF-8', 'cp874', "฿$price"),1,0,'R');
+    $pdf->Cell(30 ,5,iconv('UTF-8', 'cp874', "฿$priceAmount"),1,1,'R');//end of line
 
-                $pdf->Cell(109 ,5,iconv('UTF-8', 'cp874', "$rowPD[name]"),1,0);
-                $pdf->Cell(20 ,5,iconv('UTF-8', 'cp874', "$row[gpdID]"),1,0,'C');
-                $pdf->Cell(30 ,5,iconv('UTF-8', 'cp874', "$price"),1,0,'R');
-                $pdf->Cell(30 ,5,iconv('UTF-8', 'cp874', "$priceAmount"),1,1,'R');//end of line
-//            }
-
-
-
-
-    }
+}
 
 mysqli_close();
 
@@ -107,24 +100,24 @@ mysqli_close();
 $pdf->Cell(130 ,5,'',0,0);
 $pdf->Cell(25 ,5,iconv('UTF-8', 'cp874', 'ยอดรวมสินค้า'),0,0);
 $pdf->Cell(4 ,5,iconv('UTF-8', 'cp874', '฿'),1,0);
-$pdf->Cell(30 ,5,'4,450',1,1,'R');//end of line
+$pdf->Cell(30 ,5,"$_POST[priceAmount]",1,1,'R');//end of line
 
 $pdf->Cell(130 ,5,'',0,0);
 $pdf->Cell(25 ,5,iconv('UTF-8', 'cp874', 'ส่วนลด'),0,0);
 $pdf->Cell(4 ,5,iconv('UTF-8', 'cp874', '฿'),1,0);
-$pdf->Cell(30 ,5,'4,450',1,1,'R');//end of line
+$pdf->Cell(30 ,5,"$_POST[discountPrice]",1,1,'R');//end of line
 
 $pdf->Cell(130 ,5,'',0,0);
 $pdf->Cell(25 ,5,iconv('UTF-8', 'cp874', 'ค่าจัดส่ง'),0,0);
 $pdf->Cell(4 ,5,iconv('UTF-8', 'cp874', '฿'),1,0);
-$pdf->Cell(30 ,5,'4,450',1,1,'R');//end of line
+$pdf->Cell(30 ,5,"$_POST[shipPrice]",1,1,'R');//end of line
 
 
 $pdf->Cell(130 ,5,'',0,0);
 $pdf->Cell(25 ,5,iconv('UTF-8', 'cp874', 'ราคาสุทธิ'),0,0);
 $pdf->SetTextColor(194,8,8);
 $pdf->Cell(4 ,5,iconv('UTF-8', 'cp874', '฿'),1,0);
-$pdf->Cell(30 ,5,'4,450',1,1,'R');//end of line
+$pdf->Cell(30 ,5,"$_POST[netPrice]",1,1,'R');//end of line
 
 
 $pdf->Output();

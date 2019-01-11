@@ -85,17 +85,17 @@ else{
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <!--===============================================================================================-->
     <style>
-    .listtable{
-        text-align: center;
-        padding-top: 10px;
-    }
+        .listtable{
+            text-align: center;
+            padding-top: 10px;
+        }
         td{
             padding: 5px 10px 5px 10px;
         }
-    .listtable td{
-        padding: 10px 0px 10px 10px;
-        border-bottom: 1px grey;
-    }
+        .listtable td{
+            padding: 10px 0px 10px 10px;
+            border-bottom: 1px grey;
+        }
         .tf{
             border-top: white 2px solid;
             background-color: ghostwhite;
@@ -232,7 +232,7 @@ else{
                                                     </a>
 
                                                     <span class="header-cart-item-info">
-											<?php echo $values["quantity"]; ?> x  ฿<?php echo number_format($values["price"], 2); ?>
+											<?php echo $values["quantity"]; ?> x  ฿<?php echo $values["price"]; ?>
 										</span>
                                                 </div>
                                             </li>
@@ -262,7 +262,7 @@ else{
                                                     </a>
 
                                                     <span class="header-cart-item-info">
-											<?php echo $values["quantity"]; ?> x  ฿<?php echo number_format($values["price"], 2); ?>
+											<?php echo $values["quantity"]; ?> x  ฿<?php echo $values["price"]; ?>
 										</span>
                                                 </div>
                                             </li>
@@ -322,7 +322,7 @@ else{
                             if($total!==null) {
                                 ?>
                                 <div class="header-cart-total">
-                                    รวมค่าสินค้า : ฿<?php echo number_format($total, 2); ?>
+                                    รวมค่าสินค้า : ฿<?php echo number_format($total, 0); ?>
                                 </div>
                                 <?php
                             }
@@ -362,17 +362,28 @@ else{
             $rowPayment  = mysqli_fetch_array($resultPayment ,MYSQLI_ASSOC);
             $dateTimePayment = date_format(date_create($rowPayment['date']),'d-m-Y');
 
+            $priceAmount = number_format($rowOrder['priceAmount'], 2);
+            $discountPrice = number_format($rowOrder['discountPrice'], 2);
+            $shipPrice = number_format($rowOrder['shipPrice'], 2);
+            $netPrice = number_format($rowOrder['netPrice'], 2);
+
             echo "
-        <form action=\"../invoice-test/invoice02.php\" method=\"post\" style='text-align: right;margin-right: 8%'>
+        <form action=\"../invoice/invoice.php\" method=\"post\" style='text-align: right;margin-right: 8%'>
             <input type=\"hidden\" name=\"orderID\" value=\"$rowOrder[orderID]\">
             <input type=\"hidden\" name=\"dateRecieve\" value=\"$dateTimePayment\">
              <input type=\"hidden\" name=\"name\" value=\"$rowOrder[nameShip]\"> 
              <input type=\"hidden\" name=\"address\" value=\"$rowOrder[addressShip]\"> 
              <input type=\"hidden\" name=\"tel\" value=\"$rowOrder[telShip]\">
-             <input type=\"hidden\" name=\"gpdID\" value=\" $rowOrder[gpdID]\">
+             <input type=\"hidden\" name=\"gpdID\" value=\"$rowOrder[gpdID]\">
+            
+             <input type=\"hidden\" name=\"priceAmount\" value=\"$priceAmount\">
+             <input type=\"hidden\" name=\"discountPrice\" value=\"$discountPrice\">
+             <input type=\"hidden\" name=\"shipPrice\" value=\"$shipPrice\">
+             <input type=\"hidden\" name=\"netPrice\" value=\"$netPrice\">
 
             <input type=\"submit\" value='ปริ้นใบเสร็จ' class='btn badge-info' style='margin-bottom:2%; ' >
-        </form>";
+        </form>
+        ";
         }
         ?>
 
