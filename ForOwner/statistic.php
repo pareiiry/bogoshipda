@@ -343,7 +343,7 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
         if(isset($_GET)){
             if($_GET['dateSt']!="" && $_GET['dateEn']!=""){
                 if($_GET['dateSt']<=$_GET['dateEn']){
-                    $sqlPayment = "SELECT * FROM payment WHERE (dateVerifyPayment >= '".$_GET['dateSt']."' AND dateVerifyPayment <='".$_GET['dateEn'].":23:59:59')";
+                    $sqlPayment = "SELECT * FROM payment WHERE (dateVerifyPayment >= '".$_GET['dateSt']."' AND dateVerifyPayment <='".$_GET['dateEn'].":23:59:59') ORDER BY dateVerifyPayment ASC";
                     $resultPayment = mysqli_query($con,$sqlPayment);
                     echo "<table class=\"list table-striped\">
                     <thead>
@@ -363,8 +363,12 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                         unset($dates);
                         unset($prices);
                         unset($cost_f);
+
                         $totalPrice = 0;
                         $totalCost = 0;
+
+                        $yesD = null;
+                        $f = 0;
                         while ($rowPayment = mysqli_fetch_assoc($resultPayment)) {
                             $sqlOrderTable = "SELECT * FROM order_table WHERE orderID = '" . $rowPayment['orderID'] . "'";
                             $resultOrderTable = mysqli_query($con, $sqlOrderTable);
@@ -379,6 +383,7 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                             }
 
                             $date = date_format(date_create($rowPayment['dateVerifyPayment']), 'd-m-Y');
+                            $dateCheck = date_format(date_create($rowPayment['dateVerifyPayment']), 'd-m-Y');
                             $price = number_format($rowOrderTable['priceAmount'] - $rowOrderTable['discountPrice']);
                             $cost_f = number_format($cost);
                             echo "
@@ -390,16 +395,88 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                             </tr>
                         ";
                             //--add date array and data line chart????--//
-                            $dates[] = $date;
-                            $prices[] = $price;
-                            $cost_fs[] =$cost_f;
+
+                            //R1
+                            if($f == 0){
+                                $dates[] = $dateCheck;
+                                $yesD = $dateCheck;
+                                $f = 1;
+                            }
+                            else{
+//                                echo $dateCheck." VS ".$yesD."<br>";
+                                if($dateCheck != $yesD){
+                                    $dates[] = $dateCheck;
+                                    $yesD = $dateCheck;
+                                }
+
+
+                            }
+
+//                            $dates[] = $date;
+//                            $prices[] = str_replace(",", "",$price);
+//                            $cost_fs[] = str_replace(",", "",$cost_f);
 
 
                             $totalPrice += ($rowOrderTable['priceAmount'] - $rowOrderTable['discountPrice']);
                             $totalCost += $cost;
+
+
+
                         }
+//                        print_r($dates);
+
+                        foreach ($dates as $d){
+// echo $d;
+                            $dateC = date_format(date_create($d), 'Y-m-d');
+                            $sqlPayment2 = "SELECT * FROM payment WHERE (dateVerifyPayment >= '".$dateC." 00:00:00' AND dateVerifyPayment <='".$dateC." 23:59:59') ORDER BY dateVerifyPayment";
+                            $resultPayment2 = mysqli_query($con,$sqlPayment2);
+
+                            $priceK = 0;
+                            $cost_f = 0;
+                            $price2 = 0;
+                            $cost_f2 = 0;
+                            while ($rowPayment2 = mysqli_fetch_assoc($resultPayment2)){
+//                                print_r($rowPayment2 );
+                                $sqlOrderTable2 = "SELECT * FROM order_table WHERE orderID = '".$rowPayment2['orderID']."'";
+                                $resultOrderTable2 = mysqli_query($con, $sqlOrderTable2);
+                                $rowOrderTable2 = mysqli_fetch_array($resultOrderTable2, MYSQLI_ASSOC);
 
 
+
+                                $sqlGpd2 = "SELECT * FROM groupproduct WHERE gpdID = '" . $rowOrderTable2['gpdID'] . "'";
+                                $resultGpd2 = mysqli_query($con, $sqlGpd2);
+                                $cost2 = 0;
+
+                                while ($rowGpd2 = mysqli_fetch_assoc($resultGpd2)) {
+                                    $cost2 += $rowGpd2['costAmount'];
+                                }
+
+//                                echo $rowOrderTable2['priceAmount']." - ".$rowOrderTable2['discountPrice']."<br>";
+                                $price2 = number_format($rowOrderTable2['priceAmount'] - $rowOrderTable2['discountPrice']);
+                                $cost_f2 = number_format($cost2);
+//                                echo $priceK." ";
+                                $priceK += str_replace(",", "",$price2);
+                                $cost_f += str_replace(",", "",$cost_f2);
+//                                echo $price2." ";
+
+
+                            }
+//                            echo "<br>";
+
+//                            foreach ($prices as $p){
+//                                $priceK -= $p;
+//                            }
+//                            foreach ($cost_fs as $c){
+//                                $cost_f -= $c;
+//                            }
+
+
+                            $prices[] = $priceK;
+                            $cost_fs[] = $cost_f;
+
+
+
+                        }
 
                     $totalPrice_f=number_format($totalPrice);
                     $totalCost_f=number_format($totalCost);
@@ -444,30 +521,8 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
 
 
 
-            <script>
-                function search() {
-                    var input, filter, table, tr, td, i,td2;
-                    input = document.getElementById("myInput");
-                    filter = input.value.toUpperCase();
-                    table = document.getElementById("myTable");
-                    tr = table.getElementsByTagName("tr");
-                    for (i = 0; i < tr.length; i++) {
-                        td = tr[i].getElementsByTagName("td")[1];
-                        td2 = tr[i].getElementsByTagName("td")[2];
-                        if (td||td2) {
-                            if (td.innerHTML.toUpperCase().indexOf(filter) > -1 || td2.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                                tr[i].style.display = "";
-                            } else {
-                                tr[i].style.display = "none";
-                            }
-                        }
-                    }
-                }
-            </script>
 
                 <script>
-                    //var MONTHS = ['30-11-2018', '12-12-2018', '12-12-2018'];
-                    // var MONTHS = ['30-11-2018', '12-12-2018', '12-12-2018'];
                     var config = {
                         type: 'line',
                         data: {
@@ -475,16 +530,16 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                             datasets: [{
                                 label: 'ยอดขาย',
                                 lineTension: 0,
-                                backgroundColor: window.chartColors.red,
-                                borderColor: window.chartColors.red,
+                                backgroundColor: window.chartColors.blue,
+                                borderColor: window.chartColors.blue,
                                 data: <?php echo json_encode($prices, JSON_NUMERIC_CHECK); ?>,
                                 fill: false,
                             }, {
                                 label: 'ต้นทุน',
                                 fill: false,
                                 lineTension: 0,
-                                backgroundColor: window.chartColors.blue,
-                                borderColor: window.chartColors.blue,
+                                backgroundColor: window.chartColors.red,
+                                borderColor: window.chartColors.red,
                                 data: <?php echo json_encode($cost_fs, JSON_NUMERIC_CHECK); ?>,
                             }]
                         },

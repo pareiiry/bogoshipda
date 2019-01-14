@@ -50,6 +50,8 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/png" href="../images/icons/favicon.png"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="dist/Chart.bundle.js"></script>
+    <script src="utils.js"></script>
     <style>
 
         /* Set gray background color and 100% height */
@@ -344,7 +346,7 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
         if(isset($_GET)){
             if($_GET['dateSt']!="" && $_GET['dateEn']!=""){
                 if($_GET['dateSt']<=$_GET['dateEn']){
-                    $sqlPayment = "SELECT * FROM payment WHERE (dateVerifyPayment >= '".$_GET['dateSt']."' AND dateVerifyPayment <='".$_GET['dateEn'].":23:59:59')";
+                    $sqlPayment = "SELECT * FROM payment WHERE (dateVerifyPayment >= '".$_GET['dateSt']."' AND dateVerifyPayment <='".$_GET['dateEn'].":23:59:59') ORDER BY dateVerifyPayment ASC";
                     $resultPayment = mysqli_query($con,$sqlPayment);
                     echo "<table class=\"list table-striped\">
                     <thead>
@@ -361,15 +363,24 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                         ";
                     }
                     else {
+                        $oldDate = null;
+
+                        unset($dates);
+                        unset($allAmounts);
                         $totalPrice = 0;
                         $totalAmount = 0;
                         $totalOrder = 0;
+
+                        $yesD = null;
+                        $f = 0;
+//                        $dates[] = null;
                         while ($rowPayment = mysqli_fetch_assoc($resultPayment)) {
                             $sqlOrderTable = "SELECT * FROM order_table WHERE orderID = '" . $rowPayment['orderID'] . "'";
                             $resultOrderTable = mysqli_query($con, $sqlOrderTable);
                             $rowOrderTable = mysqli_fetch_array($resultOrderTable, MYSQLI_ASSOC);
 
                             $date = date_format(date_create($rowPayment['dateVerifyPayment']), 'd-m-Y');
+//                            $dateT = date_format(date_create($rowPayment['dateVerifyPayment']), 'Y-m-d');
                             $price = number_format($rowOrderTable['priceAmount'] - $rowOrderTable['discountPrice']);
                             echo "
                             <tr>
@@ -380,14 +391,92 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                             </tr>
                         ";
 
+
+                            if($f == 0){
+                                $dates[] = $date;
+                                $yesD = $date;
+                                $f = 1;
+                            }
+                            else{
+//                                echo $dateCheck." VS ".$yesD."<br>";
+                                if($date != $yesD){
+                                    $dates[] = $date;
+                                    $yesD = $date;
+                                }
+
+                            }
+
+
+
                             $totalPrice += ($rowOrderTable['priceAmount'] - $rowOrderTable['discountPrice']);
                             $totalAmount += $rowOrderTable['allAmount'];
                             $totalOrder++;
+
                         }
 
-                        $totalPrice_f=number_format($totalPrice);
 
-                        echo "
+                        foreach ($dates as $d){
+// echo $d;
+                            $dateC = date_format(date_create($d), 'Y-m-d');
+                            $sqlPayment2 = "SELECT * FROM payment WHERE (dateVerifyPayment >= '".$dateC." 00:00:00' AND dateVerifyPayment <='".$dateC." 23:59:59') ORDER BY dateVerifyPayment";
+                            $resultPayment2 = mysqli_query($con,$sqlPayment2);
+
+                            $allAmount = 0;
+                            while ($rowPayment2 = mysqli_fetch_assoc($resultPayment2)){
+//                                print_r($rowPayment2 );
+                                $sqlOrderTable2 = "SELECT * FROM order_table WHERE orderID = '".$rowPayment2['orderID']."'";
+                                $resultOrderTable2 = mysqli_query($con, $sqlOrderTable2);
+                                $rowOrderTable2 = mysqli_fetch_array($resultOrderTable2, MYSQLI_ASSOC);
+
+                                $allAmount += str_replace(",", "",$rowOrderTable2['allAmount']);
+
+
+                            }
+
+                            $allAmounts[] = $allAmount;
+
+
+
+                        }
+
+                        $totalPrice_f = number_format($totalPrice);
+
+
+
+
+//                        foreach($dates as $result) {
+//
+//                                $sqlPaymentChart = "SELECT * FROM payment WHERE dateVerifyPayment = '".$result."')";
+//                                $resultPaymentChart = mysqli_query($con,$sqlPaymentChart);
+//                                print_r($resultPaymentChart);
+////                                echo $resultPaymentChart['orderID'];
+//                                $amount=0;
+//
+////                                var_dump($resultPaymentChart);
+//                                while ($rowPaymentChart = mysqli_fetch_assoc($resultPaymentChart)) {
+//                                    echo $rowPaymentChart['orderID'];
+//                                    $sqlOrderTableChart = "SELECT * FROM order_table WHERE orderID = '" . $rowPaymentChart['orderID'] . "'";
+//                                    $resultOrderTableChart = mysqli_query($con, $sqlOrderTableChart);
+//                                    $rowOrderTableChart = mysqli_fetch_array($resultOrderTableChart, MYSQLI_ASSOC);
+//                                     echo $rowOrderTableChart['allAmount'];
+//
+//                                    $amount= $amount + $rowOrderTable['allAmount'];
+//
+//                                }
+//                                $allAmounts[]=$amount;
+//
+//
+//
+//                        }
+
+
+
+                        echo "</table>
+
+                        <div style=\"width:80%;margin: 10%\">
+                            <canvas id=\"canvas\"></canvas>
+                        </div>
+                        
                           <table class=\"tb\" width=\"80%\">
                                             <tr>
                                                 <td colspan=\"2\">
@@ -444,6 +533,59 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                     }
                 }
             </script>
+
+        <script>
+            var config = {
+                type: 'line',
+                data: {
+                    labels: <?php echo json_encode($dates); ?>,
+                    datasets: [{
+                        label: 'จำนวนรายการ',
+                        lineTension: 0,
+                        backgroundColor: window.chartColors.green,
+                        borderColor: window.chartColors.green,
+                        data: <?php echo json_encode($allAmounts, JSON_NUMERIC_CHECK); ?>,
+                        fill: false,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'กราฟแสดงสถิติ จำนวนการสั่งซื้อ'
+                    },
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'วันที่สั่งซื้อ'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'จำนวนรายการ'
+                            }
+                        }]
+                    }
+                }
+            };
+
+            window.onload = function() {
+                var ctx = document.getElementById('canvas').getContext('2d');
+                window.myLine = new Chart(ctx, config);
+            };
+        </script>
 
         </div>
     </div>
