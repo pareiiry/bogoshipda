@@ -374,7 +374,9 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                     if($row2['active']==1){
                         $drnM = new DateTime("now", new DateTimeZone('Asia/Bangkok'));
                         $drnM = $drnM ->format("Y-m-d");
-                        if($row2['dateDelete']>$drnM){
+                        $timeNow = date("H:i:s");
+
+                        if(($row2['dateDelete'].' 23:59:59')>($drnM.' '.$timeNow)){
                             echo"<td style=\"text-align:center;color: #1BA135\">ใช้งาน</td>";
                         }
                         else{
