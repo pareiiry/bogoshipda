@@ -520,19 +520,17 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
         ?>
 
 
-
-
                 <script>
                     var config = {
                         type: 'line',
                         data: {
-                            labels: <?php echo json_encode($dates); ?>,
+                            labels: <?php echo json_encode($dates); ?>, //date
                             datasets: [{
                                 label: 'ยอดขาย',
                                 lineTension: 0,
                                 backgroundColor: window.chartColors.blue,
                                 borderColor: window.chartColors.blue,
-                                data: <?php echo json_encode($prices, JSON_NUMERIC_CHECK); ?>,
+                                data: <?php echo json_encode($prices, JSON_NUMERIC_CHECK); ?>, //[.1,2,3,4,...]
                                 fill: false,
                             }, {
                                 label: 'ต้นทุน',
