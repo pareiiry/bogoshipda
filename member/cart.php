@@ -350,7 +350,9 @@ $discount=0;
                         if ($rowC['active'] == 1) {
                             $drnM = new DateTime("now", new DateTimeZone('Asia/Bangkok'));
                             $drnM = $drnM->format("Y-m-d");
-                            if ($rowC['dateDelete'] > $drnM) {
+                            $timeNow = date("H:i:s");
+
+                            if(($rowC['dateDelete'].' 23:59:59')>($drnM.' '.$timeNow)){
 
                                 $valueDIscount = $rowC['discount'];
                                 $unit = $rowC['unitDiscount'];

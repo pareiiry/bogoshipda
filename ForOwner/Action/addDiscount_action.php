@@ -12,7 +12,7 @@ if($dateCreate<=$dateDelete){
     $sqlCheckCode = "SELECT * FROM code WHERE codeText='".$codeText."'";
     $resultCheckCode = mysqli_query($con,$sqlCheckCode);
     $checkCode = mysqli_num_rows($resultCheckCode);
-    if($checkCode=0){
+    if($checkCode==0){
         $sql="INSERT INTO code (codeID,codeText,discount,unitDiscount,dateCreate,dateDelete,active)VALUES('','$codeText','$discount','$unitDiscount','$dateCreate','$dateDelete',1)";//คำสั่งเพิ่มข้อมูล
         $sql_query=mysqli_query($con,$sql);
         if($sql_query) {
