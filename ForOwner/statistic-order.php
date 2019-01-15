@@ -343,7 +343,7 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
 
 
         <?php
-        if(isset($_GET)){
+        if(isset($_GET['dateSt']) && isset($_GET['dateEn'])){
             if($_GET['dateSt']!="" && $_GET['dateEn']!=""){
                 if($_GET['dateSt']<=$_GET['dateEn']){
                     $sqlPayment = "SELECT * FROM payment WHERE (dateVerifyPayment >= '".$_GET['dateSt']."' AND dateVerifyPayment <='".$_GET['dateEn'].":23:59:59') ORDER BY dateVerifyPayment ASC";
