@@ -350,9 +350,9 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                     $resultPayment = mysqli_query($con,$sqlPayment);
                     echo "<table class=\"list table-striped\">
                     <thead>
-                         <th style=\"width:10%;text-align:center;\">วันที่สั่งซื้อ</th>
-                        <th style=\"width:10%;text-align:center;\">Order ID</th>
-                        <th style=\"width:10%;text-align:center;\">จำนวน</th>
+                         <th style=\"width:15%;text-align:center;\">วันที่สั่งซื้อ</th>
+                        <th style=\"width:15%;text-align:center;\">Order ID</th>
+                        <th style=\"width:20%;text-align:center;\">จำนวน</th>
                         <th style=\"width:20%;text-align:center;\">ราคา(บาท)</th>
                     </thead>";
                     if($resultPayment->num_rows == 0){
@@ -381,13 +381,13 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
 
                             $date = date_format(date_create($rowPayment['dateVerifyPayment']), 'd-m-Y');
 //                            $dateT = date_format(date_create($rowPayment['dateVerifyPayment']), 'Y-m-d');
-                            $price = number_format($rowOrderTable['priceAmount'] - $rowOrderTable['discountPrice']);
+                            $price = number_format(($rowOrderTable['priceAmount'] - $rowOrderTable['discountPrice']),2);
                             echo "
                             <tr>
-                            <td style=\"width:10%;text-align:center;\">$date</td>
-                            <td style=\"width:10%;text-align:center;\"><a href=\"orderInfo.php?orderID=$rowOrderTable[orderID]\" class=\"color-link\">$rowOrderTable[orderID]</a></td>
+                            <td style=\"width:15%;text-align:center;\">$date</td>
+                            <td style=\"width:15%;text-align:center;\"><a href=\"orderInfo.php?orderID=$rowOrderTable[orderID]\" class=\"color-link\">$rowOrderTable[orderID]</a></td>
                             <td style=\"width:20%;text-align:center;\">$rowOrderTable[allAmount]</td>
-                            <td style=\"width:20%;text-align:center;\">$price</td>
+                            <td style=\"width:20%;text-align:right;padding-right: 18px;\">$price</td>
                             </tr>
                         ";
 
@@ -439,7 +439,7 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
 
                         }
 
-                        $totalPrice_f = number_format($totalPrice);
+                        $totalPrice_f = number_format($totalPrice,2);
 
 
 

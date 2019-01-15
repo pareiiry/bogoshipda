@@ -347,10 +347,10 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                     $resultPayment = mysqli_query($con,$sqlPayment);
                     echo "<table class=\"list table-striped\">
                     <thead>
-                        <th style=\"width:10%;text-align:center;\">วันที่สั่งซื้อ</th>
-                        <th style=\"width:10%;text-align:center;\">Order ID</th>
+                        <th style=\"width:15%;text-align:center;\">วันที่สั่งซื้อ</th>
+                        <th style=\"width:15%;text-align:center;\">Order ID</th>
                         <th style=\"width:20%;text-align:center;\">ราคาสุทธิ(บาท)</th>
-                        <th style=\"width:10%;text-align:center;\">ต้นทุนสินค้า(บาท)</th>
+                        <th style=\"width:20%;text-align:center;\">ต้นทุนสินค้า(บาท)</th>
                     </thead>";
                     if($resultPayment->num_rows == 0){
                         echo "
@@ -384,14 +384,14 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
 
                             $date = date_format(date_create($rowPayment['dateVerifyPayment']), 'd-m-Y');
                             $dateCheck = date_format(date_create($rowPayment['dateVerifyPayment']), 'd-m-Y');
-                            $price = number_format($rowOrderTable['priceAmount'] - $rowOrderTable['discountPrice']);
-                            $cost_f = number_format($cost);
+                            $price = number_format(($rowOrderTable['priceAmount'] - $rowOrderTable['discountPrice']), 2);
+                            $cost_f = number_format($cost, 2);
                             echo "
                             <tr>
-                            <td style=\"width:10%;text-align:center;\">$date</td>
-                            <td style=\"width:10%;text-align:center;\"><a href=\"orderInfo.php?orderID=$rowOrderTable[orderID]\" class=\"color-link\">$rowOrderTable[orderID]</a></td>
-                            <td style=\"width:20%;text-align:center;\">$price</td>
-                            <td style=\"width:20%;text-align:center;\">$cost_f</td>
+                            <td style=\"width:15%;text-align:center;\">$date</td>
+                            <td style=\"width:15%;text-align:center;\"><a href=\"orderInfo.php?orderID=$rowOrderTable[orderID]\" class=\"color-link\">$rowOrderTable[orderID]</a></td>
+                            <td style=\"width:20%;text-align:right;padding-right: 18px\">$price</td>
+                            <td style=\"width:20%;text-align:right; padding-right: 18px\">$cost_f</td>
                             </tr>
                         ";
                             //--add date array and data line chart????--//
@@ -478,9 +478,9 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
 
                         }
 
-                    $totalPrice_f=number_format($totalPrice);
-                    $totalCost_f=number_format($totalCost);
-                    $totalProfit_f=number_format(($totalPrice-$totalCost));
+                    $totalPrice_f=number_format($totalPrice,2);
+                    $totalCost_f=number_format($totalCost,2);
+                    $totalProfit_f=number_format(($totalPrice-$totalCost),2);
 
                         echo "</table>
 
