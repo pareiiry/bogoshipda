@@ -436,10 +436,11 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
             <table id="myTable">
                 <tr class="header">
                     <th style="width:10%;text-align:center;">Review ID</th>
+                    <th style="width:15%;text-align:center;">รูปภาพ</th>
                     <th style="width:15%;text-align:center;">วันที่รีวิว</th>
                     <th style="width:20%;text-align:center;">ชื่อผู้ใช้</th>
                     <th style="width:5%;text-align:center;">คะแนน (ดาว)</th>
-                    <th style="width:50%;text-align:center;">ความคิดเห็น</th>
+                    <th style="width:35%;text-align:center;">ความคิดเห็น</th>
                 </tr>
                 <?php
                 while($rowReview= mysqli_fetch_assoc($resultReview))// show the information from query
@@ -449,8 +450,19 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                     $rowUser = mysqli_fetch_array($resultUser,MYSQLI_ASSOC);
 
                         echo "
+
+
                     <tr class='$rowReview[score]'>
-                    <td style='text-align:center;'>$rowReview[reviewID]</td>
+                    <td style='text-align:center;'>$rowReview[reviewID]</td>  <td style='text-align:center;'>";
+
+                    if($rowReview['img']===""){
+                    echo '<img style="width:60%" src="../images/no-picture.jpg">';
+                    }
+                    else {
+                        echo '<img style="width:60%" src="data:image/*;base64,' . base64_encode($rowReview['img']) . '"/>';
+                    }
+
+                    echo "</td>
                     <td style='text-align:center;'>$rowReview[dateTime]</td>
                     <td style='text-align:center;'>$rowUser[name]</td>
                     <td style='text-align:center;'>$rowReview[score]</td>
@@ -479,7 +491,7 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                     table = document.getElementById("myTable");
                     tr = table.getElementsByTagName("tr");
                     for (i = 0; i < tr.length; i++) {
-                        td = tr[i].getElementsByTagName("td")[3];
+                        td = tr[i].getElementsByTagName("td")[4];
                         if (td) {
                             if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
                                 tr[i].style.display = "";
@@ -495,7 +507,7 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                     table = document.getElementById("myTable");
                     tr = table.getElementsByTagName("tr");
                     for (i = 0; i < tr.length; i++) {
-                        td = tr[i].getElementsByTagName("td")[3];
+                        td = tr[i].getElementsByTagName("td")[4];
                         if (td) {
                             if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
                                 tr[i].style.display = "";
@@ -511,7 +523,7 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                     table = document.getElementById("myTable");
                     tr = table.getElementsByTagName("tr");
                     for (i = 0; i < tr.length; i++) {
-                        td = tr[i].getElementsByTagName("td")[3];
+                        td = tr[i].getElementsByTagName("td")[4];
                         if (td) {
                             if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
                                 tr[i].style.display = "";
@@ -527,7 +539,7 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                     table = document.getElementById("myTable");
                     tr = table.getElementsByTagName("tr");
                     for (i = 0; i < tr.length; i++) {
-                        td = tr[i].getElementsByTagName("td")[3];
+                        td = tr[i].getElementsByTagName("td")[4];
                         if (td) {
                             if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
                                 tr[i].style.display = "";
@@ -543,7 +555,7 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                     table = document.getElementById("myTable");
                     tr = table.getElementsByTagName("tr");
                     for (i = 0; i < tr.length; i++) {
-                        td = tr[i].getElementsByTagName("td")[3];
+                        td = tr[i].getElementsByTagName("td")[4];
                         if (td) {
                             if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
                                 tr[i].style.display = "";
@@ -559,7 +571,7 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                     table = document.getElementById("myTable");
                     tr = table.getElementsByTagName("tr");
                     for (i = 0; i < tr.length; i++) {
-                        td = tr[i].getElementsByTagName("td")[3];
+                        td = tr[i].getElementsByTagName("td")[4];
                         if (td) {
                             if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
                                 tr[i].style.display = "";
