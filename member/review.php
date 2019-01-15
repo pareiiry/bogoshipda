@@ -345,11 +345,11 @@ while($rowReview= mysqli_fetch_assoc($resultReview))// show the information from
                         <div class=\"block2\">
                             <div class=\"block2-img wrap-pic-w of-hidden pos-relative\">";
 
- if($rowReview['img']===""){
+ if($rowReview['imgReviewPath']===""){
      echo '<img src="../images/no-picture.jpg">';
  }
  else {
-     echo '<img src="data:image/*;base64,' . base64_encode($rowReview['img']) . '" style="width:270px;height:270px;"/>';
+     echo '<a class="example-image-link" href="../'.$rowReview['imgReviewPath'].'" data-lightbox="product"><img  style="width:270px;height:270px;" src="../'.$rowReview['imgReviewPath'].'"/></a>';
  }
     $sqlU = "SELECT * FROM user WHERE uID = '".$rowReview['uID']."' ";
     $resultU = mysqli_query($con,$sqlU);

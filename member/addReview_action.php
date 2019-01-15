@@ -12,9 +12,16 @@ if($score != 0) {
     if ($_FILES['filesToUpload']['size'] !== 0) {
 //$filesToUpload=$_POST['filesToUpload'];
         for ($i = 0; $i < count($_FILES['filesToUpload']['name']); $i++) {
-            $image = addslashes(file_get_contents($_FILES['filesToUpload']['tmp_name'][$i]));
-            $sql = "INSERT INTO review (reviewID,uID,img,score,comment,dateTime)VALUES('','$uID','$image','$score','$comment','$dateTime')";//คำสั่งเพิ่มข้อมูล
+
+            if($_FILES['filesToUpload']['size'][$i] !== 0) {
+                $filename = 'review_img/review_' . md5(uniqid(rand(), true)) . '.png';
+                move_uploaded_file($_FILES['filesToUpload']['tmp_name'][$i], '../' . $filename);
+
+
+//            $image = addslashes(file_get_contents($_FILES['filesToUpload']['tmp_name'][$i]));
+            $sql = "INSERT INTO review (reviewID,uID,imgReviewPath,score,comment,dateTime)VALUES('','$uID','$filename','$score','$comment','$dateTime')";//คำสั่งเพิ่มข้อมูล
             $sql_query = mysqli_query($con, $sql);
+            }
         }
         if ($sql_query) {
             echo "<script type='text/javascript'>alert('บันทึกการรีวิวเรียบร้อยแล้ว')</script>";

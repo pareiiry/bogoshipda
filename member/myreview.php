@@ -347,11 +347,12 @@ $resultReview = mysqli_query($con,$sqlReview);
 
                     echo "<tr>
                     <td>";
-                    if($rowReview['img']===""){
+                    if($rowReview['imgReviewPath']===""){
                     echo '<img style="width:30%" src="../images/no-picture.jpg">';
                     }
                     else {
-                        echo '<img style="width:30%" src="data:image/*;base64,' . base64_encode($rowReview['img']) . '"/>';
+//                        echo '<img style="width:30%" src="data:image/*;base64,' . base64_encode($rowReview['img']) . '"/>';
+                        echo '<a class="example-image-link" href="../'.$rowReview['imgReviewPath'].'" data-lightbox="product"><img  style="width:30%" src="../'.$rowReview['imgReviewPath'].'"/></a>';
                     }
 
                     $dateReview = date_format(date_create($rowReview['dateTime']),'d-m-Y H:i:s');

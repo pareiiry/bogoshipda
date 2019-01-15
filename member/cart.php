@@ -685,7 +685,7 @@ $discount=0;
             document.getElementById("lastPrice").innerHTML = "฿ <?php echo $lastPrice;?>";
 
         }
-        else if (this.value == 'Ems') {
+        else if (this.value == 'EMS') {
             <?php $ship = 50;
             if($count>5){
                 $addShip = ($count-4)*5;
@@ -716,7 +716,7 @@ $discount=0;
             document.getElementById("lastPriceShip").innerHTML = "฿ <?php echo $lastPrice;?>";
 
         }
-        else if (this.value == 'Ems') {
+        else if (this.value == 'EMS') {
             <?php $ship = 50;
             if($count>5){
                 $addShip = ($count-4)*5;

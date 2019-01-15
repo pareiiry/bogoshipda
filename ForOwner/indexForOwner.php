@@ -34,10 +34,10 @@ else{
 }
 
 if(!isset($_GET['page'])){
-    $sql2 = "SELECT * FROM product ORDER BY dateCreate DESC LIMIT $pageshow,10";
+    $sql2 = "SELECT * FROM product WHERE custom='0' ORDER BY dateCreate DESC LIMIT $pageshow,10";
     $result2 = mysqli_query($con,$sql2);
 
-    $sql3 = "SELECT * FROM product ORDER BY dateCreate DESC";
+    $sql3 = "SELECT * FROM product WHERE custom='0' ORDER BY dateCreate DESC";
     $result3 = mysqli_query($con,$sql3);
     $all_pd_count = mysqli_num_rows($result3);
     $cal=$all_pd_count/10;
@@ -45,10 +45,10 @@ if(!isset($_GET['page'])){
 }
 else{
 
-    $sql2 = "SELECT * FROM product ORDER BY dateCreate DESC LIMIT $pageshow,10";
+    $sql2 = "SELECT * FROM product WHERE custom='0' ORDER BY dateCreate DESC LIMIT $pageshow,10";
     $result2 = mysqli_query($con, $sql2);
 
-    $sql3 = "SELECT * FROM product ORDER BY dateCreate DESC";
+    $sql3 = "SELECT * FROM product WHERE custom='0' ORDER BY dateCreate DESC";
     $result3 = mysqli_query($con, $sql3);
     $all_pd_count = mysqli_num_rows($result3);
     $cal = $all_pd_count / 10;

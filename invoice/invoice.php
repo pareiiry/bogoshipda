@@ -94,7 +94,7 @@ while($row = mysqli_fetch_assoc($result))
 
 }
 
-mysqli_close();
+$con->close();
 
 //summary
 $pdf->Cell(130 ,5,'',0,0);

@@ -23,7 +23,14 @@ $sqlOrder = "SELECT * FROM order_table WHERE orderID='".$_GET['orderID']."'";
 $resultOrder = mysqli_query($con,$sqlOrder);
 $rowOrder  = mysqli_fetch_array($resultOrder ,MYSQLI_ASSOC);
 $dateTime = date_format(date_create($rowOrder['dateTime']),'d-m-Y');
-$howShip = $rowOrder['howShip'];
+
+if($rowOrder['howShip']=='Regis'){
+    $howShip = "พัสดุลงทะเบียน";
+}elseif ($rowOrder['howShip']=='EMS'){
+    $howShip = "พัสดุด่วนพิเศษ (EMS)";
+}elseif ($rowOrder['howShip']='Kerry'){
+    $howShip = "Kerry Express";
+}
 if($rowOrder['orderStatus']=='waiting for payment'){
     $orderStatus = "รอชำระเงิน";
 }
@@ -419,10 +426,11 @@ else{
             <table class="listtable" width="100%">
                 <thead style=" color:#ffaeba">
                 <tr>
-                    <th style="text-align:center;">ชื่อสินค้า</th>
-                    <th style="text-align:center;">จำนวน</th>
-                    <th style="text-align:right;">ราคา</th>
-                    <th style="text-align:right;">ราคารวม</th>
+                    <th style="text-align:center;width: 25%;"></th>
+                    <th style="text-align:center;width: 25%;">ชื่อสินค้า</th>
+                    <th style="text-align:center;width: 10%;">จำนวน</th>
+                    <th style="text-align:right;width: 15%">ราคา</th>
+                    <th style="text-align:right;width: 15%">ราคารวม</th>
 
                 </tr>
                 </thead>
@@ -436,8 +444,42 @@ else{
                     $resultPD = mysqli_query($con,$sqlPD);
                     $rowPD = mysqli_fetch_array($resultPD,MYSQLI_ASSOC);
                     echo "
-                                    <tr>
-                                        <td style=\"text-align: left; \">$rowPD[name]</td>
+                                    <tr>";
+
+                    if($rowPD['custom']==1){
+                        $sql3 = "SELECT * FROM design WHERE design.pdID= '".$rowPD["pdID"]."' LIMIT 1";
+                        $result3 = mysqli_query($con, $sql3);
+                        $row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC);
+                        echo "
+                                        <td style=\"text-align:center;\">";
+                        if($row3['imgPath']==="" || empty($row3)){
+
+                            echo '<img style="width:30%" src="../images/no-picture.jpg">';
+                        }
+                        else {
+                            echo '<a class="example-image-link" href="../member/'.$row3['imgPath'].'" data-lightbox="product"><img style="width:30%" src="../member/'.$row3['imgPath'].'"/></a>';
+                        }
+                        echo"</td>";
+                    }
+                    else{
+                        $sql3 = "SELECT * FROM image WHERE pdID= '".$rowPD['pdID']."' LIMIT 1";
+                        $result3 = mysqli_query($con,$sql3);
+                        $row3 = mysqli_fetch_array($result3,MYSQLI_ASSOC);
+
+                        echo "
+                 
+                                        <td style=\"text-align:center;\">";
+                        if($row3['pdImgPath']==="" || empty($row3)){
+                            echo '<img style="width:30%" src="../images/no-picture.jpg">';
+                        }
+                        else {
+                            echo '<a class="example-image-link" href="../'.$row3['pdImgPath'].'" data-lightbox="product"><img style="width:30%" src="../'.$row3['pdImgPath'].'"/></a>';
+//                            echo '<a class="example-image-link" href="data:image/*;base64,'.base64_encode($row3['img']).'" data-lightbox="product"><img style="width:30%" src="data:image/*;base64,' . base64_encode($row3['img']) . '"/></a>';
+                        }
+                        echo"</td>";
+                    }
+
+                    echo "<td style=\"text-align: left; \">$rowPD[name]</td>
                                         <td>$rowgpd[amount]</td>
                                         <td style=\"text-align: right;\"> "?> <?php echo number_format($rowPD['price'],2); ?> <?php echo "</td>
                                         <td style=\"text-align: right; \"> "?> <?php echo number_format($rowgpd['priceAmount'],2); ?> <?php echo "</td>
@@ -446,19 +488,19 @@ else{
                 }
                 ?>
                 <tr>
-                    <td colspan="3" class="tf">ยอดรวมสินค้า</td>
+                    <td colspan="4" class="tf">ยอดรวมสินค้า</td>
                     <td class="tf">฿ <?php echo number_format($rowOrder['priceAmount'], 2);?></td>
                 </tr>
                 <tr>
-                    <td colspan="3" class="tf">ส่วนลด</td>
+                    <td colspan="4" class="tf">ส่วนลด</td>
                     <td class="tf">฿ <?php echo number_format($rowOrder['discountPrice'], 2);?></td>
                 </tr>
                 <tr>
-                    <td colspan="3" class="tf">ค่าจัดส่ง</td>
+                    <td colspan="4" class="tf">ค่าจัดส่ง</td>
                     <td class="tf">฿ <?php echo number_format($rowOrder['shipPrice'], 2);?></td>
                 </tr>
                 <tr>
-                    <td colspan="3" class="tf">ราคาสุทธิ</td>
+                    <td colspan="4" class="tf">ราคาสุทธิ</td>
                     <td class="tf" style="color: red"><b>฿ <?php echo number_format($rowOrder['netPrice'], 2);?></b></td>
                 </tr>
 

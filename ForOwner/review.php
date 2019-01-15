@@ -455,11 +455,11 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                     <tr class='$rowReview[score]'>
                     <td style='text-align:center;'>$rowReview[reviewID]</td>  <td style='text-align:center;'>";
 
-                    if($rowReview['img']===""){
+                    if($rowReview['imgReviewPath']===""){
                     echo '<img style="width:60%" src="../images/no-picture.jpg">';
                     }
                     else {
-                        echo '<img style="width:60%" src="data:image/*;base64,' . base64_encode($rowReview['img']) . '"/>';
+                        echo '<a class="example-image-link" href="../'.$rowReview['imgReviewPath'].'" data-lightbox="product"><img style="width:60%" src="../'.$rowReview['imgReviewPath'].'"/></a>';
                     }
 
                     echo "</td>
@@ -587,9 +587,6 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
     </div>
 </div>
 
-<!--<footer class="container-fluid">-->
-<!--    <p>Footer Text</p>-->
-<!--</footer>-->
 
 </body>
 </html>
