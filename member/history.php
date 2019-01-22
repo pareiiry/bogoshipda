@@ -383,9 +383,15 @@ $resultOrder = mysqli_query($con,$sqlOrder);
                     </td>";
               if($rowOrder['orderStatus']=='waiting for payment') {
                   echo "<td>
-                        <a href=\"infoPayment.php?orderID=$rowOrder[orderID]\" style=\"color: #ffffff\"><button type=\"submit\" class=\"flex-c-m sizefull bg9 bo-rad-23 hov1 s-text1 trans-0-4 \">
+                        <span style=\"display: inline;\">
+                        <a href=\"infoPayment.php?orderID=$rowOrder[orderID]\" style=\"color: #ffffff\"><button type=\"submit\" style='padding-right: 5%;padding-left: 5%' class=\"bg9 bo-rad-23 hov1 s-text1 trans-0-4 \">
                             แจ้งชำระเงิน
                         </button ></a>
+                        <a href=\"../ForOwner/Action/updateCancelStatusTosendOrder_action.php?orderID=$rowOrder[orderID]\" style=\"color: #ffffff\"><button type=\"submit\" style='padding-right: 5%;padding-left: 5%;background-color: #AAAAAA' class=\"bo-rad-23 hov1 s-text1 trans-0-4 \">
+                            ยกเลิก
+                        </button ></a>
+                        
+                        </span>
                     </td>";
               }
               else if($rowOrder['orderStatus']=='waiting for verify') {
