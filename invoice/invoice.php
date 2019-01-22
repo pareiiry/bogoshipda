@@ -120,4 +120,31 @@ $pdf->Cell(4 ,5,iconv('UTF-8', 'cp874', '฿'),1,0);
 $pdf->Cell(30 ,5,"$_POST[netPrice]",1,1,'R');//end of line
 
 
+$pdf->SetTextColor(0,0,0);
+$pdf->Cell(130 ,5,'',0,0);
+$pdf->Cell(25 ,5,iconv('UTF-8', 'cp874', 'VATABLE'),0,0);
+$pdf->Cell(4 ,5,iconv('UTF-8', 'cp874', '฿'),1,0);
+$pdf->Cell(30 ,5,"$_POST[beforeVat]",1,1,'R');//end of line
+
+
+$pdf->Cell(130 ,5,'',0,0);
+$pdf->Cell(25 ,5,iconv('UTF-8', 'cp874', 'VAT 7%'),0,0);
+$pdf->Cell(4 ,5,iconv('UTF-8', 'cp874', '฿'),1,0);
+$pdf->Cell(30 ,5,"$_POST[vat]",1,1,'R');//end of line
+
+$pdf->Cell(190 ,10,iconv('UTF-8', 'cp874', "-$_POST[textPrice]-"),0,0,'R');
+
+
+$pdf->Cell(189 ,15,'',0,1);//end of line
+
+$pdf->Cell(130 ,5,'',0,0);
+$pdf->Cell(25 ,5,iconv('UTF-8', 'cp874', 'ผู้รับเงิน'),0,0);
+$pdf->Cell( 60, 25, $pdf->Image("signature.jpg", $pdf->GetX(), $pdf->GetY(), 33.78), 0, 1, 'C', false );
+
+$pdf->Cell(140 ,5,'',0,0);
+$pdf->Cell( 60, 5, iconv('UTF-8', 'cp874', "( ภูริดา สุมลมาตร )"), 0, 1, 'C', false );
+
+
+
 $pdf->Output();
+
