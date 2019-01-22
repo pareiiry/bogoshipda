@@ -335,6 +335,7 @@ $resultOrder = mysqli_query($con,$sqlOrder);
                     <li>รอตรวจสอบ – ได้รับการแจ้งชำระเงิน รอยืนยันการชำระเงิน</li>
                     <li>เตรียมจัดส่งสินค้า – อยู่ในระหว่างผลิตสินค้า เพื่อรอจัดส่ง</li>
                     <li>จัดส่งสินค้า – สินค้าได้จัดส่งออกจากร้านเรียบร้อยแล้วค่ะ</li>
+                    <li>ได้รับสินค้าแล้ว – สินค้าได้จัดส่งถึงมือลูกค้าและลูกค้าได้ตรวจสอบเรียบร้อยแล้ว</li>
                     <li>การสั่งซื้อถูกยกเลิก – ใบสั่งซื้อที่ไม่ชำระเงินและไม่ยืนยันการชำระเงินเข้ามาภายในระยะเวลาที่กำหนด</li>
                 </ul>
             </div>
@@ -368,6 +369,9 @@ $resultOrder = mysqli_query($con,$sqlOrder);
                     }
                     else if($rowOrder['orderStatus']=='cancel'){
                         $orderStatus = "การสั่งซื้อถูกยกเลิก";
+                    }
+                    else if($rowOrder['orderStatus']=='get product'){
+                        $orderStatus = "ได้รับสินค้าแล้ว";
                     }
 
                     $dateTime = date_format(date_create($rowOrder['dateTime']),'d-m-Y');
@@ -404,10 +408,22 @@ $resultOrder = mysqli_query($con,$sqlOrder);
                         ยกเลิก 
                     </td>";
               }
-              else {
-                  echo "<td style='color: limegreen'>      
-                           ได้รับการยืนยันแล้ว                   
+              else if($rowOrder['orderStatus']=='get product') {
+                  echo "<td style='color: limegreen'>
+                        ได้รับการยืนยันแล้ว
                     </td>";
+              }
+              else {
+//                  echo "<td style='color: limegreen'>
+//                           ได้รับการยืนยันแล้ว
+//                    </td>";
+                  echo "<td>
+                       <a href=\"confirmGetPD.php?orderID=$rowOrder[orderID]\" style=\"color: #ffffff\"><button type=\"submit\" class=\"flex-c-m bg9 sizefull bo-rad-23 hov1 s-text1 trans-0-4\">
+                            ได้รับและตรวจสอบสินค้าแล้ว
+                       </button ></a>
+
+                </td>";
+
               }
                 echo "</tr>";
                 }?>

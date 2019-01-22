@@ -410,6 +410,9 @@ $countNotiShipment = mysqli_num_rows($resultOrder4);
                     else if($rowOrder['orderStatus']=='cancel'){
                         $orderStatus = "ยกเลิก";
                     }
+                    else if($rowOrder['orderStatus']=='get product'){
+                        $orderStatus = "ได้รับสินค้าแล้ว";
+                    }
 
                     $sqlU = "SELECT * FROM user WHERE uID= '".$rowOrder['uID']."'";
                     $resultU = mysqli_query($con,$sqlU);

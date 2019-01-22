@@ -34,6 +34,9 @@ else if($rowOrder['orderStatus']=='sent order'){
 else if($rowOrder['orderStatus']=='cancel'){
     $orderStatus = "การสั่งซื้อถูกยกเลิก";
 }
+else if($rowOrder['orderStatus']=='get product'){
+    $orderStatus = "ได้รับสินค้าแล้ว";
+}
 if($rowOrder['howShip']=='Regis'){
     $howShip = "พัสดุลงทะเบียน";
 }elseif ($rowOrder['howShip']=='EMS'){

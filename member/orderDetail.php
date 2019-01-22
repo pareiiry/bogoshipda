@@ -46,6 +46,9 @@ else if($rowOrder['orderStatus']=='sent order'){
 else if($rowOrder['orderStatus']=='cancel'){
     $orderStatus = "การสั่งซื้อถูกยกเลิก";
 }
+else if($rowOrder['orderStatus']=='get product'){
+    $orderStatus = "ได้รับสินค้าแล้ว";
+}
 
 if($rowOrder['trackingNumber']==NULL){
     $trackingNumber = "-";
@@ -363,7 +366,7 @@ else{
 
     <div class="container">
         <?php
-        if($rowOrder['orderStatus']=='prepare to send order' || $rowOrder['orderStatus']=='sent order'){
+        if($rowOrder['orderStatus']=='prepare to send order' || $rowOrder['orderStatus']=='sent order' || $rowOrder['orderStatus']=='get product'){
             $sqlPayment = "SELECT * FROM payment WHERE orderID='".$rowOrder['orderID']."'";
             $resultPayment = mysqli_query($con,$sqlPayment);
             $rowPayment  = mysqli_fetch_array($resultPayment ,MYSQLI_ASSOC);
