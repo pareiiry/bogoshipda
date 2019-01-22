@@ -354,17 +354,23 @@ else if($rowBank['bankName']=='PrompPay') {
 
                     <div class="panel panel-default">
                         <div class="panel-heading fs-25"><b>รายละเอียดการชำระเงิน  <?php
-                                if($orderStatus!='รอชำระเงิน'){
-                                if($rowPay['checked']=='0'){
-                                    if($rowOrder['orderStatus']=="cancel"){
-                                        echo "<span style='color: grey'>(ถูกปฏิเสธ)</span>";
+                                if($rowOrder['orderStatus']=="cancel"){
+                                    echo "<span style='color: grey'>(ถูกปฏิเสธ)</span>";
+                                }
+                                elseif($orderStatus!='รอชำระเงิน'){
+                                    if($rowPay['checked']=='0'){
+//                                        if($rowOrder['orderStatus']=="cancel"){
+//                                            echo "<span style='color: grey'>(ถูกปฏิเสธ)</span>";
+//                                        }
+                                        if($rowOrder['orderStatus']!="cancel") {
+                                            echo "<span style='color: red'>(ยังไม่ได้ยืนยันการชำระเงิน)</span>";
+                                        }
+                                    } else{
+                                            echo "<span style='color: limegreen'>(ยืนยันการชำระเงินแล้ว)</span>";
                                     }
-                                    else {
-                                        echo "<span style='color: red'>(ยังไม่ได้ยืนยันการชำระเงิน)</span>";
-                                    }
-                                } else{
-                                        echo "<span style='color: limegreen'>(ยืนยันการชำระเงินแล้ว)</span>";
-                                }}?></b></div>
+                                }
+
+                                ?></b></div>
                         <div class="panel-body" style="margin: 0% 2% 0% 2%">
                             <!--                            <form method="post">-->
                             <table class="orderinfo" width="100%">

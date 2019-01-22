@@ -179,32 +179,32 @@ else if($rowBank['bankName']=='PrompPay') {
             border-color: #28a745;
         }
         .btn-outline-danger {
-            color: #dc3545;
+            color: #dca222;
             background-color: transparent;
             background-image: none;
-            border-color: #dc3545;
+            border-color: #DCA222;
         }
 
         .btn-outline-danger:hover {
             color: #fff;
-            background-color: #dc3545;
-            border-color: #dc3545;
+            background-color: #DCA222;
+            border-color: #DCA222;
         }
 
         .btn-outline-danger:focus, .btn-outline-danger.focus {
-            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.5);
+            box-shadow: 0 0 0 3px rgba(220, 162, 34, 0.5);
         }
 
         .btn-outline-danger.disabled, .btn-outline-danger:disabled {
-            color: #dc3545;
+            color: #DCA222;
             background-color: transparent;
         }
 
         .btn-outline-danger:active, .btn-outline-danger.active,
         .show > .btn-outline-danger.dropdown-toggle {
             color: #fff;
-            background-color: #dc3545;
-            border-color: #dc3545;
+            background-color: #DCA222;
+            border-color: #DCA222;
         }
         .menu-icons-noti {
             display: -webkit-box;
@@ -377,15 +377,17 @@ else if($rowBank['bankName']=='PrompPay') {
                                                 echo "<span style='color: grey'>ถูกปฏิเสธ</span>";
                                             }else{
                                        echo "
-                                       <form action='Action/updateStatusTosendOrder_action.php' method='post'>
+                                       
+                                       <form action='Action/updateStatusTosendOrder_action.php' style=\"display: inline;\" method='post'>
                                             <input type='hidden' name='paymentID' value='$rowPay[paymentID]'>
                                             <input type='hidden' name='orderID' value='$rowPay[orderID]'>
                                             <button type=\"submit\" class=\"btn btn-outline-success\">ยืนยัน</button>
                                         </form>
-                                        <form action='Action/updateCancelStatusTosendOrder_action.php' method='post'>
+                                        <!--<form action='Action/updateCancelStatusTosendOrder_action.php' style=\"display: inline;\" method='post'>
                                             <input type='hidden' name='orderID' value='$rowPay[orderID]'>
                                             <button type=\"submit\" class=\"btn btn-outline-danger\">ปฏิเสธ</button>
-                                         </form>";
+                                         </form>!-->
+                                         <a style=\"display: inline;\" class=\"btn btn-outline-danger\" href=\"mailto:$rowUser[email]\">ติดต่อลูกค้า</a>";
                                         }
                                         }
                                         else{
