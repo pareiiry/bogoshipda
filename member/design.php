@@ -421,6 +421,7 @@ $result2 = mysqli_query($con,$sql2);
 
                                 </div>
                                 <button style="display:block;" class="btn btn-primary" onclick="document.getElementById('imgInp').click()">อัพโหลดไฟล์...</button>
+                                <p style="color: red"> *แนะนำไฟล์ภาพนามสกุล png <br> จะแสดงผลได้ดีที่สุด </p>
                                 <input type='file' id="imgInp" style="display:none">
                                 <br>
                                 <div id="avatarlist" style="margin-top: 5%">
